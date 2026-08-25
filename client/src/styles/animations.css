@@ -1,0 +1,8 @@
+/* Clean and simple transition and layout animation helpers */
+.transition-luxury {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(197, 168, 128, 0.15);
+}

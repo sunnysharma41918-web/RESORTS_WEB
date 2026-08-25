@@ -1,0 +1,408 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams, Link } from 'react-router-dom';
+import { ArrowLeft, Plus, Trash2, BedDouble } from 'lucide-react';
+import { hotelService } from '../../../services/hotelService';
+import { FormField, FormInput, FormTextarea, FormToggle } from '../../../components/admin/AdminFormField';
+import Button from '../../../components/common/Button';
+import { slugify } from '../../../utils/slugify';
+import { useToast } from '../../../components/admin/ToastNotification';
+
+export default function AdminHotelForm() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { addToast } = useToast();
+  const isEditing = Boolean(id);
+
+  const [formData, setFormData] = useState({
+    name: '',
+    slug: '',
+    tagline: '',
+    location: '',
+    city: '',
+    state: '',
+    country: 'India',
+    rating: 4.95,
+    featured: false,
+    status: 'active',
+    heroImage: '',
+    featuredImage: '',
+    shortDescription: '',
+    description: '',
+    contactPhone: '+91 98765 43220',
+    contactWhatsapp: '+919876543220',
+    contactEmail: 'concierge@aura-resorts.com',
+    contactAddress: '',
+    galleryUrls: '',
+    facilities: [
+      { name: '54th Floor Rooftop Sky Pool', icon: 'Waves' },
+      { name: 'Artisan Rooftop Bar & Lounge', icon: 'Wine' },
+      { name: 'Private Executive Boardrooms', icon: 'Briefcase' },
+    ],
+    rooms: [
+      {
+        name: 'The Skyline Presidential Penthouse',
+        size: '3,500 sq ft',
+        capacity: '4 Guests',
+        bedType: 'Dual King Master Suites',
+        view: 'City & Sea View',
+        image: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1000&q=80',
+        description: 'Featuring private elevator access, marble fireplace, and wraparound terrace.',
+      },
+    ],
+  });
+
+  useEffect(() => {
+    if (isEditing) {
+      hotelService.getHotelById(id).then((h) => {
+        if (h) {
+          setFormData({
+            ...h,
+            contactPhone: h.contact?.phone || '',
+            contactWhatsapp: h.contact?.whatsapp || '',
+            contactEmail: h.contact?.email || '',
+            contactAddress: h.contact?.address || '',
+            galleryUrls: Array.isArray(h.gallery) ? h.gallery.join('\n') : '',
+            facilities: h.facilities || [],
+            rooms: h.rooms || [],
+          });
+        }
+      });
+    }
+  }, [id, isEditing]);
+
+  const handleChange = (field, value) => {
+    setFormData((prev) => {
+      const updated = { ...prev, [field]: value };
+      if (field === 'name' && !isEditing) {
+        updated.slug = slugify(value);
+      }
+      return updated;
+    });
+  };
+
+  const handleAddRoom = () => {
+    setFormData((prev) => ({
+      ...prev,
+      rooms: [
+        ...prev.rooms,
+        {
+          name: 'Executive Studio Suite',
+          size: '1,500 sq ft',
+          capacity: '2 Guests',
+          bedType: 'King Bed',
+          view: 'Urban Skyline',
+          image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1000&q=80',
+          description: 'Contemporary suite designed for international travelers and executives.',
+        },
+      ],
+    }));
+  };
+
+  const handleRemoveRoom = (index) => {
+    setFormData((prev) => ({
+      ...prev,
+      rooms: prev.rooms.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleRoomChange = (index, field, value) => {
+    setFormData((prev) => {
+      const newRooms = [...prev.rooms];
+      newRooms[index] = { ...newRooms[index], [field]: value };
+      return { ...prev, rooms: newRooms };
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const galleryArray = formData.galleryUrls
+      ? formData.galleryUrls.split('\n').map((u) => u.trim()).filter(Boolean)
+      : [];
+
+    const payload = {
+      ...formData,
+      gallery: galleryArray.length > 0 ? galleryArray : [formData.heroImage || formData.featuredImage],
+      contact: {
+        phone: formData.contactPhone,
+        whatsapp: formData.contactWhatsapp,
+        email: formData.contactEmail,
+        address: formData.contactAddress || formData.location,
+      },
+    };
+
+    if (isEditing) {
+      await hotelService.updateHotel(id, payload);
+      addToast(`Hotel "${payload.name}" updated successfully.`);
+    } else {
+      await hotelService.createHotel(payload);
+      addToast(`Hotel "${payload.name}" created successfully.`);
+    }
+
+    navigate('/admin/hotels');
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-luxury-border">
+        <div className="flex items-center space-x-4">
+          <Link
+            to="/admin/hotels"
+            className="p-2 border border-luxury-border text-luxury-muted hover:text-luxury-light"
+          >
+            <ArrowLeft className="w-4 h-4" />
+          </Link>
+          <div>
+            <span className="text-xs uppercase tracking-luxury text-luxury-accent block mb-1">
+              {isEditing ? 'Modify Hotel' : 'New Urban Property'}
+            </span>
+            <h1 className="text-3xl font-serif text-luxury-light">
+              {isEditing ? `Edit: ${formData.name}` : 'Add Boutique Hotel'}
+            </h1>
+          </div>
+        </div>
+
+        <div className="flex items-center space-x-3">
+          <Button to="/admin/hotels" variant="outline" size="sm">
+            Cancel
+          </Button>
+          <Button type="submit" variant="secondary" size="sm">
+            {isEditing ? 'Save Changes' : 'Create Hotel'}
+          </Button>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="lg:col-span-8 space-y-6">
+          <div className="bg-luxury-card border border-luxury-border p-6 md:p-8 space-y-6">
+            <h3 className="text-lg font-serif text-luxury-light border-b border-luxury-border pb-3">
+              Hotel Details
+            </h3>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <FormField label="Hotel Name" required>
+                <FormInput
+                  required
+                  value={formData.name}
+                  onChange={(e) => handleChange('name', e.target.value)}
+                  placeholder="e.g. The Grand Vista Urban Tower"
+                />
+              </FormField>
+
+              <FormField label="URL Slug" required helperText="Generated automatically or customize">
+                <FormInput
+                  required
+                  value={formData.slug}
+                  onChange={(e) => handleChange('slug', e.target.value)}
+                  placeholder="e.g. grand-vista-hotel"
+                />
+              </FormField>
+            </div>
+
+            <FormField label="Tagline">
+              <FormInput
+                value={formData.tagline}
+                onChange={(e) => handleChange('tagline', e.target.value)}
+                placeholder="e.g. High-Rise Architectural Modernity"
+              />
+            </FormField>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <FormField label="City & Location" required>
+                <FormInput
+                  required
+                  value={formData.location}
+                  onChange={(e) => handleChange('location', e.target.value)}
+                  placeholder="e.g. Mumbai, Maharashtra"
+                />
+              </FormField>
+
+              <FormField label="Metropolitan City">
+                <FormInput
+                  value={formData.city}
+                  onChange={(e) => handleChange('city', e.target.value)}
+                  placeholder="e.g. Mumbai"
+                />
+              </FormField>
+            </div>
+
+            <FormField label="Short Description" required>
+              <FormTextarea
+                rows={2}
+                required
+                value={formData.shortDescription}
+                onChange={(e) => handleChange('shortDescription', e.target.value)}
+              />
+            </FormField>
+
+            <FormField label="Full Editorial Description" required>
+              <FormTextarea
+                rows={5}
+                required
+                value={formData.description}
+                onChange={(e) => handleChange('description', e.target.value)}
+              />
+            </FormField>
+          </div>
+
+          <div className="bg-luxury-card border border-luxury-border p-6 md:p-8 space-y-6">
+            <h3 className="text-lg font-serif text-luxury-light border-b border-luxury-border pb-3">
+              Imagery URLs
+            </h3>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <FormField label="Hero Banner Image URL" required>
+                <FormInput
+                  required
+                  value={formData.heroImage}
+                  onChange={(e) => handleChange('heroImage', e.target.value)}
+                />
+              </FormField>
+
+              <FormField label="Featured Thumbnail Image URL" required>
+                <FormInput
+                  required
+                  value={formData.featuredImage}
+                  onChange={(e) => handleChange('featuredImage', e.target.value)}
+                />
+              </FormField>
+            </div>
+
+            <FormField label="Gallery Images (1 URL per line)">
+              <FormTextarea
+                rows={4}
+                value={formData.galleryUrls}
+                onChange={(e) => handleChange('galleryUrls', e.target.value)}
+              />
+            </FormField>
+          </div>
+
+          {/* Rooms / Suites */}
+          <div className="bg-luxury-card border border-luxury-border p-6 md:p-8 space-y-6">
+            <div className="flex items-center justify-between border-b border-luxury-border pb-3">
+              <h3 className="text-lg font-serif text-luxury-light flex items-center space-x-2">
+                <BedDouble className="w-4 h-4 text-luxury-accent" />
+                <span>Executive Suites ({formData.rooms.length})</span>
+              </h3>
+              <button
+                type="button"
+                onClick={handleAddRoom}
+                className="text-xs uppercase tracking-luxury text-luxury-accent hover:underline flex items-center space-x-1"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Add Suite</span>
+              </button>
+            </div>
+
+            <div className="space-y-6">
+              {formData.rooms.map((room, idx) => (
+                <div key={idx} className="p-4 bg-luxury-stone/30 border border-luxury-border space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs uppercase tracking-luxury text-luxury-accent font-medium">
+                      Suite #{idx + 1}
+                    </span>
+                    {formData.rooms.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveRoom(idx)}
+                        className="text-red-400 hover:text-red-300 text-xs"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <FormField label="Suite Name">
+                      <FormInput
+                        value={room.name}
+                        onChange={(e) => handleRoomChange(idx, 'name', e.target.value)}
+                      />
+                    </FormField>
+                    <FormField label="Dimensions">
+                      <FormInput
+                        value={room.size}
+                        onChange={(e) => handleRoomChange(idx, 'size', e.target.value)}
+                      />
+                    </FormField>
+                    <FormField label="Capacity">
+                      <FormInput
+                        value={room.capacity}
+                        onChange={(e) => handleRoomChange(idx, 'capacity', e.target.value)}
+                      />
+                    </FormField>
+                    <FormField label="Bed Type">
+                      <FormInput
+                        value={room.bedType}
+                        onChange={(e) => handleRoomChange(idx, 'bedType', e.target.value)}
+                      />
+                    </FormField>
+                    <FormField label="Suite Image URL">
+                      <FormInput
+                        value={room.image}
+                        onChange={(e) => handleRoomChange(idx, 'image', e.target.value)}
+                      />
+                    </FormField>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="lg:col-span-4 space-y-6">
+          <div className="bg-luxury-card border border-luxury-border p-6 space-y-6">
+            <h3 className="text-sm font-serif text-luxury-light uppercase tracking-luxury border-b border-luxury-border pb-3">
+              Publishing Options
+            </h3>
+
+            <FormToggle
+              label="Featured on Homepage"
+              checked={formData.featured}
+              onChange={(v) => handleChange('featured', v)}
+            />
+
+            <FormField label="Rating (1-5)">
+              <FormInput
+                type="number"
+                step="0.01"
+                min="1"
+                max="5"
+                value={formData.rating}
+                onChange={(e) => handleChange('rating', parseFloat(e.target.value))}
+              />
+            </FormField>
+          </div>
+
+          <div className="bg-luxury-card border border-luxury-border p-6 space-y-6">
+            <h3 className="text-sm font-serif text-luxury-light uppercase tracking-luxury border-b border-luxury-border pb-3">
+              Hotel Concierge
+            </h3>
+
+            <FormField label="Desk Phone">
+              <FormInput
+                value={formData.contactPhone}
+                onChange={(e) => handleChange('contactPhone', e.target.value)}
+              />
+            </FormField>
+
+            <FormField label="WhatsApp">
+              <FormInput
+                value={formData.contactWhatsapp}
+                onChange={(e) => handleChange('contactWhatsapp', e.target.value)}
+              />
+            </FormField>
+
+            <FormField label="Concierge Email">
+              <FormInput
+                type="email"
+                value={formData.contactEmail}
+                onChange={(e) => handleChange('contactEmail', e.target.value)}
+              />
+            </FormField>
+          </div>
+        </div>
+      </div>
+    </form>
+  );
+}

@@ -1,0 +1,49 @@
+.glass-panel {
+  background: rgba(10, 18, 25, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+}
+
+.glass-blue {
+  background: rgba(6, 11, 16, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: 0 12px 40px -10px rgba(56, 189, 248, 0.18);
+}
+
+.glass-blue-glow {
+  background: rgba(8, 16, 23, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  box-shadow: 0 0 35px -5px rgba(56, 189, 248, 0.35);
+}
+
+.glass-nav {
+  background: rgba(6, 11, 16, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+}
+
+.glow-blue {
+  box-shadow: 0 0 25px -3px rgba(56, 189, 248, 0.45);
+}
+
+.glow-blue-sm {
+  box-shadow: 0 0 15px -2px rgba(56, 189, 248, 0.35);
+}
+
+.img-overlay-gradient {
+  background: linear-gradient(180deg, rgba(6, 11, 16, 0.15) 0%, rgba(6, 11, 16, 0.9) 100%);
+}
+
+.aspect-cinematic {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-editorial {
+  aspect-ratio: 4 / 5;
+}
