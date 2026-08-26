@@ -62,8 +62,8 @@ npm start
 ## 🔐 Super Administrator Access
 
 - **Admin Login Portal**: `http://localhost:3000/admin/login`
-- **Administrator ID**: `CHHR0012`
-- **Password**: `CHR456`
+- **Administrator ID**: `****`
+- **Password**: `****`
 
 ---
 
