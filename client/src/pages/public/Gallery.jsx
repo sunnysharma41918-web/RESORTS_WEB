@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { X, Maximize2, ChevronLeft, ChevronRight, ArrowRight, Phone } from 'lucide-react';
 import ScrollReveal from '../../components/common/ScrollReveal';
 import MagneticButton from '../../components/common/MagneticButton';
 import EditorialHeritageStamp from '../../components/common/EditorialHeritageStamp';
 import EditorialBackgroundElements from '../../components/common/EditorialBackgroundElements';
+import { galleryService } from '../../services/galleryService';
 
-const galleryCollection = [
+const fallbackGallery = [
   {
     id: 1,
     title: 'High-Altitude Sunrise Ridge Horizon',
@@ -61,35 +62,52 @@ const galleryCollection = [
     gridSpan: 'lg:col-span-8',
     url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=90',
   },
-  {
-    id: 7,
-    title: 'High-Mountain Ridge Panorama',
-    category: 'LANDSCAPES',
-    specs: 'Himalayan Ridge Crest • 360° Panorama',
-    aspect: 'aspect-[16/10]',
-    gridSpan: 'lg:col-span-6',
-    url: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=90',
-  },
-  {
-    id: 8,
-    title: 'Sunset Rock Slowhouse Terrace',
-    category: 'ARCHITECTURE',
-    specs: 'Hand-Carved Stone • Suspended Deck',
-    aspect: 'aspect-[16/10]',
-    gridSpan: 'lg:col-span-6',
-    url: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1400&q=90',
-  },
 ];
 
-const categories = ['ALL', 'ARCHITECTURE', 'VILLAS', 'GASTRONOMY', 'WELLNESS', 'LANDSCAPES'];
+const CATEGORIES = [
+  { label: 'ALL CATEGORIES', value: 'All' },
+  { label: 'RESORTS', value: 'Resorts' },
+  { label: 'HOTELS', value: 'Hotels' },
+  { label: 'SUITES & ROOMS', value: 'Rooms' },
+  { label: 'WEDDINGS & CELEBRATIONS', value: 'Weddings' },
+  { label: 'NATURE & LANDSCAPE', value: 'Nature' },
+  { label: 'EXPERIENCES & RITUALS', value: 'Experiences' },
+];
 
 export default function Gallery() {
-  const [selectedCategory, setSelectedCategory] = useState('ALL');
+  const [items, setItems] = useState(fallbackGallery);
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [lightboxIndex, setLightboxIndex] = useState(null);
 
-  const filtered = selectedCategory === 'ALL'
-    ? galleryCollection
-    : galleryCollection.filter((item) => item.category === selectedCategory);
+  useEffect(() => {
+    async function loadGallery() {
+      try {
+        const data = await galleryService.getGalleryItems();
+        if (data && data.length > 0) {
+          const normalized = data.map((item, idx) => ({
+            ...item,
+            url: item.url || item.image || 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1600&q=90',
+            gridSpan: item.gridSpan || (idx % 3 === 0 ? 'lg:col-span-8' : 'lg:col-span-4'),
+            aspect: item.aspect || (idx % 3 === 0 ? 'aspect-[16/10]' : 'aspect-[3/4]'),
+            specs: item.specs || item.location || 'Sanctuary Estate',
+          }));
+          setItems(normalized);
+        }
+      } catch (err) {
+        console.error('Failed to load gallery items from CMS:', err);
+      }
+    }
+    loadGallery();
+  }, []);
+
+  const filtered = useMemo(() => {
+    if (selectedCategory === 'All') return items;
+    return items.filter((item) => {
+      const itemCat = (item.category || '').toLowerCase();
+      const target = selectedCategory.toLowerCase();
+      return itemCat === target || itemCat.includes(target) || target.includes(itemCat);
+    });
+  }, [items, selectedCategory]);
 
   // Keyboard navigation for lightbox
   useEffect(() => {
@@ -104,10 +122,10 @@ export default function Gallery() {
   }, [lightboxIndex, filtered.length]);
 
   return (
-    <div className="w-full bg-[#1C1C1C] text-white overflow-hidden font-manrope">
+    <div className="w-full dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] overflow-hidden font-manrope transition-colors duration-300">
 
       {/* 1. HERO BANNER IN PURE BLACK */}
-      <section className="relative min-h-[85vh] flex flex-col justify-between py-24 sm:py-32 px-6 sm:px-12 bg-black border-b border-[#333333] overflow-hidden select-none">
+      <section className="relative min-h-[85vh] flex flex-col justify-between py-24 sm:py-32 px-6 sm:px-12 bg-black border-b dark:border-[#333333] border-[#E9E9DE] overflow-hidden select-none">
         {/* Background Vista */}
         <div className="absolute inset-0 z-0">
           <img
@@ -150,17 +168,17 @@ export default function Gallery() {
       </section>
 
 
-      {/* 2. MAIN GALLERY SECTION IN IVORY (#FAFDF2) */}
-      <section className="relative bg-[#FAFDF2] text-[#0E0E0E] py-28 sm:py-40 px-6 sm:px-10 lg:px-16 overflow-hidden">
+      {/* 2. MAIN GALLERY SECTION (ADAPTIVE DARK/LIGHT) */}
+      <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-28 sm:py-40 px-6 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300">
         <EditorialBackgroundElements variant="light" position="top-right" />
 
         <div className="max-w-7xl mx-auto space-y-16 lg:space-y-24 relative z-10">
 
           {/* Section Header with Category Filters */}
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 pb-10 border-b border-[#E9E9DE]">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 pb-10 border-b dark:border-[#333333] border-[#E9E9DE]">
             <div className="space-y-4">
               <ScrollReveal direction="up">
-                <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-[#0E0E0E]">
+                <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] dark:text-white text-[#0E0E0E]">
                   <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
                   <span>01 — VISUAL CURATION</span>
                 </div>
@@ -174,22 +192,22 @@ export default function Gallery() {
               </ScrollReveal>
             </div>
 
-            {/* Filter Tabs */}
+            {/* Filter Tabs matching Admin Media & Gallery CMS */}
             <ScrollReveal direction="up" delay={200}>
               <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                {categories.map((cat) => {
-                  const isActive = cat === selectedCategory;
+                {CATEGORIES.map((cat) => {
+                  const isActive = cat.value === selectedCategory;
                   return (
                     <button
-                      key={cat}
-                      onClick={() => setSelectedCategory(cat)}
+                      key={cat.value}
+                      onClick={() => setSelectedCategory(cat.value)}
                       className={`px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-all duration-300 cursor-pointer ${
                         isActive
-                          ? 'bg-[#0E0E0E] text-white'
-                          : 'border border-[#E9E9DE] text-[#0E0E0E]/70 hover:border-[#0E0E0E] hover:text-[#0E0E0E] bg-white/40'
+                          ? 'bg-[#FF1F02] text-white shadow-md'
+                          : 'border dark:border-[#333333] border-[#E9E9DE] dark:text-[#D0D0D0] text-[#0E0E0E]/75 hover:border-[#FF1F02] hover:text-[#FF1F02] dark:bg-[#0E0E0E] bg-white/60'
                       }`}
                     >
-                      {cat}
+                      {cat.label}
                     </button>
                   );
                 })}
@@ -209,7 +227,7 @@ export default function Gallery() {
                 <ScrollReveal direction="clip" delay={idx * 60}>
                   
                   {/* Image Frame */}
-                  <div className={`relative overflow-hidden ${item.aspect} border border-[#E9E9DE] bg-[#FAFDF2] shadow-sm`}>
+                  <div className={`relative overflow-hidden ${item.aspect} border dark:border-[#333333] border-[#E9E9DE] dark:bg-[#0E0E0E] bg-[#FAFDF2] shadow-sm`}>
                     <img
                       src={item.url}
                       alt={item.title}
@@ -241,11 +259,11 @@ export default function Gallery() {
                   </div>
 
                   {/* Caption Below Image */}
-                  <div className="pt-3 flex items-baseline justify-between text-xs border-b border-[#E9E9DE] pb-2">
-                    <span className="font-bold uppercase tracking-tight text-[#0E0E0E] group-hover:text-[#FF1F02] transition-colors">
+                  <div className="pt-3 flex items-baseline justify-between text-xs border-b dark:border-[#333333] border-[#E9E9DE] pb-2">
+                    <span className="font-bold uppercase tracking-tight dark:text-white text-[#0E0E0E] group-hover:text-[#FF1F02] transition-colors">
                       {item.title}
                     </span>
-                    <span className="text-[10px] font-mono text-[#0E0E0E]/50 uppercase tracking-widest">
+                    <span className="text-[10px] font-mono dark:text-[#A0A0A0] text-[#0E0E0E]/50 uppercase tracking-widest">
                       0{item.id}
                     </span>
                   </div>
@@ -315,8 +333,8 @@ export default function Gallery() {
       </section>
 
 
-      {/* 3. FINAL INVITATION CTA IN PURE BLACK */}
-      <section className="relative bg-[#000000] text-white py-32 sm:py-48 px-6 sm:px-10 lg:px-16 overflow-hidden">
+      {/* 3. FINAL INVITATION CTA (ADAPTIVE DARK/LIGHT) */}
+      <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-32 sm:py-48 px-6 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300 border-t dark:border-[#333333] border-[#E9E9DE]">
         {/* Background Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -324,35 +342,35 @@ export default function Gallery() {
             alt="Mountain Horizon"
             className="w-full h-full object-cover filter brightness-[0.25]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/60" />
+          <div className="absolute inset-0 dark:bg-gradient-to-t dark:from-black dark:via-black/80 dark:to-black/60 bg-gradient-to-t from-black/80 via-black/60 to-black/40" />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-10 sm:space-y-12">
           
-          {/* Animated Red CHTR Stamp */}
+          {/* Animated Red CHHR Stamp */}
           <ScrollReveal direction="scale">
             <div className="flex justify-center mb-2">
-              <EditorialHeritageStamp size={110} centerText="CHTR" year="EST 2026" />
+              <EditorialHeritageStamp size={110} centerText="CHHR" text="CHHR HOTELS & RESORTS • SANCTUARY • " year="EST 2026" />
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="up">
             <div className="inline-flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-[#FF1F02]">
               <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
-              <span>02 — IMMERSE YOURSELF</span>
+              <span>02 — INVITATION</span>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={100}>
-            <h2 className="text-5xl sm:text-7xl lg:text-9xl font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-art-orange-dark">
-              EXPERIENCE <br />
-              IT LIVE.
+            <h2 className="text-5xl sm:text-7xl lg:text-9xl font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-art-trio">
+              STEP INTO <br />
+              THE FRAME.
             </h2>
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={200}>
             <p className="text-base sm:text-xl font-light text-[#D0D0D0] max-w-xl mx-auto leading-relaxed">
-              Photographs capture the geometry, but only being here reveals the profound stillness and scent of cedar hearths.
+              Experience the unhurried life first-hand. Book your stay or contact our concierge to reserve your sanctuary pavilion.
             </p>
           </ScrollReveal>
 
@@ -360,10 +378,10 @@ export default function Gallery() {
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-5">
               <MagneticButton>
                 <Link
-                  to="/resorts"
+                  to="/contact"
                   className="inline-flex items-center gap-4 px-10 py-5 rounded-none bg-white hover:bg-[#FF1F02] text-[#0E0E0E] hover:text-white font-bold text-xs uppercase tracking-[0.16em] transition-all duration-300 shadow-2xl group cursor-pointer"
                 >
-                  <span>EXPLORE RESIDENCES</span>
+                  <span>PLAN YOUR RETREAT</span>
                   <span className="w-6 h-6 rounded-full bg-[#FF1F02] group-hover:bg-white text-white group-hover:text-[#FF1F02] flex items-center justify-center transition-colors">
                     <ArrowRight className="w-3.5 h-3.5" />
                   </span>
@@ -372,10 +390,11 @@ export default function Gallery() {
 
               <MagneticButton>
                 <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-3 px-8 py-5 rounded-none border border-white/40 hover:border-white text-white font-semibold text-xs uppercase tracking-[0.16em] backdrop-blur-md transition-all duration-300"
+                  to="/offers"
+                  className="inline-flex items-center gap-3 px-8 py-5 rounded-none border border-white/40 hover:border-white text-white font-semibold text-xs uppercase tracking-[0.16em] backdrop-blur-md transition-all duration-300 cursor-pointer"
                 >
-                  <span>CONNECT CONCIERGE</span>
+                  <Phone className="w-4 h-4 text-[#FF1F02]" />
+                  <span>VIEW PACKAGES</span>
                 </Link>
               </MagneticButton>
             </div>
@@ -383,9 +402,9 @@ export default function Gallery() {
 
           <ScrollReveal direction="up" delay={400}>
             <div className="pt-6 flex items-center justify-center gap-6 text-[11px] font-mono text-[#B0B0B0] uppercase tracking-widest">
-              <span>● 500-ACRE ESTATE</span>
-              <span>● HIGH HIMALAYAN RIDGE</span>
-              <span>● PRIVACY GUARANTEED</span>
+              <span>● 100% OFF-GRID SOLAR</span>
+              <span>● 500-ACRE CONSERVATION</span>
+              <span>● 24/7 BUTLER CARE</span>
             </div>
           </ScrollReveal>
 

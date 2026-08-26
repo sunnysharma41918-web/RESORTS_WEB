@@ -4,7 +4,7 @@ import { storage } from '../../../services/storage';
 import { FormField, FormInput, FormTextarea } from '../../../components/admin/AdminFormField';
 import ConfirmDialog from '../../../components/admin/ConfirmDialog';
 import { useToast } from '../../../components/admin/ToastNotification';
-import { RotateCcw, Save, Sparkles } from 'lucide-react';
+import { RotateCcw, Save, Sparkles, Sliders } from 'lucide-react';
 
 export default function AdminSettings() {
   const { addToast } = useToast();
@@ -90,28 +90,31 @@ export default function AdminSettings() {
   };
 
   return (
-    <form onSubmit={handleSave} className="space-y-10 max-w-5xl select-none">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-luxury-border">
+    <form onSubmit={handleSave} className="space-y-10 max-w-6xl select-none font-manrope">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#333333]">
         <div>
-          <span className="text-[10px] uppercase tracking-luxury text-orange-400 font-bold block mb-1">
-            Global Configuration
-          </span>
-          <h1 className="text-3xl font-display font-bold text-white">Website CMS Settings</h1>
+          <div className="flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-widest text-[#FF1F02] mb-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02]" />
+            <span>GLOBAL SYSTEM CONTROLS</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-white">
+            Website CMS Settings
+          </h1>
         </div>
 
         <div className="flex items-center space-x-3">
           <button
             type="button"
             onClick={() => setIsResetDialogOpen(true)}
-            className="inline-flex items-center space-x-2 px-4 py-2.5 rounded-full bg-black/60 hover:bg-black/90 border border-luxury-border text-white text-xs uppercase tracking-luxury font-medium transition-all"
+            className="inline-flex items-center space-x-2 px-4 py-2.5 bg-[#1C1C1C] hover:bg-[#2A2A2A] border border-[#333333] text-white text-xs font-mono uppercase tracking-wider transition-all cursor-pointer"
           >
-            <RotateCcw className="w-3.5 h-3.5 text-orange-400" />
-            <span>Reset All Seeds</span>
+            <RotateCcw className="w-3.5 h-3.5 text-[#EAB308]" />
+            <span>Reset Demo Seeds</span>
           </button>
 
           <button
             type="submit"
-            className="inline-flex items-center space-x-2 px-6 py-2.5 rounded-full bg-orange-500 hover:bg-orange-400 text-black font-bold text-xs uppercase tracking-luxury transition-all shadow-[0_0_20px_rgba(255,107,0,0.3)] hover:scale-105"
+            className="inline-flex items-center space-x-2 px-6 py-2.5 bg-[#FF1F02] hover:bg-white text-white hover:text-[#0E0E0E] font-bold text-xs font-mono uppercase tracking-wider transition-all shadow-lg hover:scale-105 cursor-pointer"
           >
             <Save className="w-4 h-4" />
             <span>Save All Settings</span>
@@ -121,10 +124,13 @@ export default function AdminSettings() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Brand & Editorial Copy */}
-        <div className="bg-luxury-card border border-luxury-border/80 p-6 md:p-8 rounded-3xl space-y-6 shadow-2xl">
-          <h3 className="text-base font-display font-bold text-white border-b border-luxury-border/60 pb-3 uppercase tracking-tight">
-            Brand Identity & SEO
-          </h3>
+        <div className="bg-[#0E0E0E] border border-[#333333] p-6 md:p-8 space-y-6 shadow-xl">
+          <div className="flex items-center gap-2 pb-3 border-b border-[#222222]">
+            <Sliders className="w-4 h-4 text-[#FF1F02]" />
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
+              Brand Identity & SEO
+            </h3>
+          </div>
 
           <FormField label="Brand Name" required>
             <FormInput
@@ -153,10 +159,13 @@ export default function AdminSettings() {
         </div>
 
         {/* Contact Numbers & Channels */}
-        <div className="bg-luxury-card border border-luxury-border/80 p-6 md:p-8 rounded-3xl space-y-6 shadow-2xl">
-          <h3 className="text-base font-display font-bold text-white border-b border-luxury-border/60 pb-3 uppercase tracking-tight">
-            Global Concierge Contact
-          </h3>
+        <div className="bg-[#0E0E0E] border border-[#333333] p-6 md:p-8 space-y-6 shadow-xl">
+          <div className="flex items-center gap-2 pb-3 border-b border-[#222222]">
+            <Sparkles className="w-4 h-4 text-[#EAB308]" />
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
+              Global Concierge Contact
+            </h3>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField label="Display Phone" required>

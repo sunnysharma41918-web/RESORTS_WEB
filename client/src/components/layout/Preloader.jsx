@@ -5,13 +5,13 @@ export default function Preloader({ onComplete }) {
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    // Quick, clean initial entrance load
+    // Ultra fast, smooth entrance
     const timer = setTimeout(() => {
       setIsExiting(true);
       setTimeout(() => {
         if (onComplete) onComplete();
-      }, 500);
-    }, 600);
+      }, 200);
+    }, 80);
 
     return () => clearTimeout(timer);
   }, [onComplete]);
@@ -22,7 +22,7 @@ export default function Preloader({ onComplete }) {
         isExiting ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
-      <Loader fullscreen text="Sculpting Architectural Serenity" />
+      <Loader fullscreen text="WELCOME TO THE COUNTRY HOLIDAYS HOTELS AND RESORTS" />
     </div>
   );
 }

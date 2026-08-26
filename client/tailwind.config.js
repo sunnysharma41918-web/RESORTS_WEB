@@ -8,6 +8,14 @@ export default {
   theme: {
     extend: {
       colors: {
+        theme: {
+          bg: 'var(--app-bg)',
+          card: 'var(--app-card)',
+          surface: 'var(--app-surface)',
+          text: 'var(--app-text)',
+          muted: 'var(--app-text-muted)',
+          border: 'var(--app-border)',
+        },
         brand: {
           orange: '#FF1F02',
           ivory: '#FAFDF2',

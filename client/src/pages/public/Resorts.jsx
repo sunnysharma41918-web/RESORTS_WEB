@@ -292,12 +292,12 @@ export default function Resorts() {
 
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-10 sm:space-y-12">
           
-          {/* Animated Red CHTR Stamp */}
-          <ScrollReveal direction="scale">
-            <div className="flex justify-center mb-2">
-              <EditorialHeritageStamp size={110} centerText="CHTR" year="EST 2026" />
-            </div>
-          </ScrollReveal>
+          {/* Animated Red CHHR Stamp */}
+          <div className="absolute -top-10 -right-4 sm:-right-8 z-20">
+            <MagneticButton distance={0.25}>
+              <EditorialHeritageStamp size={110} centerText="CHHR" text="CHHR HOTELS & RESORTS • SANCTUARY • " year="EST 2026" />
+            </MagneticButton>
+          </div>
 
           <ScrollReveal direction="up">
             <div className="inline-flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-[#FF1F02]">

@@ -260,10 +260,10 @@ export default function Experiences() {
 
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-10 sm:space-y-12">
           
-          {/* Animated Red CHTR Stamp */}
+          {/* Animated Red CHHR Stamp */}
           <ScrollReveal direction="scale">
             <div className="flex justify-center mb-2">
-              <EditorialHeritageStamp size={110} centerText="CHTR" year="EST 2026" />
+              <EditorialHeritageStamp size={110} centerText="CHHR" text="CHHR HOTELS & RESORTS • PRIVATE SANCTUARY • " year="EST 2026" />
             </div>
           </ScrollReveal>
 

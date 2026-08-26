@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Palmtree,
-  Building2,
-  Compass,
+  BedDouble,
   Image as ImageIcon,
   MessageSquare,
+  Tag,
   Plus,
   ArrowRight,
   Sparkles,
@@ -15,18 +14,16 @@ import {
   Mail
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { resortService } from '../../services/resortService';
-import { hotelService } from '../../services/hotelService';
-import { experienceService } from '../../services/experienceService';
+import { accommodationService } from '../../services/accommodationService';
 import { galleryService } from '../../services/galleryService';
+import { offerService } from '../../services/offerService';
 import { inquiryService } from '../../services/inquiryService';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
-    resorts: [],
-    hotels: [],
-    experiences: [],
+    accommodations: [],
     gallery: [],
+    offers: [],
     inquiries: [],
     loading: true,
   });
@@ -34,20 +31,18 @@ export default function Dashboard() {
   useEffect(() => {
     async function loadStats() {
       try {
-        const [resorts, hotels, experiences, gallery, inquiries] = await Promise.all([
-          resortService.getAllResorts(),
-          hotelService.getAllHotels(),
-          experienceService.getAllExperiences(),
+        const [accommodations, gallery, offers, inquiries] = await Promise.all([
+          accommodationService.getAllAccommodations(),
           galleryService.getGalleryItems(),
+          offerService.getOffers(),
           inquiryService.getInquiries(),
         ]);
 
         setStats({
-          resorts,
-          hotels,
-          experiences,
-          gallery,
-          inquiries,
+          accommodations: accommodations || [],
+          gallery: gallery || [],
+          offers: offers || [],
+          inquiries: inquiries || [],
           loading: false,
         });
       } catch (err) {
@@ -60,36 +55,36 @@ export default function Dashboard() {
 
   const kpiCards = [
     {
-      label: 'Sanctuary Resorts',
-      count: stats.resorts.length || 5,
-      path: '/admin/resorts',
-      icon: Palmtree,
-      actionText: '+ Add Sanctuary',
-      actionPath: '/admin/resorts/new',
-    },
-    {
-      label: 'Boutique Hotels',
-      count: stats.hotels.length || 8,
-      path: '/admin/hotels',
-      icon: Building2,
-      actionText: '+ Add Hotel',
-      actionPath: '/admin/hotels/new',
-    },
-    {
-      label: 'Curated Experiences',
-      count: stats.experiences.length || 6,
-      path: '/admin/experiences',
-      icon: Compass,
-      actionText: '+ Add Journey',
-      actionPath: '/admin/experiences',
-    },
-    {
-      label: 'Active Inquiries',
-      count: stats.inquiries.length || 12,
+      label: 'Active Guest Inquiries',
+      count: stats.inquiries.length || 0,
       path: '/admin/inquiries',
       icon: MessageSquare,
-      actionText: 'View Leads →',
+      actionText: 'Manage Leads →',
       actionPath: '/admin/inquiries',
+    },
+    {
+      label: 'Signature Suites & Villas',
+      count: stats.accommodations.length || 3,
+      path: '/admin/accommodations',
+      icon: BedDouble,
+      actionText: '+ Add Suite',
+      actionPath: '/admin/accommodations/new',
+    },
+    {
+      label: 'Offers & Packages',
+      count: stats.offers.length || 6,
+      path: '/admin/offers',
+      icon: Tag,
+      actionText: '+ Add Package',
+      actionPath: '/admin/offers/new',
+    },
+    {
+      label: 'Visual Media Gallery',
+      count: stats.gallery.length || 18,
+      path: '/admin/gallery',
+      icon: ImageIcon,
+      actionText: 'View Media →',
+      actionPath: '/admin/gallery',
     },
   ];
 
@@ -111,19 +106,27 @@ export default function Dashboard() {
         {/* Quick Action Buttons */}
         <div className="flex flex-wrap items-center gap-3">
           <Link
-            to="/admin/resorts/new"
-            className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-none bg-white hover:bg-[#FF1F02] text-[#0E0E0E] hover:text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg"
+            to="/admin/inquiries"
+            className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-none bg-[#FF1F02] hover:bg-white text-white hover:text-black font-bold text-xs uppercase tracking-wider transition-all shadow-lg"
           >
-            <Plus className="w-4 h-4" />
-            <span>Add Sanctuary</span>
+            <MessageSquare className="w-4 h-4" />
+            <span>Guest Inquiries</span>
           </Link>
 
           <Link
-            to="/admin/hotels/new"
+            to="/admin/accommodations/new"
             className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-none bg-[#1C1C1C] hover:bg-white/10 border border-[#333333] text-white font-semibold text-xs uppercase tracking-wider transition-all"
           >
             <Plus className="w-4 h-4 text-[#FF1F02]" />
-            <span>Add Hotel</span>
+            <span>Add Suite</span>
+          </Link>
+
+          <Link
+            to="/admin/offers/new"
+            className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-none bg-[#1C1C1C] hover:bg-white/10 border border-[#333333] text-white font-semibold text-xs uppercase tracking-wider transition-all"
+          >
+            <Plus className="w-4 h-4 text-[#FF1F02]" />
+            <span>Create Offer</span>
           </Link>
 
           <Link
@@ -208,22 +211,28 @@ export default function Dashboard() {
             {stats.inquiries && stats.inquiries.length > 0 ? (
               stats.inquiries.slice(0, 4).map((inq, idx) => (
                 <div
-                  key={idx}
+                  key={inq.id || idx}
                   className="p-4 bg-black border border-[#333333] hover:border-[#FF1F02]/50 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-3">
-                      <span className="text-sm font-bold text-white uppercase">{inq.name || 'Guest'}</span>
+                      <span className="text-sm font-bold text-white uppercase">{inq.guestName || inq.name || 'Guest'}</span>
                       <span className="text-[10px] font-mono px-2 py-0.5 bg-[#1C1C1C] text-[#FF1F02] border border-[#333333] uppercase">
-                        {inq.residence || 'General Inquiry'}
+                        {inq.property || inq.residence || 'Sanctuary Stay'}
                       </span>
                     </div>
-                    <p className="text-xs text-[#D0D0D0] font-light">
+                    <p className="text-xs text-[#D0D0D0] font-light font-mono">
                       {inq.email} • {inq.phone}
                     </p>
                   </div>
-                  <span className="text-[10px] font-mono text-white/50 uppercase tracking-widest shrink-0">
-                    STATUS: NEW
+                  <span className={`text-[10px] font-mono uppercase tracking-widest shrink-0 px-2.5 py-1 border ${
+                    inq.status === 'resolved'
+                      ? 'border-emerald-500/40 text-emerald-400 bg-emerald-950/20'
+                      : inq.status === 'in-progress'
+                      ? 'border-blue-500/40 text-blue-300 bg-blue-950/20'
+                      : 'border-[#FF1F02]/40 text-[#FF1F02] bg-red-950/20'
+                  }`}>
+                    {inq.status ? inq.status.toUpperCase() : 'NEW LEAD'}
                   </span>
                 </div>
               ))

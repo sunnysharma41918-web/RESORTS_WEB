@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Plus, Trash2, Eye, Image as ImageIcon } from 'lucide-react';
+import { Plus, Trash2, Eye, Image as ImageIcon, Sparkles, MapPin } from 'lucide-react';
 import { galleryService } from '../../../services/galleryService';
 import Modal from '../../../components/common/Modal';
 import { FormField, FormInput, FormSelect } from '../../../components/admin/AdminFormField';
-import Button from '../../../components/common/Button';
 import ConfirmDialog from '../../../components/admin/ConfirmDialog';
 import { useToast } from '../../../components/admin/ToastNotification';
 import { cn } from '../../../utils/cn';
 
 const CATEGORIES = [
+  { label: 'All Categories', value: 'All' },
   { label: 'Resorts', value: 'Resorts' },
   { label: 'Hotels', value: 'Hotels' },
-  { label: 'Rooms', value: 'Rooms' },
-  { label: 'Dining', value: 'Dining' },
-  { label: 'Nature', value: 'Nature' },
-  { label: 'Experiences', value: 'Experiences' },
+  { label: 'Suites & Rooms', value: 'Rooms' },
+  { label: 'Weddings & Celebrations', value: 'Weddings' },
+  { label: 'Nature & Landscape', value: 'Nature' },
+  { label: 'Experiences & Rituals', value: 'Experiences' },
 ];
 
 export default function AdminGalleryList() {
@@ -43,7 +43,7 @@ export default function AdminGalleryList() {
 
   const filteredItems = useMemo(() => {
     if (categoryFilter === 'All') return items;
-    return items.filter((i) => i.category.toLowerCase() === categoryFilter.toLowerCase());
+    return items.filter((i) => i.category?.toLowerCase() === categoryFilter.toLowerCase());
   }, [items, categoryFilter]);
 
   const handleAddItem = async (e) => {
@@ -72,39 +72,42 @@ export default function AdminGalleryList() {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-luxury-border">
+    <div className="space-y-8 select-none font-manrope">
+      {/* Top Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#333333]">
         <div>
-          <span className="text-xs uppercase tracking-luxury text-luxury-accent block mb-1">
-            Media & Visual Assets
-          </span>
-          <h1 className="text-3xl font-serif text-luxury-light">Gallery Assets CMS</h1>
+          <div className="flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-widest text-[#FF1F02] mb-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02]" />
+            <span>VISUAL ARCHIVE & MEDIA</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-white">
+            Media & Gallery Assets CMS
+          </h1>
         </div>
 
-        <Button
+        <button
           onClick={() => setIsAddModalOpen(true)}
-          variant="primary"
-          size="sm"
-          icon={<Plus className="w-4 h-4" />}
+          className="inline-flex items-center space-x-2 px-6 py-3 bg-[#FF1F02] hover:bg-white text-white hover:text-[#0E0E0E] font-bold text-xs font-mono uppercase tracking-wider transition-all shadow-lg hover:scale-105 cursor-pointer"
         >
-          Add Media Asset
-        </Button>
+          <Plus className="w-4 h-4" />
+          <span>Add Media Asset</span>
+        </button>
       </div>
 
       {/* Category filter pills */}
-      <div className="flex flex-wrap items-center gap-2 pb-4 border-b border-luxury-border">
-        {['All', 'Resorts', 'Hotels', 'Rooms', 'Dining', 'Nature', 'Experiences'].map((cat) => (
+      <div className="flex flex-wrap items-center gap-2 pb-4 border-b border-[#333333]">
+        {CATEGORIES.map((cat) => (
           <button
-            key={cat}
-            onClick={() => setCategoryFilter(cat)}
+            key={cat.value}
+            onClick={() => setCategoryFilter(cat.value)}
             className={cn(
-              'px-3.5 py-1.5 text-xs uppercase tracking-luxury border transition-all',
-              categoryFilter.toLowerCase() === cat.toLowerCase()
-                ? 'bg-luxury-light text-luxury-black border-luxury-light font-medium'
-                : 'bg-transparent text-luxury-muted border-luxury-border hover:border-luxury-accent/50 hover:text-luxury-light'
+              'px-4 py-2 text-xs font-mono uppercase tracking-wider border transition-all cursor-pointer',
+              categoryFilter.toLowerCase() === cat.value.toLowerCase()
+                ? 'bg-[#FF1F02] text-white border-[#FF1F02] font-bold shadow-md'
+                : 'bg-[#0E0E0E] text-[#888888] border-[#333333] hover:border-white/40 hover:text-white'
             )}
           >
-            {cat}
+            {cat.label}
           </button>
         ))}
       </div>
@@ -114,39 +117,42 @@ export default function AdminGalleryList() {
         {filteredItems.map((item) => (
           <div
             key={item.id}
-            className="group bg-luxury-card border border-luxury-border flex flex-col justify-between overflow-hidden relative"
+            className="group bg-[#0E0E0E] border border-[#333333] hover:border-[#FF1F02]/50 flex flex-col justify-between overflow-hidden relative shadow-lg transition-all"
           >
-            <div className="relative aspect-[16/11] overflow-hidden bg-luxury-stone">
+            <div className="relative aspect-[16/11] overflow-hidden bg-black">
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-95"
               />
-              <span className="absolute top-2 left-2 z-10 px-2 py-0.5 bg-luxury-black/80 backdrop-blur-md text-[9px] uppercase tracking-luxury text-luxury-accent">
+              <span className="absolute top-2 left-2 z-10 px-2.5 py-1 bg-black/80 backdrop-blur-md text-[9px] font-mono font-bold uppercase tracking-widest text-[#EAB308] border border-[#EAB308]/30">
                 {item.category}
               </span>
             </div>
 
             <div className="p-4 space-y-3">
               <div>
-                <h4 className="text-sm font-serif text-luxury-light line-clamp-1">{item.title}</h4>
-                <p className="text-xs text-luxury-muted line-clamp-1">{item.location}</p>
+                <h4 className="text-sm font-bold text-white line-clamp-1">{item.title}</h4>
+                <p className="text-xs text-[#888888] line-clamp-1 flex items-center gap-1 mt-0.5">
+                  <MapPin className="w-3 h-3 text-[#FF1F02] shrink-0" />
+                  <span>{item.location}</span>
+                </p>
               </div>
 
-              <div className="pt-2 border-t border-luxury-border/60 flex items-center justify-between">
+              <div className="pt-2.5 border-t border-[#222222] flex items-center justify-between">
                 <a
                   href={item.image}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-xs text-luxury-muted hover:text-luxury-light flex items-center space-x-1"
+                  className="text-xs font-mono text-[#888888] hover:text-white flex items-center space-x-1 transition-colors"
                 >
                   <Eye className="w-3.5 h-3.5" />
-                  <span>View Raw</span>
+                  <span>Preview</span>
                 </a>
 
                 <button
                   onClick={() => setDeleteTarget(item)}
-                  className="p-1.5 text-luxury-muted hover:text-red-400 transition-colors"
+                  className="p-1.5 text-[#888888] hover:text-[#FF1F02] transition-colors cursor-pointer"
                   title="Delete asset"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
@@ -163,13 +169,13 @@ export default function AdminGalleryList() {
         onClose={() => setIsAddModalOpen(false)}
         title="Add Gallery Media Asset"
       >
-        <form onSubmit={handleAddItem} className="space-y-6">
+        <form onSubmit={handleAddItem} className="space-y-6 text-white font-manrope">
           <FormField label="Asset Title" required>
             <FormInput
               required
               value={newItem.title}
               onChange={(e) => setNewItem({ ...newItem, title: e.target.value })}
-              placeholder="e.g. Cliffside Infinity Pool at Dusk"
+              placeholder="e.g. Royal Courtyard at Sunset"
             />
           </FormField>
 
@@ -178,7 +184,7 @@ export default function AdminGalleryList() {
               <FormSelect
                 value={newItem.category}
                 onChange={(e) => setNewItem({ ...newItem, category: e.target.value })}
-                options={CATEGORIES}
+                options={CATEGORIES.filter((c) => c.value !== 'All')}
               />
             </FormField>
 
@@ -187,7 +193,7 @@ export default function AdminGalleryList() {
                 required
                 value={newItem.location}
                 onChange={(e) => setNewItem({ ...newItem, location: e.target.value })}
-                placeholder="e.g. Azure Coast Sanctuary"
+                placeholder="e.g. Udaipur Royal Heritage Estate"
               />
             </FormField>
           </div>
@@ -201,13 +207,26 @@ export default function AdminGalleryList() {
             />
           </FormField>
 
-          <div className="flex items-center justify-end space-x-3 pt-4 border-t border-luxury-border">
-            <Button type="button" variant="outline" size="sm" onClick={() => setIsAddModalOpen(false)}>
+          {newItem.image && (
+            <div className="relative aspect-[16/9] border border-[#333333] overflow-hidden bg-black">
+              <img src={newItem.image} alt="Preview" className="w-full h-full object-cover" />
+            </div>
+          )}
+
+          <div className="flex items-center justify-end space-x-3 pt-4 border-t border-[#333333]">
+            <button
+              type="button"
+              onClick={() => setIsAddModalOpen(false)}
+              className="px-5 py-2.5 bg-[#1C1C1C] border border-[#333333] text-xs font-mono uppercase text-white hover:bg-[#2A2A2A] transition-colors"
+            >
               Cancel
-            </Button>
-            <Button type="submit" variant="primary" size="sm">
+            </button>
+            <button
+              type="submit"
+              className="px-6 py-2.5 bg-[#FF1F02] hover:bg-white text-white hover:text-[#0E0E0E] font-bold text-xs font-mono uppercase transition-all shadow-lg"
+            >
               Save Asset
-            </Button>
+            </button>
           </div>
         </form>
       </Modal>

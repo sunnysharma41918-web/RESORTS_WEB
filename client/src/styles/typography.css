@@ -25,7 +25,17 @@
   letter-spacing: 0.12em;
 }
 
-/* Static Crisp Artistic Typography Slashes (#FF1F02, Yellow, Green) */
+/* =========================================================================
+   THEME-AWARE EDITORIAL TYPOGRAPHY GRADIENTS
+   In Light Mode (background #FAFDF2): Base text is dark #0E0E0E with vibrant accents.
+   In Dark Mode (background #1C1C1C): Base text is crisp #FFFFFF with vibrant accents.
+   ========================================================================= */
+
+/* Light Mode Defaults */
+html.light .text-art-orange,
+html.light .text-art-orange-dark,
+[data-theme="light"] .text-art-orange,
+[data-theme="light"] .text-art-orange-dark,
 .text-art-orange {
   background: linear-gradient(135deg, #0E0E0E 0%, #0E0E0E 30%, #FF1F02 48%, #FF1F02 56%, #0E0E0E 72%, #0E0E0E 100%);
   -webkit-background-clip: text;
@@ -33,28 +43,44 @@
   display: inline-block;
 }
 
+html.light .text-art-yellow,
+html.light .text-art-yellow-dark,
+[data-theme="light"] .text-art-yellow,
+[data-theme="light"] .text-art-yellow-dark,
 .text-art-yellow {
-  background: linear-gradient(135deg, #0E0E0E 0%, #0E0E0E 30%, #EAB308 48%, #EAB308 56%, #0E0E0E 72%, #0E0E0E 100%);
+  background: linear-gradient(135deg, #0E0E0E 0%, #0E0E0E 30%, #D97706 48%, #D97706 56%, #0E0E0E 72%, #0E0E0E 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }
 
+html.light .text-art-green,
+html.light .text-art-green-dark,
+[data-theme="light"] .text-art-green,
+[data-theme="light"] .text-art-green-dark,
 .text-art-green {
-  background: linear-gradient(135deg, #0E0E0E 0%, #0E0E0E 30%, #16A34A 48%, #16A34A 56%, #0E0E0E 72%, #0E0E0E 100%);
+  background: linear-gradient(135deg, #0E0E0E 0%, #0E0E0E 30%, #15803D 48%, #15803D 56%, #0E0E0E 72%, #0E0E0E 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }
 
+html.light .text-art-trio,
+html.light .text-art-trio-dark,
+[data-theme="light"] .text-art-trio,
+[data-theme="light"] .text-art-trio-dark,
 .text-art-trio {
-  background: linear-gradient(135deg, #0E0E0E 0%, #0E0E0E 25%, #FF1F02 40%, #EAB308 55%, #16A34A 70%, #0E0E0E 85%, #0E0E0E 100%);
+  background: linear-gradient(135deg, #0E0E0E 0%, #0E0E0E 25%, #FF1F02 40%, #D97706 55%, #15803D 70%, #0E0E0E 85%, #0E0E0E 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }
 
-/* Dark Mode Variants */
+/* Dark Mode Overrides */
+html.dark .text-art-orange,
+html.dark .text-art-orange-dark,
+[data-theme="dark"] .text-art-orange,
+[data-theme="dark"] .text-art-orange-dark,
 .text-art-orange-dark {
   background: linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 30%, #FF1F02 48%, #FF1F02 56%, #FFFFFF 72%, #FFFFFF 100%);
   -webkit-background-clip: text;
@@ -62,6 +88,10 @@
   display: inline-block;
 }
 
+html.dark .text-art-yellow,
+html.dark .text-art-yellow-dark,
+[data-theme="dark"] .text-art-yellow,
+[data-theme="dark"] .text-art-yellow-dark,
 .text-art-yellow-dark {
   background: linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 30%, #EAB308 48%, #EAB308 56%, #FFFFFF 72%, #FFFFFF 100%);
   -webkit-background-clip: text;
@@ -69,6 +99,10 @@
   display: inline-block;
 }
 
+html.dark .text-art-green,
+html.dark .text-art-green-dark,
+[data-theme="dark"] .text-art-green,
+[data-theme="dark"] .text-art-green-dark,
 .text-art-green-dark {
   background: linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 30%, #16A34A 48%, #16A34A 56%, #FFFFFF 72%, #FFFFFF 100%);
   -webkit-background-clip: text;
@@ -76,6 +110,10 @@
   display: inline-block;
 }
 
+html.dark .text-art-trio,
+html.dark .text-art-trio-dark,
+[data-theme="dark"] .text-art-trio,
+[data-theme="dark"] .text-art-trio-dark,
 .text-art-trio-dark {
   background: linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 25%, #FF1F02 42%, #EAB308 55%, #16A34A 68%, #FFFFFF 85%, #FFFFFF 100%);
   -webkit-background-clip: text;
@@ -83,7 +121,7 @@
   display: inline-block;
 }
 
-/* 5-Color Hero Palette (#2F50A3, #32ACE3, #F2E20F, #F19F1F, #ED1C24) from User Reference */
+/* 5-Color Hero Palette */
 .text-hero-palette {
   background: linear-gradient(135deg, #FFFFFF 0%, #32ACE3 22%, #F2E20F 44%, #F19F1F 66%, #ED1C24 86%, #FFFFFF 100%);
   -webkit-background-clip: text;

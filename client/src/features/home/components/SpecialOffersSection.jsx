@@ -1,134 +1,195 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, ArrowRight, Gift, Percent, Calendar } from 'lucide-react';
+import { Sparkles, ArrowRight, Tag, CheckCircle2, Calendar, MapPin, Gift, Phone } from 'lucide-react';
+import ScrollReveal from '../../../components/common/ScrollReveal';
+import MagneticButton from '../../../components/common/MagneticButton';
+import EditorialBackgroundElements from '../../../components/common/EditorialBackgroundElements';
+import EditorialHeritageStamp from '../../../components/common/EditorialHeritageStamp';
+import { offerService } from '../../../services/offerService';
+import { getWhatsAppBookingUrl } from '../../../data/contact';
 
 export default function SpecialOffersSection() {
-  const offers = [
-    {
-      id: 'weekend-escape',
-      title: 'The Weekend Sanctuary Escape',
-      validity: 'Valid Fri - Sun throughout 2026',
-      desc: 'Includes luxury return airport sedan transfers, daily champagne breakfast, and $250 Ayurvedic Spa credit.',
-      discount: 'Save 20%',
-      image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=85',
-      tag: 'MOST POPULAR',
-      tagBg: '#3FD3C9',
-      tagColor: '#171C28',
-    },
-    {
-      id: 'extended-stay',
-      title: 'Extended Horizon Residency',
-      validity: '5+ Nights Bookings',
-      desc: 'Complimentary private sommelier wine tasting, bespoke in-villa dinner, and complimentary laundry service.',
-      discount: 'Up to 30% Off',
-      image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=85',
-      tag: 'LONG STAY',
-      tagBg: '#B72257',
-      tagColor: '#FFFFFF',
-    },
-    {
-      id: 'romantic-retreat',
-      title: 'Romantic Sunset & Sea Voyage',
-      validity: 'Couples & Anniversaries',
-      desc: 'Private catamaran sunset cruise, floral bath ritual setup, and a 5-course candlelit clifftop dinner.',
-      discount: 'Bespoke Experience',
-      image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=85',
-      tag: 'HONEYMOON',
-      tagBg: '#3FD3C9',
-      tagColor: '#171C28',
-    },
-  ];
+  const [offers, setOffers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadOffers() {
+      try {
+        const data = await offerService.getOffers({ featured: true });
+        setOffers(data && data.length > 0 ? data.slice(0, 4) : []);
+      } catch (err) {
+        console.error('Failed to load offers:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadOffers();
+  }, []);
 
   return (
-    <section className="relative py-28 sm:py-36 bg-[#171C28] text-white overflow-hidden select-none border-t border-[#5E6575]/25">
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Rokkitt:wght@700;800;900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
-        .so-display { font-family: 'Rokkitt', Georgia, serif; }
-        .so-body { font-family: 'Ubuntu', sans-serif; }
-      `}</style>
+    <section className="relative bg-[#000000] text-white py-28 sm:py-36 px-6 sm:px-10 lg:px-16 overflow-hidden">
+      {/* Background Graphic Elements */}
+      <EditorialBackgroundElements variant="dark" position="bottom-left" />
 
-      {/* Ambient Glow */}
-      <div className="absolute top-1/3 left-1/3 w-[600px] h-[600px] bg-[#B72257]/10 rounded-full blur-[180px] pointer-events-none" />
+      <div className="max-w-7xl mx-auto space-y-16 lg:space-y-20 relative z-10">
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 space-y-12 relative z-10">
-        
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-[#5E6575]/30">
-          <div>
-            <div className="inline-flex items-center space-x-2 text-[#3FD3C9] text-xs uppercase tracking-[0.25em] font-bold mb-2">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>SEASONAL EXPERIENCES</span>
-            </div>
-            <h2 className="so-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-white">
-              Curated Special Offers
-            </h2>
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-8 border-b border-[#333333]">
+          <div className="space-y-4">
+            <ScrollReveal direction="up">
+              <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-[#FF1F02]">
+                <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
+                <span>05 — SPECIAL OFFERS & PACKAGES</span>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal direction="up" delay={100}>
+              <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-art-orange-dark">
+                EXCLUSIVE <br />
+                PACKAGES & <br />
+                EXPERIENCES.
+              </h2>
+            </ScrollReveal>
           </div>
-          <p className="so-body text-xs sm:text-sm text-white/60 font-light max-w-sm">
-            Exclusive privileges designed to enrich your sanctuary journey with unforgettable moments.
-          </p>
+
+          <div className="space-y-4 max-w-sm">
+            <ScrollReveal direction="up" delay={200}>
+              <p className="text-sm font-light text-[#D0D0D0] leading-relaxed">
+                Curated holiday escapes, destination weddings, and celebratory packages crafted to deliver extraordinary memories and genuine comfort.
+              </p>
+            </ScrollReveal>
+
+            <ScrollReveal direction="up" delay={300}>
+              <Link
+                to="/offers"
+                className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-[#FF1F02] hover:text-white transition-colors"
+              >
+                <span>VIEW ALL PACKAGES ({offers.length}+)</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </ScrollReveal>
+          </div>
         </div>
 
-        {/* 3 Offer Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {offers.map((offer) => (
-            <div
-              key={offer.id}
-              className="rounded-3xl overflow-hidden bg-[#1F2536]/85 border border-[#5E6575]/35 hover:border-[#3FD3C9]/60 shadow-2xl transition-all duration-500 flex flex-col justify-between group"
-            >
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <img
-                  src={offer.image}
-                  alt={offer.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1F2536] via-transparent to-transparent" />
+        {/* Offers 2x2 Feature Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {offers.map((pkg, idx) => (
+            <ScrollReveal key={pkg.id} direction="up" delay={idx * 100}>
+              <div className="group bg-[#161616] border border-[#333333] hover:border-[#FF1F02] transition-all duration-500 overflow-hidden flex flex-col justify-between h-full">
+                
+                {/* Media Banner with Badge */}
+                <div className="relative aspect-[16/9] overflow-hidden bg-black">
+                  <img
+                    src={pkg.image}
+                    alt={pkg.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-90"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#161616] via-transparent to-transparent pointer-events-none" />
 
-                {/* Top Badge */}
-                <div className="absolute top-4 left-4 z-10">
-                  <span
-                    className="px-3.5 py-1 rounded-full text-[10px] font-mono font-extrabold tracking-widest uppercase shadow-lg"
-                    style={{ backgroundColor: offer.tagBg, color: offer.tagColor }}
-                  >
-                    {offer.tag}
-                  </span>
-                </div>
-
-                {/* Discount Tag */}
-                <div className="absolute bottom-4 right-4 z-10">
-                  <span className="px-3 py-1 rounded-full bg-[#171C28]/80 backdrop-blur-md border border-[#5E6575]/30 text-xs font-mono font-bold text-[#3FD3C9]">
-                    {offer.discount}
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
-                <div className="space-y-2">
-                  <span className="so-body text-[11px] font-mono text-white/50 block">
-                    {offer.validity}
-                  </span>
-                  <h3 className="so-display text-lg font-bold text-white group-hover:text-[#3FD3C9] transition-colors leading-snug">
-                    {offer.title}
-                  </h3>
-                  <p className="so-body text-xs text-white/65 font-light leading-relaxed">
-                    {offer.desc}
-                  </p>
-                </div>
-
-                <div className="pt-3 border-t border-[#5E6575]/30">
-                  <Link
-                    to="/resorts"
-                    className="inline-flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-[#3FD3C9] hover:text-white transition-colors"
-                  >
-                    <span>Claim Package</span>
-                    <span className="w-6 h-6 rounded-full bg-[#B72257] text-white flex items-center justify-center">
-                      <ArrowRight className="w-3 h-3" />
+                  {/* Top Badges */}
+                  <div className="absolute top-4 left-4 flex flex-wrap gap-2 z-10">
+                    <span className="px-3 py-1 bg-[#FF1F02] text-white text-[10px] font-mono uppercase tracking-wider font-extrabold shadow-md">
+                      {pkg.badge || 'SPECIAL OFFER'}
                     </span>
-                  </Link>
+                    <span className="px-2.5 py-1 bg-black/80 backdrop-blur-sm text-[#EAB308] border border-[#EAB308]/40 text-[10px] font-mono uppercase tracking-wider">
+                      {pkg.tag}
+                    </span>
+                  </div>
+
+                  {/* Discount / Benefit Ribbon */}
+                  {pkg.discount && (
+                    <div className="absolute bottom-3 right-4 px-3 py-1 bg-black/90 backdrop-blur-sm border border-white/20 text-white text-xs font-mono font-bold flex items-center gap-1.5">
+                      <Gift className="w-3.5 h-3.5 text-[#FF1F02]" />
+                      <span>{pkg.discount}</span>
+                    </div>
+                  )}
                 </div>
+
+                {/* Content Body */}
+                <div className="p-6 sm:p-8 space-y-6 flex-1 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <h3 className="text-xl sm:text-2xl font-bold uppercase text-white group-hover:text-[#FF1F02] transition-colors leading-tight">
+                      {pkg.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#B0B0B0] font-light leading-relaxed">
+                      {pkg.description}
+                    </p>
+
+                    {/* Key Inclusions */}
+                    {pkg.inclusions && pkg.inclusions.length > 0 && (
+                      <div className="pt-3 space-y-1.5">
+                        <span className="text-[10px] font-mono text-[#EAB308] uppercase tracking-widest block font-bold">
+                          PACKAGE INCLUSIONS:
+                        </span>
+                        <ul className="space-y-1">
+                          {pkg.inclusions.slice(0, 3).map((inc, iIdx) => (
+                            <li key={iIdx} className="flex items-start gap-2 text-xs text-[#CCCCCC] font-light">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-[#FF1F02] shrink-0 mt-0.5" />
+                              <span>{inc}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Footer Action Rail */}
+                  <div className="pt-6 border-t border-[#2A2A2A] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="text-[11px] font-mono text-[#888888]">
+                      <span>{pkg.location}</span>
+                    </div>
+
+                    <a
+                      href={getWhatsAppBookingUrl(`Hello Country Holidays, I would like to book or inquire about: ${pkg.title}`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#FF1F02] hover:bg-white text-white hover:text-black text-xs font-mono uppercase font-bold tracking-wider transition-all duration-300 shadow-md cursor-pointer"
+                    >
+                      <span>BOOK THIS OFFER</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+
+                </div>
+
               </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
+
+        {/* Bottom Banner with Event Concierge */}
+        <ScrollReveal direction="up" delay={300}>
+          <div className="p-8 bg-gradient-to-r from-[#1C1C1C] via-[#161616] to-[#1C1C1C] border border-[#333333] flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div className="space-y-1">
+              <span className="text-[10px] font-mono text-[#EAB308] uppercase tracking-widest font-bold">
+                ✦ CUSTOM CELEBRATIONS & GROUP PACKAGES ✦
+              </span>
+              <h4 className="text-xl sm:text-2xl font-bold uppercase text-white">
+                Looking for a Tailor-Made Holiday or Event Package?
+              </h4>
+              <p className="text-xs sm:text-sm text-[#A0A0A0] font-light">
+                Our dedicated event advisors create bespoke itineraries for weddings, conferences, and family reunions.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4 shrink-0">
+              <a
+                href={getWhatsAppBookingUrl('Hello Country Holidays, I would like to discuss a custom package for our upcoming event/stay.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 bg-white hover:bg-[#FF1F02] text-black hover:text-white font-bold text-xs uppercase font-mono tracking-wider transition-all duration-300"
+              >
+                TALK TO PACKAGE ADVISOR
+              </a>
+              <Link
+                to="/offers"
+                className="px-6 py-3 border border-white/40 hover:border-white text-white font-bold text-xs uppercase font-mono tracking-wider transition-all duration-300"
+              >
+                BROWSE ALL OFFERS
+              </Link>
+            </div>
+          </div>
+        </ScrollReveal>
 
       </div>
     </section>

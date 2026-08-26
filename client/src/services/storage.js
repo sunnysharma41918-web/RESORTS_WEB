@@ -2,6 +2,7 @@ import { RESORTS_DATA } from '../features/resorts/resortData';
 import { HOTELS_DATA } from '../features/hotels/hotelData';
 import { EXPERIENCES_DATA } from '../features/experiences/experienceData';
 import { GALLERY_DATA } from '../features/gallery/galleryData';
+import { OFFERS_DATA } from '../features/offers/offersData';
 import { CONTACT_INFO } from '../data/contact';
 import { SITE_CONFIG } from '../data/siteConfig';
 
@@ -10,6 +11,7 @@ const KEYS = {
   HOTELS: 'aura_hotels',
   EXPERIENCES: 'aura_experiences',
   GALLERY: 'aura_gallery',
+  OFFERS: 'aura_offers',
   SETTINGS: 'aura_settings',
   INQUIRIES: 'aura_inquiries',
 };
@@ -84,6 +86,13 @@ export const storage = {
     localStorage.setItem(KEYS.GALLERY, JSON.stringify(data));
   },
 
+  getOffers() {
+    return initCollection(KEYS.OFFERS, OFFERS_DATA);
+  },
+  saveOffers(data) {
+    localStorage.setItem(KEYS.OFFERS, JSON.stringify(data));
+  },
+
   getSettings() {
     return initCollection(KEYS.SETTINGS, {
       siteConfig: SITE_CONFIG,
@@ -106,6 +115,7 @@ export const storage = {
     localStorage.setItem(KEYS.HOTELS, JSON.stringify(HOTELS_DATA));
     localStorage.setItem(KEYS.EXPERIENCES, JSON.stringify(EXPERIENCES_DATA));
     localStorage.setItem(KEYS.GALLERY, JSON.stringify(GALLERY_DATA));
+    localStorage.setItem(KEYS.OFFERS, JSON.stringify(OFFERS_DATA));
     localStorage.setItem(KEYS.SETTINGS, JSON.stringify({ siteConfig: SITE_CONFIG, contactInfo: CONTACT_INFO }));
     localStorage.setItem(KEYS.INQUIRIES, JSON.stringify(DEFAULT_INQUIRIES));
   },

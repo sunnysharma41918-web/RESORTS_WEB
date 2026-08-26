@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, MapPin, Compass, ShieldCheck, ArrowRight } from 'lucide-react';
+import { getWhatsAppBookingUrl } from '../../../data/contact';
 
 export default function SignatureStaySection() {
   return (
@@ -88,14 +89,19 @@ export default function SignatureStaySection() {
           </div>
         </div>
 
-        {/* Single Signature CTA */}
+        {/* Single Signature CTA rendering to WhatsApp */}
         <div className="pt-6 flex justify-center">
-          <Link to="/resorts" className="btn-sig group">
+          <a
+            href={getWhatsAppBookingUrl('Hello Country Holidays Hotels & Resorts, I would like to book the Signature Suite.')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-sig group"
+          >
             <span>Book Your Stay</span>
             <span className="w-6 h-6 rounded-full bg-[#B72257] group-hover:bg-[#171C28] group-hover:text-[#3FD3C9] text-white flex items-center justify-center transition-colors">
               <ArrowRight className="w-3 h-3" />
             </span>
-          </Link>
+          </a>
         </div>
       </div>
     </section>

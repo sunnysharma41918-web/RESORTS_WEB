@@ -23,15 +23,11 @@ export default function ConnectingVisualSpine() {
             {/* Experiences */}
             <stop offset="38%" stopColor="#FF1F02" stopOpacity="0.85" />
             {/* Cinematic Journey */}
-            <stop offset="50%" stopColor="#EAB308" stopOpacity="0.8" />
-            {/* Dining */}
-            <stop offset="62%" stopColor="#FF1F02" stopOpacity="0.85" />
-            {/* Wellness */}
-            <stop offset="74%" stopColor="#EAB308" stopOpacity="0.8" />
+            <stop offset="52%" stopColor="#EAB308" stopOpacity="0.8" />
             {/* Location */}
-            <stop offset="82%" stopColor="#16A34A" stopOpacity="0.8" />
+            <stop offset="72%" stopColor="#16A34A" stopOpacity="0.8" />
             {/* Gallery & CTA */}
-            <stop offset="92%" stopColor="#FF1F02" stopOpacity="0.85" />
+            <stop offset="90%" stopColor="#FF1F02" stopOpacity="0.85" />
             <stop offset="100%" stopColor="#FF1F02" stopOpacity="0.9" />
           </linearGradient>
 
@@ -107,15 +103,7 @@ export default function ConnectingVisualSpine() {
         <circle cx="160" cy="4800" r="5" fill="#EAB308" />
         <circle cx="160" cy="4800" r="12" stroke="#EAB308" strokeWidth="1.5" strokeOpacity="0.4" />
 
-        {/* Section 07 Dining Loop */}
-        <circle cx="800" cy="5600" r="4" fill="#FF1F02" />
-        <circle cx="800" cy="5600" r="10" stroke="#FF1F02" strokeWidth="1" strokeOpacity="0.35" />
-
-        {/* Section 08 Wellness Arc */}
-        <circle cx="1260" cy="6400" r="5" fill="#EAB308" />
-        <circle cx="1260" cy="6400" r="12" stroke="#EAB308" strokeWidth="1.5" strokeOpacity="0.4" />
-
-        {/* Section 09 Location Turn */}
+        {/* Location Turn */}
         <circle cx="180" cy="8000" r="5" fill="#16A34A" />
         <circle cx="180" cy="8000" r="12" stroke="#16A34A" strokeWidth="1.5" strokeOpacity="0.4" />
 

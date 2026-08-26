@@ -1,15 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { X, Maximize2, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import ScrollReveal from '../../../components/common/ScrollReveal';
 import EditorialBackgroundElements from '../../../components/common/EditorialBackgroundElements';
+import { galleryService } from '../../../services/galleryService';
 
-const categories = ['ALL', 'ARCHITECTURE', 'VILLAS', 'WELLNESS', 'GASTRONOMY'];
+const CATEGORIES = [
+  { label: 'ALL CATEGORIES', value: 'All' },
+  { label: 'RESORTS', value: 'Resorts' },
+  { label: 'HOTELS', value: 'Hotels' },
+  { label: 'SUITES & ROOMS', value: 'Rooms' },
+  { label: 'WEDDINGS & CELEBRATIONS', value: 'Weddings' },
+  { label: 'NATURE & LANDSCAPE', value: 'Nature' },
+  { label: 'EXPERIENCES & RITUALS', value: 'Experiences' },
+];
 
-const galleryItems = [
+const fallbackGalleryItems = [
   {
     id: 1,
     title: 'High-Altitude Ridge Horizon',
-    category: 'ARCHITECTURE',
+    category: 'Resorts',
     specs: 'Elevation 1,850m • Morning Mist',
     aspect: 'aspect-[16/10]',
     gridSpan: 'lg:col-span-8',
@@ -18,7 +27,7 @@ const galleryItems = [
   {
     id: 2,
     title: 'Cantilevered Slate Soaking Tub',
-    category: 'VILLAS',
+    category: 'Rooms',
     specs: 'Forest Pool Villa • Private Deck',
     aspect: 'aspect-[3/4]',
     gridSpan: 'lg:col-span-4',
@@ -27,7 +36,7 @@ const galleryItems = [
   {
     id: 3,
     title: 'Sommelier Subterranean Cellar',
-    category: 'GASTRONOMY',
+    category: 'Experiences',
     specs: 'Biodynamic Vintages • Natural Stone',
     aspect: 'aspect-[4/5]',
     gridSpan: 'lg:col-span-4',
@@ -36,7 +45,7 @@ const galleryItems = [
   {
     id: 4,
     title: 'Geothermal Mineral Thermal Spa',
-    category: 'WELLNESS',
+    category: 'Experiences',
     specs: 'Sound Therapy • 38°C Spring Water',
     aspect: 'aspect-[16/10]',
     gridSpan: 'lg:col-span-8',
@@ -45,7 +54,7 @@ const galleryItems = [
   {
     id: 5,
     title: '500-Acre Wildlife Pine Corridor',
-    category: 'ARCHITECTURE',
+    category: 'Nature',
     specs: 'Zero-Emission Conservation Zone',
     aspect: 'aspect-square',
     gridSpan: 'lg:col-span-4',
@@ -54,7 +63,7 @@ const galleryItems = [
   {
     id: 6,
     title: 'Monolith Stargazing Sky-Roof Chalet',
-    category: 'VILLAS',
+    category: 'Rooms',
     specs: 'Heated Timber • Panoramic Ridge Views',
     aspect: 'aspect-[16/9]',
     gridSpan: 'lg:col-span-8',
@@ -63,12 +72,39 @@ const galleryItems = [
 ];
 
 export default function ResortGallerySection() {
-  const [selectedCategory, setSelectedCategory] = useState('ALL');
+  const [items, setItems] = useState(fallbackGalleryItems);
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [lightboxIndex, setLightboxIndex] = useState(null);
 
-  const filteredItems = selectedCategory === 'ALL'
-    ? galleryItems
-    : galleryItems.filter((item) => item.category === selectedCategory);
+  useEffect(() => {
+    async function loadItems() {
+      try {
+        const data = await galleryService.getGalleryItems();
+        if (data && data.length > 0) {
+          const normalized = data.map((item, idx) => ({
+            ...item,
+            url: item.url || item.image || 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1600&q=90',
+            gridSpan: item.gridSpan || (idx % 3 === 0 ? 'lg:col-span-8' : 'lg:col-span-4'),
+            aspect: item.aspect || (idx % 3 === 0 ? 'aspect-[16/10]' : 'aspect-[3/4]'),
+            specs: item.specs || item.location || 'Sanctuary Estate',
+          }));
+          setItems(normalized);
+        }
+      } catch (err) {
+        console.error('Failed to load gallery items:', err);
+      }
+    }
+    loadItems();
+  }, []);
+
+  const filteredItems = useMemo(() => {
+    if (selectedCategory === 'All') return items;
+    return items.filter((item) => {
+      const itemCat = (item.category || '').toLowerCase();
+      const target = selectedCategory.toLowerCase();
+      return itemCat === target || itemCat.includes(target) || target.includes(itemCat);
+    });
+  }, [items, selectedCategory]);
 
   // Keyboard navigation for lightbox
   useEffect(() => {
@@ -107,22 +143,22 @@ export default function ResortGallerySection() {
             </ScrollReveal>
           </div>
 
-          {/* Editorial Category Filter Tabs */}
+          {/* Editorial Category Filter Tabs matching Admin Media CMS */}
           <ScrollReveal direction="up" delay={200}>
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-              {categories.map((cat) => {
-                const isActive = cat === selectedCategory;
+              {CATEGORIES.map((cat) => {
+                const isActive = cat.value === selectedCategory;
                 return (
                   <button
-                    key={cat}
-                    onClick={() => setSelectedCategory(cat)}
+                    key={cat.value}
+                    onClick={() => setSelectedCategory(cat.value)}
                     className={`px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-all duration-300 cursor-pointer ${
                       isActive
-                        ? 'bg-[#0E0E0E] text-white'
-                        : 'border border-[#E9E9DE] text-[#0E0E0E]/70 hover:border-[#0E0E0E] hover:text-[#0E0E0E] bg-white/40'
+                        ? 'bg-[#FF1F02] text-white shadow-md'
+                        : 'border border-[#E9E9DE] text-[#0E0E0E]/75 hover:border-[#FF1F02] hover:text-[#FF1F02] bg-white/60'
                     }`}
                   >
-                    {cat}
+                    {cat.label}
                   </button>
                 );
               })}

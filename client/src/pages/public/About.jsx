@@ -1,56 +1,59 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Compass, ShieldCheck, TreePine, Sun, Moon, Sparkles, Layers } from 'lucide-react';
+import { ArrowRight, Compass, ShieldCheck, Heart, Sparkles, Star, Users, MapPin, Phone } from 'lucide-react';
 import ScrollReveal from '../../components/common/ScrollReveal';
 import MagneticButton from '../../components/common/MagneticButton';
 import EditorialHeritageStamp from '../../components/common/EditorialHeritageStamp';
 import EditorialBackgroundElements from '../../components/common/EditorialBackgroundElements';
+import { getWhatsAppBookingUrl } from '../../data/contact';
 
 const pillars = [
   {
     number: '01',
-    title: 'BIO-HARMONIC ARCHITECTURE',
-    desc: 'Every pavilion is sculpted directly into high-altitude rock faces using locally quarried slate, timber, and low-iron acoustic glass.',
+    title: 'WARM & INTENTIONAL HOSPITALITY',
+    desc: 'A heartfelt guest-first philosophy with 24/7 dedicated concierge teams ensuring every guest feels truly valued and at home.',
     accent: '#FF1F02',
   },
   {
     number: '02',
-    title: 'DEEP ECOLOGICAL STEWARDSHIP',
-    desc: '500-acre private conservation corridor operating 100% off-grid with clean solar micro-grids and zero single-use plastics.',
+    title: 'CURATED LUXURY STAYS',
+    desc: 'From serene coastal retreats to prime city hotels, each property is thoughtfully selected for premium comfort, cleanliness, and peace.',
     accent: '#EAB308',
   },
   {
     number: '03',
-    title: 'THE GASTRONOMY OF TIME',
-    desc: 'Zero-kilometer culinary craft celebrating unhurried seasonal harvests from our subterranean cellars and organic estate gardens.',
+    title: 'MEMORABLE EXPERIENCES',
+    desc: 'Expertly managed destination weddings, festive celebrations, and authentic local excursions crafted by specialist event advisors.',
     accent: '#16A34A',
   },
   {
     number: '04',
-    title: 'UNHURRIED SILENCE',
-    desc: 'Protected night skies with zero light pollution, Ayurvedic geothermal realignment, and sound chambers designed for deep restorative sleep.',
+    title: 'UNWAVERING QUALITY & TRUST',
+    desc: 'Transparent booking, attentive staff, and continuous dedication to making every family vacation and executive retreat effortless.',
     accent: '#FF1F02',
   },
 ];
 
 const milestones = [
-  { year: '2020', title: 'Topographical Survey', desc: '500 acres of high-altitude Himalayan ridge mapped with zero tree felling.' },
-  { year: '2022', title: 'Stone Quarrying & Foundation', desc: 'Architects and master stonemasons sculpt the first subterranean pavilions.' },
-  { year: '2024', title: 'Solar Micro-Grid Activation', desc: 'Full off-grid energetic independence achieved with renewable solar storage.' },
-  { year: '2026', title: 'Global Inauguration', desc: 'Opening the sanctuary to travelers seeking uncompromised architectural tranquility.' },
+  { year: '2020', title: 'The Founding Vision', desc: 'Conceived with a clear mission: to make luxury holiday stays accessible, transparent, and warmly hospitable.' },
+  { year: '2022', title: 'Curated Destinations', desc: 'Expanded signature stays across premier leisure gateways, coastal havens, and heritage properties.' },
+  { year: '2024', title: 'Banquets & Event Desks', desc: 'Introduced dedicated event advisory desks for destination weddings, corporate summits, and grand galas.' },
+  { year: '2026', title: 'Country Holidays Milestone', desc: 'Delivering exceptional holiday experiences to thousands of delighted families across Chennai, Noida, Mumbai, and Delhi.' },
 ];
 
 export default function About() {
   return (
-    <div className="w-full bg-[#1C1C1C] text-white overflow-hidden font-manrope">
+    <div className="w-full dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] overflow-hidden font-manrope transition-colors duration-300">
 
       {/* 1. HERO SECTION: CINEMATIC MONUMENTAL BANNER IN PURE BLACK */}
-      <section className="relative min-h-[85vh] flex flex-col justify-between py-24 sm:py-32 px-6 sm:px-12 bg-black border-b border-[#333333] overflow-hidden select-none">
+      <section className="relative min-h-[85vh] flex flex-col justify-between py-24 sm:py-32 px-6 sm:px-12 bg-black border-b dark:border-[#333333] border-[#E9E9DE] overflow-hidden select-none">
         {/* Background Subtle Vista */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=3000&q=90"
-            alt="Mountain Sanctuary Mist Horizon"
+            src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1600&q=75"
+            alt="Country Holidays Hotels & Resorts Horizon"
+            loading="eager"
+            decoding="async"
             className="w-full h-full object-cover filter brightness-[0.25]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
@@ -60,83 +63,83 @@ export default function About() {
           <ScrollReveal direction="up">
             <div className="inline-flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#FF1F02]">
               <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block" />
-              <span>THE ARCHITECTURAL MANIFESTO</span>
+              <span>ABOUT COUNTRY HOLIDAYS HOTELS & RESORTS</span>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={100}>
-            <h1 className="text-5xl sm:text-7xl lg:text-[8.5rem] font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-white">
-              BORN FROM <br />
-              STONE & <br />
-              <span className="text-art-trio">STILLNESS.</span>
+            <h1 className="text-5xl sm:text-7xl lg:text-[8rem] font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-white">
+              WHERE MEMORIES <br />
+              BEGIN & <br />
+              <span className="text-art-trio">COMFORT LIVES.</span>
             </h1>
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={200}>
-            <p className="text-base sm:text-xl font-light text-[#D0D0D0] max-w-2xl mx-auto leading-relaxed">
-              We built CHTR not as a hotel, but as a sanctuary of deceleration — where architecture bows to the wilderness and time is measured only by the sun.
+            <p className="text-base sm:text-xl font-light text-[#D0D0D0] max-w-3xl mx-auto leading-relaxed">
+              Country Holidays Hotels & Resorts was created with a simple vision — to make every holiday comfortable, memorable, and truly special.
             </p>
           </ScrollReveal>
         </div>
 
         {/* Bottom Editorial Coordinates */}
         <div className="relative z-10 max-w-6xl mx-auto w-full pt-8 border-t border-[#333333] flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-[#B0B0B0] uppercase tracking-widest gap-4">
-          <span>● CHTR SANCTUARY RESORT</span>
-          <span>ELEVATION: 1,850 METERS</span>
+          <span>● COUNTRY HOLIDAYS HOTELS & RESORTS (CHHR)</span>
+          <span>CHENNAI • NOIDA • MUMBAI • DELHI</span>
           <span>EST. 2026</span>
         </div>
       </section>
 
 
-      {/* 2. SECTION 01: OUR VISION IN IVORY (#FAFDF2) WITH TEXT-OVER-IMAGE */}
-      <section className="relative bg-[#FAFDF2] text-[#0E0E0E] py-28 sm:py-40 px-6 sm:px-10 lg:px-16 overflow-hidden">
+      {/* 2. SECTION 01: OUR VISION (ADAPTIVE DARK/LIGHT) */}
+      <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-28 sm:py-40 px-6 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300">
         <EditorialBackgroundElements variant="light" position="top-right" />
 
         <div className="max-w-7xl mx-auto space-y-20 lg:space-y-28 relative z-10">
-          
+
           <ScrollReveal direction="up">
-            <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-[#0E0E0E]">
+            <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] dark:text-white text-[#0E0E0E]">
               <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
-              <span>01 — THE VISION</span>
+              <span>01 — ABOUT OUR HOSPITALITY</span>
             </div>
           </ScrollReveal>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            
+
             {/* Left Typography Column (7 Cols) */}
             <div className="lg:col-span-7 space-y-8 sm:space-y-10">
               <ScrollReveal direction="up" delay={100}>
                 <h2 className="text-5xl sm:text-7xl lg:text-8xl font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-art-trio">
-                  A QUIETER <br />
-                  WAY TO <br />
-                  EXIST.
+                  YOUR PERFECT <br />
+                  GETAWAY <br />
+                  BEGINS HERE.
                 </h2>
               </ScrollReveal>
 
               <ScrollReveal direction="up" delay={200}>
-                <p className="text-base sm:text-lg font-normal text-[#0E0E0E]/80 leading-relaxed max-w-xl">
-                  Modern life operates at relentless speed. We created a high-altitude sanctuary where sensory clutter falls away, replaced by sweeping mountain horizons, crackling cedar hearths, and unhurried hospitality.
+                <p className="text-base sm:text-lg font-normal dark:text-[#D0D0D0] text-[#0E0E0E]/85 leading-relaxed max-w-xl">
+                  We are committed to delivering warm hospitality, comfortable stays, quality services, and experiences that make every visit special.
                 </p>
               </ScrollReveal>
 
               <ScrollReveal direction="up" delay={300}>
-                <p className="text-sm sm:text-base font-light text-[#0E0E0E]/65 leading-relaxed max-w-xl">
-                  Every villa is oriented toward the morning sun, designed with low-iron acoustic glass that dampens exterior noise to an extraordinary 24 decibels — the sound of quiet breathing.
+                <p className="text-sm sm:text-base font-light dark:text-[#A0A0A0] text-[#0E0E0E]/70 leading-relaxed max-w-xl">
+                  Our team works with passion to ensure that every guest feels valued, relaxed, and truly at home across all our signature hotels, resorts, and vacation suites.
                 </p>
               </ScrollReveal>
 
               {/* Offset Material Plate */}
               <ScrollReveal direction="scale" delay={350}>
                 <div className="pt-4 max-w-sm">
-                  <div className="p-6 bg-white border border-[#E9E9DE] shadow-md space-y-2">
+                  <div className="p-6 dark:bg-[#0E0E0E] dark:border-[#333333] bg-white border border-[#E9E9DE] shadow-md space-y-2 transition-colors">
                     <span className="text-[10px] font-mono uppercase tracking-widest text-[#FF1F02] font-bold block">
-                      ARCHITECTURAL MATERIALITY
+                      OUR CORE COMMITMENT
                     </span>
-                    <h4 className="text-base font-bold uppercase text-[#0E0E0E]">
-                      Locally Quarried Valley Slate & Cedar
+                    <h4 className="text-base font-bold uppercase dark:text-white text-[#0E0E0E]">
+                      Comfort, Excellence & Warmth
                     </h4>
-                    <p className="text-xs text-[#0E0E0E]/70 font-light">
-                      Naturally insulating materials that absorb daytime mountain sunlight and radiate soothing warmth through the cool evening hours.
+                    <p className="text-xs dark:text-[#A0A0A0] text-[#0E0E0E]/70 font-light">
+                      Dedicated 24/7 guest support, personalized itineraries, and authentic local experiences crafted for families, couples, and corporate travelers.
                     </p>
                   </div>
                 </div>
@@ -145,31 +148,23 @@ export default function About() {
 
             {/* Right Column: Master Image with Upper Overlapping SANCTUARY Typography (5 Cols) */}
             <div className="lg:col-span-5 relative pt-10 sm:pt-14">
-              
-              {/* Monumental Text Positioned Upper & Overlapping Image Top - Cleanly fitted with rich color */}
-              <div className="absolute top-0 left-0 z-30 pointer-events-none select-none">
-                <span className="text-4xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl font-extrabold uppercase tracking-tight leading-none text-art-trio block">
-                  SANCTUARY
-                </span>
-              </div>
-
-              {/* Animated Red CHTR Stamp Overlapping Corner */}
-              <div className="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 z-40">
-                <EditorialHeritageStamp size={100} centerText="CHTR" year="EST 2026" />
-              </div>
-
-              <ScrollReveal direction="clip" delay={200}>
-                <div className="relative rounded-none overflow-hidden aspect-[3/4] border border-[#E9E9DE] shadow-2xl group bg-[#FAFDF2] z-10" data-cursor="VIEW">
+              <ScrollReveal direction="scale">
+                <div className="aspect-[4/5] bg-black overflow-hidden relative shadow-2xl border dark:border-[#333333] border-[#E9E9DE]">
                   <img
-                    src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1400&q=90"
-                    alt="High Mountain Sanctuary Architecture"
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 filter brightness-95"
+                    src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=75"
+                    alt="Luxury Hospitality Experience"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover filter brightness-90"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-
-                  <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-white text-xs font-mono">
-                    <span className="tracking-widest uppercase">ELEVATION 1,850M</span>
-                    <span className="text-[#FF1F02] font-bold">● 2026</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
+                    <span className="text-[10px] font-mono text-[#EAB308] uppercase tracking-widest block font-bold">
+                      ✦ CHHR SIGNATURE HOSPITALITY ✦
+                    </span>
+                    <p className="text-xs font-light text-white/90">
+                      Tailor-made vacation memories across India's most scenic destinations.
+                    </p>
                   </div>
                 </div>
               </ScrollReveal>
@@ -181,18 +176,16 @@ export default function About() {
       </section>
 
 
-      {/* 3. SECTION 02: THE 4 FOUNDATIONAL PILLARS IN DARK (#1C1C1C) */}
-      <section className="relative bg-[#1C1C1C] text-white py-28 sm:py-40 px-6 sm:px-10 lg:px-16 overflow-hidden">
-        <EditorialBackgroundElements variant="dark" position="bottom-left" />
-
+      {/* 3. SECTION 02: GUIDING PILLARS */}
+      <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-28 sm:py-40 px-6 sm:px-10 lg:px-16 border-t border-b dark:border-[#333333] border-[#E9E9DE] overflow-hidden transition-colors duration-300">
         <div className="max-w-7xl mx-auto space-y-20 lg:space-y-28 relative z-10">
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-8 border-b border-[#333333]">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-8 border-b dark:border-[#333333] border-[#E9E9DE]">
             <div className="space-y-4">
               <ScrollReveal direction="up">
-                <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-[#FF1F02]">
+                <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] dark:text-white text-[#0E0E0E]">
                   <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
-                  <span>02 — OUR PILLARS</span>
+                  <span>02 — PHILOSOPHY & VALUES</span>
                 </div>
               </ScrollReveal>
 
@@ -205,27 +198,27 @@ export default function About() {
             </div>
 
             <ScrollReveal direction="up" delay={200}>
-              <p className="text-sm font-light text-[#D0D0D0] max-w-sm leading-relaxed">
-                Four immovable commitments that define our architecture, our zero-emission estate, and our hospitality.
+              <p className="text-sm font-light dark:text-[#D0D0D0] text-[#0E0E0E]/70 max-w-sm leading-relaxed">
+                Four core commitments that define our hospitality, our service standards, and every guest stay.
               </p>
             </ScrollReveal>
           </div>
 
-          {/* 4 Pillars Grid with Thin Borders */}
+          {/* 4 Pillars Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {pillars.map((pillar, idx) => (
               <ScrollReveal key={pillar.number} direction="up" delay={idx * 80}>
-                <div className="p-8 bg-[#000000] border border-[#333333] hover:border-[#FF1F02] transition-all duration-300 h-full flex flex-col justify-between group">
+                <div className="p-8 dark:bg-[#0E0E0E] dark:border-[#333333] bg-white border border-[#E9E9DE] hover:border-[#FF1F02] transition-all duration-300 h-full flex flex-col justify-between group shadow-sm">
                   <div className="space-y-6">
                     <span className="text-xs font-mono font-bold tracking-widest text-[#FF1F02]">
                       ● {pillar.number}
                     </span>
-                    <h3 className="text-xl font-extrabold uppercase tracking-tight text-white group-hover:text-[#FF1F02] transition-colors leading-tight">
+                    <h3 className="text-xl font-extrabold uppercase tracking-tight dark:text-white text-[#0E0E0E] group-hover:text-[#FF1F02] transition-colors leading-tight">
                       {pillar.title}
                     </h3>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-[#B0B0B0] font-light leading-relaxed pt-8 border-t border-[#333333]/60 mt-8">
+                  <p className="text-xs sm:text-sm dark:text-[#B0B0B0] text-[#0E0E0E]/70 font-light leading-relaxed pt-8 border-t dark:border-[#333333]/60 border-[#E9E9DE] mt-8">
                     {pillar.desc}
                   </p>
                 </div>
@@ -237,32 +230,132 @@ export default function About() {
       </section>
 
 
-      {/* 4. SECTION 03: ARCHITECTURAL CHRONOLOGY TIMELINE IN IVORY (#FAFDF2) */}
-      <section className="relative bg-[#FAFDF2] text-[#0E0E0E] py-28 sm:py-40 px-6 sm:px-10 lg:px-16 overflow-hidden">
+      {/* 4. SECTION 03: CORPORATE & REGIONAL OFFICES */}
+      <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-28 sm:py-36 px-6 sm:px-10 lg:px-16 border-t border-b dark:border-[#333333] border-[#E9E9DE] overflow-hidden transition-colors duration-300">
+        <div className="max-w-7xl mx-auto space-y-16 relative z-10">
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b dark:border-[#2A2A2A] border-[#E9E9DE]">
+            <div>
+              <span className="text-[10px] font-mono uppercase tracking-widest text-[#FF1F02] font-bold block mb-2">
+                ● 03 — REGIONAL OFFICES & HUBS
+              </span>
+              <h2 className="text-4xl sm:text-6xl font-extrabold uppercase tracking-tight dark:text-white text-[#0E0E0E]">
+                WHERE WE RESIDE
+              </h2>
+            </div>
+            <p className="text-xs sm:text-sm dark:text-[#A0A0A0] text-[#0E0E0E]/70 font-light max-w-md">
+              Our network of corporate headquarters and regional guest advisory offices across India's key metropolitan centers.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                city: 'Chennai',
+                type: 'Main Corporate Headquarters',
+                isMain: true,
+                desc: 'Principal Management, Central Operations & Nationwide Concierge Headquarters.',
+                image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=600&q=75',
+                address: 'Anna Salai / OMR Business Corridor, Chennai, Tamil Nadu',
+              },
+              {
+                city: 'Noida',
+                type: 'Northern Regional Hub',
+                isMain: false,
+                desc: 'North Zone Operations, Partner Relations & Regional Concierge Desk.',
+                image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=75',
+                address: 'Commercial Sector Hub, Sector 62, Noida, Uttar Pradesh',
+              },
+              {
+                city: 'Delhi',
+                type: 'Capital Regional Office',
+                isMain: false,
+                desc: 'Executive Guest Relations, Event Advisory & Corporate Desk.',
+                image: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=75',
+                address: 'Aerocity / CP Business District, New Delhi',
+              },
+              {
+                city: 'Mumbai',
+                type: 'Western Regional Office',
+                isMain: false,
+                desc: 'West Coast Hospitality Services, Banquet Planning & Media Desk.',
+                image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=75',
+                address: 'Bandra Kurla Complex (BKC), Mumbai, Maharashtra',
+              },
+            ].map((office, idx) => (
+              <ScrollReveal key={office.city} direction="up" delay={idx * 100}>
+                <div className={`group relative dark:bg-[#0E0E0E] bg-white border ${office.isMain ? 'border-[#FF1F02]/80 ring-1 ring-[#FF1F02]/40' : 'dark:border-[#333333] border-[#E9E9DE]'} hover:border-[#FF1F02] transition-all overflow-hidden flex flex-col justify-between h-full shadow-sm`}>
+                  {/* Office Glass / Corporate Interior Photo */}
+                  <div className="aspect-[16/10] overflow-hidden relative bg-black">
+                    <img
+                      src={office.image}
+                      alt={`${office.city} Office`}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-85"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <span className={`absolute top-3 right-3 text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 backdrop-blur-sm border ${office.isMain ? 'bg-[#FF1F02] text-white border-[#FF1F02] font-black' : 'bg-black/80 text-[#EAB308] border-[#333333] font-bold'}`}>
+                      {office.isMain ? 'MAIN HQ' : `HUB 0${idx + 1}`}
+                    </span>
+                  </div>
+
+                  {/* Office Info Body */}
+                  <div className="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                    <div className="space-y-1.5">
+                      <span className={`text-[10px] font-mono uppercase tracking-widest block font-bold ${office.isMain ? 'text-[#FF1F02]' : 'text-[#EAB308]'}`}>
+                        {office.type}
+                      </span>
+                      <h4 className="text-xl font-bold uppercase dark:text-white text-[#0E0E0E] tracking-tight">
+                        {office.city}
+                      </h4>
+                      <p className="text-xs dark:text-[#A0A0A0] text-[#0E0E0E]/70 font-light leading-relaxed">
+                        {office.desc}
+                      </p>
+                    </div>
+
+                    <div className="pt-3 border-t dark:border-[#2A2A2A] border-[#E9E9DE] space-y-1 text-xs font-mono dark:text-[#888888] text-[#0E0E0E]/60">
+                      <div className="flex items-start gap-1.5">
+                        <MapPin className="w-3.5 h-3.5 text-[#FF1F02] shrink-0 mt-0.5" />
+                        <span className="line-clamp-2">{office.address}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* 5. SECTION 04: ARCHITECTURAL CHRONOLOGY TIMELINE */}
+      <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-28 sm:py-40 px-6 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300">
         <EditorialBackgroundElements variant="light" position="top-right" />
 
         <div className="max-w-7xl mx-auto space-y-20 lg:space-y-28 relative z-10">
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-8 border-b border-[#E9E9DE]">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-8 border-b dark:border-[#333333] border-[#E9E9DE]">
             <div className="space-y-4">
               <ScrollReveal direction="up">
-                <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-[#0E0E0E]">
+                <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] dark:text-white text-[#0E0E0E]">
                   <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
-                  <span>03 — CHRONOLOGY</span>
+                  <span>04 — OUR JOURNEY</span>
                 </div>
               </ScrollReveal>
 
               <ScrollReveal direction="up" delay={100}>
                 <h2 className="text-5xl sm:text-7xl lg:text-8xl font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-art-green">
-                  THE MAKING <br />
-                  OF CHTR.
+                  THE JOURNEY <br />
+                  OF CHHR.
                 </h2>
               </ScrollReveal>
             </div>
 
             <ScrollReveal direction="up" delay={200}>
-              <p className="text-sm font-light text-[#0E0E0E]/70 max-w-sm leading-relaxed">
-                Six years of unhurried craftsmanship, topographic reverence, and zero-compromise sustainable engineering.
+              <p className="text-sm font-light dark:text-[#D0D0D0] text-[#0E0E0E]/70 max-w-sm leading-relaxed">
+                Years of building authentic hospitality, trusted service standards, and memorable vacations.
               </p>
             </ScrollReveal>
           </div>
@@ -271,14 +364,14 @@ export default function About() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {milestones.map((m, idx) => (
               <ScrollReveal key={m.year} direction="up" delay={idx * 100}>
-                <div className="space-y-4 border-t-2 border-[#0E0E0E] pt-6 group">
-                  <span className="text-4xl sm:text-5xl font-extrabold text-[#0E0E0E] font-mono block group-hover:text-[#FF1F02] transition-colors">
+                <div className="space-y-4 border-t-2 dark:border-white border-[#0E0E0E] pt-6 group">
+                  <span className="text-4xl sm:text-5xl font-extrabold dark:text-white text-[#0E0E0E] font-mono block group-hover:text-[#FF1F02] transition-colors">
                     {m.year}
                   </span>
-                  <h4 className="text-base font-bold uppercase tracking-tight text-[#0E0E0E]">
+                  <h4 className="text-base font-bold uppercase tracking-tight dark:text-white text-[#0E0E0E]">
                     {m.title}
                   </h4>
-                  <p className="text-xs sm:text-sm text-[#0E0E0E]/70 font-light leading-relaxed">
+                  <p className="text-xs sm:text-sm dark:text-[#A0A0A0] text-[#0E0E0E]/70 font-light leading-relaxed">
                     {m.desc}
                   </p>
                 </div>
@@ -290,66 +383,71 @@ export default function About() {
       </section>
 
 
-      {/* 5. FINAL CTA: INVITATION TO EXPERIENCE THE ESTATE IN PURE BLACK */}
-      <section className="relative bg-[#000000] text-white py-32 sm:py-48 px-6 sm:px-10 lg:px-16 overflow-hidden">
+      {/* 6. FINAL CTA: INVITATION TO EXPERIENCE (ADAPTIVE DARK/LIGHT) */}
+      <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-32 sm:py-48 px-6 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300 border-t dark:border-[#333333] border-[#E9E9DE]">
         {/* Background Photography Overlay */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=3840&q=95"
-            alt="Sunrise Mountain Peak Horizon"
+            src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1400&q=75"
+            alt="Country Holidays Hotels & Resorts Horizon"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover filter brightness-[0.25]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/60" />
+          <div className="absolute inset-0 dark:bg-gradient-to-t dark:from-black dark:via-black/80 dark:to-black/60 bg-gradient-to-t from-black/80 via-black/60 to-black/40" />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-10 sm:space-y-12">
-          
-          {/* Animated Red CHTR Stamp */}
+
+          {/* Animated Red CHHR Stamp */}
           <ScrollReveal direction="scale">
             <div className="flex justify-center mb-2">
-              <EditorialHeritageStamp size={110} centerText="CHTR" year="EST 2026" />
+              <EditorialHeritageStamp size={110} centerText="CHHR" text="CHHR HOTELS & RESORTS • PRIVATE ESTATE • " year="EST 2026" />
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="up">
             <div className="inline-flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-[#FF1F02]">
               <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
-              <span>04 — INVITATION</span>
+              <span>05 — INVITATION</span>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={100}>
             <h2 className="text-5xl sm:text-7xl lg:text-9xl font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-art-orange-dark">
               EXPERIENCE <br />
-              THE SANCTUARY.
+              THE DIFFERENCE.
             </h2>
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={200}>
             <p className="text-base sm:text-xl font-light text-[#D0D0D0] max-w-xl mx-auto leading-relaxed">
-              Step beyond the ordinary. Reserve your private residence high above the clouds and discover the art of unhurried living.
+              Step into a world of comfort, warm hospitality, and unforgettable memories. Book your stay or plan your next celebration with our concierge today.
             </p>
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={300}>
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-5">
               <MagneticButton>
-                <Link
-                  to="/resorts"
+                <a
+                  href={getWhatsAppBookingUrl('Hello Country Holidays Hotels & Resorts, I would like to plan our holiday stay.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-4 px-10 py-5 rounded-none bg-white hover:bg-[#FF1F02] text-[#0E0E0E] hover:text-white font-bold text-xs uppercase tracking-[0.16em] transition-all duration-300 shadow-2xl group cursor-pointer"
                 >
-                  <span>EXPLORE RESIDENCES</span>
+                  <span>BOOK YOUR STAY</span>
                   <span className="w-6 h-6 rounded-full bg-[#FF1F02] group-hover:bg-white text-white group-hover:text-[#FF1F02] flex items-center justify-center transition-colors">
                     <ArrowRight className="w-3.5 h-3.5" />
                   </span>
-                </Link>
+                </a>
               </MagneticButton>
 
               <MagneticButton>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-3 px-8 py-5 rounded-none border border-white/40 hover:border-white text-white font-semibold text-xs uppercase tracking-[0.16em] backdrop-blur-md transition-all duration-300"
+                  className="inline-flex items-center gap-3 px-8 py-5 rounded-none border border-white/40 hover:border-white text-white font-semibold text-xs uppercase tracking-[0.16em] backdrop-blur-md transition-all duration-300 cursor-pointer"
                 >
+                  <Phone className="w-4 h-4 text-[#FF1F02]" />
                   <span>DIRECT INQUIRIES</span>
                 </Link>
               </MagneticButton>
@@ -358,9 +456,9 @@ export default function About() {
 
           <ScrollReveal direction="up" delay={400}>
             <div className="pt-6 flex items-center justify-center gap-6 text-[11px] font-mono text-[#B0B0B0] uppercase tracking-widest">
-              <span>● 100% OFF-GRID SOLAR</span>
-              <span>● 500-ACRE CONSERVATION ESTATE</span>
-              <span>● 24/7 DEDICATED BUTLER</span>
+              <span>● WARM HOSPITALITY</span>
+              <span>● CURATED HOLIDAY RETREATS</span>
+              <span>● 24/7 DEDICATED CARE</span>
             </div>
           </ScrollReveal>
 

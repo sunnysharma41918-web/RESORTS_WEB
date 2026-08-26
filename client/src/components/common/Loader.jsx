@@ -1,27 +1,19 @@
 import React from 'react';
 import { cn } from '../../utils/cn';
-import logoImg from '../../assets/images/hero/New Logo CHT.png';
+import BrandLogo from './BrandLogo';
 
 export default function Loader({
   className = '',
   size = 'md',
-  text = 'Sculpting Architectural Serenity',
+  text = 'WELCOME TO THE COUNTRY HOLIDAYS HOTELS AND RESORTS',
   fullscreen = false,
 }) {
   const content = (
-    <div className={cn('flex flex-col items-center justify-center p-6 space-y-6 text-center select-none', className)}>
+    <div className={cn('flex flex-col items-center justify-center p-6 space-y-6 text-center select-none font-manrope', className)}>
       
-      {/* Brand Logo with Ambient Cyan Glow */}
+      {/* Brand Logo with Ambient Gold/Vermilion Motion Aura */}
       <div className="relative flex items-center justify-center">
-        <div className="absolute -inset-4 bg-sky-500/15 rounded-full blur-xl animate-pulse" />
-        <img
-          src={logoImg}
-          alt="Country Holidays"
-          className={cn(
-            'w-auto object-contain brightness-110 drop-shadow-[0_0_25px_rgba(56,189,248,0.35)]',
-            size === 'sm' ? 'h-8' : size === 'lg' ? 'h-16' : 'h-11 sm:h-12'
-          )}
-        />
+        <BrandLogo size={size === 'lg' ? 'xl' : size === 'sm' ? 'sm' : 'lg'} animated={true} />
       </div>
 
       {/* Hairline Cyan Gradient Loading Line */}

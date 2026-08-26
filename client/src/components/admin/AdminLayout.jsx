@@ -39,7 +39,7 @@ export default function AdminLayout() {
               </button>
               <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-white">
                 <span className="w-2 h-2 rounded-full bg-[#FF1F02]" />
-                <span>CHTR Control Center</span>
+                <span>CHHR Control Center</span>
               </div>
             </div>
 

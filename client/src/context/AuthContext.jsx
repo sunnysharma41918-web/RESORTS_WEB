@@ -15,16 +15,39 @@ export function AuthProvider({ children }) {
   });
 
   const login = async (email, password) => {
-    // Frontend demo credentials or custom admin login
-    if (
-      (email === 'admin@countryholidays.com' && password === 'admin123') ||
-      (email === 'admin' && password === 'admin') ||
-      (email.includes('@') && password.length >= 4)
-    ) {
+    try {
+      // 1. Attempt live backend authentication
+      const res = await fetch('http://localhost:5000/api/v1/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        const sessionUser = {
+          id: data.user.id,
+          name: data.user.name,
+          email: data.user.email,
+          role: data.user.role,
+          token: data.token,
+        };
+        setUser(sessionUser);
+        localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(sessionUser));
+        return { success: true, user: sessionUser };
+      }
+    } catch (err) {
+      console.warn('[Auth] Live server auth fallback:', err.message);
+    }
+
+    // 2. Local fallback credentials (Strictly CHHR0012 & CHR456 only)
+    const cleanId = String(email).trim().toLowerCase();
+    if (cleanId === 'chhr0012' && password === 'CHR456') {
       const sessionUser = {
-        id: 'adm-001',
-        name: 'Executive Director',
-        email: email || 'admin@countryholidays.com',
+        id: 'adm-chhr0012',
+        name: 'Super Administrator',
+        email: 'CHHR0012',
         role: 'Super Administrator',
         token: `mock-jwt-token-${Date.now()}`,
       };
@@ -33,7 +56,7 @@ export function AuthProvider({ children }) {
       return { success: true, user: sessionUser };
     }
 
-    throw new Error('Invalid email or password. Use demo credentials: admin@countryholidays.com / admin123');
+    throw new Error('Invalid credentials. Please verify your Administrator ID and Password.');
   };
 
   const logout = () => {

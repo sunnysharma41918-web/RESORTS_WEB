@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Plus, Trash2, Sparkles, BedDouble } from 'lucide-react';
+import { ArrowLeft, Plus, Trash2, Sparkles, BedDouble, Save } from 'lucide-react';
 import { resortService } from '../../../services/resortService';
 import { FormField, FormInput, FormTextarea, FormToggle } from '../../../components/admin/AdminFormField';
-import Button from '../../../components/common/Button';
 import { slugify } from '../../../utils/slugify';
 import { useToast } from '../../../components/admin/ToastNotification';
 
@@ -31,7 +30,7 @@ export default function AdminResortForm() {
     description: '',
     contactPhone: '+91 98765 43210',
     contactWhatsapp: '+919876543210',
-    contactEmail: 'concierge@aura-resorts.com',
+    contactEmail: 'concierge@countryholidays-resorts.com',
     contactAddress: '',
     galleryUrls: '',
     amenities: [
@@ -145,33 +144,40 @@ export default function AdminResortForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-10">
+    <form onSubmit={handleSubmit} className="space-y-10 font-manrope text-white select-none">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-luxury-border">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#333333]">
         <div className="flex items-center space-x-4">
           <Link
             to="/admin/resorts"
-            className="p-2 border border-luxury-border text-luxury-muted hover:text-luxury-light"
+            className="p-2.5 bg-[#1C1C1C] border border-[#333333] text-[#888888] hover:text-white hover:border-[#FF1F02] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <div>
-            <span className="text-xs uppercase tracking-luxury text-luxury-accent block mb-1">
-              {isEditing ? 'Modify Sanctuary' : 'New Property'}
+            <span className="text-xs uppercase font-mono tracking-widest text-[#FF1F02] font-bold block mb-1">
+              {isEditing ? 'MODIFY RESORT RECORD' : 'NEW RESORT SANCTUARY'}
             </span>
-            <h1 className="text-3xl font-serif text-luxury-light">
+            <h1 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-white">
               {isEditing ? `Edit: ${formData.name}` : 'Add Resort Sanctuary'}
             </h1>
           </div>
         </div>
 
         <div className="flex items-center space-x-3">
-          <Button to="/admin/resorts" variant="outline" size="sm">
+          <Link
+            to="/admin/resorts"
+            className="px-5 py-2.5 bg-[#1C1C1C] border border-[#333333] text-xs font-mono uppercase text-white hover:bg-[#2A2A2A] transition-colors"
+          >
             Cancel
-          </Button>
-          <Button type="submit" variant="primary" size="sm">
-            {isEditing ? 'Save Changes' : 'Create Resort'}
-          </Button>
+          </Link>
+          <button
+            type="submit"
+            className="flex items-center space-x-2 px-6 py-2.5 bg-[#FF1F02] hover:bg-white text-white hover:text-[#0E0E0E] font-bold text-xs font-mono uppercase transition-all shadow-lg hover:scale-105 cursor-pointer"
+          >
+            <Save className="w-4 h-4" />
+            <span>{isEditing ? 'Save Changes' : 'Create Resort'}</span>
+          </button>
         </div>
       </div>
 
@@ -179,8 +185,8 @@ export default function AdminResortForm() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Left Column: Core Details */}
         <div className="lg:col-span-8 space-y-6">
-          <div className="bg-luxury-card border border-luxury-border p-6 md:p-8 space-y-6">
-            <h3 className="text-lg font-serif text-luxury-light border-b border-luxury-border pb-3">
+          <div className="bg-[#0E0E0E] border border-[#333333] p-6 md:p-8 space-y-6 shadow-xl">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono border-b border-[#222222] pb-3">
               Core Identity
             </h3>
 
@@ -261,8 +267,8 @@ export default function AdminResortForm() {
           </div>
 
           {/* Media & Imagery */}
-          <div className="bg-luxury-card border border-luxury-border p-6 md:p-8 space-y-6">
-            <h3 className="text-lg font-serif text-luxury-light border-b border-luxury-border pb-3">
+          <div className="bg-[#0E0E0E] border border-[#333333] p-6 md:p-8 space-y-6 shadow-xl">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono border-b border-[#222222] pb-3">
               Imagery & Media URLs
             </h3>
 
@@ -297,16 +303,16 @@ export default function AdminResortForm() {
           </div>
 
           {/* Rooms & Villas Section */}
-          <div className="bg-luxury-card border border-luxury-border p-6 md:p-8 space-y-6">
-            <div className="flex items-center justify-between border-b border-luxury-border pb-3">
-              <h3 className="text-lg font-serif text-luxury-light flex items-center space-x-2">
-                <BedDouble className="w-4 h-4 text-luxury-accent" />
+          <div className="bg-[#0E0E0E] border border-[#333333] p-6 md:p-8 space-y-6 shadow-xl">
+            <div className="flex items-center justify-between border-b border-[#222222] pb-3">
+              <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono flex items-center space-x-2">
+                <BedDouble className="w-4 h-4 text-[#FF1F02]" />
                 <span>Villas & Living Suites ({formData.rooms.length})</span>
               </h3>
               <button
                 type="button"
                 onClick={handleAddRoom}
-                className="text-xs uppercase tracking-luxury text-luxury-accent hover:underline flex items-center space-x-1"
+                className="text-xs font-mono uppercase tracking-widest text-[#FF1F02] hover:underline flex items-center space-x-1 cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add Villa</span>
@@ -315,16 +321,16 @@ export default function AdminResortForm() {
 
             <div className="space-y-6">
               {formData.rooms.map((room, idx) => (
-                <div key={idx} className="p-4 bg-luxury-stone/30 border border-luxury-border space-y-4 relative">
+                <div key={idx} className="p-4 bg-black border border-[#333333] space-y-4 relative">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs uppercase tracking-luxury text-luxury-accent font-medium">
+                    <span className="text-xs font-mono uppercase tracking-widest text-[#EAB308] font-bold">
                       Villa #{idx + 1}
                     </span>
                     {formData.rooms.length > 1 && (
                       <button
                         type="button"
                         onClick={() => handleRemoveRoom(idx)}
-                        className="text-red-400 hover:text-red-300 text-xs"
+                        className="text-[#888888] hover:text-[#FF1F02] transition-colors p-1"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
@@ -378,8 +384,8 @@ export default function AdminResortForm() {
         {/* Right Column: Settings, Featured & Direct Contact */}
         <div className="lg:col-span-4 space-y-6">
           {/* Status & Featured */}
-          <div className="bg-luxury-card border border-luxury-border p-6 space-y-6">
-            <h3 className="text-sm font-serif text-luxury-light uppercase tracking-luxury border-b border-luxury-border pb-3">
+          <div className="bg-[#0E0E0E] border border-[#333333] p-6 space-y-6 shadow-xl">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono border-b border-[#222222] pb-3">
               Publishing Options
             </h3>
 
@@ -403,8 +409,8 @@ export default function AdminResortForm() {
           </div>
 
           {/* Concierge & Direct Contact */}
-          <div className="bg-luxury-card border border-luxury-border p-6 space-y-6">
-            <h3 className="text-sm font-serif text-luxury-light uppercase tracking-luxury border-b border-luxury-border pb-3">
+          <div className="bg-[#0E0E0E] border border-[#333333] p-6 space-y-6 shadow-xl">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono border-b border-[#222222] pb-3">
               Sanctuary Concierge
             </h3>
 

@@ -15,6 +15,14 @@ export function UIProvider({ children }) {
     content: null,
   });
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen((prev) => !prev);
+  };
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
   const openLightbox = (images, index = 0) => {
     setLightboxState({
       isOpen: true,
@@ -53,7 +61,10 @@ export function UIProvider({ children }) {
     <UIContext.Provider
       value={{
         mobileMenuOpen,
+        isMobileMenuOpen: mobileMenuOpen,
         setMobileMenuOpen,
+        toggleMobileMenu,
+        closeMobileMenu,
         lightboxState,
         openLightbox,
         closeLightbox,

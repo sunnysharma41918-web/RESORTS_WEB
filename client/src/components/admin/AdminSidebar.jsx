@@ -2,10 +2,9 @@ import React from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
-  Palmtree,
-  Building2,
-  Compass,
+  BedDouble,
   Image as ImageIcon,
+  Tag,
   MessageSquare,
   Settings,
   LogOut,
@@ -13,7 +12,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import { cn } from '../../utils/cn';
-import logoImg from '../../assets/images/hero/New Logo CHT.png';
+import BrandLogo from '../common/BrandLogo';
 import { useAuth } from '../../context/AuthContext';
 
 export default function AdminSidebar({ isOpen, onClose }) {
@@ -25,12 +24,11 @@ export default function AdminSidebar({ isOpen, onClose }) {
     navigate('/admin/login', { replace: true });
   };
   const menuItems = [
-    { label: 'Overview', path: '/admin', icon: LayoutDashboard, exact: true },
-    { label: 'Sanctuaries CMS', path: '/admin/resorts', icon: Palmtree },
-    { label: 'Hotels CMS', path: '/admin/hotels', icon: Building2 },
-    { label: 'Experiences CMS', path: '/admin/experiences', icon: Compass },
+    { label: 'Overview & Telemetry', path: '/admin', icon: LayoutDashboard, exact: true },
+    { label: 'Accommodations (Suites)', path: '/admin/accommodations', icon: BedDouble },
+    { label: 'Offers & Packages', path: '/admin/offers', icon: Tag },
     { label: 'Media & Gallery', path: '/admin/gallery', icon: ImageIcon },
-    { label: 'Guest Inquiries', path: '/admin/inquiries', icon: MessageSquare },
+    { label: 'Inquiries CRM (Leads)', path: '/admin/inquiries', icon: MessageSquare },
     { label: 'Site Settings', path: '/admin/settings', icon: Settings },
   ];
 
@@ -45,11 +43,7 @@ export default function AdminSidebar({ isOpen, onClose }) {
         
         {/* Brand Header */}
         <Link to="/admin" className="flex items-center space-x-3 px-1 group">
-          <img
-            src={logoImg}
-            alt="Country Holidays Travel Resorts"
-            className="h-9 w-auto object-contain brightness-110"
-          />
+          <BrandLogo size="sm" animated={true} />
           <span className="text-[10px] font-mono font-bold uppercase tracking-widest bg-black text-[#FF1F02] border border-[#333333] px-2 py-0.5">
             CMS
           </span>

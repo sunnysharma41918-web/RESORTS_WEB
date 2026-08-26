@@ -13,7 +13,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { CONTACT_INFO } from '../../data/contact';
-import logoImg from '../../assets/images/hero/New Logo CHT.png';
+import BrandLogo from '../common/BrandLogo';
 import EditorialHeritageStamp from '../common/EditorialHeritageStamp';
 
 const socialLinks = [
@@ -26,7 +26,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#000000] text-white border-t border-[#333333] pt-20 pb-10 px-6 sm:px-12 lg:px-16 overflow-hidden select-none font-manrope">
+    <footer className="relative dark:bg-[#111111] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] border-t dark:border-[#333333] border-[#E9E9DE] pt-20 pb-10 px-6 sm:px-12 lg:px-16 overflow-hidden select-none font-manrope transition-colors duration-300">
 
       {/* Subtle Brand Red Ambient Glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[250px] bg-[#FF1F02]/5 rounded-full blur-[160px] pointer-events-none" />
@@ -38,15 +38,11 @@ export default function Footer() {
           
           {/* Column 1: Brand Logo, Heritage Stamp & Social Media Icons (4 Cols) */}
           <div className="lg:col-span-4 space-y-6">
-            <Link to="/" className="inline-block hover:opacity-85 transition-opacity">
-              <img
-                src={logoImg}
-                alt="Country Holidays Travel Resorts"
-                className="h-10 sm:h-12 w-auto object-contain brightness-110"
-              />
+            <Link to="/" className="inline-block hover:opacity-90 transition-opacity">
+              <BrandLogo size="lg" animated={true} />
             </Link>
 
-            <p className="text-xs sm:text-sm font-light text-[#D0D0D0] leading-relaxed max-w-sm">
+            <p className="text-xs sm:text-sm font-light dark:text-[#D0D0D0] text-[#0E0E0E]/75 leading-relaxed max-w-sm">
               A high-altitude architectural sanctuary dedicated to the unhurried life. Set high along the mountain ridge where silence is preserved.
             </p>
 
@@ -65,7 +61,7 @@ export default function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.name}
-                      className="w-10 h-10 rounded-none border border-[#333333] hover:border-[#FF1F02] bg-[#1C1C1C] hover:bg-[#FF1F02] text-[#D0D0D0] hover:text-white flex items-center justify-center transition-all duration-300 group cursor-pointer shadow-md"
+                      className="w-10 h-10 rounded-none border dark:border-[#333333] border-[#E9E9DE] hover:border-[#FF1F02] dark:bg-[#1C1C1C] bg-white hover:bg-[#FF1F02] dark:text-[#D0D0D0] text-[#0E0E0E] hover:text-white flex items-center justify-center transition-all duration-300 group cursor-pointer shadow-md"
                     >
                       <Icon className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
                     </a>
@@ -82,22 +78,22 @@ export default function Footer() {
               <span>DIRECT CONTACT</span>
             </div>
 
-            <div className="space-y-3 text-xs sm:text-sm text-[#D0D0D0] font-light leading-relaxed">
+            <div className="space-y-3 text-xs sm:text-sm dark:text-[#D0D0D0] text-[#0E0E0E]/75 font-light leading-relaxed">
               <div>
-                <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block">Direct Concierge</span>
-                <a href={`tel:${CONTACT_INFO.phoneRaw}`} className="hover:text-[#FF1F02] transition-colors font-medium text-white">
+                <span className="text-[10px] font-mono dark:text-white/40 text-[#0E0E0E]/40 uppercase tracking-widest block">Direct Concierge</span>
+                <a href={`tel:${CONTACT_INFO.phoneRaw}`} className="hover:text-[#FF1F02] transition-colors font-medium dark:text-white text-[#0E0E0E]">
                   {CONTACT_INFO.phone}
                 </a>
               </div>
               <div>
-                <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block">Reservations Email</span>
-                <a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-[#FF1F02] transition-colors font-medium text-white">
+                <span className="text-[10px] font-mono dark:text-white/40 text-[#0E0E0E]/40 uppercase tracking-widest block">Reservations Email</span>
+                <a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-[#FF1F02] transition-colors font-medium dark:text-white text-[#0E0E0E]">
                   {CONTACT_INFO.email}
                 </a>
               </div>
               <div>
-                <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block">Sanctuary Location</span>
-                <p className="text-white/70 text-xs leading-normal">
+                <span className="text-[10px] font-mono dark:text-white/40 text-[#0E0E0E]/40 uppercase tracking-widest block">Sanctuary Location</span>
+                <p className="dark:text-white/70 text-[#0E0E0E]/80 text-xs leading-normal">
                   {CONTACT_INFO.address}
                 </p>
               </div>
@@ -111,7 +107,7 @@ export default function Footer() {
               <span>NAVIGATION</span>
             </div>
 
-            <ul className="space-y-2.5 text-xs sm:text-sm text-[#D0D0D0] font-light">
+            <ul className="space-y-2.5 text-xs sm:text-sm dark:text-[#D0D0D0] text-[#0E0E0E]/75 font-light">
               <li>
                 <Link to="/" className="hover:text-[#FF1F02] transition-colors inline-block hover:translate-x-1 duration-200">
                   Discover
@@ -123,13 +119,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/resorts" className="hover:text-[#FF1F02] transition-colors inline-block hover:translate-x-1 duration-200">
-                  Residences
+                <Link to="/offers" className="hover:text-[#FF1F02] transition-colors inline-block hover:translate-x-1 duration-200">
+                  Offers & Packages
                 </Link>
               </li>
               <li>
-                <Link to="/experiences" className="hover:text-[#FF1F02] transition-colors inline-block hover:translate-x-1 duration-200">
-                  Experiences
+                <Link to="/celebrations" className="hover:text-[#FF1F02] transition-colors inline-block hover:translate-x-1 duration-200">
+                  Celebrations & Weddings
                 </Link>
               </li>
               <li>
@@ -153,10 +149,10 @@ export default function Footer() {
             </div>
 
             <div className="pt-2">
-              <EditorialHeritageStamp size={110} centerText="CHTR" year="EST 2026" />
+              <EditorialHeritageStamp size={110} centerText="CHHR" text="CHHR HOTELS & RESORTS • PRIVATE ESTATE • " year="EST 2026" />
             </div>
 
-            <p className="text-[11px] font-mono text-white/50 uppercase tracking-widest text-left lg:text-right">
+            <p className="text-[11px] font-mono dark:text-white/50 text-[#0E0E0E]/50 uppercase tracking-widest text-left lg:text-right">
               ● 100% OFF-GRID SOLAR <br />
               ● 500-ACRE CONSERVATION <br />
               ● 24/7 BUTLER CARE
@@ -166,16 +162,16 @@ export default function Footer() {
         </div>
 
         {/* Monumental Editorial Brand Signoff */}
-        <div className="pt-10 border-t border-[#333333] w-full overflow-hidden flex justify-center text-center select-none">
-          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight leading-tight text-white/90">
-            COUNTRY HOLIDAYS <span className="text-art-trio">TRAVEL RESORTS.</span>
+        <div className="pt-10 border-t dark:border-[#333333] border-[#E9E9DE] w-full overflow-hidden flex justify-center text-center select-none">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight leading-tight dark:text-white/90 text-[#0E0E0E]/90">
+            COUNTRY HOLIDAYS <span className="text-art-trio">HOTELS & RESORTS.</span>
           </h2>
         </div>
 
         {/* Bottom Copyright & Legal Notice Line */}
-        <div className="pt-6 border-t border-[#333333]/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-white/50 tracking-wider">
+        <div className="pt-6 border-t dark:border-[#333333]/60 border-[#E9E9DE] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono dark:text-white/50 text-[#0E0E0E]/50 tracking-wider">
           <div>
-            Country Holidays Travel Resorts Group © {new Date().getFullYear()} • All Rights Reserved.
+            Country Holidays Hotels & Resorts Group © {new Date().getFullYear()} • All Rights Reserved.
           </div>
           <div className="flex items-center space-x-5">
             <Link to="/privacy" className="hover:text-[#FF1F02] transition-colors">Privacy Policy</Link>

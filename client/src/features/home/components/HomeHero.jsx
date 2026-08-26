@@ -1,7 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../../../context/ThemeContext';
 
 export default function HomeHero() {
+  const { isDark } = useTheme();
+
   const scrollToDiscover = () => {
     const el = document.getElementById('intro-section') || document.querySelector('section:nth-of-type(2)');
     if (el) {
@@ -10,22 +13,37 @@ export default function HomeHero() {
   };
 
   return (
-    <section className="relative w-full h-screen h-[100dvh] max-h-screen overflow-hidden bg-[#182a38] text-white select-none flex flex-col justify-between pt-24 sm:pt-28 pb-10 sm:pb-12 px-6 sm:px-12 lg:px-16 xl:px-20">
+    <section className={`relative w-full h-screen h-[100dvh] max-h-screen overflow-hidden text-white select-none flex flex-col justify-between pt-24 sm:pt-28 pb-10 sm:pb-12 px-6 sm:px-12 lg:px-16 xl:px-20 transition-colors duration-500 ${
+      isDark ? 'bg-[#1C1C1C]' : 'bg-[#FAFDF2]'
+    }`}>
       
-      {/* 1. CINEMATIC MOUNTAIN LANDSCAPE BACKGROUND */}
+      {/* 1. CINEMATIC MOUNTAIN LANDSCAPE BACKGROUND (DYNAMIC LIGHT / DARK ATMOSPHERE) */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <motion.img
-          initial={{ scale: 1.12, opacity: 0.8 }}
+          key={isDark ? 'dark-bg' : 'light-bg'}
+          initial={{ scale: 1.08, opacity: 0.8 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
-          src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=3840&q=95"
+          transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+          src={
+            isDark
+              ? 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80'
+              : 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80'
+          }
           alt="Scenic Mountain Wilderness"
-          className="w-full h-full object-cover object-center filter brightness-[0.78] contrast-[1.08]"
+          loading="eager"
+          decoding="async"
+          className={`w-full h-full object-cover object-center filter ${
+            isDark ? 'brightness-[0.75] contrast-[1.1]' : 'brightness-[0.88] contrast-[1.05]'
+          }`}
         />
 
         {/* Ambient Gradient Overlays for Razor-Sharp Typography Contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/35 z-1" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/50 z-1" />
+        <div className={`absolute inset-0 z-1 transition-opacity duration-500 ${
+          isDark
+            ? 'bg-gradient-to-t from-black/90 via-black/30 to-black/40'
+            : 'bg-gradient-to-t from-black/75 via-black/20 to-black/25'
+        }`} />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/40 z-1" />
       </div>
 
       {/* 2. MAIN CENTERPIECE: MONUMENTAL TEXT HIERARCHY WITH STAGGERED REVEAL ANIMATIONS */}
@@ -63,7 +81,7 @@ export default function HomeHero() {
           HOLIDAYS
         </motion.div>
 
-        {/* Line 3: TRAVEL RESORTS (Medium Bold with Warm Amber & Crimson Red Gradient) */}
+        {/* Line 3: HOTELS AND RESORTS (Medium Bold with Warm Amber & Crimson Red Gradient) */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
@@ -71,7 +89,7 @@ export default function HomeHero() {
           className="w-full flex justify-end mt-0.5 sm:mt-1"
         >
           <h2 className="font-sans font-black text-xl sm:text-3xl md:text-4xl lg:text-5xl uppercase tracking-tight text-hero-orange-red drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)] text-right select-none">
-            TRAVEL RESORTS
+            HOTELS AND RESORTS
           </h2>
         </motion.div>
 
@@ -85,14 +103,13 @@ export default function HomeHero() {
         className="relative z-10 w-full flex items-center justify-between pt-2 text-xs text-white/80 font-medium"
       >
         <div className="flex items-center space-x-3 sm:space-x-4">
-          <span>Goa</span>
+          <span>Chennai</span>
           <span className="w-1.5 h-1.5 rounded-full bg-[#2F50A3]" />
-          <span>Bengaluru</span>
+          <span>Noida</span>
           <span className="w-1.5 h-1.5 rounded-full bg-[#32ACE3]" />
           <span>Mumbai</span>
           <span className="w-1.5 h-1.5 rounded-full bg-[#F2E20F]" />
-          <span>Dubai</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-[#ED1C24]" />
+          <span>Delhi</span>
         </div>
 
         <button

@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function EditorialHeritageStamp({
   size = 140, // pixel diameter
-  text = 'CHTR SANCTUARY • PRIVATE ESTATE • LUXURY • ',
-  centerText = 'CHTR',
+  text = 'CHHR HOTELS & RESORTS • PRIVATE SANCTUARY • ',
+  centerText = 'CHHR',
   year = 'EST 2026',
   className = '',
 }) {

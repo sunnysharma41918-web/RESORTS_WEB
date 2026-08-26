@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const FLOATING_WORDS = [
   '✦ SANCTUARY',
-  'CHTR',
+  'CHHR',
   '✨ ESCAPE',
   '🌿 STILLNESS',
   '✦ SERENITY',

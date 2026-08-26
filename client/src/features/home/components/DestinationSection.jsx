@@ -1,119 +1,138 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, MapPin } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import ScrollReveal from '../../../components/common/ScrollReveal';
-import MagneticButton from '../../../components/common/MagneticButton';
 import EditorialBackgroundElements from '../../../components/common/EditorialBackgroundElements';
 
-const distances = [
-  { destination: 'DELHI', time: '04 HRS', mode: 'Executive Chauffeur' },
-  { destination: 'AIRPORT', time: '02 HRS', mode: 'Direct Highway' },
-  { destination: 'CITY', time: '45 MIN', mode: 'Scenic Drive' },
-  { destination: 'HELIPAD', time: 'ON-SITE', mode: 'Direct Landing Zone' },
+const ALL_STATES = [
+  { id: '01', name: 'Andaman & Nicobar Islands' },
+  { id: '02', name: 'Andhra Pradesh' },
+  { id: '03', name: 'Arunachal Pradesh' },
+  { id: '04', name: 'Assam' },
+  { id: '05', name: 'Bihar' },
+  { id: '06', name: 'Chandigarh' },
+  { id: '07', name: 'Chhattisgarh' },
+  { id: '08', name: 'Dadra & Nagar Haveli and Daman & Diu' },
+  { id: '09', name: 'Delhi NCR' },
+  { id: '10', name: 'Goa' },
+  { id: '11', name: 'Gujarat' },
+  { id: '12', name: 'Haryana' },
+  { id: '13', name: 'Himachal Pradesh' },
+  { id: '14', name: 'Jammu & Kashmir' },
+  { id: '15', name: 'Jharkhand' },
+  { id: '16', name: 'Karnataka' },
+  { id: '17', name: 'Kerala' },
+  { id: '18', name: 'Ladakh' },
+  { id: '19', name: 'Lakshadweep' },
+  { id: '20', name: 'Madhya Pradesh' },
+  { id: '21', name: 'Maharashtra' },
+  { id: '22', name: 'Manipur' },
+  { id: '23', name: 'Meghalaya' },
+  { id: '24', name: 'Mizoram' },
+  { id: '25', name: 'Nagaland' },
+  { id: '26', name: 'Odisha' },
+  { id: '27', name: 'Puducherry' },
+  { id: '28', name: 'Punjab' },
+  { id: '29', name: 'Rajasthan' },
+  { id: '30', name: 'Sikkim' },
+  { id: '31', name: 'Tamil Nadu' },
+  { id: '32', name: 'Telangana' },
+  { id: '33', name: 'Tripura' },
+  { id: '34', name: 'Uttar Pradesh' },
+  { id: '35', name: 'Uttarakhand' },
+  { id: '36', name: 'West Bengal' },
 ];
 
 export default function DestinationSection() {
   return (
-    <section className="relative bg-[#FAFDF2] text-[#0E0E0E] py-28 sm:py-40 px-6 sm:px-10 lg:px-16 overflow-hidden">
-      {/* Background Graphic Elements - strictly in top-right whitespace away from left text */}
+    <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-24 sm:py-32 px-6 sm:px-10 lg:px-16 overflow-hidden font-manrope transition-colors duration-300">
+      {/* Background Subtle Graphic */}
       <EditorialBackgroundElements variant="light" position="top-right" />
-      <div className="max-w-7xl mx-auto space-y-20 lg:space-y-28 relative z-10">
 
-        {/* Reusable Editorial Label */}
-        <ScrollReveal direction="up">
-          <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-[#0E0E0E]">
-            <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
-            <span>06 — LOCATION</span>
-          </div>
-        </ScrollReveal>
+      <div className="max-w-7xl mx-auto space-y-14 sm:space-y-16 relative z-10">
 
-        {/* Editorial Location Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        {/* 1. SECTION HEADER */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-8 border-b dark:border-[#333333] border-[#E9E9DE]">
+          <div className="space-y-4">
+            <ScrollReveal direction="up">
+              <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] dark:text-white text-[#0E0E0E]">
+                <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
+                <span>04 — OUR WIDE RANGE OF LOCATIONS</span>
+              </div>
+            </ScrollReveal>
 
-          {/* Left Column: Heading & Travel Times (5 Cols) */}
-          <div className="lg:col-span-5 space-y-8 sm:space-y-10">
             <ScrollReveal direction="up" delay={100}>
               <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-art-green">
-                FAR FROM <br />
-                THE <br />
-                ORDINARY.
+                OUR WIDE RANGE <br />
+                OF LOCATIONS.
               </h2>
             </ScrollReveal>
+          </div>
 
+          <div className="space-y-4 max-w-md">
             <ScrollReveal direction="up" delay={200}>
-              <p className="text-base sm:text-lg font-normal text-[#0E0E0E]/80 leading-relaxed">
-                Tucked into the high-altitude folds of the mountain ridge, offering absolute seclusion while remaining effortlessly reachable.
+              <p className="text-sm font-light dark:text-[#D0D0D0] text-[#0E0E0E]/75 leading-relaxed">
+                Country Holidays Hotels & Resorts delivers warm hospitality, comfortable stays, and memorable celebrations across every state nationwide.
               </p>
             </ScrollReveal>
+          </div>
+        </div>
 
-            {/* Travel Times Telemetry Rail with Thin Strokes */}
-            <ScrollReveal direction="up" delay={300}>
-              <div className="space-y-4 pt-4 border-t border-[#E9E9DE]">
-                {distances.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="flex items-center justify-between py-3 border-b border-[#E9E9DE]"
-                  >
-                    <div className="space-y-0.5">
-                      <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#0E0E0E]">
-                        {item.destination}
-                      </span>
-                      <span className="text-[10px] text-[#0E0E0E]/50 uppercase tracking-widest block font-mono">
-                        {item.mode}
-                      </span>
-                    </div>
-                    <span className="text-xl sm:text-2xl font-extrabold text-[#0E0E0E]">
-                      {item.time}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </ScrollReveal>
 
-            <ScrollReveal direction="up" delay={450}>
-              <div className="pt-2">
-                <MagneticButton>
-                  <Link
-                    to="/contact"
-                    className="inline-flex items-center gap-3 px-8 py-4 rounded-none border border-[#0E0E0E] text-[#0E0E0E] font-semibold text-xs uppercase tracking-[0.14em] hover:bg-[#FF1F02] hover:border-[#FF1F02] hover:text-white transition-all duration-300 group"
-                  >
-                    <span>GET DIRECTIONS →</span>
-                  </Link>
-                </MagneticButton>
-              </div>
-            </ScrollReveal>
+        {/* 2. STATIC CLEAN TEXT-ONLY STATES LISTING */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between pb-2">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-[#FF1F02]">
+              ● PAN-INDIA PRESENCE ({ALL_STATES.length} STATES & UTs)
+            </span>
           </div>
 
-          {/* Right Column: Landscape Photography with Upper Overlapping Monumental Text (7 Cols) */}
-          <div className="lg:col-span-7 relative pt-12 sm:pt-16 lg:pt-20">
-            {/* Monumental Text Positioned Upper & Overlapping Image Top */}
-            <div className="absolute top-0 -left-4 sm:-left-8 lg:-left-12 z-30 pointer-events-none select-none">
-              <span className="text-7xl sm:text-9xl lg:text-[10rem] font-extrabold uppercase tracking-[-0.05em] leading-none text-[#0E0E0E] block">
-                TERRAIN
-              </span>
-            </div>
-
-            <ScrollReveal direction="clip" delay={200}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
+            {ALL_STATES.map((st) => (
               <div
-                className="relative rounded-none overflow-hidden aspect-[16/11] border border-[#E9E9DE] shadow-2xl group bg-[#FAFDF2] z-10"
-                data-cursor="VIEW"
+                key={st.id}
+                className="p-3.5 border flex items-center justify-between select-none transition-colors dark:bg-[#0E0E0E] dark:border-[#333333] bg-white border-[#E9E9DE]"
               >
-                <img
-                  src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=90"
-                  alt="High Mountain Panoramic Location"
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 filter brightness-95"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-
-                <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-white text-xs font-mono">
-                  <span className="tracking-widest uppercase">GPS: 31.1048° N, 77.1734° E</span>
-                  <span className="text-[#FF1F02] font-bold">PRIVATE SANCTUARY</span>
+                <div className="flex items-center gap-3">
+                  <span className="text-[10px] font-mono dark:text-white/40 text-[#0E0E0E]/40">
+                    {st.id}
+                  </span>
+                  <span className="text-sm font-bold uppercase dark:text-white text-[#0E0E0E]">
+                    {st.name}
+                  </span>
                 </div>
               </div>
-            </ScrollReveal>
+            ))}
           </div>
-
         </div>
+
+
+        {/* 3. PROMINENT CHECK AVAILABILITY BUTTON */}
+        <ScrollReveal direction="up" delay={200}>
+          <div className="p-8 sm:p-10 bg-black text-white border border-[#333333] flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left shadow-xl">
+            <div className="space-y-1">
+              <span className="text-[10px] font-mono text-[#EAB308] uppercase tracking-widest font-bold block">
+                ✦ PAN-INDIA RESERVATIONS & EVENT CONCIERGE ✦
+              </span>
+              <h3 className="text-xl sm:text-2xl font-extrabold uppercase text-white">
+                Looking for Stays or Event Venues Across India?
+              </h3>
+              <p className="text-xs sm:text-sm text-[#A0A0A0] font-light">
+                Explore our celebrations and submit a structured inquiry to check venue dates and pricing.
+              </p>
+            </div>
+
+            <div className="shrink-0">
+              <Link
+                to="/celebrations#inquiry"
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#FF1F02] hover:bg-white text-white hover:text-black font-bold text-xs uppercase font-mono tracking-widest transition-all duration-300 shadow-xl hover:scale-105 cursor-pointer"
+              >
+                <span>CHECK AVAILABILITY</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </ScrollReveal>
 
       </div>
     </section>

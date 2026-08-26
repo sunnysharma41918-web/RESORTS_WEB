@@ -48,7 +48,7 @@ export default function App() {
   }
 
   return (
-    <div className="relative min-h-screen bg-brand-dark text-white flex flex-col justify-between selection:bg-brand-orange selection:text-white">
+    <div className="relative min-h-screen dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] flex flex-col justify-between selection:bg-brand-orange selection:text-white transition-colors duration-300">
       <CustomCursor />
       {!loadingComplete && <Preloader onComplete={() => setLoadingComplete(true)} />}
 
@@ -61,7 +61,7 @@ export default function App() {
           <Suspense
             fallback={
               <div className="min-h-screen flex items-center justify-center bg-luxury-black">
-                <Loader text="Curating experience..." />
+                <Loader text="WELCOME TO THE COUNTRY HOLIDAYS HOTELS AND RESORTS" />
               </div>
             }
           >
