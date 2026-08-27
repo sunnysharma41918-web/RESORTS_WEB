@@ -125,7 +125,7 @@ export default function Gallery() {
     <div className="w-full dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] overflow-hidden font-manrope transition-colors duration-300">
 
       {/* 1. HERO BANNER IN PURE BLACK */}
-      <section className="relative min-h-[85vh] flex flex-col justify-between py-24 sm:py-32 px-6 sm:px-12 bg-black border-b dark:border-[#333333] border-[#E9E9DE] overflow-hidden select-none">
+      <section className="relative min-h-[75vh] sm:min-h-[85vh] flex flex-col justify-center py-20 sm:py-32 px-4 sm:px-12 bg-black border-b dark:border-[#333333] border-[#E9E9DE] overflow-hidden select-none">
         {/* Background Vista */}
         <div className="absolute inset-0 z-0">
           <img
@@ -136,16 +136,16 @@ export default function Gallery() {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto text-center space-y-8 my-auto">
+        <div className="relative z-10 max-w-6xl mx-auto text-center space-y-6 sm:space-y-8 my-auto w-full">
           <ScrollReveal direction="up">
-            <div className="inline-flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#FF1F02]">
-              <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block" />
+            <div className="inline-flex items-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#FF1F02] px-3 py-1 bg-black/40 border border-[#FF1F02]/30 rounded-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02] inline-block animate-pulse" />
               <span>THE LIVING VISUAL ARCHIVE</span>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={100}>
-            <h1 className="text-5xl sm:text-7xl lg:text-[8.5rem] font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-white">
+            <h1 className="text-[clamp(1.95rem,7.5vw,8.5rem)] font-extrabold uppercase tracking-tight sm:tracking-[-0.04em] leading-[0.98] sm:leading-[0.88] text-white break-words">
               THE ART OF <br />
               ARCHITECTURAL <br />
               <span className="text-art-trio">PERSPECTIVE.</span>
@@ -153,39 +153,32 @@ export default function Gallery() {
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={200}>
-            <p className="text-base sm:text-xl font-light text-[#D0D0D0] max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xs sm:text-lg lg:text-xl font-light text-[#D0D0D0] max-w-2xl mx-auto leading-relaxed px-2">
               A curated photographic portrait of mountain mist, native slate architecture, and unhurried stillness across our 500-acre sanctuary.
             </p>
           </ScrollReveal>
-        </div>
-
-        {/* Bottom Coordinates */}
-        <div className="relative z-10 max-w-6xl mx-auto w-full pt-8 border-t border-[#333333] flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-[#B0B0B0] uppercase tracking-widest gap-4">
-          <span>● CURATED COLLECTION</span>
-          <span>HIGH-RESOLUTION ARCHIVE</span>
-          <span>EST. 2026</span>
         </div>
       </section>
 
 
       {/* 2. MAIN GALLERY SECTION (ADAPTIVE DARK/LIGHT) */}
-      <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-28 sm:py-40 px-6 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300">
+      <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-20 sm:py-36 px-4 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300">
         <EditorialBackgroundElements variant="light" position="top-right" />
 
-        <div className="max-w-7xl mx-auto space-y-16 lg:space-y-24 relative z-10">
+        <div className="max-w-7xl mx-auto space-y-12 sm:space-y-20 relative z-10">
 
           {/* Section Header with Category Filters */}
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 pb-10 border-b dark:border-[#333333] border-[#E9E9DE]">
-            <div className="space-y-4">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 sm:gap-10 pb-8 sm:pb-10 border-b dark:border-[#333333] border-[#E9E9DE]">
+            <div className="space-y-3 sm:space-y-4">
               <ScrollReveal direction="up">
-                <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] dark:text-white text-[#0E0E0E]">
-                  <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
+                <div className="flex items-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.14em] dark:text-white text-[#0E0E0E]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02] inline-block shrink-0" />
                   <span>01 — VISUAL CURATION</span>
                 </div>
               </ScrollReveal>
 
               <ScrollReveal direction="up" delay={100}>
-                <h2 className="text-5xl sm:text-7xl lg:text-8xl font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-art-green">
+                <h2 className="text-[clamp(2rem,6.5vw,7.5rem)] font-extrabold uppercase tracking-tight sm:tracking-[-0.04em] leading-[0.95] sm:leading-[0.88] text-art-green">
                   THE LIVING <br />
                   GALLERY.
                 </h2>
@@ -194,14 +187,14 @@ export default function Gallery() {
 
             {/* Filter Tabs matching Admin Media & Gallery CMS */}
             <ScrollReveal direction="up" delay={200}>
-              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-3">
                 {CATEGORIES.map((cat) => {
                   const isActive = cat.value === selectedCategory;
                   return (
                     <button
                       key={cat.value}
                       onClick={() => setSelectedCategory(cat.value)}
-                      className={`px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-all duration-300 cursor-pointer ${
+                      className={`px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.12em] transition-all duration-300 cursor-pointer ${
                         isActive
                           ? 'bg-[#FF1F02] text-white shadow-md'
                           : 'border dark:border-[#333333] border-[#E9E9DE] dark:text-[#D0D0D0] text-[#0E0E0E]/75 hover:border-[#FF1F02] hover:text-[#FF1F02] dark:bg-[#0E0E0E] bg-white/60'
@@ -350,7 +343,7 @@ export default function Gallery() {
           {/* Animated Red CHHR Stamp */}
           <ScrollReveal direction="scale">
             <div className="flex justify-center mb-2">
-              <EditorialHeritageStamp size={110} centerText="CHHR" text="CHHR HOTELS & RESORTS • SANCTUARY • " year="EST 2026" />
+              <EditorialHeritageStamp size={110} centerText="CHHR" text="CHHR HOTELS & RESORTS • SANCTUARY • " />
             </div>
           </ScrollReveal>
 

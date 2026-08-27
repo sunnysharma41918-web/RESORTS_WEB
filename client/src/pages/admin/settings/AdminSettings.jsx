@@ -20,7 +20,7 @@ export default function AdminSettings() {
     whatsappMessage: 'Hello Country Holidays Concierge, I would like to enquire about your luxury stays.',
     email: 'concierge@countryholidays-resorts.com',
     enquiriesEmail: 'reservations@countryholidays-resorts.com',
-    address: 'Country Holidays Corporate Pavilion, Ocean Avenue, Goa, India',
+    address: '111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041',
     hours: '24/7 Global Luxury Concierge',
   });
 

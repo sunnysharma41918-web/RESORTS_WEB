@@ -12,7 +12,6 @@ import Loader from '../../components/common/Loader';
 const CATEGORIES = [
   { label: 'ALL PACKAGES', value: 'All' },
   { label: 'WEDDINGS & BANQUETS', value: 'Weddings' },
-  { label: 'WELLNESS & SPA', value: 'Wellness' },
   { label: 'CORPORATE OFFSITES', value: 'Corporate' },
   { label: 'FAMILY HOLIDAYS', value: 'Holidays' },
   { label: 'CELEBRATIONS', value: 'Celebrations' },
@@ -65,7 +64,7 @@ export default function Offers() {
     <div className="w-full dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] overflow-hidden font-manrope transition-colors duration-300">
 
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[75vh] flex flex-col justify-between py-24 sm:py-32 px-6 sm:px-12 bg-black border-b dark:border-[#333333] border-[#E9E9DE] overflow-hidden select-none">
+      <section className="relative min-h-[75vh] sm:min-h-[85vh] flex flex-col justify-center py-20 sm:py-32 px-4 sm:px-12 bg-black border-b dark:border-[#333333] border-[#E9E9DE] overflow-hidden select-none">
         <div className="absolute inset-0 z-0">
           <img
             src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=3000&q=95"
@@ -75,16 +74,16 @@ export default function Offers() {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto text-center space-y-6 my-auto">
+        <div className="relative z-10 max-w-6xl mx-auto text-center space-y-6 sm:space-y-8 my-auto w-full">
           <ScrollReveal direction="up">
-            <div className="inline-flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#FF1F02]">
-              <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block" />
+            <div className="inline-flex items-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#FF1F02] px-3 py-1 bg-black/40 border border-[#FF1F02]/30 rounded-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02] inline-block animate-pulse" />
               <span>SPECIAL OFFERS & CURATED PACKAGES</span>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={100}>
-            <h1 className="text-5xl sm:text-7xl lg:text-[7.5rem] font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-white">
+            <h1 className="text-[clamp(1.95rem,7.5vw,7.5rem)] font-extrabold uppercase tracking-tight sm:tracking-[-0.04em] leading-[0.98] sm:leading-[0.88] text-white break-words">
               EXCLUSIVE <br />
               EXPERIENCES & <br />
               <span className="text-art-orange-dark">CURATED PACKAGES.</span>
@@ -92,25 +91,18 @@ export default function Offers() {
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={200}>
-            <p className="text-base sm:text-xl font-light text-[#D0D0D0] max-w-3xl mx-auto leading-relaxed">
-              Discover exceptional holiday value with our tailor-made getaway offers, destination wedding packages, corporate summits, and weekend wellness retreats.
+            <p className="text-xs sm:text-lg lg:text-xl font-light text-[#D0D0D0] max-w-3xl mx-auto leading-relaxed px-2">
+              Discover exceptional holiday value with our tailor-made getaway offers, destination wedding packages, corporate summits, and bespoke family escapes.
             </p>
           </ScrollReveal>
-        </div>
-
-        {/* Bottom Coordinates Bar */}
-        <div className="relative z-10 max-w-6xl mx-auto w-full pt-8 border-t border-[#333333] flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-[#B0B0B0] uppercase tracking-widest gap-4">
-          <span>● COUNTRY HOLIDAYS HOTELS & RESORTS</span>
-          <span>SPECIAL PACKAGES • {offers.length} CURATED EXPERIENCES</span>
-          <span>2026 EDITION</span>
         </div>
       </section>
 
       {/* 2. MAIN OFFERS SECTION (ADAPTIVE DARK/LIGHT) */}
-      <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-24 sm:py-36 px-6 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300">
+      <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-20 sm:py-36 px-4 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300">
         <EditorialBackgroundElements variant="light" position="top-right" />
 
-        <div className="max-w-7xl mx-auto space-y-16 relative z-10">
+        <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16 relative z-10">
 
           {/* Controls: Search & Category Tabs */}
           <div className="space-y-8 pb-10 border-b dark:border-[#333333] border-[#E9E9DE]">

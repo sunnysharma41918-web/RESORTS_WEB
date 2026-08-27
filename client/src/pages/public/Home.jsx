@@ -5,7 +5,7 @@ import RoomsSuitesSection from '../../features/home/components/RoomsSuitesSectio
 import ResortExperiencesSection from '../../features/home/components/ResortExperiencesSection';
 import DestinationSection from '../../features/home/components/DestinationSection';
 import GuestReviewsSection from '../../features/home/components/GuestReviewsSection';
-import FinalBookingCTA from '../../features/home/components/FinalBookingCTA';
+import CustomerCareSection from '../../features/home/components/CustomerCareSection';
 import ConnectingVisualSpine from '../../components/common/ConnectingVisualSpine';
 import { useHomeData } from '../../features/home/hooks/useHomeData';
 import Loader from '../../components/common/Loader';
@@ -41,8 +41,8 @@ export default function Home() {
         {/* 5. TESTIMONIALS */}
         <GuestReviewsSection />
 
-        {/* 6. FINAL INVITATION CTA */}
-        <FinalBookingCTA />
+        {/* 6. 24/7 CUSTOMER CARE & CONCIERGE */}
+        <CustomerCareSection />
       </div>
     </div>
   );

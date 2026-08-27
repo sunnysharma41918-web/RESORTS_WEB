@@ -89,20 +89,6 @@ const seedDefaultData = async () => {
           featured: true,
         },
         {
-          title: 'Ayurvedic Healing & Longevity Retreat',
-          category: 'Wellness',
-          description:
-            'Immerse in holistic rejuvenation guided by traditional Vaidyas, sunrise chakra meditation, organic farm-to-table nutrition, and daily therapeutic herbal baths.',
-          inclusions: ['Daily Doctor Consultation', 'Personalized Diet', 'Sound Therapy', 'Yoga Pavilion Access'],
-          discount: 'Complimentary 4th Night',
-          tag: 'WELLNESS RETREAT',
-          image:
-            'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=75',
-          location: 'Western Ghats Bio-Sanctuary',
-          validTill: 'Ongoing Privilege',
-          featured: true,
-        },
-        {
           title: 'Corporate Leadership Conclave Privilege',
           category: 'Corporate',
           description:
@@ -182,7 +168,7 @@ const seedDefaultData = async () => {
           whatsappMessage: 'Hello Country Holidays Concierge, I would like to enquire about your luxury stays.',
           email: 'concierge@countryholidays-resorts.com',
           enquiriesEmail: 'reservations@countryholidays-resorts.com',
-          address: 'Country Holidays Corporate Pavilion, Ocean Avenue, Goa, India',
+          address: '111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041',
           hours: '24/7 Global Luxury Concierge',
         },
       });

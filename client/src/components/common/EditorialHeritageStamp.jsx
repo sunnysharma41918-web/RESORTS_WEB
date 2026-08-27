@@ -4,7 +4,7 @@ export default function EditorialHeritageStamp({
   size = 140, // pixel diameter
   text = 'CHHR HOTELS & RESORTS • PRIVATE SANCTUARY • ',
   centerText = 'CHHR',
-  year = 'EST 2026',
+  year = '',
   className = '',
 }) {
   const radius = 56;
@@ -75,9 +75,11 @@ export default function EditorialHeritageStamp({
         <span className="text-base sm:text-lg font-extrabold tracking-widest text-[#FF1F02] font-mono leading-none">
           {centerText}
         </span>
-        <span className="text-[8px] sm:text-[9px] font-bold tracking-widest text-[#FF1F02]/80 uppercase font-mono mt-1">
-          {year}
-        </span>
+        {year ? (
+          <span className="text-[8px] sm:text-[9px] font-bold tracking-widest text-[#FF1F02]/80 uppercase font-mono mt-1">
+            {year}
+          </span>
+        ) : null}
       </div>
     </div>
   );

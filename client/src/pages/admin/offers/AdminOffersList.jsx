@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, Search, Edit2, Trash2, Tag, Gift, CheckCircle2, Eye, MapPin } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, Tag, Gift, CheckCircle2, Eye, MapPin, Flame } from 'lucide-react';
 import { offerService } from '../../../services/offerService';
 import Loader from '../../../components/common/Loader';
 
 const CATEGORIES = [
   'All',
   'Weddings',
-  'Wellness',
   'Corporate',
   'Holidays',
   'Celebrations',
@@ -79,13 +78,23 @@ export default function AdminOffersList() {
           </p>
         </div>
 
-        <Link
-          to="/admin/offers/new"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF1F02] hover:bg-white text-white hover:text-black font-bold text-xs uppercase font-mono tracking-wider transition-all shadow-md shrink-0"
-        >
-          <Plus className="w-4 h-4" />
-          <span>ADD NEW PACKAGE</span>
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            to="/admin/ticker"
+            className="inline-flex items-center gap-2 px-5 py-3 bg-[#1C1C1C] hover:bg-[#2A2A2A] border border-[#333333] text-white font-bold text-xs uppercase font-mono tracking-wider transition-all shadow-md shrink-0"
+          >
+            <Flame className="w-4 h-4 text-[#FF1F02]" />
+            <span>Top Marquee Ticker</span>
+          </Link>
+
+          <Link
+            to="/admin/offers/new"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF1F02] hover:bg-white text-white hover:text-black font-bold text-xs uppercase font-mono tracking-wider transition-all shadow-md shrink-0"
+          >
+            <Plus className="w-4 h-4" />
+            <span>ADD NEW PACKAGE</span>
+          </Link>
+        </div>
       </div>
 
       {/* Filter Tabs & Search */}

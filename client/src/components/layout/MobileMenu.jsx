@@ -6,6 +6,7 @@ import { CONTACT_INFO, getWhatsAppBookingUrl } from '../../data/contact';
 import { useUI } from '../../context/UIContext';
 import { cn } from '../../utils/cn';
 import EditorialHeritageStamp from '../common/EditorialHeritageStamp';
+import ThemeToggle from '../common/ThemeToggle';
 
 const mobileNavLinks = [
   { number: '01', name: 'Discover', path: '/' },
@@ -19,6 +20,18 @@ const mobileNavLinks = [
 export default function MobileMenu() {
   const { isMobileMenuOpen, closeMobileMenu } = useUI();
 
+  // Prevent background scrolling when mobile menu is open
+  React.useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <AnimatePresence>
       {isMobileMenuOpen && (
@@ -27,7 +40,7 @@ export default function MobileMenu() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-40 lg:hidden dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] flex flex-col justify-between pt-24 pb-8 px-6 sm:px-8 overflow-y-auto font-manrope select-none transition-colors duration-300"
+          className="fixed inset-0 z-40 lg:hidden dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] flex flex-col justify-between pt-32 pb-8 px-6 sm:px-8 overflow-y-auto font-manrope select-none transition-colors duration-300"
         >
           {/* Subtle Ambient Background Gradients */}
           <div className="absolute top-1/4 right-0 w-72 h-72 bg-[#FF1F02]/10 rounded-full blur-3xl pointer-events-none" />
@@ -86,7 +99,7 @@ export default function MobileMenu() {
               <span className="text-[10px] font-mono uppercase tracking-widest dark:text-[#D0D0D0] text-[#0E0E0E]/60">
                 Direct Concierge
               </span>
-              <EditorialHeritageStamp size={45} centerText="CHHR" text="CHHR HOTELS & RESORTS • " year="2026" />
+              <EditorialHeritageStamp size={45} centerText="CHHR" text="CHHR HOTELS & RESORTS • " />
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-xs font-mono">

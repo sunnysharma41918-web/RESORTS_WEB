@@ -91,7 +91,7 @@ export default function ResortIntro() {
 
             {/* Animated Red CHHR Heritage Stamp Overlapping Corner */}
             <div className="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 z-40">
-              <EditorialHeritageStamp size={100} centerText="CHHR" text="CHHR HOTELS & RESORTS • SANCTUARY • " year="EST 2026" />
+              <EditorialHeritageStamp size={100} centerText="CHHR" text="CHHR HOTELS & RESORTS • SANCTUARY • " />
             </div>
 
             <ScrollReveal direction="clip" delay={200}>

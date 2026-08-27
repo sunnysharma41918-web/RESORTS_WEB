@@ -6,7 +6,6 @@ import Loader from '../../../components/common/Loader';
 
 const CATEGORIES = [
   'Weddings',
-  'Wellness',
   'Corporate',
   'Holidays',
   'Celebrations',

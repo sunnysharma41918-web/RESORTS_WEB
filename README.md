@@ -68,4 +68,4 @@ npm start
 ---
 
 ## 📄 License
-Private & Proprietary — Country Holidays Hotels & Resorts (EST. 2026).
+Private & Proprietary — Country Holidays Hotels & Resorts.

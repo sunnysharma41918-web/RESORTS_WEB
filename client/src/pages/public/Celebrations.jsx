@@ -55,35 +55,39 @@ const celebrationSections = [
     overlayText: 'VIVAH',
     iconType: 'rings',
     description:
-      'Immerse your vows in imperial Indian majesty. From grand palace courtyards in Rajasthan and lakefront heritage estates in Udaipur to oceanfront mandaps in Goa, our bespoke wedding concierges choreograph royal Baraat entries with live Shehnai, opulent marigold and jasmine floral canopies, and 7-course royal banquets.',
+      'Celebrate your wedding in the timeless grandeur of India. From magnificent palace courtyards in Rajasthan and serene lakefront heritage estates in Udaipur to breathtaking oceanfront mandaps in Goa, every celebration is thoughtfully crafted around Indian traditions, royal hospitality, and your unique love story.\n\nOur dedicated wedding concierges orchestrate every detail — from a grand Baraat entry with a royal vintage car or decorated elephant to live Shehnai and classical music, exquisite marigold and jasmine floral mandaps, sacred Vedic ceremonies, and lavish Indian wedding feasts.',
     capacity: '250 – 2,500 Guests',
     venues: ['Royal Palace Courtyard', 'Oceanfront Sunken Lawn', 'Grand Mughal Ballroom'],
     image: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1600&q=90',
     curations: [
       'Royal Vintage Car / Decorated Elephant Baraat Procession',
-      'Live Shehnai, Classical Sitar & Sufi Symphony Orchestrations',
-      'Michelin-Caliber Awadhi Dum Pukht & Royal Vedic Menus',
-      'Dedicated Master Bridal & Groom Sanctum Suites'
+      'Live Shehnai, Classical Sitar & Sufi Music Performances',
+      'Grand Indian Wedding Feast featuring Awadhi, Rajasthani & Royal Indian Cuisine',
+      'Dedicated Luxury Bridal & Groom Sanctum Suites',
+      'Traditional Vedic Ceremony & Sacred Mandap Décor',
+      'Marigold & Jasmine Floral Canopies with Bespoke Wedding Décor'
     ],
     theme: 'light'
   },
   {
     id: 'engagement',
     number: '02',
-    title: 'Engagement',
-    tagline: 'Intimate Ring Ceremonies & Cocktail Sundowners',
-    overlayText: 'ENGAGE',
+    title: 'Engagement & Ring Ceremony',
+    tagline: 'Roka, Sagai & Sangeet Sundowners',
+    overlayText: 'SAGAI',
     iconType: 'rings-duo',
     description:
-      'The magical prelude to lifelong togetherness. Celebrate your ring exchange overlooking sweeping sunset vistas with artisanal champagne cascades, live acoustic jazz, ambient candlelit chandeliers, and exquisite finger-food tasting plates.',
+      'The cherished auspicious beginning of two families uniting. Celebrate your Roka and Sagai with traditional Indian warmth, royal flower petal cascades, and vibrant Sangeet rhythms under golden evening skies.\n\nFrom ceremonial silver ring platters and fresh mogra flower backdrops to live Dhol beats and interactive Indian street chaat counters, every moment is filled with festivity and joy.',
     capacity: '50 – 400 Guests',
-    venues: ['Infinity Pool Deck', 'Cliffside Glass Pavilion', 'Sunset Terrace'],
+    venues: ['Lakeside Heritage Lawn', 'Sunset Palace Courtyard', 'Royal Glass Pavilion'],
     image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=90',
     curations: [
-      'Curated French Champagne & Artisanal Wine Bars',
-      'Custom Sculpted Ring Platter & Fresh Rose Floral Stages',
-      'Cinematic Drone & 4K Memory Videography',
-      'International DJ & Sunset Sangeet Sundowner'
+      'Grand Dhol Tasha Welcome & Rose Petal Showers',
+      'Live Punjabi & Bollywood Sangeet DJ with LED Dance Floor',
+      'Artisanal Live Chaat Street & Royal Indian Sweet Counters',
+      'Custom Floral Ring Tray & Traditional Sagai Stage Decor',
+      'Professional Henna & Mehendi Artist Lounges',
+      'Cinematic 4K Candid Photography & Drone Highlights'
     ],
     theme: 'light'
   },
@@ -91,79 +95,87 @@ const celebrationSections = [
     id: 'anniversary',
     number: '03',
     title: 'Anniversary Celebrations',
-    tagline: 'Milestone Silver & Golden Jubilees',
-    overlayText: 'JUBILEE',
+    tagline: 'Silver, Golden & Milestone Vivah Jubilees',
+    overlayText: 'MILAN',
     iconType: 'heart',
     description:
-      'Reignite cherished memories with timeless elegance. Exclusive private dining under starlit desert skies, secluded island banquets, and personalized memory galas crafted by master private chefs, violinists, and world-class sommeliers.',
+      'Honor lifelong companionship with traditional Indian grace and regal hospitality. Reaffirm your vows in intimate candlelit palace courtyards with family blessings, soulful melodies, and timeless culinary traditions.\n\nFrom sacred renewal rituals by the holy ghats or lakeside gazebos to classical sitar serenades and bespoke royal feasts, we create heartfelt milestones that your family will treasure for generations.',
     capacity: '20 – 300 Guests',
-    venues: ['Private Palace Gazebo', 'Starlit Dune Amphitheater', 'Candlelit Vineyard'],
+    venues: ['Private Palace Gazebo', 'Lakeside Heritage Courtyard', 'Royal Dining Pavilion'],
     image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1600&q=90',
     curations: [
-      'Dedicated Master Sommelier & Rare Vintage Pairings',
-      'Private 5-Course Candlelit Tasting Menu by Master Chef',
-      'Acoustic Violin & Santoor Serenade under the Stars',
-      'Chauffeured Luxury Transfers & Private Suite Styling'
+      'Traditional Vow Renewal & Mangalsutra Blessing Ceremony',
+      'Classical Sitar, Santoor & Ghazal Evening Performances',
+      'Master Chef 5-Course Royal Thali & Heritage Tasting Menu',
+      'Vintage Open-Top Car Procession for the Anniversary Couple',
+      'Diyas & Lantern Floatation on Heritage Water Bodies',
+      'Chauffeured Luxury Transfers & Private Royal Suite Styling'
     ],
     theme: 'dark'
   },
   {
     id: 'birthday-party',
     number: '04',
-    title: 'Birthday Soirée',
-    tagline: 'Opulent Milestone & Themed Galas',
-    overlayText: 'SOIRÉE',
+    title: 'Birthday Soirée & Janamotsav',
+    tagline: 'Shahi Janamotsav & Milestone Galas',
+    overlayText: 'UTSAV',
     iconType: 'cake',
     description:
-      'Turn milestone birthdays into unforgettable royal galas. From high-energy themed pool parties to glamorous black-tie ballroom dinners with bespoke multi-tiered confectionery sculptures and live celebrity entertainment.',
+      'Transform milestone birthdays into majestic Indian celebrations. From energetic pool party carnival lunches to grand evening royal galas filled with live music, dancing, and mouthwatering Indian delicacies.\n\nWhether an intimate 1st birthday, a sweet 16, or a 50th Shahi Janamotsav, our planners design thematic decor, customized royal sweet displays, and captivating live entertainment for all ages.',
     capacity: '30 – 500 Guests',
-    venues: ['Lakeside Panorama Deck', 'VIP Lounge Pavilion', 'Grand Ballroom'],
+    venues: ['Lakeside Panorama Lawn', 'Royal Banquet Pavilion', 'Poolside Sunset Terrace'],
     image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=1600&q=90',
     curations: [
-      'Custom Multi-Tier Confectionery Sculpture by Master Pâtissier',
-      'Live Molecular Cocktail & Royal Mocktail Bar',
-      'Bespoke Spatial Lighting & Photo Immersion Zones',
-      'Live Bands, Illusionists & Celebrity DJs'
+      'Grand Thematic Stage Decor & Customized Royal Cake Sculptures',
+      'Live Tandoor, Royal Biryani & Regional Indian Food Stations',
+      'Interactive Live Magic, Puppet Shows & Illusionist Acts',
+      'High-Energy Bollywood DJ & Festive Dance Light Rig',
+      'Special Mocktail & Desi Kulhad Chai/Thandai Bar',
+      'Personalized Traditional Gift Hampers & Return Favors'
     ],
     theme: 'light'
   },
   {
     id: 'corporate-meetings',
     number: '05',
-    title: 'Corporate Meetings & Events',
+    title: 'Corporate Meetings & Conclaves',
     tagline: 'High-Level Summits, Conclaves & Retreats',
-    overlayText: 'SUMMIT',
+    overlayText: 'SAMMELAN',
     iconType: 'corporate',
     description:
-      'Where visionary leadership meets sanctuary tranquility. State-of-the-art acoustic boardrooms, panoramic executive summit halls, high-speed fiber connectivity, and seamless VIP hospitality for leadership conclaves, product launches, and annual shareholder galas.',
+      'Where visionary corporate leadership meets prestigious Indian hospitality. Host executive summits, annual conclaves, and stakeholder galas with world-class audio-visual technology and seamless boardroom comfort.\n\nCombine productive high-tech strategy sessions with authentic regional networking dinners, cultural performances, and peaceful sanctuary retreats across premier business hubs.',
     capacity: '40 – 1,200 Delegates',
-    venues: ['Executive Summit Hall', 'Acoustic Conclave Suite', 'Open-Air Lawn Breakouts'],
+    venues: ['Executive Summit Hall', 'Acoustic Conclave Suite', 'Open-Air Manicured Lawn Breakouts'],
     image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1600&q=90',
     curations: [
-      '4K Seamless Video Walls & Interpretation Consoles',
-      'Executive Ayurvedic Mindfulness & Spa Wellness Breaks',
-      'Gala Networking Dinners & Live Cultural Showcases',
-      'Helicopter Pad & VIP Executive Convoy Coordination'
+      '4K Seamless Video Walls, High-Speed Starlink & AV Rigs',
+      'Royal High-Tea & Morning Conclave Breakfast Buffets',
+      'Grand Networking Dinners with Live Regional Indian Gastronomy',
+      'Dedicated Business Concierge & Executive VIP Convoy Coordination',
+      'Team-Building Lawn Activities & Cultural Evening Showcases',
+      'Executive Presidential Suite & Boardroom Facilities'
     ],
     theme: 'dark'
   },
   {
     id: 'pool-parties-concerts',
     number: '06',
-    title: 'Pool Parties, Concert & Shows',
-    tagline: 'Infinity Pool Sundowners & Live Performances',
-    overlayText: 'SUNDOWN',
+    title: 'Pool Parties, Concerts & Melas',
+    tagline: 'Sangeet Nights, Desi Melas & Live Shows',
+    overlayText: 'JALSA',
     iconType: 'stage',
     description:
-      'Electrifying audio-visual extravaganzas set against tranquil waters and dramatic mountain peaks. Host world-tour concerts, Sufi nights, Bollywood musical showcases, and sunset infinity pool carnivals with cutting-edge line arrays and pyrotechnics.',
+      'Electrifying audio-visual extravaganzas blending vibrant Indian culture with spectacular open-air settings. Host unforgettable Bollywood concert nights, Sufi musical evenings, and colorful poolside festive melas.\n\nWith world-class stage acoustics, royal street food bazaars, and mesmerizing fireworks displays, every gathering becomes a legendary celebration of life.',
     capacity: '200 – 3,500 Attendees',
-    venues: ['Olympic Infinity Pool Deck', 'Natural Rock Amphitheater', 'Festival Grounds'],
+    venues: ['Grand Festival Grounds', 'Olympic Infinity Pool Deck', 'Natural Rock Amphitheater'],
     image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1600&q=90',
     curations: [
-      'Festival Grade Line-Array Sound & Laser Lighting Rigs',
-      'Private Poolside Cabana VIP Lounges & Bottle Service',
-      'Gourmet Live Barbecue Grills & Royal Street Food Stalls',
-      'Synchronized Pyrotechnic & Sky Illumination Shows'
+      'Festival-Grade Line-Array Concert Stage & Laser Lighting Rig',
+      'Live Sufi, Qawwali & Bollywood Star Performance Setups',
+      'Interactive Desi Mela Stalls, Live Chaat & Barbecue Grills',
+      'Grand Synchronized Pyrotechnic & Sky Illumination Shows',
+      'Exclusive Poolside VIP Cabanas & Royal Hospitality Service',
+      'High-Capacity Crowd Management & Multi-Zone Sound Engineering'
     ],
     theme: 'light'
   }
@@ -465,13 +477,6 @@ export default function Celebrations() {
             </p>
           </ScrollReveal>
         </div>
-
-        {/* Bottom Editorial Coordinates */}
-        <div className="relative z-10 max-w-6xl mx-auto w-full pt-8 border-t border-[#333333] flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-[#B0B0B0] uppercase tracking-widest gap-4">
-          <span>● COUNTRY HOLIDAYS HOTELS & RESORTS (CHHR)</span>
-          <span>WEDDING • BANQUETS • ANNIVERSARY • SOIRÉE</span>
-          <span>EST. 2026</span>
-        </div>
       </section>
 
       {/* Category Marquee Strip */}
@@ -579,9 +584,11 @@ export default function Celebrations() {
                         {section.title}
                       </h2>
 
-                      <p className={`text-sm font-light leading-relaxed pt-1 ${isDark ? 'text-[#D0D0D0]' : 'text-[#4A4A4A]'}`}>
-                        {section.description}
-                      </p>
+                      <div className={`text-sm font-light leading-relaxed pt-1 space-y-2.5 ${isDark ? 'text-[#D0D0D0]' : 'text-[#4A4A4A]'}`}>
+                        {section.description.split('\n\n').map((para, pIdx) => (
+                          <p key={pIdx}>{para}</p>
+                        ))}
+                      </div>
                     </div>
 
                     <div className="space-y-2.5">
@@ -616,39 +623,23 @@ export default function Celebrations() {
       {/* ============================================================ */}
       {/* STRUCTURED LUXURY CELEBRATION INQUIRY DOSSIER                 */}
       {/* ============================================================ */}
-      <section id="inquiry" className="py-24 sm:py-36 px-6 sm:px-10 lg:px-16 xl:px-20 dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] border-t dark:border-[#333333] border-[#E9E9DE] relative overflow-hidden transition-colors duration-300">
-        <EditorialBackgroundElements variant="light" position="top-right" />
+      {/* SECTION 02: THE INQUIRY (MINIMALIST ARCHITECTURAL DOSSIER)   */}
+      {/* ============================================================ */}
+      <section id="inquiry" className="py-24 sm:py-36 px-4 sm:px-8 dark:bg-[#141414] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] border-t dark:border-[#2A2A2A] border-[#E9E9DE] relative overflow-hidden transition-colors duration-300">
+        
+        {/* Giant Faint 02 Background Watermark Numeral */}
+        <div className="absolute top-6 right-8 sm:right-16 select-none pointer-events-none z-0">
+          <span className="text-[12rem] sm:text-[18rem] lg:text-[22rem] font-bold font-mono leading-none tracking-tighter dark:text-white/[0.03] text-[#0E0E0E]/[0.04]">
+            02
+          </span>
+        </div>
 
-        <div className="max-w-7xl mx-auto space-y-16 lg:space-y-20 relative z-10">
-
-          {/* Section Heading */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-8 border-b dark:border-[#333333] border-[#E9E9DE]">
-            <div className="space-y-4">
-              <ScrollReveal direction="up">
-                <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-[#FF1F02]">
-                  <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
-                  <span>02 — BESPOKE INQUIRY & AVAILABILITY</span>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal direction="up" delay={100}>
-                <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-art-trio">
-                  COMMISSION YOUR <br />
-                  CELEBRATION.
-                </h2>
-              </ScrollReveal>
-            </div>
-
-            <ScrollReveal direction="up" delay={200}>
-              <p className="text-sm font-light dark:text-[#D0D0D0] text-[#0E0E0E]/75 max-w-md leading-relaxed">
-                Connect directly with our senior event planners and royal concierge team to verify date availability, banquet capacities, and bespoke culinary packages across all properties.
-              </p>
-            </ScrollReveal>
-          </div>
+        {/* 80% SCREEN RATIO WRAPPER */}
+        <div className="w-full max-w-[92vw] lg:max-w-[80vw] mx-auto relative z-10">
 
           {submittedInquiry ? (
-            <div className="dark:bg-[#0E0E0E] bg-white border dark:border-[#333333] border-[#E9E9DE] p-8 sm:p-14 shadow-2xl text-center max-w-2xl mx-auto space-y-8">
-              <div className="w-20 h-20 dark:bg-[#161616] bg-[#FAFDF2] border-2 border-[#FF1F02] text-[#FF1F02] rounded-full flex items-center justify-center mx-auto shadow-xl">
+            <div className="dark:bg-[#1A1A1A] bg-white border dark:border-[#333333] border-[#E5E5D8] p-8 sm:p-14 shadow-2xl text-center max-w-2xl mx-auto space-y-8">
+              <div className="w-20 h-20 dark:bg-[#141414] bg-[#FAFDF2] border-2 border-[#FF1F02] text-[#FF1F02] rounded-full flex items-center justify-center mx-auto shadow-xl">
                 <CheckCircle2 className="w-10 h-10" />
               </div>
               <div className="space-y-3">
@@ -663,10 +654,10 @@ export default function Celebrations() {
                 </p>
               </div>
 
-              <div className="p-5 dark:bg-[#161616] bg-[#FAFDF2] border dark:border-[#333333] border-[#E9E9DE] text-left text-xs font-mono space-y-2">
+              <div className="p-5 dark:bg-[#141414] bg-[#FAFDF2] border dark:border-[#2E2E2E] border-[#E9E9DE] text-left text-xs font-mono space-y-2">
                 <div className="text-[10px] text-[#FF1F02] uppercase tracking-widest font-bold">TRANSMISSION SUMMARY:</div>
                 <div className="dark:text-white text-[#0E0E0E]"><span className="dark:text-white/60 text-[#0E0E0E]/60">Host Contact:</span> {submittedInquiry.phone} {submittedInquiry.email !== 'N/A' && `• ${submittedInquiry.email}`}</div>
-                <div className="dark:text-white text-[#0E0E0E]"><span className="dark:text-white/60 text-[#0E0E0E]/60">Location / City:</span> {submittedInquiry.city || 'India'}</div>
+                <div className="dark:text-white text-[#0E0E0E]"><span className="dark:text-white/60 text-[#0E0E0E]/60">Location / Region:</span> {submittedInquiry.city || 'India'}</div>
                 <div className="dark:text-white text-[#0E0E0E]"><span className="dark:text-white/60 text-[#0E0E0E]/60">Parameters:</span> Budget: {submittedInquiry.budget || 'Flexible'} • Guests: {submittedInquiry.guestCount || 'TBD'} • Rooms: {submittedInquiry.roomCount || 'TBD'}</div>
               </div>
 
@@ -675,10 +666,10 @@ export default function Celebrations() {
                   href={getWhatsAppBookingUrl(`Hello Country Holidays, I have submitted an event inquiry for ${submittedInquiry.property} (Host: ${submittedInquiry.guestName}, Phone: ${submittedInquiry.phone}). Please share availability and banquet options.`)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-8 py-4 bg-[#FF1F02] hover:bg-white hover:text-black text-white text-xs font-bold uppercase tracking-[0.16em] transition-all shadow-xl flex items-center justify-center gap-3 cursor-pointer group"
+                  className="w-full sm:w-auto px-8 py-4 bg-[#0E0E0E] hover:bg-[#FF1F02] text-white text-xs font-bold font-mono uppercase tracking-[0.16em] transition-all shadow-xl flex items-center justify-center gap-3 cursor-pointer group"
                 >
                   <MessageSquare className="w-4 h-4" />
-                  <span>INSTANT WHATSAPP DESK</span>
+                  <span>OPEN WHATSAPP DESK</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </a>
 
@@ -701,402 +692,292 @@ export default function Celebrations() {
                       message: '',
                     });
                   }}
-                  className="w-full sm:w-auto px-7 py-4 dark:bg-[#161616] dark:border-[#333333] dark:text-white bg-white border border-[#E9E9DE] hover:border-[#FF1F02] text-[#0E0E0E] text-xs font-bold uppercase tracking-[0.16em] transition-colors cursor-pointer"
+                  className="w-full sm:w-auto px-7 py-4 dark:bg-[#141414] dark:border-[#333333] dark:text-white bg-white border border-[#E9E9DE] hover:border-[#FF1F02] text-[#0E0E0E] text-xs font-bold font-mono uppercase tracking-[0.16em] transition-colors cursor-pointer"
                 >
-                  SUBMIT ANOTHER BRIEF
+                  SUBMIT ANOTHER INQUIRY
                 </button>
               </div>
             </div>
           ) : (
-            /* 2-Column Luxury Concierge Dossier Layout */
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+            /* Minimalist 2-Column Swiss Editorial Layout */
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-24 items-start">
 
-              {/* LEFT RAIL: CONCIERGE IDENTITY & COMMITMENTS (4 COLS) */}
+              {/* LEFT COLUMN: THE INQUIRY HEADLINE & SCOPE (4 COLS) */}
               <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-28">
-                
-                {/* Active Selection Summary Card */}
-                <div className="p-7 sm:p-8 dark:bg-[#0E0E0E] bg-white border dark:border-[#333333] border-[#E9E9DE] shadow-xl space-y-6 relative overflow-hidden">
-                  <div className="space-y-2 border-b dark:border-[#333333] border-[#E9E9DE] pb-5">
-                    <span className="text-[10px] font-mono text-[#FF1F02] uppercase tracking-widest font-bold block">
-                      ● SELECTED OCCASION
-                    </span>
-                    <h3 className="text-2xl font-extrabold uppercase tracking-tight dark:text-white text-[#0E0E0E]">
-                      {formData.celebrationType}
-                    </h3>
+                <ScrollReveal direction="up">
+                  <div className="flex items-center gap-3 text-xs font-mono tracking-widest dark:text-white/60 text-[#0E0E0E]/60 uppercase">
+                    <span className="w-8 h-[1px] bg-[#FF1F02]" />
+                    <span>CHHR / 02</span>
+                    <span>CONTACT</span>
                   </div>
+                </ScrollReveal>
 
-                  {/* Curated Perks */}
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3.5">
-                      <div className="w-8 h-8 rounded-none dark:bg-[#161616] bg-[#FAFDF2] border dark:border-[#333333] border-[#E9E9DE] flex items-center justify-center shrink-0">
-                        <Clock className="w-4 h-4 text-[#FF1F02]" />
-                      </div>
-                      <div>
-                        <span className="text-xs font-bold uppercase dark:text-white text-[#0E0E0E] block">15-Min Response Guarantee</span>
-                        <p className="text-[11px] font-light dark:text-[#A0A0A0] text-[#0E0E0E]/70">Central event concierge reviews your dates instantly.</p>
-                      </div>
-                    </div>
+                <ScrollReveal direction="up" delay={100}>
+                  <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#0E0E0E] dark:text-white leading-[0.95]">
+                    The <br />
+                    inquiry.
+                  </h2>
+                </ScrollReveal>
 
-                    <div className="flex items-start gap-3.5">
-                      <div className="w-8 h-8 rounded-none dark:bg-[#161616] bg-[#FAFDF2] border dark:border-[#333333] border-[#E9E9DE] flex items-center justify-center shrink-0">
-                        <Crown className="w-4 h-4 text-[#EAB308]" />
-                      </div>
-                      <div>
-                        <span className="text-xs font-bold uppercase dark:text-white text-[#0E0E0E] block">Master Menu & Decor Tasting</span>
-                        <p className="text-[11px] font-light dark:text-[#A0A0A0] text-[#0E0E0E]/70">Complimentary chef consultation for booked dates.</p>
-                      </div>
-                    </div>
+                <ScrollReveal direction="up" delay={150}>
+                  <p className="text-sm sm:text-base font-light dark:text-[#A8A8A8] text-[#0E0E0E]/70 leading-relaxed max-w-sm pt-2">
+                    Tell us where you are now and where you want your celebration to go.
+                  </p>
+                </ScrollReveal>
 
-                    <div className="flex items-start gap-3.5">
-                      <div className="w-8 h-8 rounded-none dark:bg-[#161616] bg-[#FAFDF2] border dark:border-[#333333] border-[#E9E9DE] flex items-center justify-center shrink-0">
-                        <ShieldCheck className="w-4 h-4 text-[#16A34A]" />
-                      </div>
-                      <div>
-                        <span className="text-xs font-bold uppercase dark:text-white text-[#0E0E0E] block">Guaranteed Transparent Pricing</span>
-                        <p className="text-[11px] font-light dark:text-[#A0A0A0] text-[#0E0E0E]/70">Direct-from-property rates with no hidden fees.</p>
-                      </div>
-                    </div>
+                {/* Micro Assurance Strip */}
+                <div className="pt-8 space-y-3 text-xs font-mono dark:text-white/40 text-[#0E0E0E]/40 uppercase tracking-wider">
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02]" />
+                    <span>24/7 Dedicated Concierge Response</span>
                   </div>
-
-                  {/* Direct Contact Hotline Strip */}
-                  <div className="pt-5 border-t dark:border-[#333333] border-[#E9E9DE] space-y-3">
-                    <div className="flex items-center justify-between text-xs font-mono">
-                      <span className="dark:text-white/60 text-[#0E0E0E]/60 uppercase">Direct Desk</span>
-                      <a href="tel:+919876543210" className="font-bold text-[#FF1F02] hover:underline">
-                        +91 98765 43210
-                      </a>
-                    </div>
-                    <div className="flex items-center justify-between text-xs font-mono">
-                      <span className="dark:text-white/60 text-[#0E0E0E]/60 uppercase">Desk Hours</span>
-                      <span className="font-bold dark:text-white text-[#0E0E0E]">24/7 Priority</span>
-                    </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" />
+                    <span>Guaranteed Direct-From-Property Tariff</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#EAB308]" />
+                    <span>Complimentary Tasting & Planning Consult</span>
                   </div>
                 </div>
-
-                {/* Overlapping Heritage Stamp Badge */}
-                <div className="flex justify-center pt-2">
-                  <EditorialHeritageStamp size={110} centerText="CHHR" text="COUNTRY HOLIDAYS • ROYAL EVENTS DESK • " year="EST 2026" />
-                </div>
-
               </div>
 
-              {/* RIGHT RAIL: THE LUXURY INQUIRY DOSSIER FORM (8 COLS) */}
+              {/* RIGHT COLUMN: THE MINIMALIST UNDERLINED FORM (8 COLS) */}
               <div className="lg:col-span-8">
-                <form onSubmit={handleSubmitInquiry} className="p-7 sm:p-10 lg:p-12 dark:bg-[#0E0E0E] bg-white border dark:border-[#333333] border-[#E9E9DE] shadow-2xl space-y-10 transition-colors">
-                  
-                  {/* 1. OCCASION TYPE SELECTOR */}
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF1F02] flex items-center gap-2">
-                        <span>● STEP 01</span>
-                        <span className="dark:text-white/40 text-[#0E0E0E]/40">—</span>
-                        <span className="dark:text-white text-[#0E0E0E]">CHOOSE CELEBRATION TYPE *</span>
-                      </span>
-                    </div>
+                <form onSubmit={handleSubmitInquiry} className="space-y-8 sm:space-y-10">
 
-                    <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3">
-                      {[
-                        { title: 'Destination Wedding', icon: Crown },
-                        { title: 'Engagement', icon: Heart },
-                        { title: 'Anniversary', icon: Sparkles },
-                        { title: 'Birthday Soirée', icon: Sparkles },
-                        { title: 'Corporate Event', icon: Building2 },
-                        { title: 'Pool Party & Concert', icon: Sparkles },
-                        { title: 'Banquet Hall Booking', icon: Building2 },
-                      ].map((item) => {
-                        const Icon = item.icon;
-                        const isSelected = formData.celebrationType === item.title;
-                        return (
-                          <button
-                            key={item.title}
-                            type="button"
-                            onClick={() => setFormData((prev) => ({ ...prev, celebrationType: item.title }))}
-                            className={`p-4 text-left border transition-all duration-300 flex flex-col justify-between h-24 group cursor-pointer ${
-                              isSelected
-                                ? 'border-[#FF1F02] dark:bg-[#161616] bg-[#FAFDF2] shadow-md ring-1 ring-[#FF1F02]'
-                                : 'dark:bg-[#121212] bg-white dark:border-[#262626] border-[#E9E9DE] hover:border-[#FF1F02]/70'
-                            }`}
-                          >
-                            <div className="flex items-center justify-between w-full">
-                              <Icon className={`w-4 h-4 transition-colors ${isSelected ? 'text-[#FF1F02]' : 'dark:text-white/40 text-[#0E0E0E]/40 group-hover:text-[#FF1F02]'}`} />
-                              {isSelected && <CheckCircle2 className="w-3.5 h-3.5 text-[#FF1F02]" />}
-                            </div>
-                            <span className={`text-xs font-bold uppercase tracking-tight line-clamp-2 leading-tight ${isSelected ? 'dark:text-white text-[#0E0E0E]' : 'dark:text-white/70 text-[#0E0E0E]/70 group-hover:text-[#FF1F02]'}`}>
-                              {item.title}
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* 2. PRIMARY HOST IDENTIFICATION */}
-                  <div className="space-y-4 pt-6 border-t dark:border-[#262626] border-[#E9E9DE]">
-                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF1F02] flex items-center gap-2">
-                      <span>● STEP 02</span>
-                      <span className="dark:text-white/40 text-[#0E0E0E]/40">—</span>
-                      <span className="dark:text-white text-[#0E0E0E]">HOST IDENTITY & CONTACT</span>
-                    </span>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {/* Host Name */}
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-mono dark:text-[#A0A0A0] text-[#0E0E0E]/75 uppercase tracking-wider block">
-                          Host / Organizer Full Name *
-                        </label>
-                        <div className="relative">
-                          <input
-                            type="text"
-                            name="guestName"
-                            required
-                            value={formData.guestName}
-                            onChange={handleInputChange}
-                            placeholder="e.g. Rajesh Sharma"
-                            className="w-full px-4 py-3.5 dark:bg-[#161616] dark:border-[#2E2E2E] dark:text-white dark:placeholder:text-white/30 bg-[#FAFDF2] border border-[#E9E9DE] focus:border-[#FF1F02] text-sm text-[#0E0E0E] placeholder:text-[#0E0E0E]/30 focus:outline-none transition-colors"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Phone / WhatsApp */}
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-mono dark:text-[#A0A0A0] text-[#0E0E0E]/75 uppercase tracking-wider block">
-                          Phone / WhatsApp Number *
-                        </label>
-                        <div className="relative">
-                          <input
-                            type="tel"
-                            name="phone"
-                            required
-                            value={formData.phone}
-                            onChange={handleInputChange}
-                            placeholder="e.g. +91 98765 43210"
-                            className="w-full px-4 py-3.5 dark:bg-[#161616] dark:border-[#2E2E2E] dark:text-white dark:placeholder:text-white/30 bg-[#FAFDF2] border border-[#E9E9DE] focus:border-[#FF1F02] text-sm text-[#0E0E0E] placeholder:text-[#0E0E0E]/30 focus:outline-none transition-colors"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Email Address */}
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-mono dark:text-[#A0A0A0] text-[#0E0E0E]/75 uppercase tracking-wider block">
-                          Email Address
-                        </label>
-                        <div className="relative">
-                          <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            placeholder="e.g. rajesh@example.com"
-                            className="w-full px-4 py-3.5 dark:bg-[#161616] dark:border-[#2E2E2E] dark:text-white dark:placeholder:text-white/30 bg-[#FAFDF2] border border-[#E9E9DE] focus:border-[#FF1F02] text-sm text-[#0E0E0E] placeholder:text-[#0E0E0E]/30 focus:outline-none transition-colors"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Host Origin City */}
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-mono dark:text-[#A0A0A0] text-[#0E0E0E]/75 uppercase tracking-wider block">
-                          Host Current City
-                        </label>
-                        <div className="relative">
-                          <input
-                            type="text"
-                            name="city"
-                            value={formData.city}
-                            onChange={handleInputChange}
-                            placeholder="e.g. Chennai / Delhi / Mumbai"
-                            className="w-full px-4 py-3.5 dark:bg-[#161616] dark:border-[#2E2E2E] dark:text-white dark:placeholder:text-white/30 bg-[#FAFDF2] border border-[#E9E9DE] focus:border-[#FF1F02] text-sm text-[#0E0E0E] placeholder:text-[#0E0E0E]/30 focus:outline-none transition-colors"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 3. EVENT SCOPE, BUDGET & VENUE PARAMETERS */}
-                  <div className="space-y-4 pt-6 border-t dark:border-[#262626] border-[#E9E9DE]">
-                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF1F02] flex items-center gap-2">
-                      <span>● STEP 03</span>
-                      <span className="dark:text-white/40 text-[#0E0E0E]/40">—</span>
-                      <span className="dark:text-white text-[#0E0E0E]">EVENT SCOPE & LOCATION PARAMETERS</span>
-                    </span>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                      {/* Estimated Budget */}
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-mono dark:text-[#A0A0A0] text-[#0E0E0E]/75 uppercase tracking-wider block">
-                          Estimated Budget
-                        </label>
-                        <input
-                          type="text"
-                          name="budget"
-                          value={formData.budget}
-                          onChange={handleInputChange}
-                          placeholder="e.g. ₹20 Lakhs / Flexible"
-                          className="w-full px-4 py-3.5 dark:bg-[#161616] dark:border-[#2E2E2E] dark:text-white dark:placeholder:text-white/30 bg-[#FAFDF2] border border-[#E9E9DE] focus:border-[#FF1F02] text-sm text-[#0E0E0E] placeholder:text-[#0E0E0E]/30 focus:outline-none transition-colors font-medium"
-                        />
-                      </div>
-
-                      {/* Destination / State */}
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-mono dark:text-[#A0A0A0] text-[#0E0E0E]/75 uppercase tracking-wider block">
-                          Target State / Region
-                        </label>
-                        <select
-                          name="destination"
-                          value={formData.destination}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3.5 dark:bg-[#161616] dark:border-[#2E2E2E] dark:text-white bg-[#FAFDF2] border border-[#E9E9DE] focus:border-[#FF1F02] text-sm text-[#0E0E0E] focus:outline-none cursor-pointer"
-                        >
-                          <option value="Tamil Nadu (Main HQ - Chennai)">Tamil Nadu (Main HQ - Chennai)</option>
-                          <option value="Goa">Goa (Beachfront Mandaps & Lawns)</option>
-                          <option value="Rajasthan">Rajasthan (Jaipur / Udaipur Palaces)</option>
-                          <option value="Kerala">Kerala (Backwaters & Hilltop Stays)</option>
-                          <option value="Karnataka">Karnataka (Bengaluru / Coorg)</option>
-                          <option value="Delhi NCR">Delhi NCR & Noida Hub</option>
-                          <option value="Maharashtra">Maharashtra (Mumbai / Lonavala)</option>
-                          <option value="Himachal Pradesh">Himachal Pradesh (Shimla / Manali)</option>
-                          <option value="Uttarakhand">Uttarakhand (Rishikesh / Mussoorie)</option>
-                          <option value="West Bengal">West Bengal (Kolkata / Darjeeling)</option>
-                          <option value="Telangana">Telangana (Hyderabad Hub)</option>
-                          <option value="Andhra Pradesh">Andhra Pradesh (Visakhapatnam)</option>
-                          <option value="Gujarat">Gujarat (Ahmedabad / Kutch)</option>
-                          <option value="Other Pan-India Location">Other Pan-India Location</option>
-                        </select>
-                      </div>
-
-                      {/* Guest Count */}
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-mono dark:text-[#A0A0A0] text-[#0E0E0E]/75 uppercase tracking-wider block">
-                          Guest Count
-                        </label>
-                        <input
-                          type="text"
-                          name="guestCount"
-                          value={formData.guestCount}
-                          onChange={handleInputChange}
-                          placeholder="e.g. 250 Guests / 150-200"
-                          className="w-full px-4 py-3.5 dark:bg-[#161616] dark:border-[#2E2E2E] dark:text-white dark:placeholder:text-white/30 bg-[#FAFDF2] border border-[#E9E9DE] focus:border-[#FF1F02] text-sm text-[#0E0E0E] placeholder:text-[#0E0E0E]/30 focus:outline-none transition-colors font-medium"
-                        />
-                      </div>
-
-                      {/* Room Requirement */}
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-mono dark:text-[#A0A0A0] text-[#0E0E0E]/75 uppercase tracking-wider block">
-                          Rooms / Suites Needed
-                        </label>
-                        <input
-                          type="text"
-                          name="roomCount"
-                          value={formData.roomCount}
-                          onChange={handleInputChange}
-                          placeholder="e.g. 30 Rooms / Venue Only"
-                          className="w-full px-4 py-3.5 dark:bg-[#161616] dark:border-[#2E2E2E] dark:text-white dark:placeholder:text-white/30 bg-[#FAFDF2] border border-[#E9E9DE] focus:border-[#FF1F02] text-sm text-[#0E0E0E] placeholder:text-[#0E0E0E]/30 focus:outline-none transition-colors font-medium"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 4. DURATION, DATES & CONTACT PREFERENCE */}
-                  <div className="space-y-4 pt-6 border-t dark:border-[#262626] border-[#E9E9DE]">
-                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF1F02] flex items-center gap-2">
-                      <span>● STEP 04</span>
-                      <span className="dark:text-white/40 text-[#0E0E0E]/40">—</span>
-                      <span className="dark:text-white text-[#0E0E0E]">TIMELINE & CALLBACK PREFERENCE</span>
-                    </span>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      {/* Event Duration */}
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-mono dark:text-[#A0A0A0] text-[#0E0E0E]/75 uppercase tracking-wider block">
-                          Event Duration
-                        </label>
-                        <select
-                          name="eventDuration"
-                          value={formData.eventDuration}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3.5 dark:bg-[#161616] dark:border-[#2E2E2E] dark:text-white bg-[#FAFDF2] border border-[#E9E9DE] focus:border-[#FF1F02] text-sm text-[#0E0E0E] focus:outline-none cursor-pointer"
-                        >
-                          <option value="1 Day (Single Function)">1 Day (Single Function)</option>
-                          <option value="2 Days (1 Night)">2 Days (1 Night)</option>
-                          <option value="3 Days (2 Nights - Traditional)">3 Days (2 Nights - Traditional)</option>
-                          <option value="4+ Days Multi-Day Celebration">4+ Days Multi-Day Celebration</option>
-                        </select>
-                      </div>
-
-                      {/* Tentative Event Date */}
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-mono dark:text-[#A0A0A0] text-[#0E0E0E]/75 uppercase tracking-wider block">
-                          Tentative Event Date
-                        </label>
-                        <input
-                          type="date"
-                          name="eventDate"
-                          value={formData.eventDate}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3.5 dark:bg-[#161616] dark:border-[#2E2E2E] dark:text-white bg-[#FAFDF2] border border-[#E9E9DE] focus:border-[#FF1F02] text-sm text-[#0E0E0E] focus:outline-none transition-colors"
-                        />
-                      </div>
-
-                      {/* Callback / Contact Preference */}
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-mono dark:text-[#A0A0A0] text-[#0E0E0E]/75 uppercase tracking-wider block">
-                          Preferred Callback Channel
-                        </label>
-                        <select
-                          name="preferredContact"
-                          value={formData.preferredContact}
-                          onChange={handleInputChange}
-                          className="w-full px-4 py-3.5 dark:bg-[#161616] dark:border-[#2E2E2E] dark:text-white bg-[#FAFDF2] border border-[#E9E9DE] focus:border-[#FF1F02] text-sm text-[#0E0E0E] focus:outline-none cursor-pointer"
-                        >
-                          <option value="WhatsApp Priority">WhatsApp Priority</option>
-                          <option value="Phone Call (Morning 10 AM – 1 PM)">Phone Call (Morning 10 AM – 1 PM)</option>
-                          <option value="Phone Call (Evening 4 PM – 8 PM)">Phone Call (Evening 4 PM – 8 PM)</option>
-                          <option value="Email Detailed Proposal First">Email Detailed Proposal First</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 5. BESPOKE NOTES & THEME VISION */}
-                  <div className="space-y-2 pt-6 border-t dark:border-[#262626] border-[#E9E9DE]">
-                    <label className="text-[11px] font-mono font-bold uppercase tracking-wider dark:text-white text-[#0E0E0E] block">
-                      Special Mandap, Decor Themes, Sound/Lighting or Culinary Visions
+                  {/* ROW 1: NAME */}
+                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 border-b dark:border-[#2D2D2D] border-[#D8D8CC] pb-4 focus-within:border-[#FF1F02] transition-colors">
+                    <label className="w-28 sm:w-36 shrink-0 text-xs font-mono uppercase tracking-widest dark:text-white/60 text-[#0E0E0E]/60">
+                      NAME *
                     </label>
-                    <textarea
-                      rows={3}
-                      name="message"
-                      value={formData.message}
+                    <input
+                      type="text"
+                      name="guestName"
+                      required
+                      value={formData.guestName}
                       onChange={handleInputChange}
-                      placeholder="Please share any specific Mandap concepts, stage requirements, dietary choices (Awadhi, Jain, Continental), or VIP arrangements..."
-                      className="w-full p-4 dark:bg-[#161616] dark:border-[#2E2E2E] dark:text-white dark:placeholder:text-white/30 bg-[#FAFDF2] border border-[#E9E9DE] focus:border-[#FF1F02] text-sm text-[#0E0E0E] placeholder:text-[#0E0E0E]/30 focus:outline-none transition-colors resize-none"
+                      placeholder="Your full name"
+                      className="w-full bg-transparent text-base sm:text-lg dark:text-white text-[#0E0E0E] placeholder:text-[#999990] dark:placeholder:text-[#555555] focus:outline-none font-light"
                     />
                   </div>
 
-                  {/* 6. PRIMARY SUBMIT BUTTON */}
-                  <div className="pt-4 space-y-4">
-                    <MagneticButton>
+                  {/* ROW 2: EMAIL */}
+                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 border-b dark:border-[#2D2D2D] border-[#D8D8CC] pb-4 focus-within:border-[#FF1F02] transition-colors">
+                    <label className="w-28 sm:w-36 shrink-0 text-xs font-mono uppercase tracking-widest dark:text-white/60 text-[#0E0E0E]/60">
+                      EMAIL
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="name@example.com"
+                      className="w-full bg-transparent text-base sm:text-lg dark:text-white text-[#0E0E0E] placeholder:text-[#999990] dark:placeholder:text-[#555555] focus:outline-none font-light"
+                    />
+                  </div>
+
+                  {/* ROW 3: PHONE */}
+                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 border-b dark:border-[#2D2D2D] border-[#D8D8CC] pb-4 focus-within:border-[#FF1F02] transition-colors">
+                    <label className="w-28 sm:w-36 shrink-0 text-xs font-mono uppercase tracking-widest dark:text-white/60 text-[#0E0E0E]/60">
+                      PHONE *
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      required
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="+91 98765 43210"
+                      className="w-full bg-transparent text-base sm:text-lg dark:text-white text-[#0E0E0E] placeholder:text-[#999990] dark:placeholder:text-[#555555] focus:outline-none font-light font-mono"
+                    />
+                  </div>
+
+                  {/* ROW 4: CITY / ORIGIN */}
+                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 border-b dark:border-[#2D2D2D] border-[#D8D8CC] pb-4 focus-within:border-[#FF1F02] transition-colors">
+                    <label className="w-28 sm:w-36 shrink-0 text-xs font-mono uppercase tracking-widest dark:text-white/60 text-[#0E0E0E]/60">
+                      CITY / HUB
+                    </label>
+                    <input
+                      type="text"
+                      name="city"
+                      value={formData.city}
+                      onChange={handleInputChange}
+                      placeholder="Your current city (e.g. Chennai / Delhi / Mumbai)"
+                      className="w-full bg-transparent text-base sm:text-lg dark:text-white text-[#0E0E0E] placeholder:text-[#999990] dark:placeholder:text-[#555555] focus:outline-none font-light"
+                    />
+                  </div>
+
+                  {/* ROW 5: CELEBRATION TYPE */}
+                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 border-b dark:border-[#2D2D2D] border-[#D8D8CC] pb-4 focus-within:border-[#FF1F02] transition-colors">
+                    <label className="w-28 sm:w-36 shrink-0 text-xs font-mono uppercase tracking-widest dark:text-white/60 text-[#0E0E0E]/60">
+                      OCCASION TYPE *
+                    </label>
+                    <div className="w-full relative">
+                      <select
+                        name="celebrationType"
+                        value={formData.celebrationType}
+                        onChange={handleInputChange}
+                        className="w-full bg-transparent text-base sm:text-lg dark:text-white text-[#0E0E0E] focus:outline-none font-light cursor-pointer appearance-none pr-8 py-0.5"
+                      >
+                        <option value="Destination Wedding" className="dark:bg-[#1A1A1A] bg-white">Destination Wedding (Palaces & Oceanfront Mandaps)</option>
+                        <option value="Engagement" className="dark:bg-[#1A1A1A] bg-white">Engagement & Ring Ceremony (Sagai & Roka)</option>
+                        <option value="Anniversary" className="dark:bg-[#1A1A1A] bg-white">Anniversary Celebrations (Silver & Golden Jubilees)</option>
+                        <option value="Birthday Soirée" className="dark:bg-[#1A1A1A] bg-white">Birthday Soirée & Janamotsav Galas</option>
+                        <option value="Corporate Event" className="dark:bg-[#1A1A1A] bg-white">Corporate Meetings, Summits & Conclaves</option>
+                        <option value="Pool Party & Concert" className="dark:bg-[#1A1A1A] bg-white">Pool Parties, Sangeet Nights & Concerts</option>
+                        <option value="Banquet Hall Booking" className="dark:bg-[#1A1A1A] bg-white">Grand Banquet Hall & Lawn Booking</option>
+                      </select>
+                      <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none dark:text-white/50 text-[#0E0E0E]/50 text-xs">
+                        ▼
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* ROW 6: DESTINATION */}
+                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 border-b dark:border-[#2D2D2D] border-[#D8D8CC] pb-4 focus-within:border-[#FF1F02] transition-colors">
+                    <label className="w-28 sm:w-36 shrink-0 text-xs font-mono uppercase tracking-widest dark:text-white/60 text-[#0E0E0E]/60">
+                      DESTINATION
+                    </label>
+                    <div className="w-full relative">
+                      <select
+                        name="destination"
+                        value={formData.destination}
+                        onChange={handleInputChange}
+                        className="w-full bg-transparent text-base sm:text-lg dark:text-white text-[#0E0E0E] focus:outline-none font-light cursor-pointer appearance-none pr-8 py-0.5"
+                      >
+                        <option value="Tamil Nadu (Main HQ - Chennai)" className="dark:bg-[#1A1A1A] bg-white">Tamil Nadu (Main HQ - Chennai)</option>
+                        <option value="Goa" className="dark:bg-[#1A1A1A] bg-white">Goa (Beachfront Mandaps & Lawns)</option>
+                        <option value="Rajasthan" className="dark:bg-[#1A1A1A] bg-white">Rajasthan (Jaipur & Udaipur Palaces)</option>
+                        <option value="Kerala" className="dark:bg-[#1A1A1A] bg-white">Kerala (Backwaters & Hilltop Stays)</option>
+                        <option value="Karnataka" className="dark:bg-[#1A1A1A] bg-white">Karnataka (Bengaluru & Coorg)</option>
+                        <option value="Delhi NCR" className="dark:bg-[#1A1A1A] bg-white">Delhi NCR & Noida Hub</option>
+                        <option value="Maharashtra" className="dark:bg-[#1A1A1A] bg-white">Maharashtra (Mumbai & Lonavala)</option>
+                        <option value="Himachal Pradesh" className="dark:bg-[#1A1A1A] bg-white">Himachal Pradesh (Shimla & Manali)</option>
+                        <option value="Uttarakhand" className="dark:bg-[#1A1A1A] bg-white">Uttarakhand (Rishikesh & Mussoorie)</option>
+                        <option value="West Bengal" className="dark:bg-[#1A1A1A] bg-white">West Bengal (Kolkata & Darjeeling)</option>
+                        <option value="Telangana" className="dark:bg-[#1A1A1A] bg-white">Telangana (Hyderabad Hub)</option>
+                        <option value="Andhra Pradesh" className="dark:bg-[#1A1A1A] bg-white">Andhra Pradesh (Visakhapatnam)</option>
+                        <option value="Gujarat" className="dark:bg-[#1A1A1A] bg-white">Gujarat (Ahmedabad & Kutch)</option>
+                        <option value="Other Pan-India Location" className="dark:bg-[#1A1A1A] bg-white">Other Pan-India Location</option>
+                      </select>
+                      <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none dark:text-white/50 text-[#0E0E0E]/50 text-xs">
+                        ▼
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* ROW 7: GUEST SCALE & ROOMS */}
+                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 border-b dark:border-[#2D2D2D] border-[#D8D8CC] pb-4 focus-within:border-[#FF1F02] transition-colors">
+                    <label className="w-28 sm:w-36 shrink-0 text-xs font-mono uppercase tracking-widest dark:text-white/60 text-[#0E0E0E]/60">
+                      GUEST SCALE
+                    </label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                      <input
+                        type="text"
+                        name="guestCount"
+                        value={formData.guestCount}
+                        onChange={handleInputChange}
+                        placeholder="Estimated Guests (e.g. 250 – 500)"
+                        className="w-full bg-transparent text-base sm:text-lg dark:text-white text-[#0E0E0E] placeholder:text-[#999990] dark:placeholder:text-[#555555] focus:outline-none font-light"
+                      />
+                      <input
+                        type="text"
+                        name="roomCount"
+                        value={formData.roomCount}
+                        onChange={handleInputChange}
+                        placeholder="Rooms Needed (e.g. 30 Rooms / Venue Only)"
+                        className="w-full bg-transparent text-base sm:text-lg dark:text-white text-[#0E0E0E] placeholder:text-[#999990] dark:placeholder:text-[#555555] focus:outline-none font-light"
+                      />
+                    </div>
+                  </div>
+
+                  {/* ROW 8: BUDGET */}
+                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 border-b dark:border-[#2D2D2D] border-[#D8D8CC] pb-4 focus-within:border-[#FF1F02] transition-colors">
+                    <label className="w-28 sm:w-36 shrink-0 text-xs font-mono uppercase tracking-widest dark:text-white/60 text-[#0E0E0E]/60">
+                      BUDGET
+                    </label>
+                    <div className="w-full relative">
+                      <input
+                        type="text"
+                        name="budget"
+                        value={formData.budget}
+                        onChange={handleInputChange}
+                        placeholder="Select range (e.g. ₹15–25 Lakhs, ₹50 Lakhs+, Flexible Quote)"
+                        className="w-full bg-transparent text-base sm:text-lg dark:text-white text-[#0E0E0E] placeholder:text-[#999990] dark:placeholder:text-[#555555] focus:outline-none font-light"
+                      />
+                    </div>
+                  </div>
+
+                  {/* ROW 9: TIMELINE & CALLBACK PREFERENCE */}
+                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 border-b dark:border-[#2D2D2D] border-[#D8D8CC] pb-4 focus-within:border-[#FF1F02] transition-colors">
+                    <label className="w-28 sm:w-36 shrink-0 text-xs font-mono uppercase tracking-widest dark:text-white/60 text-[#0E0E0E]/60">
+                      TIMELINE
+                    </label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                      <input
+                        type="date"
+                        name="eventDate"
+                        value={formData.eventDate}
+                        onChange={handleInputChange}
+                        className="w-full bg-transparent text-base sm:text-lg dark:text-white text-[#0E0E0E] focus:outline-none font-light cursor-pointer"
+                      />
+                      <select
+                        name="eventDuration"
+                        value={formData.eventDuration}
+                        onChange={handleInputChange}
+                        className="w-full bg-transparent text-base sm:text-lg dark:text-white text-[#0E0E0E] focus:outline-none font-light cursor-pointer appearance-none py-0.5"
+                      >
+                        <option value="1 Day (Single Function)" className="dark:bg-[#1A1A1A] bg-white">1 Day (Single Function)</option>
+                        <option value="2 Days (1 Night)" className="dark:bg-[#1A1A1A] bg-white">2 Days (1 Night)</option>
+                        <option value="3 Days (2 Nights - Traditional)" className="dark:bg-[#1A1A1A] bg-white">3 Days (2 Nights - Traditional)</option>
+                        <option value="4+ Days Multi-Day Celebration" className="dark:bg-[#1A1A1A] bg-white">4+ Days Multi-Day Celebration</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* ROW 10: MESSAGE / VISION */}
+                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 border-b dark:border-[#2D2D2D] border-[#D8D8CC] pb-4 focus-within:border-[#FF1F02] transition-colors">
+                    <label className="w-28 sm:w-36 shrink-0 text-xs font-mono uppercase tracking-widest dark:text-white/60 text-[#0E0E0E]/60 pt-1">
+                      VISION
+                    </label>
+                    <textarea
+                      rows={2}
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="What are you creating, and what should it become? (Mandap concepts, decor, cuisine, or VIP needs)"
+                      className="w-full bg-transparent text-base sm:text-lg dark:text-white text-[#0E0E0E] placeholder:text-[#999990] dark:placeholder:text-[#555555] focus:outline-none font-light resize-none leading-relaxed"
+                    />
+                  </div>
+
+                  {/* ROW 11: SUBMIT BUTTON */}
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 pt-4">
+                    <span className="w-28 sm:w-36 shrink-0 text-xs font-mono uppercase tracking-widest dark:text-white/60 text-[#0E0E0E]/60 hidden sm:block">
+                      SUBMIT
+                    </span>
+                    <div className="w-full flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full py-5 bg-[#FF1F02] hover:bg-white hover:text-black text-white font-bold text-xs uppercase tracking-[0.18em] transition-all duration-300 shadow-2xl flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 group"
+                        className="px-10 py-4 dark:bg-white dark:text-black bg-[#0E0E0E] text-white hover:bg-[#FF1F02] dark:hover:bg-[#FF1F02] dark:hover:text-white font-mono font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 shadow-xl cursor-pointer disabled:opacity-50 flex items-center justify-center gap-3 shrink-0"
                       >
                         {isSubmitting ? (
                           <>
-                            <Loader2 className="w-4 h-4 animate-spin text-white" />
-                            <span>TRANSMITTING INQUIRY DOSSIER...</span>
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                            <span>TRANSMITTING...</span>
                           </>
                         ) : (
                           <>
-                            <span>TRANSMIT CELEBRATION DOSSIER TO CENTRAL DESK</span>
-                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                            <span>SEND INQUIRY</span>
+                            <ArrowRight className="w-4 h-4" />
                           </>
                         )}
                       </button>
-                    </MagneticButton>
 
-                    <div className="flex items-center justify-center gap-6 text-[10px] font-mono dark:text-white/40 text-[#0E0E0E]/40 uppercase tracking-widest text-center">
-                      <span>● ENCRYPTED TRANSMISSION</span>
-                      <span>● ZERO SERVICE FEES</span>
-                      <span>● DIRECT PROPERTY CONFIRMATION</span>
+                      <div className="text-[11px] font-mono dark:text-white/40 text-[#0E0E0E]/40 uppercase tracking-wider">
+                        Direct to central event director • Encrypted transmission
+                      </div>
                     </div>
                   </div>
 

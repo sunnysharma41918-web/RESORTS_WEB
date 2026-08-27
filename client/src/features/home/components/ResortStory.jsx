@@ -28,7 +28,7 @@ export default function ResortStory() {
           <div className="lg:col-span-7 relative">
             {/* Animated CHHR Stamp Overlapping Top Right of Image */}
             <div className="absolute -top-10 -right-6 sm:-top-12 sm:-right-8 z-30">
-              <EditorialHeritageStamp size={110} centerText="CHHR" text="CHHR HOTELS & RESORTS • SANCTUARY • " year="EST 2026" />
+              <EditorialHeritageStamp size={110} centerText="CHHR" text="CHHR HOTELS & RESORTS • SANCTUARY • " />
             </div>
 
             <ScrollReveal direction="clip" delay={100}>

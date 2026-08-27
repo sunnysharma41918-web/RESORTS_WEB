@@ -149,21 +149,20 @@ export default function Footer() {
             </div>
 
             <div className="pt-2">
-              <EditorialHeritageStamp size={110} centerText="CHHR" text="CHHR HOTELS & RESORTS • PRIVATE ESTATE • " year="EST 2026" />
+              <EditorialHeritageStamp size={110} centerText="CHHR" text="CHHR HOTELS & RESORTS • PRIVATE ESTATE • " />
             </div>
-
-            <p className="text-[11px] font-mono dark:text-white/50 text-[#0E0E0E]/50 uppercase tracking-widest text-left lg:text-right">
-              ● 100% OFF-GRID SOLAR <br />
-              ● 500-ACRE CONSERVATION <br />
-              ● 24/7 BUTLER CARE
-            </p>
           </div>
 
         </div>
 
-        {/* Monumental Editorial Brand Signoff */}
-        <div className="pt-10 border-t dark:border-[#333333] border-[#E9E9DE] w-full overflow-hidden flex justify-center text-center select-none">
-          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight leading-tight dark:text-white/90 text-[#0E0E0E]/90">
+        {/* Monumental Editorial Brand Signoff with Thanks for Visiting */}
+        <div className="pt-10 border-t dark:border-[#333333] border-[#E9E9DE] w-full overflow-hidden flex flex-col items-center justify-center text-center select-none space-y-3">
+          <div className="inline-flex items-center gap-2 text-[10.5px] sm:text-xs font-mono font-bold uppercase tracking-[0.22em] text-[#FF1F02]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02] animate-pulse" />
+            <span>THANKS FOR VISITING</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02] animate-pulse" />
+          </div>
+          <h2 className="text-[clamp(0.95rem,4.3vw,3.75rem)] font-extrabold uppercase tracking-tight leading-none whitespace-nowrap dark:text-white/90 text-[#0E0E0E]/90">
             COUNTRY HOLIDAYS <span className="text-art-trio">HOTELS & RESORTS.</span>
           </h2>
         </div>

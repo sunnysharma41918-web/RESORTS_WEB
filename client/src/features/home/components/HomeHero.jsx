@@ -13,7 +13,7 @@ export default function HomeHero() {
   };
 
   return (
-    <section className={`relative w-full h-screen h-[100dvh] max-h-screen overflow-hidden text-white select-none flex flex-col justify-between pt-24 sm:pt-28 pb-10 sm:pb-12 px-6 sm:px-12 lg:px-16 xl:px-20 transition-colors duration-500 ${
+    <section className={`relative w-full h-screen h-[100dvh] max-h-screen overflow-hidden text-white select-none flex flex-col justify-between pt-24 sm:pt-28 pb-8 sm:pb-12 px-4 sm:px-12 lg:px-16 xl:px-20 transition-colors duration-500 ${
       isDark ? 'bg-[#1C1C1C]' : 'bg-[#FAFDF2]'
     }`}>
       
@@ -54,11 +54,11 @@ export default function HomeHero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35, ease: 'easeOut' }}
-          className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.35em] text-white/90 mb-1 drop-shadow flex items-center gap-2"
+          className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.35em] text-white/90 mb-1 drop-shadow flex items-center gap-1.5 sm:gap-2 flex-wrap"
         >
           <span className="text-[#32ACE3]">✦</span>
           <span>DISCOVER THE 2026 COLLECTION</span>
-          <span className="w-2 h-2 rounded-full bg-[#F2E20F] inline-block ml-1" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#F2E20F] inline-block ml-0.5" />
         </motion.div>
 
         {/* Line 1: COUNTRY (Medium Large Display) */}
@@ -66,7 +66,7 @@ export default function HomeHero() {
           initial={{ opacity: 0, y: 35 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          className="font-sans font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-none drop-shadow-[0_10px_25px_rgba(0,0,0,0.9)] select-none"
+          className="font-sans font-black text-2xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-none drop-shadow-[0_10px_25px_rgba(0,0,0,0.9)] select-none"
         >
           COUNTRY
         </motion.div>
@@ -88,7 +88,7 @@ export default function HomeHero() {
           transition={{ duration: 0.9, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
           className="w-full flex justify-end mt-0.5 sm:mt-1"
         >
-          <h2 className="font-sans font-black text-xl sm:text-3xl md:text-4xl lg:text-5xl uppercase tracking-tight text-hero-orange-red drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)] text-right select-none">
+          <h2 className="font-sans font-black text-base sm:text-3xl md:text-4xl lg:text-5xl uppercase tracking-tight text-hero-orange-red drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)] text-right select-none">
             HOTELS AND RESORTS
           </h2>
         </motion.div>
@@ -100,24 +100,24 @@ export default function HomeHero() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.9, ease: 'easeOut' }}
-        className="relative z-10 w-full flex items-center justify-between pt-2 text-xs text-white/80 font-medium"
+        className="relative z-10 w-full flex items-center justify-between pt-2 text-[10px] sm:text-xs text-white/80 font-medium flex-wrap gap-2"
       >
-        <div className="flex items-center space-x-3 sm:space-x-4">
+        <div className="flex items-center space-x-2 sm:space-x-4">
           <span>Chennai</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-[#2F50A3]" />
+          <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#2F50A3]" />
           <span>Noida</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-[#32ACE3]" />
+          <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#32ACE3]" />
           <span>Mumbai</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-[#F2E20F]" />
+          <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#F2E20F]" />
           <span>Delhi</span>
         </div>
 
         <button
           onClick={scrollToDiscover}
           type="button"
-          className="text-xs text-white/80 hover:text-white uppercase tracking-wider font-semibold cursor-pointer transition-colors hover:translate-y-0.5"
+          className="text-[10px] sm:text-xs text-white/80 hover:text-white uppercase tracking-wider font-semibold cursor-pointer transition-colors hover:translate-y-0.5"
         >
-          Explore All Residences ↓
+          Explore Residences ↓
         </button>
       </motion.div>
 

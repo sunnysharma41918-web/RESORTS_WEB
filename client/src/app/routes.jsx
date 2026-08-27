@@ -31,6 +31,7 @@ export const AdminExperienceForm = lazy(() => import('../pages/admin/experiences
 export const AdminGalleryList = lazy(() => import('../pages/admin/gallery/AdminGalleryList'));
 export const AdminOffersList = lazy(() => import('../pages/admin/offers/AdminOffersList'));
 export const AdminOfferForm = lazy(() => import('../pages/admin/offers/AdminOfferForm'));
+export const AdminTickerCMS = lazy(() => import('../pages/admin/offers/AdminTickerCMS'));
 export const AdminInquiriesList = lazy(() => import('../pages/admin/inquiries/AdminInquiriesList'));
 export const AdminSettings = lazy(() => import('../pages/admin/settings/AdminSettings'));
 export const AdminAccommodationsList = lazy(() => import('../pages/admin/accommodations/AdminAccommodationsList'));
@@ -65,6 +66,7 @@ export const ADMIN_ROUTES = [
   { path: 'offers', component: AdminOffersList },
   { path: 'offers/new', component: AdminOfferForm },
   { path: 'offers/edit/:id', component: AdminOfferForm },
+  { path: 'ticker', component: AdminTickerCMS },
   { path: 'gallery', component: AdminGalleryList },
   { path: 'inquiries', component: AdminInquiriesList },
   { path: 'settings', component: AdminSettings },

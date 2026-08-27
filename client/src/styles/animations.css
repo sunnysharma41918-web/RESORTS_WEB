@@ -6,3 +6,24 @@
 .hover-glow:hover {
   box-shadow: 0 0 30px rgba(197, 168, 128, 0.15);
 }
+
+/* Continuous Infinite Marquee Scroller */
+@keyframes marquee-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-infinite {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-infinite:hover {
+  animation-play-state: paused;
+}

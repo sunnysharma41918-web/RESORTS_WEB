@@ -11,7 +11,7 @@ const FLOATING_WORDS = [
   'RECONNECT',
   'ELEVATION 1,850M',
   'SLOW LIVING',
-  'EST 2026',
+  'HOSPITALITY',
 ];
 
 const COLORS = ['#FF1F02', '#EAB308', '#16A34A', '#FFFFFF'];

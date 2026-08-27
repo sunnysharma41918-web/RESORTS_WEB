@@ -87,7 +87,7 @@ export default function Resorts() {
     <div className="w-full bg-[#1C1C1C] text-white overflow-hidden font-manrope">
 
       {/* 1. HERO BANNER IN PURE BLACK */}
-      <section className="relative min-h-[85vh] flex flex-col justify-between py-24 sm:py-32 px-6 sm:px-12 bg-black border-b border-[#333333] overflow-hidden select-none">
+      <section className="relative min-h-[75vh] sm:min-h-[85vh] flex flex-col justify-center py-20 sm:py-32 px-4 sm:px-12 bg-black border-b border-[#333333] overflow-hidden select-none">
         {/* Background Vista */}
         <div className="absolute inset-0 z-0">
           <img
@@ -98,16 +98,16 @@ export default function Resorts() {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto text-center space-y-8 my-auto">
+        <div className="relative z-10 max-w-6xl mx-auto text-center space-y-6 sm:space-y-8 my-auto w-full">
           <ScrollReveal direction="up">
-            <div className="inline-flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#FF1F02]">
-              <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block" />
+            <div className="inline-flex items-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#FF1F02] px-3 py-1 bg-black/40 border border-[#FF1F02]/30 rounded-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02] inline-block animate-pulse" />
               <span>PRIVATE RESIDENCES & PAVILIONS</span>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={100}>
-            <h1 className="text-5xl sm:text-7xl lg:text-[8.5rem] font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-white">
+            <h1 className="text-[clamp(1.95rem,7.5vw,8.5rem)] font-extrabold uppercase tracking-tight sm:tracking-[-0.04em] leading-[0.98] sm:leading-[0.88] text-white break-words">
               SANCTUARIES <br />
               OF UNBROKEN <br />
               <span className="text-art-trio">CALM.</span>
@@ -115,17 +115,10 @@ export default function Resorts() {
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={200}>
-            <p className="text-base sm:text-xl font-light text-[#D0D0D0] max-w-2xl mx-auto leading-relaxed">
-              Individually sculpted into high mountain rock faces. Each residence is an architectural retreat of native slate, timber, and acoustic stillness.
+            <p className="text-xs sm:text-lg lg:text-xl font-light text-[#D0D0D0] max-w-2xl mx-auto leading-relaxed px-2">
+              Five monolithic residential tiers carved into high-altitude mountain rock, each offering uninterrupted panoramic horizon views.
             </p>
           </ScrollReveal>
-        </div>
-
-        {/* Bottom Coordinates */}
-        <div className="relative z-10 max-w-6xl mx-auto w-full pt-8 border-t border-[#333333] flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-[#B0B0B0] uppercase tracking-widest gap-4">
-          <span>● 5 DISTINCT TIERS</span>
-          <span>ELEVATION: 1,850M</span>
-          <span>EST. 2026</span>
         </div>
       </section>
 
@@ -295,7 +288,7 @@ export default function Resorts() {
           {/* Animated Red CHHR Stamp */}
           <div className="absolute -top-10 -right-4 sm:-right-8 z-20">
             <MagneticButton distance={0.25}>
-              <EditorialHeritageStamp size={110} centerText="CHHR" text="CHHR HOTELS & RESORTS • SANCTUARY • " year="EST 2026" />
+              <EditorialHeritageStamp size={110} centerText="CHHR" text="CHHR HOTELS & RESORTS • SANCTUARY • " />
             </MagneticButton>
           </div>
 

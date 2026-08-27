@@ -161,9 +161,11 @@ export default function AdminLogin() {
   const [isUsernameFocused, setIsUsernameFocused] = useState(false);
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
 
-  const { login, isAuthenticated } = useAuth();
+  const { login, isAuthenticated, sessionExpired } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const isExpiredRedirect = sessionExpired || location.state?.sessionExpired;
 
   const from = location.state?.from?.pathname || '/admin';
 
@@ -288,6 +290,17 @@ export default function AdminLogin() {
               Enter Super Administrator credentials
             </p>
           </div>
+
+          {/* Session Inactivity Timeout Alert */}
+          {isExpiredRedirect && (
+            <div className="p-3 bg-amber-950/80 border border-amber-500/80 text-amber-200 text-[11px] rounded-lg flex items-start gap-2 shadow-lg animate-pulse">
+              <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+              <div>
+                <span className="font-bold block text-amber-300">SESSION EXPIRED</span>
+                <span>You were automatically signed out after 10 minutes of inactivity. Please re-authenticate.</span>
+              </div>
+            </div>
+          )}
 
           {/* Error Alert */}
           {error && (

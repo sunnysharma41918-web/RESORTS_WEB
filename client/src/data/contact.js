@@ -5,7 +5,7 @@ export const CONTACT_INFO = {
   whatsapp: '+919876543210', // Easy to update or configure later
   whatsappMessage: 'Hello Country Holidays Hotels & Resorts, I would like to book our stay.',
   email: 'concierge@countryholidays-resorts.com',
-  address: 'Main Corporate Headquarters, Anna Salai / OMR Business Corridor, Chennai, Tamil Nadu, India',
+  address: '111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041',
   hours: '24/7 Global Luxury Concierge',
   socials: {
     instagram: 'https://instagram.com',

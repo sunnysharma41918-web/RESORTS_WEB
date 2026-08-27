@@ -46,7 +46,7 @@ export default function About() {
     <div className="w-full dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] overflow-hidden font-manrope transition-colors duration-300">
 
       {/* 1. HERO SECTION: CINEMATIC MONUMENTAL BANNER IN PURE BLACK */}
-      <section className="relative min-h-[85vh] flex flex-col justify-between py-24 sm:py-32 px-6 sm:px-12 bg-black border-b dark:border-[#333333] border-[#E9E9DE] overflow-hidden select-none">
+      <section className="relative min-h-[75vh] sm:min-h-[85vh] flex flex-col justify-center py-20 sm:py-32 px-4 sm:px-12 bg-black border-b dark:border-[#333333] border-[#E9E9DE] overflow-hidden select-none">
         {/* Background Subtle Vista */}
         <div className="absolute inset-0 z-0">
           <img
@@ -59,16 +59,16 @@ export default function About() {
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto text-center space-y-8 my-auto">
+        <div className="relative z-10 max-w-6xl mx-auto text-center space-y-6 sm:space-y-8 my-auto w-full">
           <ScrollReveal direction="up">
-            <div className="inline-flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#FF1F02]">
-              <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block" />
+            <div className="inline-flex items-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#FF1F02] px-3 py-1 bg-black/40 border border-[#FF1F02]/30 rounded-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02] inline-block animate-pulse" />
               <span>ABOUT COUNTRY HOLIDAYS HOTELS & RESORTS</span>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={100}>
-            <h1 className="text-5xl sm:text-7xl lg:text-[8rem] font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-white">
+            <h1 className="text-[clamp(1.95rem,7.5vw,8rem)] font-extrabold uppercase tracking-tight sm:tracking-[-0.04em] leading-[0.98] sm:leading-[0.88] text-white break-words">
               WHERE MEMORIES <br />
               BEGIN & <br />
               <span className="text-art-trio">COMFORT LIVES.</span>
@@ -76,40 +76,33 @@ export default function About() {
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={200}>
-            <p className="text-base sm:text-xl font-light text-[#D0D0D0] max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xs sm:text-lg lg:text-xl font-light text-[#D0D0D0] max-w-3xl mx-auto leading-relaxed px-2">
               Country Holidays Hotels & Resorts was created with a simple vision — to make every holiday comfortable, memorable, and truly special.
             </p>
           </ScrollReveal>
-        </div>
-
-        {/* Bottom Editorial Coordinates */}
-        <div className="relative z-10 max-w-6xl mx-auto w-full pt-8 border-t border-[#333333] flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-[#B0B0B0] uppercase tracking-widest gap-4">
-          <span>● COUNTRY HOLIDAYS HOTELS & RESORTS (CHHR)</span>
-          <span>CHENNAI • NOIDA • MUMBAI • DELHI</span>
-          <span>EST. 2026</span>
         </div>
       </section>
 
 
       {/* 2. SECTION 01: OUR VISION (ADAPTIVE DARK/LIGHT) */}
-      <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-28 sm:py-40 px-6 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300">
+      <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-20 sm:py-36 px-4 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300">
         <EditorialBackgroundElements variant="light" position="top-right" />
 
-        <div className="max-w-7xl mx-auto space-y-20 lg:space-y-28 relative z-10">
+        <div className="max-w-7xl mx-auto space-y-16 lg:space-y-28 relative z-10">
 
           <ScrollReveal direction="up">
-            <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] dark:text-white text-[#0E0E0E]">
-              <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
+            <div className="flex items-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.14em] dark:text-white text-[#0E0E0E]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02] inline-block shrink-0" />
               <span>01 — ABOUT OUR HOSPITALITY</span>
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
 
             {/* Left Typography Column (7 Cols) */}
-            <div className="lg:col-span-7 space-y-8 sm:space-y-10">
+            <div className="lg:col-span-7 space-y-6 sm:space-y-10">
               <ScrollReveal direction="up" delay={100}>
-                <h2 className="text-5xl sm:text-7xl lg:text-8xl font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-art-trio">
+                <h2 className="text-[clamp(1.95rem,6.5vw,7.5rem)] font-extrabold uppercase tracking-tight sm:tracking-[-0.04em] leading-[0.98] sm:leading-[0.88] text-art-trio break-words">
                   YOUR PERFECT <br />
                   GETAWAY <br />
                   BEGINS HERE.
@@ -256,7 +249,7 @@ export default function About() {
                 isMain: true,
                 desc: 'Principal Management, Central Operations & Nationwide Concierge Headquarters.',
                 image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=600&q=75',
-                address: 'Anna Salai / OMR Business Corridor, Chennai, Tamil Nadu',
+                address: '111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041',
               },
               {
                 city: 'Noida',
@@ -402,7 +395,7 @@ export default function About() {
           {/* Animated Red CHHR Stamp */}
           <ScrollReveal direction="scale">
             <div className="flex justify-center mb-2">
-              <EditorialHeritageStamp size={110} centerText="CHHR" text="CHHR HOTELS & RESORTS • PRIVATE ESTATE • " year="EST 2026" />
+              <EditorialHeritageStamp size={110} centerText="CHHR" text="CHHR HOTELS & RESORTS • PRIVATE ESTATE • " />
             </div>
           </ScrollReveal>
 

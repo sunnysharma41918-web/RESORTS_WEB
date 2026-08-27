@@ -14,7 +14,51 @@ const KEYS = {
   OFFERS: 'aura_offers',
   SETTINGS: 'aura_settings',
   INQUIRIES: 'aura_inquiries',
+  TICKER_OFFERS: 'country_holidays_ticker_offers',
 };
+
+const DEFAULT_TICKER_OFFERS = [
+  {
+    id: 't-1',
+    badge: 'FESTIVAL SPECIAL',
+    badgeColor: 'bg-[#FF1F02]',
+    text: 'Up to 35% Off on Luxury Goa, Rajasthan & Kerala Holiday Sanctuaries',
+    link: '/offers',
+    isActive: true,
+  },
+  {
+    id: 't-2',
+    badge: 'WEDDINGS & EVENTS',
+    badgeColor: 'bg-[#EAB308] text-black',
+    text: 'Complimentary Royal Mandap Consultation & Master Chef Tasting with Bookings',
+    link: '/celebrations#inquiry',
+    isActive: true,
+  },
+  {
+    id: 't-3',
+    badge: 'LIMITED COUPON',
+    badgeColor: 'bg-[#16A34A]',
+    text: 'Use Code "CHHR2026" for Instant ₹5,000 Dining Voucher',
+    link: '/offers',
+    isActive: true,
+  },
+  {
+    id: 't-4',
+    badge: 'SUMMER RETREAT',
+    badgeColor: 'bg-[#32ACE3] text-black',
+    text: '25% Early Bird Discount on Hilltop Suites & Private Pool Chalets',
+    link: '/offers',
+    isActive: true,
+  },
+  {
+    id: 't-5',
+    badge: 'WEEKEND PRIVILEGE',
+    badgeColor: 'bg-[#9333EA]',
+    text: 'Free Luxury Airport & Station Transfers on 2+ Nights Reservation',
+    link: '/offers',
+    isActive: true,
+  },
+];
 
 const DEFAULT_INQUIRIES = [
   {
@@ -93,6 +137,14 @@ export const storage = {
     localStorage.setItem(KEYS.OFFERS, JSON.stringify(data));
   },
 
+  getTickerOffers() {
+    return initCollection(KEYS.TICKER_OFFERS, DEFAULT_TICKER_OFFERS);
+  },
+  saveTickerOffers(data) {
+    localStorage.setItem(KEYS.TICKER_OFFERS, JSON.stringify(data));
+    window.dispatchEvent(new Event('chhr_ticker_updated'));
+  },
+
   getSettings() {
     return initCollection(KEYS.SETTINGS, {
       siteConfig: SITE_CONFIG,
@@ -116,7 +168,9 @@ export const storage = {
     localStorage.setItem(KEYS.EXPERIENCES, JSON.stringify(EXPERIENCES_DATA));
     localStorage.setItem(KEYS.GALLERY, JSON.stringify(GALLERY_DATA));
     localStorage.setItem(KEYS.OFFERS, JSON.stringify(OFFERS_DATA));
+    localStorage.setItem(KEYS.TICKER_OFFERS, JSON.stringify(DEFAULT_TICKER_OFFERS));
     localStorage.setItem(KEYS.SETTINGS, JSON.stringify({ siteConfig: SITE_CONFIG, contactInfo: CONTACT_INFO }));
     localStorage.setItem(KEYS.INQUIRIES, JSON.stringify(DEFAULT_INQUIRIES));
+    window.dispatchEvent(new Event('chhr_ticker_updated'));
   },
 };

@@ -20,26 +20,6 @@ export const OFFERS_DATA = [
     featured: true,
   },
   {
-    id: 'pkg-2',
-    title: 'Weekend Wellness & Spa Retreat',
-    tag: 'Restoration & Rejuvenation',
-    category: 'Wellness',
-    discount: 'Includes 60-min Ayurvedic Spa',
-    validTill: 'Friday to Sunday Stays',
-    badge: 'WEEKEND SPECIAL',
-    description: 'Immerse in tranquility with our signature Ayurvedic massage therapies, temperature-controlled pool relaxation, chef-crafted organic wellness meals, and peaceful nature strolls.',
-    inclusions: [
-      '2 Nights Luxury Suite Stay',
-      'Daily Sunrise Yoga & Meditation',
-      'Complimentary 60-min Ayurvedic Massage',
-      'Organic Breakfast & Healthy Detox Drinks',
-      'Late Checkout until 3:00 PM'
-    ],
-    location: 'All Properties (Chennai, Noida, Mumbai, Delhi)',
-    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=90',
-    featured: true,
-  },
-  {
     id: 'pkg-3',
     title: 'Executive Corporate Offsite & Summit',
     tag: 'Corporate & Boardrooms',
