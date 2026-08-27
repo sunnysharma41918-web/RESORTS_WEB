@@ -197,11 +197,31 @@ export default function Contact() {
                         onChange={(e) => setFormData({ ...formData, residence: e.target.value })}
                         className="w-full px-4 py-3.5 dark:bg-[#161616] dark:border-[#333333] dark:text-white bg-[#FAFDF2] border border-[#E9E9DE] focus:border-[#FF1F02] text-sm text-[#0E0E0E] outline-none transition-colors cursor-pointer"
                       >
-                        <option>The Forest Pool Villa</option>
-                        <option>Monolith Glass Chalet</option>
-                        <option>Botanical Sanctuary Suite</option>
-                        <option>The Cliffside Stone Slowhouse</option>
-                        <option>Ridge Horizon Grand Penthouse</option>
+                        <optgroup label="── SIGNATURE RESIDENCES & VILLAS ──" className="dark:bg-[#1C1C1C] dark:text-[#EAB308] bg-gray-100 text-amber-800 font-bold">
+                          <option value="The Forest Pool Villa">The Forest Pool Villa (Private Seclusion)</option>
+                          <option value="Monolith Glass Chalet">Monolith Glass Chalet (High-Altitude Vista)</option>
+                          <option value="Botanical Sanctuary Suite">Botanical Sanctuary Suite (Conservation Garden)</option>
+                          <option value="The Cliffside Stone Slowhouse">The Cliffside Stone Slowhouse (Valley Panorama)</option>
+                          <option value="Ridge Horizon Grand Penthouse">Ridge Horizon Grand Penthouse (Flagship Residence)</option>
+                          <option value="Royal Cantilever Ocean Suite">Royal Cantilever Ocean Suite (Oceanfront)</option>
+                        </optgroup>
+
+                        <optgroup label="── DESTINATION RESORTS & SANCTUARIES ──" className="dark:bg-[#1C1C1C] dark:text-[#32ACE3] bg-gray-100 text-sky-800 font-bold">
+                          <option value="Goa — Azure Coast Beachfront Sanctuary">Goa — Azure Coast Beachfront Sanctuary</option>
+                          <option value="Himachal Pradesh — Himalayan Cloud Ridge">Himachal Pradesh — Himalayan Cloud Ridge Sanctuary</option>
+                          <option value="Rajasthan — Thar Royal Palace & Pavilion">Rajasthan — Thar Royal Palace & Desert Pavilion</option>
+                          <option value="Kerala — Backwaters Emerald Lagoon Estate">Kerala — Backwaters Emerald Lagoon Estate</option>
+                          <option value="Tamil Nadu — Nilgiri Cloud Forest Estate">Tamil Nadu — Nilgiri Cloud Forest Estate (Ooty)</option>
+                          <option value="Kashmir — Alpine Pine Valley Retreat">Kashmir — Alpine Pine Valley Retreat (Pahalgam)</option>
+                          <option value="Karnataka — Coorg Coffee Plantation Estate">Karnataka — Coorg Coffee Plantation Estate</option>
+                          <option value="Uttarakhand — Ganges Riverbank Sanctuary">Uttarakhand — Ganges Riverbank Sanctuary (Rishikesh)</option>
+                        </optgroup>
+
+                        <optgroup label="── CELEBRATIONS & BESPOKE TRAVEL ──" className="dark:bg-[#1C1C1C] dark:text-[#FF1F02] bg-gray-100 text-red-800 font-bold">
+                          <option value="Grand Destination Wedding (Palace / Mandap)">Grand Destination Wedding (Palace / Mandap)</option>
+                          <option value="Corporate Executive Board Summit">Corporate Executive Board Summit</option>
+                          <option value="Multi-Destination Bespoke Helicopter Tour">Multi-Destination Bespoke Helicopter Tour</option>
+                        </optgroup>
                       </select>
                     </div>
                   </div>
