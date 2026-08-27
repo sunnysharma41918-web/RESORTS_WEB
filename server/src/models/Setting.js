@@ -22,7 +22,7 @@ const settingSchema = new mongoose.Schema(
       },
       url: {
         type: String,
-        default: 'https://countryholidays-resorts.com',
+        default: 'https://countryholidaysresorts.com',
       },
     },
     contactInfo: {
@@ -44,11 +44,11 @@ const settingSchema = new mongoose.Schema(
       },
       email: {
         type: String,
-        default: 'concierge@countryholidays-resorts.com',
+        default: 'info@countryholidaysresorts.com',
       },
       enquiriesEmail: {
         type: String,
-        default: 'reservations@countryholidays-resorts.com',
+        default: 'info@countryholidaysresorts.com',
       },
       address: {
         type: String,

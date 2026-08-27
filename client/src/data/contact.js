@@ -4,7 +4,7 @@ export const CONTACT_INFO = {
   phoneRaw: '+919876543210',
   whatsapp: '+919876543210', // Easy to update or configure later
   whatsappMessage: 'Hello Country Holidays Hotels & Resorts, I would like to book our stay.',
-  email: 'concierge@countryholidays-resorts.com',
+  email: 'info@countryholidaysresorts.com',
   address: '111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041',
   hours: '24/7 Global Luxury Concierge',
   socials: {

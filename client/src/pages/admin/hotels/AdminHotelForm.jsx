@@ -29,7 +29,7 @@ export default function AdminHotelForm() {
     description: '',
     contactPhone: '+91 98765 43220',
     contactWhatsapp: '+919876543220',
-    contactEmail: 'concierge@countryholidays-resorts.com',
+    contactEmail: 'info@countryholidaysresorts.com',
     contactAddress: '',
     galleryUrls: '',
     facilities: [

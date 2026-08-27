@@ -317,8 +317,8 @@ export default function Contact() {
                       </div>
                       <div>
                         <span className="text-[10px] font-mono dark:text-white/50 text-[#0E0E0E]/50 uppercase tracking-widest block">Official Email</span>
-                        <a href="mailto:concierge@countryholidays-resorts.com" className="text-base font-bold dark:text-white text-[#0E0E0E] hover:text-[#FF1F02] transition-colors">
-                          concierge@countryholidays-resorts.com
+                        <a href="mailto:info@countryholidaysresorts.com" className="text-base font-bold dark:text-white text-[#0E0E0E] hover:text-[#FF1F02] transition-colors">
+                          info@countryholidaysresorts.com
                         </a>
                       </div>
                     </div>

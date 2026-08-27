@@ -116,4 +116,4 @@ npm start
 ## 🏢 Organization
 **Country Holidays Hotel & Resorts Pvt. Ltd.**  
 *Corporate Office:* 111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041  
-*Official Concierge Desk:* reservations@countryholidays-resorts.com
+*Official Concierge Desk:* info@countryholidaysresorts.com
