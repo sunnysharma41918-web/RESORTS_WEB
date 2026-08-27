@@ -96,3 +96,24 @@ npm start
 * **CORS**: Configured for frontend origin whitelist.
 * **Morgan**: HTTP request logger in development.
 * **Mongoose Schema Sanitization**: Input trim, validation rules, and schema level constraints.
+
+---
+
+## 👨‍💻 Engineering & Development Team
+
+### 🌟 Project Leadership & Guidance
+* **Prityoush Raj**  
+  *Head of Information Technology (HOD - IT)*  
+  *Country Holidays Hotel & Resorts Pvt. Ltd.*
+
+### 🛠️ Architecture & Core Full-Stack Development
+* **Sunny Sharma**  
+  *IT Executive & Full-Stack Developer*  
+  *Country Holidays Hotel & Resorts Pvt. Ltd.*
+
+---
+
+## 🏢 Organization
+**Country Holidays Hotel & Resorts Pvt. Ltd.**  
+*Corporate Office:* 111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041  
+*Official Concierge Desk:* reservations@countryholidays-resorts.com
