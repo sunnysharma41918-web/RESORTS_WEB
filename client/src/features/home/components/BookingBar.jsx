@@ -1,12 +1,25 @@
 import React, { useState } from 'react';
-import { Calendar, Users, Home, Sparkles, ArrowRight } from 'lucide-react';
+import { Calendar, Users, MapPin, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
+const STATES = [
+  'Tamil Nadu',
+  'Goa',
+  'Rajasthan',
+  'Kerala',
+  'Himachal Pradesh',
+  'Karnataka',
+  'Uttarakhand',
+  'Kashmir',
+  'Maharashtra',
+  'Delhi NCR',
+];
 
 export default function BookingBar() {
   const [checkIn, setCheckIn] = useState('2026-10-15');
   const [checkOut, setCheckOut] = useState('2026-10-20');
   const [guests, setGuests] = useState('2 Guests');
-  const [roomType, setRoomType] = useState('Private Pool Villa');
+  const [selectedState, setSelectedState] = useState('Tamil Nadu');
 
   return (
     <section className="relative z-30 -mt-10 sm:-mt-14 max-w-6xl mx-auto px-4 sm:px-6 select-none">
@@ -66,22 +79,23 @@ export default function BookingBar() {
             </div>
           </div>
 
-          {/* 4. ROOM CATEGORY */}
+          {/* 4. STATE SELECTION */}
           <div className="flex items-center space-x-3 px-4 py-2 sm:py-1 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer border-t lg:border-t-0 lg:border-l border-white/10">
-            <Home className="w-4 h-4 text-sky-400 shrink-0 group-hover:scale-110 transition-transform" />
+            <MapPin className="w-4 h-4 text-sky-400 shrink-0 group-hover:scale-110 transition-transform" />
             <div className="text-left">
               <span className="block text-[10px] uppercase tracking-widest text-white/50 font-medium">
-                Sanctuary Type
+                State / Location
               </span>
               <select
-                value={roomType}
-                onChange={(e) => setRoomType(e.target.value)}
+                value={selectedState}
+                onChange={(e) => setSelectedState(e.target.value)}
                 className="bg-transparent text-xs font-semibold text-white outline-none cursor-pointer [color-scheme:dark]"
               >
-                <option value="Private Pool Villa" className="bg-[#0c1824] text-white">Private Pool Villa</option>
-                <option value="Ocean Penthouse" className="bg-[#0c1824] text-white">Ocean Penthouse</option>
-                <option value="Forest Chalet" className="bg-[#0c1824] text-white">Forest Chalet</option>
-                <option value="Heritage Suite" className="bg-[#0c1824] text-white">Heritage Suite</option>
+                {STATES.map((state) => (
+                  <option key={state} value={state} className="bg-[#0c1824] text-white">
+                    {state}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
