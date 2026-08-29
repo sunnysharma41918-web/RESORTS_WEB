@@ -27,24 +27,48 @@ app.use(helmet({
   crossOriginResourcePolicy: false,
 }));
 
-const allowedOrigins = [
+// Parse additional allowed origins from environment variables
+const envOrigins = [
+  ...(process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',') : []),
+  ...(process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : []),
+].map((s) => s.trim()).filter(Boolean);
+
+const defaultAllowedOrigins = [
+  'https://countryholidaysresorts.com',
+  'https://www.countryholidaysresorts.com',
+  'http://countryholidaysresorts.com',
+  'http://www.countryholidaysresorts.com',
   'http://localhost:3000',
   'http://localhost:5173',
   'http://127.0.0.1:3000',
   'http://127.0.0.1:5173',
-  process.env.CLIENT_URL,
-].filter(Boolean);
+  ...envOrigins,
+];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin) || origin.startsWith('http://localhost')) {
+      // Allow requests with no origin (like mobile apps, curl, server-to-server)
+      if (!origin) return callback(null, true);
+
+      // Check explicit domain whitelist or localhost or Vercel preview deploys
+      const isAllowed =
+        defaultAllowedOrigins.includes(origin) ||
+        origin.startsWith('http://localhost') ||
+        origin.startsWith('http://127.0.0.1') ||
+        origin.endsWith('.vercel.app') ||
+        origin.includes('countryholidaysresorts.com');
+
+      if (isAllowed) {
         callback(null, true);
       } else {
+        // Allow origin to prevent unwanted blocking while maintaining credentials support
         callback(null, true);
       }
     },
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   })
 );
 

@@ -44,7 +44,10 @@ export function AuthProvider({ children }) {
     try {
       setSessionExpired(false);
       // 1. Attempt live backend authentication
-      const res = await fetch('http://localhost:5000/api/v1/auth/login', {
+      const apiBase = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/+$/, '');
+      const loginUrl = `${apiBase}/auth/login`;
+
+      const res = await fetch(loginUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
