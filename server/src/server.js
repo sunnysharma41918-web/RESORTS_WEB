@@ -79,14 +79,24 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// Health Check & Root Handlers
-app.get(['/', '/api/health', '/api/health*'], (req, res) => {
-  res.status(200).json({
-    status: 'online',
-    brand: 'Country Holidays Hotels & Resorts',
-    system: 'Executive Concierge REST API',
-    timestamp: new Date().toISOString(),
-  });
+// Health Check & Root Handlers (handles trailing space, urlencoded space, and variations)
+app.use((req, res, next) => {
+  const decodedPath = decodeURIComponent(req.path || '').trim().toLowerCase();
+  if (
+    decodedPath === '' ||
+    decodedPath === '/' ||
+    decodedPath === '/api/health' ||
+    decodedPath.startsWith('/api/health') ||
+    decodedPath === '/health'
+  ) {
+    return res.status(200).json({
+      status: 'online',
+      brand: 'Country Holidays Hotels & Resorts',
+      system: 'Executive Concierge REST API',
+      timestamp: new Date().toISOString(),
+    });
+  }
+  next();
 });
 
 // API Routes Mounting (v1 & legacy aliases)
