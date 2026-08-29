@@ -97,19 +97,8 @@ Private & Proprietary — Country Holidays Hotels & Resorts.
 ---
 ## 🖼️ Project Screenshots
 
-<a href="./docs/screenshots/">
-  <img src="./docs/screenshots/" alt="CHHR Homepage" width="800">
+<a href="./docs/screenshots/Main_page.png">
+  <img src="./docs/screenshots/Main_page.png" alt="CHHR Homepage" width="800">
 </a>
-
-<a href="./docs/screenshots/">
-  <img src="./docs/screenshots/" alt="CHHR Accommodations" width="800">
-</a>
-
-<a href="./docs/screenshots/">
-  <img src="./docs/screenshots/" alt="CHHR Admin Portal" width="800">
-</a>
-
 ## 🏢 Organization
 **Country Holidays Hotel & Resorts Pvt. Ltd.**  
-*Corporate Office:* 111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041  
-*Official Concierge Desk:* info@countryholidaysresorts.com
