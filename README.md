@@ -96,6 +96,6 @@ Private & Proprietary — Country Holidays Hotels & Resorts.
 
 ---
 ## 🖼️ Project Screenshots
-![CHHR Homepage](docs/screenshots/Main_page.png)
+![CHHR Homepage](./Main_page.png)
 ## 🏢 Organization
 **Country Holidays Hotel & Resorts Pvt. Ltd.**  
