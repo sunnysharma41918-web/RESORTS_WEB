@@ -4,6 +4,16 @@
 
 ---
 
+## 🌐 Live Production Links
+
+- 🏛️ **Official Website**: [https://countryholidaysresorts.com](https://countryholidaysresorts.com)
+- 🏢 **Alternative Domain**: [https://www.countryholidaysresorts.com](https://www.countryholidaysresorts.com)
+- 🔐 **Admin Concierge Portal**: [https://countryholidaysresorts.com/admin/login](https://countryholidaysresorts.com/admin/login)
+- ⚙️ **Backend REST API**: [https://resorts-web.onrender.com](https://resorts-web.onrender.com)
+- 📖 **Full Deployment Documentation**: [`DEPLOYMENT_DOCS.md`](file:///c:/Users/lenovo/Desktop/RESORTS/DEPLOYMENT_DOCS.md)
+
+---
+
 ## 🌟 Key Features
 
 - **Editorial Luxury Design System**: Custom-crafted HSL color tokens (`#FF1F02` brand red accent, `#FAFDF2` luxury ivory, `#181824` dark backdrop).
