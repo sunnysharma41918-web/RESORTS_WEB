@@ -79,8 +79,8 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// Health Check API
-app.get('/api/health', (req, res) => {
+// Health Check & Root Handlers
+app.get(['/', '/api/health', '/api/health*'], (req, res) => {
   res.status(200).json({
     status: 'online',
     brand: 'Country Holidays Hotels & Resorts',
