@@ -96,7 +96,6 @@ Private & Proprietary — Country Holidays Hotels & Resorts.
 
 ---
 ## 🖼️ Project Screenshots
-
 <a href="./docs/screenshots/Main_page.png">
   <img src="./docs/screenshots/Main_page.png" alt="CHHR Homepage" width="800">
 </a>
