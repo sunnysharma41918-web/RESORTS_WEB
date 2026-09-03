@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Trash2, Save, Sparkles, Flame, Tag, Eye, EyeOff, ArrowUp, ArrowDown, RotateCcw } from 'lucide-react';
 import { storage } from '../../../services/storage';
+import { settingsService } from '../../../services/settingsService';
 import { useToast } from '../../../components/admin/ToastNotification';
 
 const BADGE_COLORS = [
@@ -26,28 +27,28 @@ export default function AdminTickerCMS() {
     loadItems();
   }, []);
 
-  const loadItems = () => {
-    const data = storage.getTickerOffers();
+  const loadItems = async () => {
+    const data = await settingsService.getTickerOffers();
     setItems(data || []);
   };
 
-  const handleToggleActive = (id) => {
+  const handleToggleActive = async (id) => {
     const updated = items.map((item) =>
       item.id === id ? { ...item, isActive: !item.isActive } : item
     );
     setItems(updated);
-    storage.saveTickerOffers(updated);
+    await settingsService.updateTickerOffers(updated);
     addToast('Ticker announcement status toggled.');
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const updated = items.filter((item) => item.id !== id);
     setItems(updated);
-    storage.saveTickerOffers(updated);
+    await settingsService.updateTickerOffers(updated);
     addToast('Announcement removed from marquee scroller.');
   };
 
-  const handleMove = (index, direction) => {
+  const handleMove = async (index, direction) => {
     const targetIndex = index + direction;
     if (targetIndex < 0 || targetIndex >= items.length) return;
     const newItems = [...items];
@@ -55,10 +56,10 @@ export default function AdminTickerCMS() {
     newItems[index] = newItems[targetIndex];
     newItems[targetIndex] = temp;
     setItems(newItems);
-    storage.saveTickerOffers(newItems);
+    await settingsService.updateTickerOffers(newItems);
   };
 
-  const handleAddItem = (e) => {
+  const handleAddItem = async (e) => {
     e.preventDefault();
     if (!editingItem.text.trim()) return;
 
@@ -73,7 +74,7 @@ export default function AdminTickerCMS() {
 
     const updated = [newItem, ...items];
     setItems(updated);
-    storage.saveTickerOffers(updated);
+    await settingsService.updateTickerOffers(updated);
     setEditingItem({
       badge: 'FESTIVAL OFFER',
       badgeColor: 'bg-[#FF1F02] text-white',

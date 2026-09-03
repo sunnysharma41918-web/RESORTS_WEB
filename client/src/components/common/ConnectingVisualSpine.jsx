@@ -2,9 +2,9 @@ import React from 'react';
 
 export default function ConnectingVisualSpine() {
   return (
-    <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden select-none">
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden select-none [contain:paint]">
       <svg
-        className="w-full h-full"
+        className="w-full h-full hidden md:block"
         viewBox="0 0 1440 9000"
         fill="none"
         preserveAspectRatio="none"
@@ -33,7 +33,7 @@ export default function ConnectingVisualSpine() {
 
           {/* Glowing Aura Filter for Snake Body */}
           <filter id="snakeGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feGaussianBlur stdDeviation="3" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
 

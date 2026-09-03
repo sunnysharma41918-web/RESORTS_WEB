@@ -55,8 +55,10 @@ export default function Contact() {
         {/* Background Vista */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=3000&q=90"
+            src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1400&q=75"
             alt="Sanctuary Mountain Horizon"
+            loading="eager"
+            decoding="async"
             className="w-full h-full object-cover filter brightness-[0.25]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
@@ -362,8 +364,10 @@ export default function Contact() {
         {/* Background Overlay */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=3840&q=95"
+            src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1400&q=75"
             alt="Mountain Horizon"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover filter brightness-[0.25]"
           />
           <div className="absolute inset-0 dark:bg-gradient-to-t dark:from-black dark:via-black/80 dark:to-black/60 bg-gradient-to-t from-black/80 via-black/60 to-black/40" />

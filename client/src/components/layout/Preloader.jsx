@@ -10,16 +10,16 @@ export default function Preloader({ onComplete }) {
       setIsExiting(true);
       setTimeout(() => {
         if (onComplete) onComplete();
-      }, 200);
-    }, 80);
+      }, 150);
+    }, 40);
 
     return () => clearTimeout(timer);
   }, [onComplete]);
 
   return (
     <div
-      className={`fixed inset-0 z-[100] transition-opacity duration-500 ${
-        isExiting ? 'opacity-0 pointer-events-none' : 'opacity-100'
+      className={`fixed inset-0 z-[100] transition-opacity duration-300 pointer-events-none ${
+        isExiting ? 'opacity-0' : 'opacity-100'
       }`}
     >
       <Loader fullscreen text="WELCOME TO THE COUNTRY HOLIDAYS HOTELS AND RESORTS" />

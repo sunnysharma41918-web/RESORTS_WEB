@@ -11,8 +11,8 @@ export default function CustomCursor() {
   const ringRef = useRef(null);
 
   useEffect(() => {
-    // Only enable on desktop with mouse pointer (non-touch)
-    if (window.matchMedia('(pointer: coarse)').matches) {
+    // Only enable on desktop with fine mouse pointer (non-touch)
+    if (typeof window === 'undefined' || window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 1024) {
       return undefined;
     }
 
@@ -25,7 +25,7 @@ export default function CustomCursor() {
     const handleMouseMove = (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      if (!isVisible) setIsVisible(true);
+      setIsVisible(true);
 
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
@@ -71,8 +71,8 @@ export default function CustomCursor() {
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('wheel', handleWheel, { passive: true });
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('mousedown', handleMouseDown, { passive: true });
+    window.addEventListener('mouseup', handleMouseUp, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mouseenter', handleMouseEnter);
     animationFrameId = requestAnimationFrame(animateTrail);
@@ -87,7 +87,7 @@ export default function CustomCursor() {
       clearTimeout(scrollTimeout);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [isVisible]);
+  }, []);
 
   if (!isVisible) return null;
 

@@ -59,6 +59,34 @@ const settingSchema = new mongoose.Schema(
         default: '24/7 Global Luxury Concierge',
       },
     },
+    tickerOffers: [
+      {
+        id: {
+          type: String,
+          default: () => `t-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+        },
+        badge: {
+          type: String,
+          default: 'SPECIAL OFFER',
+        },
+        badgeColor: {
+          type: String,
+          default: 'bg-[#FF1F02] text-white',
+        },
+        text: {
+          type: String,
+          required: true,
+        },
+        link: {
+          type: String,
+          default: '/offers',
+        },
+        isActive: {
+          type: Boolean,
+          default: true,
+        },
+      },
+    ],
   },
   {
     timestamps: true,

@@ -21,13 +21,13 @@ export default function HomeHero() {
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <motion.img
           key={isDark ? 'dark-bg' : 'light-bg'}
-          initial={{ scale: 1.08, opacity: 0.8 }}
+          initial={{ scale: 1.04, opacity: 0.9 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           src={
             isDark
-              ? 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80'
-              : 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80'
+              ? 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1400&q=75'
+              : 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=75'
           }
           alt="Scenic Mountain Wilderness"
           loading="eager"
@@ -46,14 +46,14 @@ export default function HomeHero() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/40 z-1" />
       </div>
 
-      {/* 2. MAIN CENTERPIECE: MONUMENTAL TEXT HIERARCHY WITH STAGGERED REVEAL ANIMATIONS */}
+      {/* 2. MAIN CENTERPIECE: MONUMENTAL TEXT HIERARCHY WITH FAST REVEAL ANIMATIONS */}
       <div className="relative z-10 w-full my-auto flex flex-col justify-end py-1">
         
         {/* Eyebrow Spaced Tag with 5-Color Palette Accents */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.35, ease: 'easeOut' }}
+          transition={{ duration: 0.4, delay: 0.05, ease: 'easeOut' }}
           className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.35em] text-white/90 mb-1 drop-shadow flex items-center gap-1.5 sm:gap-2 flex-wrap"
         >
           <span className="text-[#32ACE3]">✦</span>
@@ -63,9 +63,9 @@ export default function HomeHero() {
 
         {/* Line 1: COUNTRY (Medium Large Display) */}
         <motion.div
-          initial={{ opacity: 0, y: 35 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
           className="font-sans font-black text-2xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-none drop-shadow-[0_10px_25px_rgba(0,0,0,0.9)] select-none"
         >
           COUNTRY
@@ -73,9 +73,9 @@ export default function HomeHero() {
 
         {/* Line 2: HOLIDAYS (GIANT Monumental Lettering with Exact 5-Color Combination) */}
         <motion.div
-          initial={{ opacity: 0, y: 55, scale: 0.96 }}
+          initial={{ opacity: 0, y: 25, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1.1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.55, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="font-sans font-black text-[12.5vw] sm:text-[13.5vw] md:text-[14vw] lg:text-[14.5vw] leading-[0.88] uppercase tracking-normal sm:tracking-[0.02em] text-hero-palette drop-shadow-[0_20px_60px_rgba(0,0,0,0.95)] select-none"
         >
           HOLIDAYS
@@ -83,9 +83,9 @@ export default function HomeHero() {
 
         {/* Line 3: HOTELS AND RESORTS (Medium Bold with Warm Amber & Crimson Red Gradient) */}
         <motion.div
-          initial={{ opacity: 0, x: 40 }}
+          initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
           className="w-full flex justify-end mt-0.5 sm:mt-1"
         >
           <h2 className="font-sans font-black text-base sm:text-3xl md:text-4xl lg:text-5xl uppercase tracking-tight text-hero-orange-red drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)] text-right select-none">
@@ -97,9 +97,9 @@ export default function HomeHero() {
 
       {/* 4. BOTTOM BAR WITH PALETTE ACCENT WAYPOINTS */}
       <motion.div
-        initial={{ opacity: 0, y: 15 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.9, ease: 'easeOut' }}
+        transition={{ duration: 0.45, delay: 0.35, ease: 'easeOut' }}
         className="relative z-10 w-full flex items-center justify-between pt-2 text-[10px] sm:text-xs text-white/80 font-medium flex-wrap gap-2"
       >
         <div className="flex items-center space-x-2 sm:space-x-4">

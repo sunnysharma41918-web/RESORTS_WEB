@@ -6,6 +6,7 @@ import MagneticButton from '../../components/common/MagneticButton';
 import EditorialHeritageStamp from '../../components/common/EditorialHeritageStamp';
 import EditorialBackgroundElements from '../../components/common/EditorialBackgroundElements';
 import { offerService } from '../../services/offerService';
+import { storage } from '../../services/storage';
 import { getWhatsAppBookingUrl } from '../../data/contact';
 import Loader from '../../components/common/Loader';
 
@@ -19,21 +20,27 @@ const CATEGORIES = [
 ];
 
 export default function Offers() {
-  const [offers, setOffers] = useState([]);
+  const [offers, setOffers] = useState(() => {
+    try {
+      return storage.getOffers() || [];
+    } catch {
+      return [];
+    }
+  });
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [selectedModalPkg, setSelectedModalPkg] = useState(null);
 
   useEffect(() => {
     async function loadOffers() {
       try {
         const data = await offerService.getOffers();
-        setOffers(data || []);
+        if (data && data.length > 0) {
+          setOffers(data);
+        }
       } catch (err) {
         console.error('Failed to load offers:', err);
-      } finally {
-        setLoading(false);
       }
     }
     loadOffers();
@@ -55,10 +62,6 @@ export default function Offers() {
       return matchCategory && matchSearch;
     });
   }, [offers, selectedCategory, searchQuery]);
-
-  if (loading) {
-    return <Loader fullscreen text="LOADING SPECIAL OFFERS & PACKAGES" />;
-  }
 
   return (
     <div className="w-full dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] overflow-hidden font-manrope transition-colors duration-300">

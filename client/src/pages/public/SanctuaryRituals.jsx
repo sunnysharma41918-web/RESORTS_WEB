@@ -510,8 +510,10 @@ export default function SanctuaryRituals() {
       <section className="relative py-24 sm:py-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=2400&q=90"
+            src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1400&q=75"
             alt="Sanctuary Horizon"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover filter brightness-[0.35]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#171C28] via-transparent to-[#171C28]" />

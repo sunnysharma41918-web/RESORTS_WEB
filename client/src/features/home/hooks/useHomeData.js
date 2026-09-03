@@ -17,7 +17,7 @@ export function useHomeData() {
     experiences: [],
     testimonials: [],
     gallery: [],
-    loading: true,
+    loading: false,
     error: null,
   });
 
@@ -27,31 +27,31 @@ export function useHomeData() {
     async function load() {
       try {
         const [resorts, hotels, rooms, exps, testimonials, gallery] = await Promise.all([
-          resortService.getFeaturedResorts(),
-          hotelService.getFeaturedHotels(),
-          roomService.getFeaturedRooms(),
-          experienceService.getFeaturedExperiences(),
-          testimonialService.getTestimonials(),
-          galleryService.getGalleryItems(),
+          resortService.getFeaturedResorts().catch(() => []),
+          hotelService.getFeaturedHotels().catch(() => []),
+          roomService.getFeaturedRooms().catch(() => []),
+          experienceService.getFeaturedExperiences().catch(() => []),
+          testimonialService.getTestimonials().catch(() => []),
+          galleryService.getGalleryItems().catch(() => []),
         ]);
 
         if (isMounted) {
           setData({
             hero: HOME_HERO_DATA,
             intro: HOME_INTRO_DATA,
-            featuredResorts: resorts,
-            featuredHotels: hotels,
-            featuredRooms: rooms,
-            experiences: exps,
-            testimonials,
-            gallery,
+            featuredResorts: resorts || [],
+            featuredHotels: hotels || [],
+            featuredRooms: rooms || [],
+            experiences: exps || [],
+            testimonials: testimonials || [],
+            gallery: gallery || [],
             loading: false,
             error: null,
           });
         }
       } catch (err) {
         if (isMounted) {
-          setData((prev) => ({ ...prev, loading: false, error: err.message }));
+          setData((prev) => ({ ...prev, loading: false, error: err?.message || null }));
         }
       }
     }
@@ -64,3 +64,4 @@ export function useHomeData() {
 
   return data;
 }
+

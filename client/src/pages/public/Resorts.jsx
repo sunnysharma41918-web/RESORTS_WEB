@@ -91,8 +91,10 @@ export default function Resorts() {
         {/* Background Vista */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=3000&q=90"
+            src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1400&q=75"
             alt="Mountain Sanctuary Residences"
+            loading="eager"
+            decoding="async"
             className="w-full h-full object-cover filter brightness-[0.25]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
@@ -276,8 +278,10 @@ export default function Resorts() {
         {/* Background Overlay */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=3840&q=95"
+            src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1400&q=75"
             alt="Mountain Sanctuary Horizon"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover filter brightness-[0.25]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/60" />

@@ -98,8 +98,10 @@ export default function Experiences() {
         {/* Background Vista */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=3000&q=90"
+            src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1400&q=75"
             alt="Mountain Expedition Vista"
+            loading="eager"
+            decoding="async"
             className="w-full h-full object-cover filter brightness-[0.25]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
@@ -244,8 +246,10 @@ export default function Experiences() {
         {/* Background Overlay */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=3840&q=95"
+            src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1400&q=75"
             alt="Mountain Summit Horizon"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover filter brightness-[0.25]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/60" />

@@ -11,11 +11,7 @@ import { useHomeData } from '../../features/home/hooks/useHomeData';
 import Loader from '../../components/common/Loader';
 
 export default function Home() {
-  const { hero, loading } = useHomeData();
-
-  if (loading) {
-    return <Loader fullscreen text="WELCOME TO THE COUNTRY HOLIDAYS HOTELS AND RESORTS" />;
-  }
+  const { hero } = useHomeData();
 
   return (
     <div className="relative w-full overflow-hidden dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] transition-colors duration-300">
