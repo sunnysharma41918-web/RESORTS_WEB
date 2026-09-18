@@ -3,6 +3,7 @@ import { ROUTES } from '../constants/routes';
 
 // Public routes lazy loading
 export const Home = lazy(() => import('../pages/public/Home'));
+export const Destinations = lazy(() => import('../pages/public/Destinations'));
 export const Celebrations = lazy(() => import('../pages/public/Celebrations'));
 export const Experiences = lazy(() => import('../pages/public/Celebrations'));
 export const Resorts = lazy(() => import('../pages/public/Celebrations'));
@@ -39,6 +40,7 @@ export const AdminAccommodationForm = lazy(() => import('../pages/admin/accommod
 
 export const PUBLIC_ROUTES = [
   { path: ROUTES.HOME, component: Home, exact: true },
+  { path: ROUTES.DESTINATIONS, component: Destinations },
   { path: ROUTES.ABOUT, component: About },
   { path: ROUTES.CELEBRATIONS, component: Celebrations },
   { path: ROUTES.EXPERIENCES, component: Celebrations },

@@ -5,7 +5,14 @@ const Offer = require('../models/Offer');
 // @access  Public
 const getOffers = async (req, res, next) => {
   try {
-    const offers = await Offer.find().sort({ createdAt: -1 });
+    const offers = await Offer.find({
+      title: {
+        $nin: [
+          'Corporate Leadership Conclave Privilege',
+          'Royal Destination Wedding Package',
+        ],
+      },
+    }).sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,

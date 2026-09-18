@@ -1,162 +1,287 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { 
+  ArrowRight, 
+  MessageSquare, 
+  Building2, 
+  Palmtree, 
+  Sparkles, 
+  Mountain, 
+  Check, 
+  Crown,
+  Waves
+} from 'lucide-react';
 import ScrollReveal from '../../../components/common/ScrollReveal';
-import MagneticButton from '../../../components/common/MagneticButton';
-import EditorialBackgroundElements from '../../../components/common/EditorialBackgroundElements';
-import { accommodationService, DEFAULT_ACCOMMODATIONS } from '../../../services/accommodationService';
+import { RoyalOrnamentDivider, IndianJaaliBorder, RoyalBackgroundCurves } from '../../../components/common/RoyalOrnamentDivider';
+import IndianArtBackground from '../../../components/common/IndianArtBackground';
+import { getWhatsAppBookingUrl } from '../../../data/contact';
+import { accommodationService } from '../../../services/accommodationService';
+
+const ROYAL_ROOM_CATEGORIES = [
+  { id: 'all', label: 'All Rooms' },
+  { id: 'deluxe', label: 'Deluxe' },
+  { id: 'executive', label: 'Executive' },
+  { id: 'royal', label: 'Royal' },
+];
+
+const DEFAULT_ROOMS_DATA = [
+  {
+    id: '1',
+    category: 'royal',
+    title: 'Maharaja Royal Palace Suite',
+    subtitle: 'Palatial Courtyards & Private Plunge Pool',
+    price: '₹ 5,450 / night',
+    occupancy: '2 Adults, 1 Child',
+    image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80',
+    highlights: ['Hand-Carved Jharokha', 'Jacuzzi Plunge', '24/7 Butler', 'Royal Breakfast'],
+    link: '/hotels',
+  },
+  {
+    id: '2',
+    category: 'executive',
+    title: 'Heritage Executive Pavilion',
+    subtitle: 'Forest Valley & Horizon Terrace',
+    price: '₹ 4,250 / night',
+    occupancy: '2 Adults',
+    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80',
+    highlights: ['Panoramic Horizon', 'Plush King Bedding', 'Espresso Lounge', 'High-Speed Wi-Fi'],
+    link: '/resorts',
+  },
+  {
+    id: '3',
+    category: 'deluxe',
+    title: 'Grand Deluxe Courtyard Room',
+    subtitle: 'Classic Marble Hearth & Garden View',
+    price: '₹ 3,450 / night',
+    occupancy: '2 Adults',
+    image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80',
+    highlights: ['Marble Bathroom', 'Garden Verandah', 'In-Room Dining', 'Climate Control'],
+    link: '/hotels',
+  },
+  {
+    id: '4',
+    category: 'royal',
+    title: 'Himalayan Cloud Chalet Suite',
+    subtitle: 'Panoramic Skyroof & Cedar Hearth',
+    price: '₹ 6,250 / night',
+    occupancy: '2 Adults, 2 Children',
+    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
+    highlights: ['Glass Skyroof', 'Private Cedar Hearth', 'Stargazing Balcony', 'Heated Floors'],
+    link: '/resorts',
+  },
+  {
+    id: '5',
+    category: 'executive',
+    title: 'Azure Oceanfront Sunset Villa',
+    subtitle: 'Private Sandy Deck & Infinity Horizon',
+    price: '₹ 4,950 / night',
+    occupancy: '2 Adults',
+    image: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80',
+    highlights: ['Direct Beach Access', 'Infinity Pool', 'Seafood Grill', 'Sundeck Lounge'],
+    link: '/resorts',
+  },
+  {
+    id: '6',
+    category: 'deluxe',
+    title: 'Ayurvedic Sanctuary Forest Suite',
+    subtitle: 'Surrounded by Ancient Flora & Waterfalls',
+    price: '₹ 3,850 / night',
+    occupancy: '2 Adults',
+    image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80',
+    highlights: ['Herbal Spa Access', 'Zen Verandah', 'Organic Breakfast', 'Yoga Lawn'],
+    link: '/hotels',
+  },
+];
 
 export default function RoomsSuitesSection() {
-  const [villas, setVillas] = useState(DEFAULT_ACCOMMODATIONS);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [rooms, setRooms] = useState(DEFAULT_ROOMS_DATA);
 
   useEffect(() => {
-    async function loadVillas() {
+    async function fetchAccommodations() {
       try {
         const data = await accommodationService.getAllAccommodations();
         if (data && data.length > 0) {
-          setVillas(data);
+          // Normalize CMS items into Section 02 Room structure
+          const mapped = data.map((item, idx) => ({
+            id: item.id || String(idx + 1),
+            category: item.category?.toLowerCase().includes('royal')
+              ? 'royal'
+              : item.category?.toLowerCase().includes('executive')
+              ? 'executive'
+              : item.category?.toLowerCase().includes('deluxe')
+              ? 'deluxe'
+              : (idx % 3 === 0 ? 'royal' : idx % 3 === 1 ? 'executive' : 'deluxe'),
+            title: item.name,
+            subtitle: item.category || 'Luxury Panoramic Living',
+            price: item.price || '₹ 4,500 / night',
+            occupancy: item.specs && item.specs[1] ? item.specs[1] : '2 Adults',
+            image: item.image,
+            highlights: Array.isArray(item.specs) && item.specs.length > 0 
+              ? item.specs 
+              : ['Private Jacuzzi', '24/7 Butler Service', 'Panoramic Balcony', 'Royal Breakfast'],
+            link: (item.propertyType === 'Hotel' || item.name?.toLowerCase().includes('hotel')) ? '/hotels' : '/resorts',
+          }));
+          setRooms(mapped);
         }
       } catch (err) {
-        console.error('Failed to load accommodations:', err);
+        console.error('Failed to load dynamic accommodations:', err);
       }
     }
-    loadVillas();
+    fetchAccommodations();
   }, []);
 
-  const totalCountFormatted = String(villas.length).padStart(2, '0');
+  const filteredRooms = activeCategory === 'all' 
+    ? rooms 
+    : rooms.filter((r) => r.category === activeCategory);
 
   return (
-    <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-28 sm:py-40 px-6 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300">
-      {/* Background Graphic Elements */}
-      <EditorialBackgroundElements variant="light" position="top-right" />
-      <div className="max-w-7xl mx-auto space-y-24 sm:space-y-36 relative z-10">
+    <section className="relative bg-[#FAF6ED] dark:bg-[#0D0A07] text-[#241A12] dark:text-[#F5EFE6] py-20 sm:py-28 px-4 sm:px-8 lg:px-14 overflow-hidden transition-colors duration-500 font-sans border-t border-[#B38738]/20 dark:border-[#B38738]/30">
+      
+      {/* Distinct Royal Indian Paisley & Floral Damask Tapestry Art */}
+      <IndianArtBackground variant="paisley" opacity="opacity-[0.055] dark:opacity-[0.08]" />
 
-        {/* Section Header with Oversized Number */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-10 border-b dark:border-[#333333] border-[#E9E9DE]">
-          <div className="space-y-4">
-            <ScrollReveal direction="up">
-              <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] dark:text-white text-[#0E0E0E]">
-                <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
-                <span>02 — ACCOMMODATION</span>
-              </div>
-            </ScrollReveal>
+      <div className="max-w-7xl mx-auto space-y-10 relative z-10">
 
-            <ScrollReveal direction="up" delay={100}>
-              <h2 className="text-5xl sm:text-7xl lg:text-8xl font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-art-green">
-                STAY <br />
-                YOUR <br />
-                WAY.
-              </h2>
-            </ScrollReveal>
-          </div>
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-3 font-sans">
+          
+          {/* Section 02 Royal Badge */}
+          <ScrollReveal direction="up">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#B38738]/10 dark:bg-[#B38738]/20 border border-[#B38738]/30 text-[#B38738] dark:text-[#E8C97E] text-[11px] sm:text-xs font-cinzel font-bold uppercase tracking-[0.22em]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#B38738] dark:bg-[#E8C97E]" />
+              <span>02 — ACCOMMODATION — RESORTS, HOTELS</span>
+            </div>
+          </ScrollReveal>
 
-          <div className="space-y-3 md:text-right max-w-sm">
-            <span className="text-6xl sm:text-8xl font-extrabold text-[#FF1F02] leading-none block">
-              {totalCountFormatted}
-            </span>
-            <p className="text-sm font-light dark:text-[#A0A0A0] text-[#0E0E0E]/70 leading-relaxed">
-              Each villa is an architectural pavilion set apart, facing its own uninterrupted slice of high-altitude mountain horizon.
+          <ScrollReveal direction="up" delay={50}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-marcellus font-bold text-[#241A12] dark:text-[#F5EFE6] tracking-[0.02em] uppercase leading-tight">
+              YOUR LUXURY, OUR RESPONSIBILITY
+            </h2>
+          </ScrollReveal>
+
+          {/* Royal Ornamental Spearhead Divider */}
+          <ScrollReveal direction="up" delay={100}>
+            <RoyalOrnamentDivider color="#B38738" />
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={150}>
+            <p className="text-xs sm:text-sm md:text-[15px] text-[#635142] dark:text-[#BFB0A2] leading-relaxed font-sans font-light max-w-2xl mx-auto">
+              Experience luxury at its finest in our hotels & resorts, where every detail has been carefully crafted to ensure your comfort and satisfaction. From plush bedding to world-class amenities, find everything you need for an unforgettable stay.
             </p>
-          </div>
-        </div>
+          </ScrollReveal>
 
-        {/* Alternating Large Editorial Compositions */}
-        <div className="space-y-28 sm:space-y-40">
-          {villas.map((villa, idx) => {
-            const isEven = idx % 2 === 1;
+          {/* Royal Filter Tabs */}
+          <ScrollReveal direction="up" delay={200}>
+            <div className="flex flex-wrap items-center justify-center gap-2.5 pt-3">
+              {ROYAL_ROOM_CATEGORIES.map((cat) => (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={`px-5 py-1.5 rounded-full text-xs font-serif uppercase tracking-wider transition-all duration-300 border cursor-pointer ${
+                    activeCategory === cat.id
+                      ? 'bg-[#C5A880] text-[#1A1612] border-[#C5A880] font-semibold shadow-sm scale-105'
+                      : 'bg-white/80 dark:bg-[#1C1713]/80 text-[#6E5D4F] dark:text-[#B8A89A] border-[#C5A880]/40 hover:border-[#C5A880]'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
 
-            return (
-              <div
-                key={villa.tier}
-                className={`grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center ${
-                  isEven ? 'lg:grid-flow-dense' : ''
-                }`}
+              <Link
+                to="/hotels"
+                className="px-5 py-1.5 rounded-full text-xs font-serif uppercase tracking-wider bg-[#2A1F17] text-[#FAF6F0] dark:bg-[#F3EEE0] dark:text-[#1A1612] hover:bg-[#C5A880] dark:hover:bg-[#C5A880] dark:hover:text-[#1A1612] transition-colors border border-transparent font-medium"
               >
-                {/* Large Photography Plate (7 Cols) */}
-                <div
-                  className={`lg:col-span-7 relative ${
-                    isEven ? 'lg:col-start-6' : 'lg:col-start-1'
-                  }`}
-                >
-                  <ScrollReveal direction="clip" delay={100}>
-                    <div
-                      className="relative rounded-none overflow-hidden aspect-[16/11] border dark:border-[#333333] border-[#E9E9DE] shadow-xl group dark:bg-[#0E0E0E] bg-[#FAFDF2]"
-                      data-cursor="VIEW"
-                    >
-                      <img
-                        src={villa.image}
-                        alt={villa.name}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 filter brightness-95"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-
-                      {/* Tier Floating Plate */}
-                      <div className="absolute top-6 left-6 px-4 py-1.5 dark:bg-[#0E0E0E]/90 bg-white/90 backdrop-blur-md border dark:border-[#333333] border-[#E9E9DE] text-xs font-mono font-bold dark:text-white text-[#0E0E0E]">
-                        TIER {villa.tier}
-                      </div>
-                    </div>
-                  </ScrollReveal>
-                </div>
-
-                {/* Editorial Details & Specifications (5 Cols) */}
-                <div
-                  className={`lg:col-span-5 space-y-8 ${
-                    isEven ? 'lg:col-start-1 lg:row-start-1' : ''
-                  }`}
-                >
-                  <ScrollReveal direction="up" delay={200}>
-                    <div className="space-y-3">
-                      <span className="text-[11px] font-mono uppercase tracking-widest text-[#FF1F02] font-semibold block">
-                        {villa.category}
-                      </span>
-                      <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight dark:text-white text-[#0E0E0E] leading-[0.95]">
-                        {villa.name}
-                      </h3>
-                    </div>
-                  </ScrollReveal>
-
-                  <ScrollReveal direction="up" delay={300}>
-                    <p className="text-sm sm:text-base font-light dark:text-[#A0A0A0] text-[#0E0E0E]/75 leading-relaxed">
-                      {villa.description}
-                    </p>
-                  </ScrollReveal>
-
-                  {/* Architecture Specs Pills */}
-                  <ScrollReveal direction="up" delay={400}>
-                    <div className="flex flex-wrap gap-2.5 pt-2">
-                      {villa.specs.map((spec) => (
-                        <span
-                          key={spec}
-                          className="px-3.5 py-1.5 text-[11px] font-mono uppercase tracking-wider border dark:border-[#333333] border-[#E9E9DE] dark:bg-[#0E0E0E] bg-white dark:text-white text-[#0E0E0E]"
-                        >
-                          {spec}
-                        </span>
-                      ))}
-                    </div>
-                  </ScrollReveal>
-
-                  {/* Action Link */}
-                  <ScrollReveal direction="up" delay={500}>
-                    <div className="pt-4">
-                      <MagneticButton>
-                        <Link
-                          to="/offers"
-                          className="inline-flex items-center gap-3 px-8 py-4 rounded-none border dark:border-white border-[#0E0E0E] dark:text-white text-[#0E0E0E] font-semibold text-xs uppercase tracking-[0.14em] hover:bg-[#FF1F02] hover:border-[#FF1F02] hover:text-white transition-all duration-300 group cursor-pointer"
-                        >
-                          <span>DISCOVER RESIDENCE</span>
-                          <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                        </Link>
-                      </MagneticButton>
-                    </div>
-                  </ScrollReveal>
-                </div>
-              </div>
-            );
-          })}
+                View All Rooms
+              </Link>
+            </div>
+          </ScrollReveal>
         </div>
 
+        {/* Room Showcase Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-8 font-sans">
+          {filteredRooms.map((room, idx) => (
+            <ScrollReveal key={room.id} direction="up" delay={idx * 100}>
+              <div className="group bg-white/95 dark:bg-[#1C1713]/95 border border-[#C5A880]/40 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-[#C5A880] transition-all duration-300 flex flex-col h-full">
+                
+                {/* Photo with gold border */}
+                <div className="relative aspect-[16/11] overflow-hidden bg-[#1A1612]">
+                  <img
+                    src={room.image}
+                    alt={room.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+
+                  {/* Top Category Badge */}
+                  <div className="absolute top-3 left-3">
+                    <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[#C5A880] text-[10px] font-serif uppercase tracking-widest font-semibold border border-[#C5A880]/30">
+                      {room.category}
+                    </span>
+                  </div>
+
+                  {/* Bottom Price Pill */}
+                  <div className="absolute bottom-3 right-3 bg-white/95 dark:bg-[#1C1713]/95 backdrop-blur-md px-3 py-1 rounded-lg border border-[#C5A880]/40 text-xs font-serif font-bold text-[#2A1F17] dark:text-[#C5A880]">
+                    {room.price}
+                  </div>
+                </div>
+
+                {/* Card Content */}
+                <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                  <div className="space-y-1.5">
+                    <h3 className="text-lg sm:text-xl font-serif text-[#2A1F17] dark:text-[#F3EEE0] group-hover:text-[#C5A880] transition-colors">
+                      {room.title}
+                    </h3>
+                    <p className="text-xs text-[#6E5D4F] dark:text-[#B8A89A] font-light font-serif">
+                      {room.subtitle}
+                    </p>
+                  </div>
+
+                  {/* Key Highlights */}
+                  <div className="grid grid-cols-2 gap-2 text-[11px] text-[#6E5D4F] dark:text-[#B8A89A] border-t border-b border-[#C5A880]/20 py-2.5">
+                    {room.highlights.map((hl, i) => (
+                      <div key={i} className="flex items-center gap-1.5">
+                        <Check className="w-3 h-3 text-[#C5A880] shrink-0" />
+                        <span className="truncate">{hl}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex items-center justify-between pt-1">
+                    <Link
+                      to={room.link}
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#C5A880] hover:bg-[#B39366] text-[#1A1612] text-xs font-semibold uppercase tracking-wider transition-colors shadow-sm cursor-pointer"
+                    >
+                      <span>Book Now</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </Link>
+
+                    <a
+                      href={getWhatsAppBookingUrl(`Inquiry about ${room.title}`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs text-[#6E5D4F] dark:text-[#C5A880] hover:text-[#2A1F17] dark:hover:text-white font-medium"
+                    >
+                      <MessageSquare className="w-3.5 h-3.5 text-[#22C55E]" />
+                      <span>WhatsApp</span>
+                    </a>
+                  </div>
+
+                </div>
+
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
+
+      </div>
+
+      {/* Bottom Jaali Border */}
+      <div className="absolute bottom-0 left-0 right-0">
+        <IndianJaaliBorder />
       </div>
     </section>
   );

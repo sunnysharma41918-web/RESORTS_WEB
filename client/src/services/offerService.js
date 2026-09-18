@@ -5,9 +5,23 @@ export const offerService = {
   async getOffers(params = {}) {
     try {
       const response = await api.get('/offers', { params });
-      return response.data || response;
+      let items = response?.data?.data || response?.data || response || [];
+      if (Array.isArray(items) && items.length > 0) {
+        items = items.filter(
+          (o) =>
+            o.title !== 'Corporate Leadership Conclave Privilege' &&
+            o.title !== 'Royal Destination Wedding Package'
+        );
+        if (items.length > 0) return items;
+      }
+      return storage.getOffers();
     } catch {
       let offers = storage.getOffers();
+      offers = offers.filter(
+        (o) =>
+          o.title !== 'Corporate Leadership Conclave Privilege' &&
+          o.title !== 'Royal Destination Wedding Package'
+      );
       if (params.category && params.category !== 'All') {
         offers = offers.filter(
           (o) => o.category?.toLowerCase() === params.category.toLowerCase()

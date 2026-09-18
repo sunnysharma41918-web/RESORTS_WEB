@@ -1,7 +1,7 @@
 import React from 'react';
-import { Maximize2, Users, BedDouble } from 'lucide-react';
+import { Maximize2, Users, BedDouble, MessageCircle } from 'lucide-react';
 import LazyImage from '../../../components/common/LazyImage';
-import Button from '../../../components/common/Button';
+import { getWhatsAppBookingUrl } from '../../../data/contact';
 
 export default function RoomCard({ room }) {
   if (!room) return null;
@@ -49,9 +49,15 @@ export default function RoomCard({ room }) {
         </div>
 
         <div className="flex items-center justify-between pt-2">
-          <Button to="/contact" variant="primary" size="sm">
-            Enquire
-          </Button>
+          <a
+            href={getWhatsAppBookingUrl(`Hello Country Holidays Hotels & Resorts, I would like to enquire about booking ${room.name} (${room.propertyName || 'Luxury Stay'}).`)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#22C55E] hover:bg-green-600 text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md cursor-pointer"
+          >
+            <MessageCircle className="w-3.5 h-3.5 fill-white/20" />
+            <span>Enquire</span>
+          </a>
         </div>
       </div>
     </div>

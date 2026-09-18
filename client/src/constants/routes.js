@@ -1,5 +1,6 @@
 export const ROUTES = {
   HOME: '/',
+  DESTINATIONS: '/destinations',
   RESORTS: '/resorts',
   RESORT_DETAILS: '/resorts/:slug',
   HOTELS: '/hotels',

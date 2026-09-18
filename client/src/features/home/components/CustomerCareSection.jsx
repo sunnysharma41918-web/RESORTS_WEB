@@ -1,59 +1,72 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   Phone,
-  MessageCircle,
   Mail,
+  MapPin,
   Clock,
-  ShieldCheck,
   Headphones,
+  Headset,
   CheckCircle2,
   ArrowRight,
-  Send,
-  HelpCircle,
-  MapPin
+  MessageCircle,
+  MessageSquare,
+  Sparkles,
+  Calendar,
+  Users,
+  ChevronDown,
+  User,
+  Lock
 } from 'lucide-react';
 import ScrollReveal from '../../../components/common/ScrollReveal';
-import EditorialHeritageStamp from '../../../components/common/EditorialHeritageStamp';
-import EditorialBackgroundElements from '../../../components/common/EditorialBackgroundElements';
+import { RoyalOrnamentDivider, IndianJaaliBorder } from '../../../components/common/RoyalOrnamentDivider';
+import IndianArtBackground from '../../../components/common/IndianArtBackground';
 import { CONTACT_INFO, getWhatsAppBookingUrl } from '../../../data/contact';
 import { inquiryService } from '../../../services/inquiryService';
 
-const QUICK_TOPICS = [
-  { label: 'Booking Modification', msg: 'Hello Support, I need assistance with modifying an existing resort reservation.' },
-  { label: 'Destination Weddings', msg: 'Hello Support, I would like to consult regarding a Destination Wedding inquiry.' },
-  { label: 'Corporate Offsites', msg: 'Hello Support, I need corporate banquet details and group stay tariff.' },
-  { label: 'Membership Benefits', msg: 'Hello Support, please guide me on Country Holidays membership privileges.' },
-];
-
 export default function CustomerCareSection() {
-  const [formData, setFormData] = useState({ name: '', phone: '', topic: 'New Booking & Tariff' });
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    destination: 'Goa — Beachfront Mandaps & Luxury Villas',
+    targetDates: '',
+    partySize: '2 Guests',
+    specialRequests: '',
+  });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'specialRequests' && value.length > 500) return;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.fullName || !formData.phone) return;
     setLoading(true);
 
     try {
-      // 1. Create inquiry in backend database (and localStorage sync) for Admin Panel
-      await inquiryService.createInquiry({
-        guestName: formData.name.trim(),
+      const payload = {
+        guestName: formData.fullName.trim(),
+        email: formData.email.trim() || 'N/A',
         phone: formData.phone.trim(),
-        email: '',
-        property: `Priority Callback: ${formData.topic}`,
-        budget: 'Immediate Callback',
-        city: '24/7 Care Desk Lead',
-        message: `Priority callback requested regarding: "${formData.topic}". Contact Phone: ${formData.phone}`,
-        preferredContact: 'Phone Callback',
+        property: `Bespoke Inquiry: ${formData.destination}`,
+        budget: 'Direct Estate Tariff',
+        city: 'Online Concierge Desk',
+        guestCount: formData.partySize,
+        message: `[DATES: ${formData.targetDates || 'Flexible'}] | [GUESTS: ${formData.partySize}] | [CIRCUIT: ${formData.destination}] | [PREFERENCES: ${formData.specialRequests || 'Standard Luxury Package'}]`,
+        preferredContact: 'WhatsApp Priority',
         status: 'new',
-      });
+      };
 
+      await inquiryService.createInquiry(payload);
       setLoading(false);
       setSubmitted(true);
 
-      // 2. Also prepare WhatsApp support link for instant user connect
-      const supportMsg = `Hello Customer Care, my name is ${formData.name} (${formData.phone}). I have requested a priority callback regarding: ${formData.topic}.`;
+      const supportMsg = `Hello Country Holidays Concierge, my name is ${formData.fullName} (${formData.phone}). I would like to inquire about: ${formData.destination} for ${formData.partySize}. Dates: ${formData.targetDates || 'Flexible'}.${formData.specialRequests ? ` Preferences: ${formData.specialRequests}` : ''}`;
       setTimeout(() => {
         window.open(getWhatsAppBookingUrl(supportMsg), '_blank');
       }, 700);
@@ -64,323 +77,554 @@ export default function CustomerCareSection() {
   };
 
   return (
-    <section className="relative dark:bg-[#161616] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-24 sm:py-32 px-6 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300 font-manrope border-t dark:border-[#2A2A2A] border-[#E9E9DE]">
-      <EditorialBackgroundElements variant="light" position="top-right" />
+    <section className="relative bg-[#FAF6ED] dark:bg-[#0D0A07] text-[#241A12] dark:text-[#F5EFE6] py-16 sm:py-24 px-4 sm:px-8 lg:px-14 overflow-hidden transition-colors duration-500 font-sans select-none border-t border-[#B38738]/20 dark:border-[#B38738]/30">
+      
+      {/* Indian Royal Art & Arch Background */}
+      <IndianArtBackground variant="full" opacity="opacity-[0.045] dark:opacity-[0.065]" />
 
-      <div className="max-w-7xl mx-auto space-y-16 relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
 
-        {/* 1. SECTION HEADER */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-8 border-b dark:border-[#333333] border-[#E9E9DE]">
-          <div className="space-y-4 max-w-2xl">
-            <ScrollReveal direction="up">
-              <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-[#FF1F02]">
-                <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0 animate-pulse" />
-                <span>06 — 24/7 CUSTOMER CARE & CONCIERGE</span>
-              </div>
-            </ScrollReveal>
+        {/* 1. SECTION HEADER: YOUR LUXURY, OUR RESPONSIBILITY */}
+        <div className="text-center max-w-3xl mx-auto space-y-3.5 mb-12 sm:mb-16">
+          <ScrollReveal direction="up">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#B38738]/10 dark:bg-[#B38738]/20 border border-[#B38738]/30 text-[#B38738] dark:text-[#E8C97E] text-[11px] sm:text-xs font-cinzel font-bold uppercase tracking-[0.25em]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#B38738] dark:bg-[#E8C97E]" />
+              <span>YOUR LUXURY, OUR RESPONSIBILITY</span>
+            </div>
+          </ScrollReveal>
 
-            <ScrollReveal direction="up" delay={100}>
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-[#0E0E0E] dark:text-white leading-[1.05]">
-                DEDICATED SUPPORT, <br />
-                <span className="text-[#FF1F02]">AT YOUR SERVICE ALWAYS.</span>
-              </h2>
-            </ScrollReveal>
+          <ScrollReveal direction="up" delay={50}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-marcellus font-bold text-[#241A12] dark:text-[#F5EFE6] tracking-[0.02em] uppercase">
+              RESERVE YOUR ROYAL RETREAT
+            </h2>
+          </ScrollReveal>
 
-            <ScrollReveal direction="up" delay={150}>
-              <p className="text-sm sm:text-base font-light dark:text-[#D0D0D0] text-[#0E0E0E]/70 leading-relaxed">
-                Whether you need assistance with ongoing bookings, custom holiday planning, banquet reservations, or on-trip concierge care across all 36 States & UTs, our executive helpdesk is live 24 hours a day, 7 days a week.
-              </p>
-            </ScrollReveal>
-          </div>
+          <ScrollReveal direction="up" delay={100}>
+            <RoyalOrnamentDivider color="#B38738" />
+          </ScrollReveal>
 
-          <ScrollReveal direction="scale" className="hidden lg:block shrink-0">
-            <EditorialHeritageStamp size={105} centerText="CHHR" text="COUNTRY HOLIDAYS • 24/7 CARE DESK • " />
+          <ScrollReveal direction="up" delay={150}>
+            <p className="text-xs sm:text-sm md:text-[15px] text-[#635142] dark:text-[#BFB0A2] leading-relaxed font-sans font-light max-w-2xl mx-auto">
+              Submit your bespoke itinerary request directly to our central estate director or connect with our personal concierge officers for immediate reservation guidance.
+            </p>
           </ScrollReveal>
         </div>
 
-        {/* 2. CHANNELS & INTERACTIVE HELP DESK GRID */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        {/* 2. 2-COLUMN LUXURY CLEAN LAYOUT */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
 
-          {/* LEFT 4 CHANNELS (7 COLS) */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* ========================================================== */}
+          {/* LEFT COLUMN: PERSONAL CONCIERGE DESK (CLEAN FLAT ON PAGE) */}
+          {/* ========================================================== */}
+          <div className="lg:col-span-5 h-full flex flex-col justify-between space-y-8 py-2">
+            <ScrollReveal direction="up">
+              <div className="space-y-4">
+                
+                {/* Royal Welcoming Greeting Tag */}
+                <div className="inline-flex items-center gap-3 p-2 pr-4 rounded-2xl bg-[#F8F4EC] dark:bg-[#140F0A] border border-[#B38738]/30 shadow-sm">
+                  <img
+                    src="/images/padharo_mhare_desh.png"
+                    alt="Padharo Mhare Desh"
+                    className="w-11 h-11 object-contain rounded-xl border border-[#B38738]/40 bg-[#FAF6ED] dark:bg-[#1A130D] p-0.5"
+                  />
+                  <div className="text-left">
+                    <span className="text-[10px] font-cinzel text-[#B38738] dark:text-[#E8C97E] uppercase tracking-[0.2em] font-bold block">
+                      ✦ PADHARO MHARE DESH ✦
+                    </span>
+                    <span className="text-xs font-cormorant italic text-[#241A12] dark:text-[#F5EFE6]">
+                      Warm Welcoming Concierge
+                    </span>
+                  </div>
+                </div>
 
-            {/* Direct Phone Helpline */}
-            <ScrollReveal direction="up" delay={100}>
-              <a
-                href={`tel:${CONTACT_INFO.phoneRaw}`}
-                className="h-full flex flex-col justify-between p-6 sm:p-7 dark:bg-[#0E0E0E] bg-white border dark:border-[#333333] border-[#E9E9DE] hover:border-[#FF1F02] transition-all duration-300 hover:-translate-y-1 shadow-lg shadow-black/5 group"
-              >
-                <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-none dark:bg-[#1A1A1A] bg-[#FAFDF2] border dark:border-[#333333] border-[#E9E9DE] flex items-center justify-center text-[#FF1F02] group-hover:bg-[#FF1F02] group-hover:text-white transition-colors">
+                <div className="space-y-2 pt-1">
+                  <span className="text-[11px] sm:text-xs font-cinzel text-[#B38738] dark:text-[#E8C97E] uppercase tracking-[0.24em] font-bold block">
+                    ✦ YOUR LUXURY, OUR RESPONSIBILITY ✦
+                  </span>
+                  <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-marcellus font-bold text-[#241A12] dark:text-[#F5EFE6] leading-[1.12] tracking-[0.02em]">
+                    Personal<br />Concierge Desk
+                  </h2>
+                  <p className="text-xs sm:text-sm text-[#635142] dark:text-[#BFB0A2] font-sans font-light leading-relaxed pt-1">
+                    We're here to plan your perfect stay. Reach out directly or share your details and our concierge team will get back to you shortly.
+                  </p>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Contact Items - Clean flat list directly on page */}
+            <ScrollReveal direction="up" delay={50}>
+              <div className="space-y-6">
+                
+                {/* 1. Direct Concierge */}
+                <div className="flex items-start gap-4 group">
+                  <div className="w-12 h-12 rounded-full bg-[#EFE8DC] dark:bg-[#1C160E] text-[#B38738] dark:text-[#E8C97E] border border-[#B38738]/20 flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 shadow-sm">
                     <Phone className="w-5 h-5" />
                   </div>
-                  <div>
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#FF1F02] block mb-1">
-                      Direct Hotline • Toll-Free
+                  <div className="space-y-0.5 min-w-0">
+                    <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-[#635142] dark:text-[#BFB0A2] block font-semibold">
+                      DIRECT CONCIERGE
                     </span>
-                    <h3 className="text-lg font-bold uppercase dark:text-white text-[#0E0E0E]">
-                      Phone Support
-                    </h3>
-                    <p className="text-xs dark:text-[#B0B0B0] text-[#0E0E0E]/60 mt-1 leading-relaxed">
-                      Instant connection to our senior reservation specialists.
-                    </p>
+                    <a
+                      href={`tel:${CONTACT_INFO.phoneRaw || '+919876543210'}`}
+                      className="text-lg sm:text-xl font-serif font-bold text-[#241A12] dark:text-[#F5EFE6] hover:text-[#B38738] dark:hover:text-[#E8C97E] transition-colors block font-mono"
+                    >
+                      {CONTACT_INFO.phone || '+91 98765 43210'}
+                    </a>
                   </div>
                 </div>
 
-                <div className="pt-6 mt-4 border-t dark:border-[#222222] border-[#E9E9DE] flex items-center justify-between">
-                  <span className="text-sm font-bold font-mono dark:text-white text-[#0E0E0E] group-hover:text-[#FF1F02] transition-colors">
-                    {CONTACT_INFO.phone}
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-[#FF1F02] transition-transform group-hover:translate-x-1" />
-                </div>
-              </a>
-            </ScrollReveal>
-
-            {/* WhatsApp Live Concierge */}
-            <ScrollReveal direction="up" delay={150}>
-              <a
-                href={getWhatsAppBookingUrl('Hello Customer Care, I would like to speak with a concierge specialist.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-full flex flex-col justify-between p-6 sm:p-7 dark:bg-[#0E0E0E] bg-white border dark:border-[#333333] border-[#E9E9DE] hover:border-[#22C55E] transition-all duration-300 hover:-translate-y-1 shadow-lg shadow-black/5 group"
-              >
-                <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-none dark:bg-[#1A1A1A] bg-[#FAFDF2] border dark:border-[#333333] border-[#E9E9DE] flex items-center justify-center text-[#22C55E] group-hover:bg-[#22C55E] group-hover:text-white transition-colors">
-                    <MessageCircle className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#22C55E] block mb-1">
-                      ● Active Now • Instant
-                    </span>
-                    <h3 className="text-lg font-bold uppercase dark:text-white text-[#0E0E0E]">
-                      WhatsApp Desk
-                    </h3>
-                    <p className="text-xs dark:text-[#B0B0B0] text-[#0E0E0E]/60 mt-1 leading-relaxed">
-                      Share itinerary preferences, photos, and request instant quotes.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="pt-6 mt-4 border-t dark:border-[#222222] border-[#E9E9DE] flex items-center justify-between">
-                  <span className="text-sm font-bold font-mono dark:text-white text-[#0E0E0E] group-hover:text-[#22C55E] transition-colors">
-                    Chat on WhatsApp
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-[#22C55E] transition-transform group-hover:translate-x-1" />
-                </div>
-              </a>
-            </ScrollReveal>
-
-            {/* Official Email Desk */}
-            <ScrollReveal direction="up" delay={200}>
-              <a
-                href={`mailto:${CONTACT_INFO.email}?subject=Customer Care Inquiry - Country Holidays Hotels & Resorts`}
-                className="h-full flex flex-col justify-between p-6 sm:p-7 dark:bg-[#0E0E0E] bg-white border dark:border-[#333333] border-[#E9E9DE] hover:border-[#FF1F02] transition-all duration-300 hover:-translate-y-1 shadow-lg shadow-black/5 group"
-              >
-                <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-none dark:bg-[#1A1A1A] bg-[#FAFDF2] border dark:border-[#333333] border-[#E9E9DE] flex items-center justify-center text-[#FF1F02] group-hover:bg-[#FF1F02] group-hover:text-white transition-colors">
+                {/* 2. Official Email */}
+                <div className="flex items-start gap-4 group">
+                  <div className="w-12 h-12 rounded-full bg-[#EFE8DC] dark:bg-[#1C160E] text-[#B38738] dark:text-[#E8C97E] border border-[#B38738]/20 flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 shadow-sm">
                     <Mail className="w-5 h-5" />
                   </div>
-                  <div>
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#FF1F02] block mb-1">
-                      Response &lt; 2 Hours
+                  <div className="space-y-0.5 min-w-0">
+                    <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-[#635142] dark:text-[#BFB0A2] block font-semibold">
+                      OFFICIAL EMAIL
                     </span>
-                    <h3 className="text-lg font-bold uppercase dark:text-white text-[#0E0E0E]">
-                      Email Dossier
-                    </h3>
-                    <p className="text-xs dark:text-[#B0B0B0] text-[#0E0E0E]/60 mt-1 leading-relaxed">
-                      Detailed event briefs, corporate invoices, and membership queries.
+                    <a
+                      href={`mailto:${CONTACT_INFO.email}`}
+                      className="text-sm sm:text-base font-serif font-bold text-[#241A12] dark:text-[#F5EFE6] hover:text-[#B38738] dark:hover:text-[#E8C97E] transition-colors truncate block"
+                    >
+                      {CONTACT_INFO.email}
+                    </a>
+                  </div>
+                </div>
+
+                {/* 3. Corporate Headquarters */}
+                <div className="flex items-start gap-4 group">
+                  <div className="w-12 h-12 rounded-full bg-[#EFE8DC] dark:bg-[#1C160E] text-[#B38738] dark:text-[#E8C97E] border border-[#B38738]/20 flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 shadow-sm">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <div className="space-y-0.5 min-w-0">
+                    <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-[#635142] dark:text-[#BFB0A2] block font-semibold">
+                      CORPORATE HEADQUARTERS
+                    </span>
+                    <p className="text-xs sm:text-sm font-serif text-[#635142] dark:text-[#BFB0A2] leading-relaxed">
+                      111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041, India.
                     </p>
                   </div>
                 </div>
 
-                <div className="pt-6 mt-4 border-t dark:border-[#222222] border-[#E9E9DE] flex items-center justify-between">
-                  <span className="text-xs font-bold font-mono dark:text-white text-[#0E0E0E] truncate group-hover:text-[#FF1F02] transition-colors max-w-[200px]">
-                    {CONTACT_INFO.email}
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-[#FF1F02] shrink-0 transition-transform group-hover:translate-x-1" />
-                </div>
-              </a>
+              </div>
             </ScrollReveal>
 
-            {/* Corporate & Banquets Desk */}
-            <ScrollReveal direction="up" delay={250}>
-              <Link
-                to="/celebrations"
-                className="h-full flex flex-col justify-between p-6 sm:p-7 dark:bg-[#0E0E0E] bg-white border dark:border-[#333333] border-[#E9E9DE] hover:border-[#EAB308] transition-all duration-300 hover:-translate-y-1 shadow-lg shadow-black/5 group"
-              >
-                <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-none dark:bg-[#1A1A1A] bg-[#FAFDF2] border dark:border-[#333333] border-[#E9E9DE] flex items-center justify-center text-[#EAB308] group-hover:bg-[#EAB308] group-hover:text-black transition-colors">
-                    <Headphones className="w-5 h-5" />
-                  </div>
+            {/* Bottom Stats Row: Response Time & 24/7 Live Desk */}
+            <ScrollReveal direction="up" delay={100}>
+              <div className="pt-6 border-t border-[#B38738]/20 dark:border-[#B38738]/30 flex items-center gap-8 text-[#241A12] dark:text-[#F5EFE6]">
+                
+                {/* Response Time */}
+                <div className="flex items-center gap-3">
+                  <Clock className="w-6 h-6 text-[#B38738] dark:text-[#E8C97E] stroke-[1.5]" />
                   <div>
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#EAB308] block mb-1">
-                      Events & Wedlock Desk
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#635142] dark:text-[#BFB0A2] block font-medium">
+                      RESPONSE TIME
                     </span>
-                    <h3 className="text-lg font-bold uppercase dark:text-white text-[#0E0E0E]">
-                      Celebrations Desk
-                    </h3>
-                    <p className="text-xs dark:text-[#B0B0B0] text-[#0E0E0E]/60 mt-1 leading-relaxed">
-                      Bespoke wedding curations, large group banquets & corporate offsites.
-                    </p>
+                    <span className="text-sm sm:text-base font-serif font-bold text-[#241A12] dark:text-[#F5EFE6]">
+                      &lt; 2 HOURS
+                    </span>
                   </div>
                 </div>
 
-                <div className="pt-6 mt-4 border-t dark:border-[#222222] border-[#E9E9DE] flex items-center justify-between">
-                  <span className="text-sm font-bold font-mono dark:text-white text-[#0E0E0E] group-hover:text-[#EAB308] transition-colors">
-                    Submit Event Brief
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-[#EAB308] transition-transform group-hover:translate-x-1" />
+                {/* Vertical Divider */}
+                <div className="h-8 w-[1px] bg-[#B38738]/25 dark:bg-[#B38738]/35" />
+
+                {/* 24/7 Live Desk */}
+                <div className="flex items-center gap-3">
+                  <Headset className="w-6 h-6 text-[#B38738] dark:text-[#E8C97E] stroke-[1.5]" />
+                  <div>
+                    <span className="text-sm sm:text-base font-serif font-bold text-[#241A12] dark:text-[#F5EFE6] block leading-tight">
+                      24/7
+                    </span>
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#635142] dark:text-[#BFB0A2] block font-medium">
+                      LIVE DESK
+                    </span>
+                  </div>
                 </div>
-              </Link>
+
+              </div>
             </ScrollReveal>
 
+            {/* 3D Social Media Channels */}
+            <ScrollReveal direction="up" delay={150}>
+              <div className="pt-4 space-y-3">
+                <span className="text-[10px] sm:text-[11px] font-cinzel uppercase tracking-[0.22em] text-[#B38738] dark:text-[#E8C97E] font-bold block">
+                  ✦ CONNECT ON SOCIAL SANCTUARIES ✦
+                </span>
+                <div className="flex items-center gap-3 sm:gap-4">
+                  
+                  {/* Instagram 3D */}
+                  <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Follow on Instagram"
+                    className="group relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl p-1 bg-gradient-to-br from-[#E8C97E]/30 via-[#B38738]/20 to-transparent border border-[#B38738]/40 hover:border-[#E8C97E] shadow-[0_4px_14px_rgba(0,0,0,0.15)] dark:shadow-[0_4px_14px_rgba(0,0,0,0.5)] hover:shadow-[0_8px_24px_rgba(179,135,56,0.35)] transition-all duration-300 hover:scale-110 hover:-translate-y-1 block overflow-hidden"
+                  >
+                    <img
+                      src="/images/icon_3d_instagram.jpg"
+                      alt="Instagram 3D"
+                      className="w-full h-full object-cover rounded-xl"
+                    />
+                  </a>
+
+                  {/* WhatsApp 3D */}
+                  <a
+                    href="https://wa.me/919876543210"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Chat on WhatsApp"
+                    className="group relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl p-1 bg-gradient-to-br from-[#E8C97E]/30 via-[#B38738]/20 to-transparent border border-[#B38738]/40 hover:border-[#E8C97E] shadow-[0_4px_14px_rgba(0,0,0,0.15)] dark:shadow-[0_4px_14px_rgba(0,0,0,0.5)] hover:shadow-[0_8px_24px_rgba(179,135,56,0.35)] transition-all duration-300 hover:scale-110 hover:-translate-y-1 block overflow-hidden"
+                  >
+                    <img
+                      src="/images/icon_3d_whatsapp.jpg"
+                      alt="WhatsApp 3D"
+                      className="w-full h-full object-cover rounded-xl"
+                    />
+                  </a>
+
+                  {/* YouTube 3D */}
+                  <a
+                    href="https://youtube.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Watch on YouTube"
+                    className="group relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl p-1 bg-gradient-to-br from-[#E8C97E]/30 via-[#B38738]/20 to-transparent border border-[#B38738]/40 hover:border-[#E8C97E] shadow-[0_4px_14px_rgba(0,0,0,0.15)] dark:shadow-[0_4px_14px_rgba(0,0,0,0.5)] hover:shadow-[0_8px_24px_rgba(179,135,56,0.35)] transition-all duration-300 hover:scale-110 hover:-translate-y-1 block overflow-hidden"
+                  >
+                    <img
+                      src="/images/icon_3d_youtube.jpg"
+                      alt="YouTube 3D"
+                      className="w-full h-full object-cover rounded-xl"
+                    />
+                  </a>
+
+                  {/* Facebook 3D */}
+                  <a
+                    href="https://facebook.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Connect on Facebook"
+                    className="group relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl p-1 bg-gradient-to-br from-[#E8C97E]/30 via-[#B38738]/20 to-transparent border border-[#B38738]/40 hover:border-[#E8C97E] shadow-[0_4px_14px_rgba(0,0,0,0.15)] dark:shadow-[0_4px_14px_rgba(0,0,0,0.5)] hover:shadow-[0_8px_24px_rgba(179,135,56,0.35)] transition-all duration-300 hover:scale-110 hover:-translate-y-1 block overflow-hidden"
+                  >
+                    <img
+                      src="/images/icon_3d_facebook.jpg"
+                      alt="Facebook 3D"
+                      className="w-full h-full object-cover rounded-xl"
+                    />
+                  </a>
+
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
 
-          {/* RIGHT 5 COLS: INSTANT PRIORITY CALLBACK FORM */}
-          <div className="lg:col-span-5">
-            <ScrollReveal direction="up" delay={200}>
-              <div className="h-full p-8 sm:p-10 dark:bg-[#0E0E0E] bg-white border dark:border-[#333333] border-[#E9E9DE] shadow-2xl flex flex-col justify-between relative overflow-hidden">
+
+          {/* ========================================================== */}
+          {/* RIGHT COLUMN: PLAN YOUR STAY FORM (CLEAN FLAT PANEL)       */}
+          {/* ========================================================== */}
+          <div className="lg:col-span-7">
+            <ScrollReveal direction="up" delay={100}>
+              <div className="bg-[#F8F4EC] dark:bg-[#140F0A] border border-[#B38738]/30 dark:border-[#B38738]/40 rounded-2xl p-6 sm:p-9 lg:p-10 relative transition-all shadow-[0_8px_30px_rgba(179,135,56,0.12)]">
                 
-                {/* Decorative Top Accent */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-[#FF1F02]" />
-
-                <div className="space-y-6">
-                  <div className="space-y-2">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#FF1F02] block">
-                      FAST RESPONSE GUARANTEE
-                    </span>
-                    <h3 className="text-2xl font-extrabold uppercase tracking-tight dark:text-white text-[#0E0E0E]">
-                      Request Priority Callback
-                    </h3>
-                    <p className="text-xs dark:text-[#A0A0A0] text-[#0E0E0E]/60 leading-relaxed font-light">
-                      Leave your details and our senior customer care executive will call you within 15 minutes.
-                    </p>
-                  </div>
-
-                  {submitted ? (
-                    <div className="p-6 dark:bg-[#1A1A1A] bg-[#FAFDF2] border border-[#22C55E]/40 space-y-3 text-center my-6">
-                      <CheckCircle2 className="w-10 h-10 text-[#22C55E] mx-auto" />
-                      <h4 className="text-base font-bold uppercase text-white">Callback Request Logged</h4>
-                      <p className="text-xs text-[#B0B0B0] font-light">
-                        Our executive has been assigned. You will receive a call shortly at <span className="text-white font-mono font-bold">{formData.phone}</span>.
+                {submitted ? (
+                  <div className="py-14 text-center space-y-6 bg-white/70 dark:bg-black/40 p-8 sm:p-10 rounded-2xl border border-[#B38738]/40 my-auto shadow-inner">
+                    <div className="w-16 h-16 rounded-full bg-[#B38738]/15 dark:bg-[#B38738]/25 text-[#B38738] dark:text-[#E8C97E] flex items-center justify-center mx-auto shadow-md">
+                      <CheckCircle2 className="w-8 h-8" />
+                    </div>
+                    <div className="space-y-2.5">
+                      <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#B38738] dark:text-[#E8C97E] font-bold block">
+                        ● OFFICIAL INQUIRY TRANSMITTED
+                      </span>
+                      <h3 className="font-serif text-2xl sm:text-3xl text-[#241A12] dark:text-[#F5EFE6]">
+                        Inquiry Received, {formData.fullName}!
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#635142] dark:text-[#BFB0A2] font-serif max-w-md mx-auto leading-relaxed">
+                        Your request for <strong className="text-[#B38738] dark:text-[#E8C97E]">{formData.destination}</strong> has been logged. Connecting you with our priority desk on WhatsApp...
                       </p>
+                    </div>
+
+                    <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3.5">
+                      <a
+                        href={getWhatsAppBookingUrl(`Hello Country Holidays Concierge, my name is ${formData.fullName} (${formData.phone}). I have submitted an inquiry for ${formData.destination}.`)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#8F661E] via-[#B38738] to-[#805915] hover:from-[#A87B2A] hover:to-[#966819] text-white font-serif text-xs uppercase tracking-[0.16em] font-bold transition-all shadow-md inline-flex items-center justify-center gap-2 cursor-pointer"
+                      >
+                        <MessageCircle className="w-4 h-4" />
+                        <span>Continue to WhatsApp</span>
+                      </a>
+
                       <button
                         type="button"
-                        onClick={() => { setSubmitted(false); setFormData({ name: '', phone: '', topic: 'General Inquiry' }); }}
-                        className="text-[11px] font-mono uppercase text-[#FF1F02] underline pt-2 block mx-auto cursor-pointer"
+                        onClick={() => {
+                          setSubmitted(false);
+                          setFormData({
+                            fullName: '',
+                            email: '',
+                            phone: '',
+                            destination: 'Goa — Beachfront Mandaps & Luxury Villas',
+                            targetDates: '',
+                            partySize: '2 Guests',
+                            specialRequests: '',
+                          });
+                        }}
+                        className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-transparent border border-[#B38738]/40 text-[#241A12] dark:text-[#F5EFE6] font-serif text-xs uppercase tracking-[0.16em] font-medium hover:border-[#B38738] transition-colors cursor-pointer"
                       >
-                        Submit Another Request
+                        Submit Another
                       </button>
                     </div>
-                  ) : (
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <div>
-                        <label className="block text-[10px] font-mono uppercase tracking-widest dark:text-white/60 text-[#0E0E0E]/60 mb-1.5 font-bold">
-                          Your Full Name *
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    
+                    {/* Card Header matching image */}
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 text-[11px] font-cinzel text-[#B38738] dark:text-[#E8C97E] uppercase tracking-[0.2em] font-bold">
+                        <span className="w-5 h-[1.5px] bg-[#B38738] dark:bg-[#E8C97E]" />
+                        <span>SEND US YOUR INQUIRY</span>
+                      </div>
+                      <h3 className="text-2xl sm:text-3xl lg:text-[34px] font-marcellus font-normal text-[#241A12] dark:text-[#F5EFE6] tracking-[0.02em]">
+                        Plan Your Stay with Our Concierge
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#635142] dark:text-[#BFB0A2] font-sans font-light leading-relaxed">
+                        Fill in your details below and we'll assist you with the best options.
+                      </p>
+                    </div>
+
+                    {/* ROW 1: FULL NAME & EMAIL ADDRESS */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      
+                      {/* FULL NAME */}
+                      <div className="space-y-1.5">
+                        <label className="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-[#635142] dark:text-[#BFB0A2] font-semibold">
+                          <User className="w-3.5 h-3.5 text-[#B38738] dark:text-[#E8C97E]" />
+                          <span>FULL NAME *</span>
                         </label>
-                        <input
-                          type="text"
-                          required
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          placeholder="e.g. Vikramaditya Roy"
-                          className="w-full px-4 py-3 text-xs dark:bg-[#161616] bg-[#FAFDF2] border dark:border-[#333333] border-[#E9E9DE] dark:text-white text-[#0E0E0E] focus:outline-none focus:border-[#FF1F02] transition-colors"
+                        <div className="relative">
+                          <User className="w-4 h-4 text-[#B38738]/50 dark:text-[#E8C97E]/50 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                          <input
+                            type="text"
+                            required
+                            name="fullName"
+                            value={formData.fullName}
+                            onChange={handleInputChange}
+                            placeholder="Elena Vance"
+                            className="w-full pl-10 pr-4 py-3 rounded-lg bg-white dark:bg-[#1A130D] border border-[#DDD4C4] dark:border-[#3A2C17] text-sm text-[#241A12] dark:text-[#F5EFE6] placeholder:text-[#635142]/40 dark:placeholder:text-[#BFB0A2]/40 focus:outline-none focus:border-[#B38738] dark:focus:border-[#E8C97E] focus:ring-1 focus:ring-[#B38738]/20 transition-all font-sans shadow-none"
+                          />
+                        </div>
+                      </div>
+
+                      {/* EMAIL ADDRESS */}
+                      <div className="space-y-1.5">
+                        <label className="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-[#635142] dark:text-[#BFB0A2] font-semibold">
+                          <Mail className="w-3.5 h-3.5 text-[#B38738] dark:text-[#E8C97E]" />
+                          <span>EMAIL ADDRESS *</span>
+                        </label>
+                        <div className="relative">
+                          <Mail className="w-4 h-4 text-[#B38738]/50 dark:text-[#E8C97E]/50 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                          <input
+                            type="email"
+                            required
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            placeholder="elena.vance@residence.com"
+                            className="w-full pl-10 pr-4 py-3 rounded-lg bg-white dark:bg-[#1A130D] border border-[#DDD4C4] dark:border-[#3A2C17] text-sm text-[#241A12] dark:text-[#F5EFE6] placeholder:text-[#635142]/40 dark:placeholder:text-[#BFB0A2]/40 focus:outline-none focus:border-[#B38738] dark:focus:border-[#E8C97E] focus:ring-1 focus:ring-[#B38738]/20 transition-all font-sans shadow-none"
+                          />
+                        </div>
+                      </div>
+
+                    </div>
+
+                    {/* ROW 2: TELEPHONE NUMBER & DESTINATION CIRCUIT */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      
+                      {/* TELEPHONE NUMBER */}
+                      <div className="space-y-1.5">
+                        <label className="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-[#635142] dark:text-[#BFB0A2] font-semibold">
+                          <Phone className="w-3.5 h-3.5 text-[#B38738] dark:text-[#E8C97E]" />
+                          <span>TELEPHONE NUMBER *</span>
+                        </label>
+                        <div className="relative">
+                          <Phone className="w-4 h-4 text-[#B38738]/50 dark:text-[#E8C97E]/50 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                          <input
+                            type="tel"
+                            required
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                            placeholder="+91 98765 43210"
+                            className="w-full pl-10 pr-4 py-3 rounded-lg bg-white dark:bg-[#1A130D] border border-[#DDD4C4] dark:border-[#3A2C17] text-sm text-[#241A12] dark:text-[#F5EFE6] placeholder:text-[#635142]/40 dark:placeholder:text-[#BFB0A2]/40 focus:outline-none focus:border-[#B38738] dark:focus:border-[#E8C97E] focus:ring-1 focus:ring-[#B38738]/20 transition-all font-mono shadow-none"
+                          />
+                        </div>
+                      </div>
+
+                      {/* DESTINATION CIRCUIT */}
+                      <div className="space-y-1.5">
+                        <label className="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-[#635142] dark:text-[#BFB0A2] font-semibold">
+                          <MapPin className="w-3.5 h-3.5 text-[#B38738] dark:text-[#E8C97E]" />
+                          <span>DESTINATION CIRCUIT</span>
+                        </label>
+                        <div className="relative">
+                          <MapPin className="w-4 h-4 text-[#B38738]/50 dark:text-[#E8C97E]/50 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                          <select
+                            name="destination"
+                            value={formData.destination}
+                            onChange={handleInputChange}
+                            className="w-full pl-10 pr-10 py-3 rounded-lg bg-white dark:bg-[#1A130D] border border-[#DDD4C4] dark:border-[#3A2C17] text-sm text-[#241A12] dark:text-[#F5EFE6] focus:outline-none focus:border-[#B38738] dark:focus:border-[#E8C97E] focus:ring-1 focus:ring-[#B38738]/20 transition-all appearance-none cursor-pointer shadow-none"
+                          >
+                            <optgroup label="✦ SIGNATURE ROYAL HUBS">
+                              <option value="Goa — Beachfront Mandaps & Luxury Villas">Goa — Beachfront Mandaps & Luxury Villas</option>
+                              <option value="Rajasthan — Jaipur & Udaipur Palaces">Rajasthan — Jaipur & Udaipur Palaces</option>
+                              <option value="Himachal Pradesh — Manali & Shimla Chalets">Himachal Pradesh — Manali & Shimla Chalets</option>
+                              <option value="Uttarakhand — Rishikesh & Mussoorie Sanctuaries">Uttarakhand — Rishikesh & Mussoorie Sanctuaries</option>
+                              <option value="Kerala — Munnar Hills & Alleppey Backwaters">Kerala — Munnar Hills & Alleppey Backwaters</option>
+                              <option value="Karnataka — Coorg & Chikmagalur Estates">Karnataka — Coorg & Chikmagalur Estates</option>
+                              <option value="Tamil Nadu — Ooty, Mahabalipuram & Chennai HQ">Tamil Nadu — Ooty, Mahabalipuram & Chennai HQ</option>
+                              <option value="Kashmir & Ladakh — Srinagar, Gulmarg & Leh">Kashmir & Ladakh — Srinagar, Gulmarg & Leh</option>
+                            </optgroup>
+
+                            <optgroup label="✦ NORTH INDIA CIRCUIT">
+                              <option value="Manali, Himachal Pradesh (Solang & Rohtang Chalets)">Manali, Himachal Pradesh (Solang & Rohtang Chalets)</option>
+                              <option value="Shimla, Himachal Pradesh (Colonial Pine Ridge)">Shimla, Himachal Pradesh (Colonial Pine Ridge)</option>
+                              <option value="Rishikesh, Uttarakhand (Ganges Wellness Sanctuary)">Rishikesh, Uttarakhand (Ganges Wellness Sanctuary)</option>
+                              <option value="Mussoorie, Uttarakhand (Queen of Hills)">Mussoorie, Uttarakhand (Queen of Hills)</option>
+                              <option value="Nainital, Uttarakhand (Emerald Alpine Lakes)">Nainital, Uttarakhand (Emerald Alpine Lakes)</option>
+                              <option value="Jaipur, Rajasthan (Pink City Havelis & Forts)">Jaipur, Rajasthan (Pink City Havelis & Forts)</option>
+                              <option value="Udaipur, Rajasthan (Lake Pichola Palaces)">Udaipur, Rajasthan (Lake Pichola Palaces)</option>
+                              <option value="Agra, Uttar Pradesh (Taj Mahal Imperial Estate)">Agra, Uttar Pradesh (Taj Mahal Imperial Estate)</option>
+                              <option value="Vrindavan, Uttar Pradesh (Sacred River Retreat)">Vrindavan, Uttar Pradesh (Sacred River Retreat)</option>
+                              <option value="Varanasi, Uttar Pradesh (Timeless Riverfront Ghats)">Varanasi, Uttar Pradesh (Timeless Riverfront Ghats)</option>
+                              <option value="Amritsar, Punjab (Golden Temple Heritage)">Amritsar, Punjab (Golden Temple Heritage)</option>
+                              <option value="Srinagar, Kashmir (Dal Lake Royal Houseboats)">Srinagar, Kashmir (Dal Lake Royal Houseboats)</option>
+                              <option value="Gulmarg, Kashmir (Powder Snow Gondola Peaks)">Gulmarg, Kashmir (Powder Snow Gondola Peaks)</option>
+                              <option value="Leh & Pangong Tso, Ladakh (High Altitude Retreats)">Leh & Pangong Tso, Ladakh (High Altitude Retreats)</option>
+                            </optgroup>
+
+                            <optgroup label="✦ SOUTH & COASTAL CIRCUIT">
+                              <option value="Goa (Calangute, Mandrem & South Coast Villas)">Goa (Calangute, Mandrem & South Coast Villas)</option>
+                              <option value="Munnar, Kerala (Tea Estate Sanctuaries)">Munnar, Kerala (Tea Estate Sanctuaries)</option>
+                              <option value="Alleppey, Kerala (Luxury Backwater Houseboats)">Alleppey, Kerala (Luxury Backwater Houseboats)</option>
+                              <option value="Wayanad, Kerala (Rainforest Tree Villas)">Wayanad, Kerala (Rainforest Tree Villas)</option>
+                              <option value="Coorg, Karnataka (Coffee Plantation Stays)">Coorg, Karnataka (Coffee Plantation Stays)</option>
+                              <option value="Chikmagalur & Hampi, Karnataka (Heritage & Hills)">Chikmagalur & Hampi, Karnataka (Heritage & Hills)</option>
+                              <option value="Ooty & Kodaikanal, Tamil Nadu (Nilgiri Mist Resorts)">Ooty & Kodaikanal, Tamil Nadu (Nilgiri Mist Resorts)</option>
+                              <option value="Mahabalipuram & Pondicherry (Oceanfront Villas)">Mahabalipuram & Pondicherry (Oceanfront Villas)</option>
+                              <option value="Chennai, Tamil Nadu (OMR Central HQ & Urban Estate)">Chennai, Tamil Nadu (OMR Central HQ & Urban Estate)</option>
+                              <option value="Rameswaram & Kanyakumari, Tamil Nadu (Coastal Sanctuary)">Rameswaram & Kanyakumari, Tamil Nadu (Coastal Sanctuary)</option>
+                            </optgroup>
+
+                            <optgroup label="✦ BESPOKE MULTI-DESTINATION CIRCUITS">
+                              <option value="Golden Triangle Royal Circuit (Delhi • Agra • Jaipur)">Golden Triangle Royal Circuit (Delhi • Agra • Jaipur)</option>
+                              <option value="Himalayan Heights Circuit (Manali • Shimla • Rishikesh)">Himalayan Heights Circuit (Manali • Shimla • Rishikesh)</option>
+                              <option value="Royal Rajasthan Circuit (Jaipur • Udaipur • Jodhpur)">Royal Rajasthan Circuit (Jaipur • Udaipur • Jodhpur)</option>
+                              <option value="Kerala Serenity Circuit (Munnar • Alleppey • Kochi)">Kerala Serenity Circuit (Munnar • Alleppey • Kochi)</option>
+                              <option value="Custom Multi-Destination Circuit">Custom Multi-Destination Circuit</option>
+                            </optgroup>
+                          </select>
+                          <ChevronDown className="w-4 h-4 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#B38738] dark:text-[#E8C97E]" />
+                        </div>
+                      </div>
+
+                    </div>
+
+                    {/* ROW 3: TARGET DATES / SEASON & PARTY SIZE */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      
+                      {/* TARGET DATES */}
+                      <div className="space-y-1.5">
+                        <label className="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-[#635142] dark:text-[#BFB0A2] font-semibold">
+                          <Calendar className="w-3.5 h-3.5 text-[#B38738] dark:text-[#E8C97E]" />
+                          <span>TARGET DATES / SEASON</span>
+                        </label>
+                        <div className="relative">
+                          <Calendar className="w-4 h-4 text-[#B38738]/50 dark:text-[#E8C97E]/50 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                          <input
+                            type="text"
+                            name="targetDates"
+                            value={formData.targetDates}
+                            onChange={handleInputChange}
+                            placeholder="e.g. October 12 – 18, 2026"
+                            className="w-full pl-10 pr-4 py-3 rounded-lg bg-white dark:bg-[#1A130D] border border-[#DDD4C4] dark:border-[#3A2C17] text-sm text-[#241A12] dark:text-[#F5EFE6] placeholder:text-[#635142]/40 dark:placeholder:text-[#BFB0A2]/40 focus:outline-none focus:border-[#B38738] dark:focus:border-[#E8C97E] focus:ring-1 focus:ring-[#B38738]/20 transition-all shadow-none font-sans"
+                          />
+                        </div>
+                      </div>
+
+                      {/* PARTY SIZE */}
+                      <div className="space-y-1.5">
+                        <label className="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-[#635142] dark:text-[#BFB0A2] font-semibold">
+                          <Users className="w-3.5 h-3.5 text-[#B38738] dark:text-[#E8C97E]" />
+                          <span>PARTY SIZE</span>
+                        </label>
+                        <div className="relative">
+                          <Users className="w-4 h-4 text-[#B38738]/50 dark:text-[#E8C97E]/50 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                          <select
+                            name="partySize"
+                            value={formData.partySize}
+                            onChange={handleInputChange}
+                            className="w-full pl-10 pr-10 py-3 rounded-lg bg-white dark:bg-[#1A130D] border border-[#DDD4C4] dark:border-[#3A2C17] text-sm text-[#241A12] dark:text-[#F5EFE6] focus:outline-none focus:border-[#B38738] dark:focus:border-[#E8C97E] focus:ring-1 focus:ring-[#B38738]/20 transition-all appearance-none cursor-pointer shadow-none"
+                          >
+                            <option value="1 Guest">1 Guest</option>
+                            <option value="2 Guests">2 Guests</option>
+                            <option value="3 – 4 Guests">3 – 4 Guests</option>
+                            <option value="5 – 10 Guests">5 – 10 Guests</option>
+                            <option value="10+ Guests">10+ Guests</option>
+                            <option value="50+ Guests">50+ Guests</option>
+                          </select>
+                          <ChevronDown className="w-4 h-4 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#B38738] dark:text-[#E8C97E]" />
+                        </div>
+                      </div>
+
+                    </div>
+
+                    {/* ROW 4: SPECIAL REQUESTS WITH CHARACTER COUNT */}
+                    <div className="space-y-1.5">
+                      <label className="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-[#635142] dark:text-[#BFB0A2] font-semibold">
+                        <MessageSquare className="w-3.5 h-3.5 text-[#B38738] dark:text-[#E8C97E]" />
+                        <span>SPECIAL REQUESTS / CULINARY & TRANSIT PREFERENCES</span>
+                      </label>
+                      <div className="relative">
+                        <MessageSquare className="w-4 h-4 text-[#B38738]/50 dark:text-[#E8C97E]/50 absolute left-3.5 top-3.5 pointer-events-none" />
+                        <textarea
+                          rows={3}
+                          name="specialRequests"
+                          value={formData.specialRequests}
+                          onChange={handleInputChange}
+                          placeholder="Please let us know about dietary preferences, royal transfers, or celebration milestones..."
+                          className="w-full pl-10 pr-4 pt-3 pb-7 rounded-lg bg-white dark:bg-[#1A130D] border border-[#DDD4C4] dark:border-[#3A2C17] text-sm text-[#241A12] dark:text-[#F5EFE6] placeholder:text-[#635142]/40 dark:placeholder:text-[#BFB0A2]/40 focus:outline-none focus:border-[#B38738] dark:focus:border-[#E8C97E] focus:ring-1 focus:ring-[#B38738]/20 transition-all shadow-none resize-none leading-relaxed font-sans"
                         />
+                        <span className="absolute right-3 bottom-2 text-[10px] font-mono text-[#635142]/60 dark:text-[#BFB0A2]/60 pointer-events-none">
+                          {formData.specialRequests.length}/500
+                        </span>
                       </div>
+                    </div>
 
-                      <div>
-                        <label className="block text-[10px] font-mono uppercase tracking-widest dark:text-white/60 text-[#0E0E0E]/60 mb-1.5 font-bold">
-                          Phone Number *
-                        </label>
-                        <input
-                          type="tel"
-                          required
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          placeholder="+91 98765 43210"
-                          className="w-full px-4 py-3 text-xs dark:bg-[#161616] bg-[#FAFDF2] border dark:border-[#333333] border-[#E9E9DE] dark:text-white text-[#0E0E0E] focus:outline-none focus:border-[#FF1F02] transition-colors font-mono"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-[10px] font-mono uppercase tracking-widest dark:text-white/60 text-[#0E0E0E]/60 mb-1.5 font-bold">
-                          Assistance Topic
-                        </label>
-                        <select
-                          value={formData.topic}
-                          onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
-                          className="w-full px-4 py-3 text-xs dark:bg-[#161616] bg-[#FAFDF2] border dark:border-[#333333] border-[#E9E9DE] dark:text-white text-[#0E0E0E] focus:outline-none focus:border-[#FF1F02] transition-colors"
-                        >
-                          <option value="New Booking & Tariff">New Booking & Tariff</option>
-                          <option value="Booking Modification / Cancellation">Booking Modification / Cancellation</option>
-                          <option value="Destination Weddings & Events">Destination Weddings & Events</option>
-                          <option value="Membership & Privileges">Membership & Privileges</option>
-                          <option value="Billing / Invoice Support">Billing / Invoice Support</option>
-                        </select>
-                      </div>
-
+                    {/* FULL-WIDTH CTA BUTTON */}
+                    <div className="pt-2 space-y-3.5">
                       <button
                         type="submit"
                         disabled={loading}
-                        className="w-full mt-2 py-4 bg-[#FF1F02] hover:bg-black text-white font-bold text-xs uppercase font-mono tracking-widest flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xl shadow-[#FF1F02]/20"
+                        className="w-full py-3.5 sm:py-4 rounded-lg bg-gradient-to-r from-[#8F661E] via-[#B38738] to-[#805915] hover:from-[#A87B2A] hover:to-[#966819] text-white font-serif font-bold text-xs uppercase tracking-[0.22em] transition-all duration-300 shadow-[0_4px_20px_rgba(179,135,56,0.3)] inline-flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 active:scale-[0.99]"
                       >
-                        {loading ? (
-                          <span>CONNECTING...</span>
-                        ) : (
-                          <>
-                            <span>REQUEST IMMEDIATE CALLBACK</span>
-                            <Send className="w-3.5 h-3.5" />
-                          </>
-                        )}
+                        <span>{loading ? 'TRANSMITTING...' : 'TRANSMIT INQUIRY'}</span>
+                        <ArrowRight className="w-4 h-4" />
                       </button>
-                    </form>
-                  )}
-                </div>
 
-                {/* Micro trust indicators */}
-                <div className="pt-6 border-t dark:border-[#222222] border-[#E9E9DE] flex items-center justify-between text-[10px] font-mono dark:text-white/40 text-[#0E0E0E]/40 uppercase tracking-widest">
-                  <span className="flex items-center gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#22C55E]" /> 100% Privacy
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5 text-[#EAB308]" /> 24/7 Monitored Desk
-                  </span>
-                </div>
+                      {/* Security Lock Note */}
+                      <div className="flex items-center justify-center gap-1.5 text-xs text-[#635142] dark:text-[#BFB0A2] font-serif">
+                        <Lock className="w-3.5 h-3.5 text-[#B38738] dark:text-[#E8C97E]" />
+                        <span>Your information is secure with us.</span>
+                      </div>
+                    </div>
+
+                  </form>
+                )}
 
               </div>
             </ScrollReveal>
           </div>
 
         </div>
-
-        {/* 3. QUICK ASSISTANCE TOPIC PILLS (WHATSAPP SHORTCUTS) */}
-        <ScrollReveal direction="up" delay={250}>
-          <div className="p-6 sm:p-8 dark:bg-[#0E0E0E] bg-white border dark:border-[#333333] border-[#E9E9DE] space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-[#FF1F02] flex items-center gap-2">
-                <HelpCircle className="w-4 h-4" /> Quick Assistance Shortcuts
-              </span>
-              <span className="text-[10px] font-mono dark:text-white/40 text-[#0E0E0E]/40 uppercase tracking-widest hidden sm:inline">
-                Tap to chat with pre-filled topic
-              </span>
-            </div>
-
-            <div className="flex flex-wrap gap-2.5">
-              {QUICK_TOPICS.map((topic, i) => (
-                <a
-                  key={i}
-                  href={getWhatsAppBookingUrl(topic.msg)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2.5 text-xs font-mono dark:bg-[#161616] bg-[#FAFDF2] border dark:border-[#333333] border-[#E9E9DE] dark:text-white/80 text-[#0E0E0E]/80 hover:border-[#FF1F02] hover:text-[#FF1F02] dark:hover:text-[#FF1F02] transition-all flex items-center gap-2"
-                >
-                  <span>{topic.label}</span>
-                  <ArrowRight className="w-3 h-3 opacity-60" />
-                </a>
-              ))}
-            </div>
-          </div>
-        </ScrollReveal>
 
       </div>
     </section>

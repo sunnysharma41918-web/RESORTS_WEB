@@ -1,0 +1,43 @@
+{
+  "packages": [
+    {
+      "packageName": "Royal Destination Wedding Extravaganza",
+      "category": "Weddings & Banquets",
+      "price": "Starting from ₹15,00,000 for 100 Guests",
+      "inclusions": [
+        "Exclusive Royal Palace Lawns & Grand Ballroom access for 3 days",
+        "Master Chef custom gourmet multi-course tasting menu",
+        "Complimentary Presidential Bridal Suite upgrade with private butler",
+        "VIP Helicopter arrival for bride & groom",
+        "Bespoke floral mandap & lighting architecture"
+      ],
+      "validity": "Valid through December 2026",
+      "contactEscalation": "Connect with Royal Wedding Curation Desk via WhatsApp: +91 98765 43210"
+    },
+    {
+      "packageName": "Celestial Honeymoon Stargazer Package",
+      "category": "Honeymoon & Romantic Escapes",
+      "price": "₹1,75,000 / Couple (4 Nights / 5 Days)",
+      "inclusions": [
+        "Stay in The Monolith Glass Chalet with panoramic stargazing sky-roof",
+        "Private Candlelit 5-Course Dinner served on the cantilevered cliffside deck",
+        "Couples Ayurvedic Herbal Spa Therapy (90 minutes daily)",
+        "Daily Floating Breakfast in private heated cedar plunge tub",
+        "Complimentary bottle of Vintage Champagne upon check-in"
+      ],
+      "validity": "All Year Round"
+    },
+    {
+      "packageName": "Executive Corporate Leadership Retreat",
+      "category": "Corporate & Conclaves",
+      "price": "Custom Tariff based on Delegation Size",
+      "inclusions": [
+        "State-of-the-art amphitheater with high-speed encrypted Starlink telepresence",
+        "Private Sommelier wine vault networking evening",
+        "Outdoor team wilderness expeditions and guided alpine treks",
+        "Dedicated VIP concierge and executive chauffeur transfers"
+      ],
+      "validity": "Quarterly Corporate Bookings"
+    }
+  ]
+}

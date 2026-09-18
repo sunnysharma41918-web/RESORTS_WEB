@@ -1,83 +1,59 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { X, Maximize2, ChevronLeft, ChevronRight, ArrowRight, Phone } from 'lucide-react';
+import {
+  X,
+  Maximize2,
+  ChevronLeft,
+  ChevronRight,
+  ArrowRight,
+  Sparkles,
+  Star,
+  MapPin,
+  Heart,
+  ShieldCheck,
+  Camera,
+  MessageSquare,
+  Users,
+  CheckCircle2,
+  Send,
+  Loader2,
+  LayoutGrid,
+  MoveHorizontal
+} from 'lucide-react';
 import ScrollReveal from '../../components/common/ScrollReveal';
-import MagneticButton from '../../components/common/MagneticButton';
-import EditorialHeritageStamp from '../../components/common/EditorialHeritageStamp';
-import EditorialBackgroundElements from '../../components/common/EditorialBackgroundElements';
+import { RoyalOrnamentDivider, IndianJaaliBorder } from '../../components/common/RoyalOrnamentDivider';
+import IndianArtBackground from '../../components/common/IndianArtBackground';
 import { galleryService } from '../../services/galleryService';
-
-const fallbackGallery = [
-  {
-    id: 1,
-    title: 'High-Altitude Sunrise Ridge Horizon',
-    category: 'ARCHITECTURE',
-    specs: 'Elevation 1,850m • Morning Mist',
-    aspect: 'aspect-[16/10]',
-    gridSpan: 'lg:col-span-8',
-    url: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1600&q=90',
-  },
-  {
-    id: 2,
-    title: 'Cantilevered Slate Soaking Tub',
-    category: 'VILLAS',
-    specs: 'Forest Pool Villa • Private Cedar Deck',
-    aspect: 'aspect-[3/4]',
-    gridSpan: 'lg:col-span-4',
-    url: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=90',
-  },
-  {
-    id: 3,
-    title: 'Sommelier Subterranean Cellar',
-    category: 'GASTRONOMY',
-    specs: 'Biodynamic Vintages • Natural Rock Vault',
-    aspect: 'aspect-[4/5]',
-    gridSpan: 'lg:col-span-4',
-    url: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=90',
-  },
-  {
-    id: 4,
-    title: 'Geothermal Mineral Thermal Lagoon',
-    category: 'WELLNESS',
-    specs: 'Sound Therapy • 38°C Spring Water',
-    aspect: 'aspect-[16/10]',
-    gridSpan: 'lg:col-span-8',
-    url: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=90',
-  },
-  {
-    id: 5,
-    title: '500-Acre Wildlife Pine Corridor',
-    category: 'LANDSCAPES',
-    specs: 'Zero-Emission Conservation Zone',
-    aspect: 'aspect-square',
-    gridSpan: 'lg:col-span-4',
-    url: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=90',
-  },
-  {
-    id: 6,
-    title: 'Monolith Stargazing Sky-Roof Chalet',
-    category: 'VILLAS',
-    specs: 'Heated Timber • Panoramic Ridge Views',
-    aspect: 'aspect-[16/9]',
-    gridSpan: 'lg:col-span-8',
-    url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=90',
-  },
-];
-
-const CATEGORIES = [
-  { label: 'ALL CATEGORIES', value: 'All' },
-  { label: 'RESORTS', value: 'Resorts' },
-  { label: 'HOTELS', value: 'Hotels' },
-  { label: 'SUITES & ROOMS', value: 'Rooms' },
-  { label: 'WEDDINGS & CELEBRATIONS', value: 'Weddings' },
-  { label: 'NATURE & LANDSCAPE', value: 'Nature' },
-  { label: 'EXPERIENCES & RITUALS', value: 'Experiences' },
-];
+import { getWhatsAppBookingUrl } from '../../data/contact';
 
 export default function Gallery() {
-  const [items, setItems] = useState(fallbackGallery);
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [items, setItems] = useState([]);
+  const [featuredIndex, setFeaturedIndex] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [uploadData, setUploadData] = useState({ name: '', phone: '', location: '', note: '' });
+  const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [viewMode, setViewMode] = useState('scroller'); // 'scroller' | 'grid'
+  
+  const scrollerRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScrollBounds = () => {
+    if (scrollerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollerRef.current;
+      setCanScrollLeft(scrollLeft > 20);
+      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 20);
+    }
+  };
+
+  const handleScrollBy = (direction) => {
+    if (scrollerRef.current) {
+      const amount = direction === 'left' ? -380 : 380;
+      scrollerRef.current.scrollBy({ left: amount, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     async function loadGallery() {
@@ -86,327 +62,530 @@ export default function Gallery() {
         if (data && data.length > 0) {
           const normalized = data.map((item, idx) => ({
             ...item,
-            url: item.url || item.image || 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1600&q=90',
-            gridSpan: item.gridSpan || (idx % 3 === 0 ? 'lg:col-span-8' : 'lg:col-span-4'),
-            aspect: item.aspect || (idx % 3 === 0 ? 'aspect-[16/10]' : 'aspect-[3/4]'),
-            specs: item.specs || item.location || 'Sanctuary Estate',
+            id: item.id || `gal-${idx}`,
+            url: item.url || item.image || 'https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1600&q=90',
+            location: item.location || item.specs || 'Sanctuary Destination',
+            rating: item.rating || 5,
+            guestName: item.guestName || 'Verified Guest',
+            quote: item.quote || 'An extraordinary stay with unforgettable hospitality!',
+            date: item.date || 'Recent Stay'
           }));
           setItems(normalized);
         }
       } catch (err) {
-        console.error('Failed to load gallery items from CMS:', err);
+        console.error('Failed to load gallery items:', err);
       }
     }
     loadGallery();
   }, []);
 
-  const filtered = useMemo(() => {
-    if (selectedCategory === 'All') return items;
-    return items.filter((item) => {
-      const itemCat = (item.category || '').toLowerCase();
-      const target = selectedCategory.toLowerCase();
-      return itemCat === target || itemCat.includes(target) || target.includes(itemCat);
-    });
-  }, [items, selectedCategory]);
+  const featuredItems = useMemo(() => {
+    return items.slice(0, 4);
+  }, [items]);
+
+  // Featured Auto-slide
+  useEffect(() => {
+    if (featuredItems.length === 0) return;
+    const timer = setInterval(() => {
+      setFeaturedIndex((prev) => (prev + 1) % featuredItems.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [featuredItems.length]);
 
   // Keyboard navigation for lightbox
   useEffect(() => {
     if (lightboxIndex === null) return;
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') setLightboxIndex(null);
-      if (e.key === 'ArrowRight') setLightboxIndex((prev) => (prev + 1) % filtered.length);
-      if (e.key === 'ArrowLeft') setLightboxIndex((prev) => (prev - 1 + filtered.length) % filtered.length);
+      if (e.key === 'ArrowRight') setLightboxIndex((prev) => (prev + 1) % items.length);
+      if (e.key === 'ArrowLeft') setLightboxIndex((prev) => (prev - 1 + items.length) % items.length);
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxIndex, filtered.length]);
+  }, [lightboxIndex, items.length]);
+
+  const activeLightboxItem = lightboxIndex !== null ? items[lightboxIndex] : null;
+  const activeFeatured = featuredItems[featuredIndex] || featuredItems[0];
+
+  const handleUploadSubmit = (e) => {
+    e.preventDefault();
+    setUploadSuccess(true);
+    setTimeout(() => {
+      setIsUploadModalOpen(false);
+      setUploadSuccess(false);
+      setUploadData({ name: '', phone: '', location: '', note: '' });
+    }, 2500);
+  };
 
   return (
-    <div className="w-full dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] overflow-hidden font-manrope transition-colors duration-300">
+    <div className="w-full bg-[#FAF6F0] dark:bg-[#0A0806] text-[#2A1F17] dark:text-[#F3EEE0] overflow-hidden font-jakarta selection:bg-[#B38738] selection:text-white transition-colors duration-500">
+      
+      {/* ------------------------------------------------------------- */}
+      {/* 1. HERO: OUR HAPPY CUSTOMER MEMORIES                          */}
+      {/* ------------------------------------------------------------- */}
+      <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 px-4 sm:px-8 border-b border-[#B38738]/20 text-center select-none overflow-hidden">
+        
+        {/* Subtle Indian Jaali Texture */}
+        <IndianArtBackground variant="full" opacity="opacity-[0.03] dark:opacity-[0.05]" />
 
-      {/* 1. HERO BANNER IN PURE BLACK */}
-      <section className="relative min-h-[75vh] sm:min-h-[85vh] flex flex-col justify-center py-20 sm:py-32 px-4 sm:px-12 bg-black border-b dark:border-[#333333] border-[#E9E9DE] overflow-hidden select-none">
-        {/* Background Vista */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1400&q=75"
-            alt="Sanctuary Visual Gallery"
-            loading="eager"
-            decoding="async"
-            className="w-full h-full object-cover filter brightness-[0.25]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
-        </div>
+        {/* Ambient Top Glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#B38738]/10 rounded-full blur-[140px] pointer-events-none" />
 
-        <div className="relative z-10 max-w-6xl mx-auto text-center space-y-6 sm:space-y-8 my-auto w-full">
+        <div className="relative z-10 max-w-4xl mx-auto space-y-5">
+          
           <ScrollReveal direction="up">
-            <div className="inline-flex items-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#FF1F02] px-3 py-1 bg-black/40 border border-[#FF1F02]/30 rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02] inline-block animate-pulse" />
-              <span>THE LIVING VISUAL ARCHIVE</span>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#8F661E]/20 via-[#B38738]/30 to-[#8F661E]/20 border border-[#B38738]/40 shadow-sm">
+              <Star className="w-4 h-4 text-[#B38738] dark:text-[#E8C97E] fill-current animate-pulse" />
+              <span className="text-[11px] font-cinzel font-bold tracking-[0.25em] text-[#8F661E] dark:text-[#E8C97E] uppercase">
+                AUTHENTIC GUEST VACATION CHRONICLES
+              </span>
             </div>
           </ScrollReveal>
 
-          <ScrollReveal direction="up" delay={100}>
-            <h1 className="text-[clamp(1.95rem,7.5vw,8.5rem)] font-extrabold uppercase tracking-tight sm:tracking-[-0.04em] leading-[0.98] sm:leading-[0.88] text-white break-words">
-              THE ART OF <br />
-              ARCHITECTURAL <br />
-              <span className="text-art-trio">PERSPECTIVE.</span>
+          <ScrollReveal direction="up" delay={80}>
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-marcellus font-normal text-[#2A1F17] dark:text-[#FAF6ED] tracking-tight uppercase leading-[1.05]">
+              Our Happy <span className="text-[#8F661E] dark:text-[#E8C97E] font-cormorant italic lowercase tracking-normal">Customer Memories</span>
             </h1>
           </ScrollReveal>
 
-          <ScrollReveal direction="up" delay={200}>
-            <p className="text-xs sm:text-lg lg:text-xl font-light text-[#D0D0D0] max-w-2xl mx-auto leading-relaxed px-2">
-              A curated photographic portrait of mountain mist, native slate architecture, and unhurried stillness across our 500-acre sanctuary.
+          <RoyalOrnamentDivider color="#B38738" className="my-1" />
+
+          <ScrollReveal direction="up" delay={120}>
+            <p className="text-base sm:text-xl text-[#6E5D4F] dark:text-[#C5BAAF] max-w-2xl mx-auto leading-relaxed font-cormorant font-light italic">
+              Joyful family smiles, sacred anniversary milestones, and unforgettable vacation stories captured by our cherished patrons.
             </p>
           </ScrollReveal>
+
+          {/* Live Stats Bar */}
+          <ScrollReveal direction="up" delay={160}>
+            <div className="pt-3 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs font-jakarta">
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4 text-[#B38738] dark:text-[#E8C97E]" />
+                <span className="font-bold text-[#2A1F17] dark:text-[#FAF6ED]">10,000+</span>
+                <span className="text-[#6E5D4F] dark:text-[#A89B8F]">Delighted Families</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Star className="w-4 h-4 text-[#B38738] dark:text-[#E8C97E] fill-current" />
+                <span className="font-bold text-[#2A1F17] dark:text-[#FAF6ED]">4.9 / 5.0</span>
+                <span className="text-[#6E5D4F] dark:text-[#A89B8F]">Patron Rating</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-[#22C55E]" />
+                <span className="font-bold text-[#2A1F17] dark:text-[#FAF6ED]">100%</span>
+                <span className="text-[#6E5D4F] dark:text-[#A89B8F]">Verified Guest Reviews</span>
+              </div>
+            </div>
+          </ScrollReveal>
+
         </div>
       </section>
 
+      {/* ------------------------------------------------------------- */}
+      {/* 2. DEDICATED CUSTOMER MEMORIES SLIDER / SCROLLER              */}
+      {/* ------------------------------------------------------------- */}
+      <section className="relative py-12 sm:py-20 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto select-none overflow-hidden">
+        
+        {/* Subtle Indian Jaali & Palace Mandala Background Art */}
+        <IndianArtBackground variant="full" opacity="opacity-[0.035] dark:opacity-[0.055]" />
 
-      {/* 2. MAIN GALLERY SECTION (ADAPTIVE DARK/LIGHT) */}
-      <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-20 sm:py-36 px-4 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300">
-        <EditorialBackgroundElements variant="light" position="top-right" />
+        {/* Ambient Radial Golden Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#B38738]/5 rounded-full blur-[140px] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto space-y-12 sm:space-y-20 relative z-10">
-
-          {/* Section Header with Category Filters */}
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 sm:gap-10 pb-8 sm:pb-10 border-b dark:border-[#333333] border-[#E9E9DE]">
-            <div className="space-y-3 sm:space-y-4">
-              <ScrollReveal direction="up">
-                <div className="flex items-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.14em] dark:text-white text-[#0E0E0E]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02] inline-block shrink-0" />
-                  <span>01 — VISUAL CURATION</span>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal direction="up" delay={100}>
-                <h2 className="text-[clamp(2rem,6.5vw,7.5rem)] font-extrabold uppercase tracking-tight sm:tracking-[-0.04em] leading-[0.95] sm:leading-[0.88] text-art-green">
-                  THE LIVING <br />
-                  GALLERY.
-                </h2>
-              </ScrollReveal>
+        {/* Scroller Header with Navigation Arrows */}
+        <div className="relative z-10 flex items-end justify-between gap-4 mb-8 pb-4 border-b border-[#B38738]/20">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#B38738] animate-ping" />
+              <span className="text-[11px] font-cinzel text-[#8F661E] dark:text-[#E8C97E] uppercase font-bold tracking-widest">
+                FEATURED GUEST CHRONICLES ({items.length} MEMORIES)
+              </span>
             </div>
-
-            {/* Filter Tabs matching Admin Media & Gallery CMS */}
-            <ScrollReveal direction="up" delay={200}>
-              <div className="flex flex-wrap items-center gap-1.5 sm:gap-3">
-                {CATEGORIES.map((cat) => {
-                  const isActive = cat.value === selectedCategory;
-                  return (
-                    <button
-                      key={cat.value}
-                      onClick={() => setSelectedCategory(cat.value)}
-                      className={`px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.12em] transition-all duration-300 cursor-pointer ${
-                        isActive
-                          ? 'bg-[#FF1F02] text-white shadow-md'
-                          : 'border dark:border-[#333333] border-[#E9E9DE] dark:text-[#D0D0D0] text-[#0E0E0E]/75 hover:border-[#FF1F02] hover:text-[#FF1F02] dark:bg-[#0E0E0E] bg-white/60'
-                      }`}
-                    >
-                      {cat.label}
-                    </button>
-                  );
-                })}
-              </div>
-            </ScrollReveal>
+            <h2 className="text-2xl sm:text-4xl font-marcellus text-[#2A1F17] dark:text-[#FAF6ED] uppercase">
+              Vacation Memories Slider
+            </h2>
           </div>
 
-          {/* Asymmetrical Staggered Collage Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {filtered.map((item, idx) => (
-              <div
-                key={item.id}
-                className={`w-full ${item.gridSpan} group cursor-pointer`}
-                onClick={() => setLightboxIndex(idx)}
-                data-cursor="VIEW"
-              >
-                <ScrollReveal direction="clip" delay={idx * 60}>
-                  
-                  {/* Image Frame */}
-                  <div className={`relative overflow-hidden ${item.aspect} border dark:border-[#333333] border-[#E9E9DE] dark:bg-[#0E0E0E] bg-[#FAFDF2] shadow-sm`}>
-                    <img
-                      src={item.url}
-                      alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] filter brightness-95"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                    {/* Corner Expand Icon */}
-                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <span className="w-8 h-8 rounded-full bg-white/90 backdrop-blur-md text-[#0E0E0E] flex items-center justify-center shadow-lg">
-                        <Maximize2 className="w-3.5 h-3.5" />
-                      </span>
-                    </div>
-
-                    {/* Bottom Metadata Overlay */}
-                    <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between">
-                      <div>
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-[#FF1F02] block font-bold">
-                          {item.category}
-                        </span>
-                        <h4 className="text-sm font-bold uppercase tracking-tight">
-                          {item.title}
-                        </h4>
-                      </div>
-                      <span className="text-[10px] font-mono text-white/70">
-                        {item.specs}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Caption Below Image */}
-                  <div className="pt-3 flex items-baseline justify-between text-xs border-b dark:border-[#333333] border-[#E9E9DE] pb-2">
-                    <span className="font-bold uppercase tracking-tight dark:text-white text-[#0E0E0E] group-hover:text-[#FF1F02] transition-colors">
-                      {item.title}
-                    </span>
-                    <span className="text-[10px] font-mono dark:text-[#A0A0A0] text-[#0E0E0E]/50 uppercase tracking-widest">
-                      0{item.id}
-                    </span>
-                  </div>
-
-                </ScrollReveal>
-              </div>
-            ))}
-          </div>
-
-        </div>
-
-        {/* Lightbox Modal */}
-        {lightboxIndex !== null && (
-          <div
-            className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 sm:p-10 select-none"
-            onClick={() => setLightboxIndex(null)}
-          >
+          {/* Left & Right Scroller Navigation Arrows */}
+          <div className="flex items-center gap-2.5">
             <button
-              onClick={() => setLightboxIndex(null)}
-              className="absolute top-6 right-6 w-12 h-12 border border-white/30 text-white hover:border-[#FF1F02] hover:text-[#FF1F02] flex items-center justify-center transition-all cursor-pointer z-50"
-              aria-label="Close Lightbox"
+              type="button"
+              onClick={() => handleScrollBy('left')}
+              disabled={!canScrollLeft}
+              className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all cursor-pointer ${
+                canScrollLeft
+                  ? 'border-[#B38738] bg-white dark:bg-[#16120E] text-[#8F661E] dark:text-[#E8C97E] hover:bg-[#B38738] hover:text-white shadow-lg'
+                  : 'border-[#B38738]/20 text-gray-400 opacity-40 cursor-not-allowed'
+              }`}
+              aria-label="Previous Slide"
             >
-              <X className="w-6 h-6" />
+              <ChevronLeft className="w-5 h-5" />
             </button>
 
             <button
+              type="button"
+              onClick={() => handleScrollBy('right')}
+              disabled={!canScrollRight}
+              className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all cursor-pointer ${
+                canScrollRight
+                  ? 'border-[#B38738] bg-white dark:bg-[#16120E] text-[#8F661E] dark:text-[#E8C97E] hover:bg-[#B38738] hover:text-white shadow-lg'
+                  : 'border-[#B38738]/20 text-gray-400 opacity-40 cursor-not-allowed'
+              }`}
+              aria-label="Next Slide"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Horizontal Slider / Scroller Track */}
+        <div
+          ref={scrollerRef}
+          onScroll={checkScrollBounds}
+          className="flex items-stretch gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-8 pt-2 px-1 no-scrollbar select-none"
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
+          }}
+        >
+          {items.map((item, idx) => (
+            <motion.div
+              key={item.id || idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-20px' }}
+              transition={{ duration: 0.4, delay: (idx % 3) * 0.06 }}
+              whileHover={{ y: -6 }}
+              className="w-[300px] sm:w-[360px] md:w-[410px] shrink-0 snap-start flex flex-col justify-between bg-white dark:bg-[#14100C] rounded-3xl border border-[#B38738]/25 hover:border-[#B38738] shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group cursor-pointer"
+              onClick={() => setLightboxIndex(idx)}
+            >
+              
+              {/* Uniform 16:10 Photo Container with Badges */}
+              <div className="relative aspect-[16/10] overflow-hidden bg-black/10 shrink-0">
+                <img
+                  src={item.url}
+                  alt={item.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-[0.96]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+
+                {/* Top Overlay Badges */}
+                <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-10">
+                  <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-[#E8C97E]/70 text-[10px] font-cinzel text-[#E8C97E] font-bold shadow-md">
+                    <Star className="w-3 h-3 fill-current text-[#E8C97E]" />
+                    <span>5.0 SATISFACTION</span>
+                  </div>
+
+                  <div className="w-8 h-8 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md">
+                    <Maximize2 className="w-3.5 h-3.5" />
+                  </div>
+                </div>
+
+                {/* Bottom Overlay Location Tag */}
+                <div className="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between z-10 pointer-events-none">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md text-white/90 text-[11px] font-jakarta border border-white/15 truncate max-w-[85%]">
+                    <MapPin className="w-3 h-3 text-[#E8C97E] shrink-0" />
+                    <span className="truncate">{item.location}</span>
+                  </span>
+                </div>
+              </div>
+
+              {/* Card Body Details with Impeccable Alignment */}
+              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                
+                <div className="space-y-3">
+                  {/* Patron Tag & Date / Stay Category */}
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-jakarta font-bold text-[#8F661E] dark:text-[#E8C97E] truncate">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#B38738] dark:text-[#E8C97E] shrink-0" />
+                      <span className="truncate">{item.guestName}</span>
+                    </span>
+                    <span className="text-[10px] font-cinzel tracking-wider text-[#6E5D4F] dark:text-[#A89B8F] shrink-0 font-semibold uppercase">
+                      {item.date}
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="font-marcellus text-lg sm:text-xl text-[#2A1F17] dark:text-[#FAF6ED] leading-snug group-hover:text-[#8F661E] dark:group-hover:text-[#E8C97E] transition-colors line-clamp-1">
+                    {item.title}
+                  </h3>
+
+                  {/* Star Rating Strip */}
+                  <div className="flex items-center gap-1">
+                    {[...Array(5)].map((_, sIdx) => (
+                      <Star key={sIdx} className="w-3.5 h-3.5 fill-[#B38738] text-[#B38738] dark:fill-[#E8C97E] dark:text-[#E8C97E]" />
+                    ))}
+                    <span className="text-[11px] font-jakarta font-bold text-[#2A1F17] dark:text-[#FAF6ED] ml-1.5">
+                      5.0
+                    </span>
+                  </div>
+
+                  {/* Quote Box with Consistent Height Alignment */}
+                  <div className="bg-[#FAF6F0] dark:bg-[#1A140F] p-3.5 rounded-2xl border border-[#B38738]/20 relative min-h-[64px] flex items-center">
+                    <p className="text-xs sm:text-sm font-cormorant italic text-[#4A3B32] dark:text-[#D5CBC2] line-clamp-2 leading-relaxed">
+                      "{item.quote}"
+                    </p>
+                  </div>
+                </div>
+
+                {/* Card Footer Pinned to Bottom */}
+                <div className="pt-3 border-t border-[#B38738]/15 flex items-center justify-between text-xs text-[#6E5D4F] dark:text-[#A89B8F] mt-auto">
+                  <span className="text-[11px] font-jakarta text-[#8F661E] dark:text-[#E8C97E] font-medium">
+                    Verified Guest Review
+                  </span>
+
+                  <span className="inline-flex items-center gap-1.5 text-xs font-cinzel font-bold text-[#8F661E] dark:text-[#E8C97E] group-hover:translate-x-1 transition-transform">
+                    <span>EXPLORE</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </div>
+
+              </div>
+
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Footer Navigation Bar */}
+        <div className="flex items-center justify-between pt-2 border-t border-[#B38738]/15 text-xs font-jakarta text-[#6E5D4F] dark:text-[#888888]">
+          <span className="flex items-center gap-2 font-cinzel tracking-wider text-[11px]">
+            <MoveHorizontal className="w-4 h-4 text-[#B38738]" />
+            <span>Swipe or click arrows to explore stories</span>
+          </span>
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#B38738]" />
+            <span className="font-mono text-[11px] font-semibold">{items.length} Memories Available</span>
+          </div>
+        </div>
+
+      </section>
+
+      {/* ------------------------------------------------------------- */}
+      {/* 4. GUEST MEMORY SUBMISSION MODAL                              */}
+      {/* ------------------------------------------------------------- */}
+      <AnimatePresence>
+        {isUploadModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
+            onClick={() => setIsUploadModalOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.92, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.92, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="max-w-lg w-full bg-white dark:bg-[#18130F] border border-[#B38738]/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative"
+            >
+              <button
+                onClick={() => setIsUploadModalOpen(false)}
+                className="absolute top-5 right-5 w-9 h-9 rounded-full bg-[#FAF6F0] dark:bg-[#0E0C0A] text-[#2A1F17] dark:text-white flex items-center justify-center hover:bg-[#B38738] hover:text-white transition-colors cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              {uploadSuccess ? (
+                <div className="text-center py-8 space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-[#B38738]/10 text-[#B38738] dark:text-[#E8C97E] flex items-center justify-center mx-auto border-2 border-[#B38738]">
+                    <CheckCircle2 className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-2xl font-marcellus text-[#2A1F17] dark:text-[#FAF6ED]">
+                    Memory Transmitted!
+                  </h3>
+                  <p className="text-xs text-[#6E5D4F] dark:text-[#A89B8F]">
+                    Thank you for sharing your royal vacation moment. Our guest relations team will review and feature it in our customer chronicles!
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleUploadSubmit} className="space-y-4">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-cinzel text-[#8F661E] dark:text-[#E8C97E] uppercase font-bold tracking-widest">
+                      ✦ GUEST MEMORY SUBMISSION
+                    </span>
+                    <h3 className="text-2xl font-marcellus text-[#2A1F17] dark:text-[#FAF6ED] uppercase">
+                      Share Your Story
+                    </h3>
+                  </div>
+
+                  <div>
+                    <label className="text-[11px] font-cinzel uppercase text-[#8F661E] dark:text-[#E8C97E] font-bold block mb-1">
+                      Guest / Family Name *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={uploadData.name}
+                      onChange={(e) => setUploadData({ ...uploadData, name: e.target.value })}
+                      placeholder="e.g. The Sharma Family / Dr. Verma"
+                      className="w-full px-4 py-2.5 bg-[#FAF6F0] dark:bg-[#0E0C0A] border border-[#B38738]/25 focus:border-[#B38738] rounded-xl text-xs text-[#2A1F17] dark:text-[#FAF6ED] focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[11px] font-cinzel uppercase text-[#8F661E] dark:text-[#E8C97E] font-bold block mb-1">
+                      WhatsApp Phone *
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      value={uploadData.phone}
+                      onChange={(e) => setUploadData({ ...uploadData, phone: e.target.value })}
+                      placeholder="+91 98765 43210"
+                      className="w-full px-4 py-2.5 bg-[#FAF6F0] dark:bg-[#0E0C0A] border border-[#B38738]/25 focus:border-[#B38738] rounded-xl text-xs text-[#2A1F17] dark:text-[#FAF6ED] focus:outline-none font-mono"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[11px] font-cinzel uppercase text-[#8F661E] dark:text-[#E8C97E] font-bold block mb-1">
+                      Resort / Location Visited
+                    </label>
+                    <input
+                      type="text"
+                      value={uploadData.location}
+                      onChange={(e) => setUploadData({ ...uploadData, location: e.target.value })}
+                      placeholder="e.g. Azure Coast Sanctuary, Goa"
+                      className="w-full px-4 py-2.5 bg-[#FAF6F0] dark:bg-[#0E0C0A] border border-[#B38738]/25 focus:border-[#B38738] rounded-xl text-xs text-[#2A1F17] dark:text-[#FAF6ED] focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[11px] font-cinzel uppercase text-[#8F661E] dark:text-[#E8C97E] font-bold block mb-1">
+                      Vacation Note & Review Quote
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={uploadData.note}
+                      onChange={(e) => setUploadData({ ...uploadData, note: e.target.value })}
+                      placeholder="Describe your favorite moment, service experience, or dining highlight..."
+                      className="w-full px-4 py-2.5 bg-[#FAF6F0] dark:bg-[#0E0C0A] border border-[#B38738]/25 focus:border-[#B38738] rounded-xl text-xs text-[#2A1F17] dark:text-[#FAF6ED] focus:outline-none resize-none"
+                    />
+                  </div>
+
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      className="w-full py-3 bg-[#B38738] hover:bg-[#8F661E] text-white font-cinzel font-bold text-xs uppercase tracking-[0.2em] rounded-full shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                      <Send className="w-3.5 h-3.5" />
+                      <span>SUBMIT FOR GUEST GALLERY</span>
+                    </button>
+                  </div>
+                </form>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ------------------------------------------------------------- */}
+      {/* 5. FULLSCREEN CINEMATIC LIGHTBOX                               */}
+      {/* ------------------------------------------------------------- */}
+      <AnimatePresence>
+        {activeLightboxItem && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 sm:p-8 select-none"
+            onClick={() => setLightboxIndex(null)}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setLightboxIndex(null)}
+              className="absolute top-6 right-6 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors z-50 cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Left Nav Button */}
+            <button
               onClick={(e) => {
                 e.stopPropagation();
-                setLightboxIndex((prev) => (prev - 1 + filtered.length) % filtered.length);
+                setLightboxIndex((prev) => (prev - 1 + items.length) % items.length);
               }}
-              className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 w-12 h-12 border border-white/30 text-white hover:border-[#FF1F02] hover:text-[#FF1F02] flex items-center justify-center transition-all cursor-pointer z-50"
-              aria-label="Previous Image"
+              className="absolute left-4 sm:left-8 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors z-50 cursor-pointer"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
 
+            {/* Right Nav Button */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                setLightboxIndex((prev) => (prev + 1) % filtered.length);
+                setLightboxIndex((prev) => (prev + 1) % items.length);
               }}
-              className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 w-12 h-12 border border-white/30 text-white hover:border-[#FF1F02] hover:text-[#FF1F02] flex items-center justify-center transition-all cursor-pointer z-50"
-              aria-label="Next Image"
+              className="absolute right-4 sm:right-8 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors z-50 cursor-pointer"
             >
               <ChevronRight className="w-6 h-6" />
             </button>
 
-            <div
-              className="max-w-5xl w-full max-h-[85vh] relative flex flex-col items-center"
+            {/* Lightbox Modal Box */}
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()}
+              className="max-w-5xl w-full bg-[#16120E] border border-[#B38738]/40 rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
             >
-              <img
-                src={filtered[lightboxIndex].url}
-                alt={filtered[lightboxIndex].title}
-                className="max-w-full max-h-[75vh] object-contain border border-[#333333]"
-              />
-              <div className="mt-4 flex items-center justify-between w-full text-white text-xs font-mono">
-                <span className="text-[#FF1F02] uppercase font-bold">
-                  {filtered[lightboxIndex].category} • 0{filtered[lightboxIndex].id}
-                </span>
-                <span className="uppercase font-bold">{filtered[lightboxIndex].title}</span>
-                <span className="text-white/60">{filtered[lightboxIndex].specs}</span>
+              <div className="relative flex-1 min-h-[350px] max-h-[60vh] bg-black">
+                <img
+                  src={activeLightboxItem.url}
+                  alt={activeLightboxItem.title}
+                  className="w-full h-full object-contain"
+                />
               </div>
-            </div>
-          </div>
+
+              {/* Lightbox Footer Info */}
+              <div className="p-6 sm:p-8 bg-[#18130F] border-t border-[#B38738]/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-cinzel text-[#E8C97E] uppercase font-bold tracking-widest flex items-center gap-1">
+                      <Star className="w-3 h-3 fill-current" />
+                      <span>5.0 GUEST SATISFACTION</span>
+                    </span>
+                    <span className="text-xs text-white/70 font-jakarta">
+                      • Guest: <strong className="text-white">{activeLightboxItem.guestName}</strong>
+                    </span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-marcellus text-white">
+                    {activeLightboxItem.title}
+                  </h3>
+                  {activeLightboxItem.quote && (
+                    <p className="text-sm font-cormorant italic text-[#E8C97E]">
+                      "{activeLightboxItem.quote}"
+                    </p>
+                  )}
+                  <div className="flex items-center gap-1.5 text-xs text-white/60 font-jakarta">
+                    <MapPin className="w-3.5 h-3.5 text-[#B38738]" />
+                    <span>{activeLightboxItem.location}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 shrink-0">
+                  <a
+                    href={getWhatsAppBookingUrl(`Hello Country Holidays Hotels & Resorts, I am viewing "${activeLightboxItem.title}" (${activeLightboxItem.guestName}) from the Happy Customer Gallery and would like to know more about this stay.`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 bg-[#B38738] hover:bg-[#8F661E] text-white text-xs font-cinzel font-bold uppercase tracking-wider rounded-full transition-all shadow-md flex items-center gap-2 cursor-pointer"
+                  >
+                    <MessageSquare className="w-3.5 h-3.5" />
+                    <span>Inquire About This Stay</span>
+                  </a>
+                </div>
+              </div>
+
+            </motion.div>
+
+          </motion.div>
         )}
-      </section>
+      </AnimatePresence>
 
-
-      {/* 3. FINAL INVITATION CTA (ADAPTIVE DARK/LIGHT) */}
-      <section className="relative dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] py-32 sm:py-48 px-6 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300 border-t dark:border-[#333333] border-[#E9E9DE]">
-        {/* Background Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1400&q=75"
-            alt="Mountain Horizon"
-            loading="lazy"
-            decoding="async"
-            className="w-full h-full object-cover filter brightness-[0.25]"
-          />
-          <div className="absolute inset-0 dark:bg-gradient-to-t dark:from-black dark:via-black/80 dark:to-black/60 bg-gradient-to-t from-black/80 via-black/60 to-black/40" />
-        </div>
-
-        <div className="relative z-10 max-w-5xl mx-auto text-center space-y-10 sm:space-y-12">
-          
-          {/* Animated Red CHHR Stamp */}
-          <ScrollReveal direction="scale">
-            <div className="flex justify-center mb-2">
-              <EditorialHeritageStamp size={110} centerText="CHHR" text="CHHR HOTELS & RESORTS • SANCTUARY • " />
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="up">
-            <div className="inline-flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-[#FF1F02]">
-              <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
-              <span>02 — INVITATION</span>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="up" delay={100}>
-            <h2 className="text-5xl sm:text-7xl lg:text-9xl font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-art-trio">
-              STEP INTO <br />
-              THE FRAME.
-            </h2>
-          </ScrollReveal>
-
-          <ScrollReveal direction="up" delay={200}>
-            <p className="text-base sm:text-xl font-light text-[#D0D0D0] max-w-xl mx-auto leading-relaxed">
-              Experience the unhurried life first-hand. Book your stay or contact our concierge to reserve your sanctuary pavilion.
-            </p>
-          </ScrollReveal>
-
-          <ScrollReveal direction="up" delay={300}>
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-5">
-              <MagneticButton>
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-4 px-10 py-5 rounded-none bg-white hover:bg-[#FF1F02] text-[#0E0E0E] hover:text-white font-bold text-xs uppercase tracking-[0.16em] transition-all duration-300 shadow-2xl group cursor-pointer"
-                >
-                  <span>PLAN YOUR RETREAT</span>
-                  <span className="w-6 h-6 rounded-full bg-[#FF1F02] group-hover:bg-white text-white group-hover:text-[#FF1F02] flex items-center justify-center transition-colors">
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                </Link>
-              </MagneticButton>
-
-              <MagneticButton>
-                <Link
-                  to="/offers"
-                  className="inline-flex items-center gap-3 px-8 py-5 rounded-none border border-white/40 hover:border-white text-white font-semibold text-xs uppercase tracking-[0.16em] backdrop-blur-md transition-all duration-300 cursor-pointer"
-                >
-                  <Phone className="w-4 h-4 text-[#FF1F02]" />
-                  <span>VIEW PACKAGES</span>
-                </Link>
-              </MagneticButton>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="up" delay={400}>
-            <div className="pt-6 flex items-center justify-center gap-6 text-[11px] font-mono text-[#B0B0B0] uppercase tracking-widest">
-              <span>● 100% OFF-GRID SOLAR</span>
-              <span>● 500-ACRE CONSERVATION</span>
-              <span>● 24/7 BUTLER CARE</span>
-            </div>
-          </ScrollReveal>
-
-        </div>
-      </section>
+      {/* Bottom Heritage Border */}
+      <IndianJaaliBorder />
 
     </div>
   );

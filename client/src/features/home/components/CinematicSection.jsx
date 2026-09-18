@@ -94,7 +94,7 @@ export default function CinematicSection() {
 
         <ScrollReveal direction="up" delay={350}>
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-[10px] sm:text-xs font-mono uppercase tracking-widest dark:text-[#B0B0B0] text-[#0E0E0E]/60">
-            <span>CHENNAI (MAIN HQ)</span>
+            <span>CHENNAI</span>
             <span className="hidden sm:inline">•</span>
             <span>NOIDA</span>
             <span className="hidden sm:inline">•</span>

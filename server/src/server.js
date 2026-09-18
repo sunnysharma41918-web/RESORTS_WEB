@@ -92,7 +92,7 @@ app.use((req, res, next) => {
     return res.status(200).json({
       status: 'online',
       brand: 'Country Holidays Hotels & Resorts',
-      system: 'Executive Concierge REST API',
+      system: 'Luxury Stays & Inquiries REST API',
       timestamp: new Date().toISOString(),
     });
   }

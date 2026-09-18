@@ -2,10 +2,9 @@ import React from 'react';
 import HomeHero from '../../features/home/components/HomeHero';
 import ResortStory from '../../features/home/components/ResortStory';
 import RoomsSuitesSection from '../../features/home/components/RoomsSuitesSection';
-import ResortExperiencesSection from '../../features/home/components/ResortExperiencesSection';
 import DestinationSection from '../../features/home/components/DestinationSection';
 import GuestReviewsSection from '../../features/home/components/GuestReviewsSection';
-import CustomerCareSection from '../../features/home/components/CustomerCareSection';
+import FAQSection from '../../features/home/components/FAQSection';
 import ConnectingVisualSpine from '../../components/common/ConnectingVisualSpine';
 import { useHomeData } from '../../features/home/hooks/useHomeData';
 import Loader from '../../components/common/Loader';
@@ -14,8 +13,8 @@ export default function Home() {
   const { hero } = useHomeData();
 
   return (
-    <div className="relative w-full overflow-hidden dark:bg-[#1C1C1C] bg-[#FAFDF2] dark:text-white text-[#0E0E0E] transition-colors duration-300">
-      {/* 1. HERO */}
+    <div className="relative w-full overflow-hidden bg-[#FAF6F0] dark:bg-[#14110E] text-[#2A1F17] dark:text-[#F3EEE0] transition-colors duration-500">
+      {/* 1. HERO (Kept untouched as requested) */}
       <HomeHero data={hero} />
 
       {/* CONTINUOUS CONNECTING COLOR GRAPHIC SPINE ACROSS ALL SECTIONS */}
@@ -28,17 +27,14 @@ export default function Home() {
         {/* 2. ACCOMMODATION */}
         <RoomsSuitesSection />
 
-        {/* 3. EXPERIENCES & SPECIALIZATIONS */}
-        <ResortExperiencesSection />
-
-        {/* 4. LOCATION / DESTINATIONS */}
+        {/* 3. LOCATION / DESTINATIONS */}
         <DestinationSection />
 
-        {/* 5. TESTIMONIALS */}
+        {/* 4. TESTIMONIALS */}
         <GuestReviewsSection />
 
-        {/* 6. 24/7 CUSTOMER CARE & CONCIERGE */}
-        <CustomerCareSection />
+        {/* 5. FREQUENTLY ASKED QUESTIONS */}
+        <FAQSection />
       </div>
     </div>
   );

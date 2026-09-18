@@ -42,13 +42,11 @@ export default function AdminInquiriesList() {
     loadInquiries();
   };
 
-  // Filtered dataset based on tab
   const filteredInquiries = useMemo(() => {
     if (statusFilter === 'all') return inquiries;
     return inquiries.filter((inq) => (inq.status || 'new') === statusFilter);
   }, [inquiries, statusFilter]);
 
-  // Counts
   const counts = useMemo(() => {
     const total = inquiries.length;
     const newCount = inquiries.filter((i) => (i.status || 'new') === 'new').length;
@@ -59,143 +57,142 @@ export default function AdminInquiriesList() {
 
   const columns = [
     {
-      header: 'Host & Origin',
+      header: 'Guest / Lead',
       key: 'guestName',
       render: (inq) => (
         <div className="space-y-1">
-          <div className="text-sm text-white font-bold">{inq.guestName}</div>
+          <div className="flex items-center space-x-2">
+            <span className="text-xs font-bold text-[#111827]">{inq.guestName}</span>
+            <span className="px-1.5 py-0.5 bg-gray-100 text-gray-700 text-[9px] font-semibold rounded-full">
+              {inq.source || 'Web Lead'}
+            </span>
+          </div>
           {inq.city && (
-            <div className="text-[11px] text-[#A0A0A0] font-mono">
+            <div className="text-[11px] text-gray-500">
               📍 {inq.city}
             </div>
           )}
-          <div className="text-[10px] text-[#888888] font-mono">
+          <div className="text-[10px] text-gray-400">
             {inq.createdAt ? new Date(inq.createdAt).toLocaleDateString() : 'Recent'}
           </div>
         </div>
       ),
     },
     {
-      header: 'Celebration & Budget',
+      header: 'Property & Budget',
       key: 'property',
       render: (inq) => (
-        <div className="space-y-1.5">
-          <div className="text-xs text-white font-bold uppercase tracking-tight">
-            {inq.property || 'Celebration Booking'}
+        <div className="space-y-1">
+          <div className="text-xs text-[#111827] font-semibold">
+            {inq.property || 'Stay / Package Booking'}
           </div>
           {inq.budget ? (
-            <span className="inline-block px-2 py-0.5 bg-[#FF1F02]/15 border border-[#FF1F02]/50 text-[#FF1F02] text-[10px] font-mono font-bold tracking-wider">
+            <span className="inline-block px-2 py-0.5 bg-[#EBF5EE] text-[#134E39] text-[10px] font-semibold rounded-md">
               💰 {inq.budget}
             </span>
           ) : (
-            <span className="text-[10px] text-[#888888] font-mono">Standard Inquiry</span>
+            <span className="text-[10px] text-gray-400">Standard Inquiry</span>
           )}
         </div>
       ),
     },
     {
-      header: 'Direct Contact',
+      header: 'Contact Info',
       key: 'email',
       render: (inq) => (
-        <div className="space-y-1 text-xs text-[#D0D0D0]">
+        <div className="space-y-1 text-xs text-gray-600">
           <div className="flex items-center space-x-1.5">
-            <Phone className="w-3 h-3 text-[#EAB308]" />
-            <a href={`tel:${inq.phone}`} className="hover:text-white hover:underline font-mono font-bold">
+            <Phone className="w-3 h-3 text-[#134E39]" />
+            <a href={`tel:${inq.phone}`} className="hover:text-[#134E39] hover:underline font-semibold text-[#111827]">
               {inq.phone}
             </a>
           </div>
           {inq.email && inq.email !== 'N/A' && (
-            <div className="flex items-center space-x-1.5">
-              <Mail className="w-3 h-3 text-[#FF1F02]" />
-              <a href={`mailto:${inq.email}`} className="hover:text-white hover:underline">
+            <div className="flex items-center space-x-1.5 text-gray-500">
+              <Mail className="w-3 h-3 text-gray-400" />
+              <a href={`mailto:${inq.email}`} className="hover:underline truncate max-w-[140px]">
                 {inq.email}
               </a>
             </div>
           )}
-          {inq.preferredContact && (
-            <div className="text-[10px] font-mono text-[#EAB308]">
-              ⏰ {inq.preferredContact}
-            </div>
-          )}
         </div>
       ),
     },
     {
-      header: 'Requirements / Lead Notes',
+      header: 'Notes / Itinerary',
       key: 'message',
       render: (inq) => (
-        <div className="max-w-xs md:max-w-md text-xs text-[#B0B0B0] leading-relaxed font-light line-clamp-2 hover:line-clamp-none transition-all">
-          {inq.message || inq.itinerary || 'Bespoke celebration inquiry'}
+        <div className="max-w-xs md:max-w-md text-xs text-gray-500 leading-relaxed font-normal line-clamp-2">
+          {inq.message || inq.itinerary || 'Bespoke resort booking inquiry'}
         </div>
       ),
     },
     {
-      header: 'Lead Status',
+      header: 'Status',
       key: 'status',
       render: (inq) => (
         <select
           value={inq.status || 'new'}
           onChange={(e) => handleStatusChange(inq.id, e.target.value)}
-          className={`px-3 py-1 text-[10px] uppercase font-mono tracking-widest font-bold border outline-none cursor-pointer ${
+          className={`px-3 py-1 text-[10px] font-semibold rounded-full border outline-none cursor-pointer ${
             inq.status === 'new'
-              ? 'bg-[#FF1F02]/20 border-[#FF1F02] text-[#FF1F02] shadow-[0_0_10px_rgba(255,31,2,0.3)]'
+              ? 'bg-red-50 border-red-200 text-red-700'
               : inq.status === 'in-progress'
-              ? 'bg-blue-950/40 border-blue-500/50 text-blue-300'
-              : 'bg-emerald-950/40 border-emerald-500/50 text-emerald-300'
+              ? 'bg-amber-50 border-amber-200 text-amber-700'
+              : 'bg-emerald-50 border-emerald-200 text-emerald-700'
           }`}
         >
-          <option value="new" className="bg-[#1C1C1C] text-white">● New Lead</option>
-          <option value="in-progress" className="bg-[#1C1C1C] text-white">In Progress</option>
-          <option value="resolved" className="bg-[#1C1C1C] text-white">Resolved</option>
+          <option value="new">● New Lead</option>
+          <option value="in-progress">In Progress</option>
+          <option value="resolved">Resolved</option>
         </select>
       ),
     },
   ];
 
   return (
-    <div className="space-y-8 select-none font-manrope text-white">
+    <div className="space-y-6 select-none font-manrope text-[#111827]">
       
-      {/* 1. SECTION HEADER */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#333333]">
+      {/* 1. Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-widest text-[#FF1F02] mb-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02]" />
-            <span>EXECUTIVE CONCIERGE & CRM</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-white">
-            Celebration & Guest Inquiries
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#111827] tracking-tight">
+            Guest Inquiries CRM
           </h1>
+          <p className="text-xs sm:text-sm text-gray-500 font-normal mt-0.5">
+            Manage incoming guest reservation requests and VIP concierge leads.
+          </p>
         </div>
       </div>
 
-      {/* 2. STATS KPI CARDS */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        <div className="p-5 bg-[#1C1C1C] border border-[#333333] space-y-1">
-          <span className="text-[10px] font-mono uppercase text-[#A0A0A0] tracking-wider block">Total Leads</span>
-          <span className="text-3xl font-mono font-extrabold text-white">{counts.total}</span>
+      {/* 2. Stats KPI 4-Card Row */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="p-5 bg-white border border-[#E5EAE7] rounded-2xl shadow-xs space-y-1">
+          <span className="text-xs font-semibold text-gray-500 block">Total Leads</span>
+          <span className="text-3xl font-extrabold text-[#111827] block">{counts.total}</span>
         </div>
 
-        <div className="p-5 bg-[#1C1C1C] border border-[#FF1F02]/40 space-y-1">
-          <span className="text-[10px] font-mono uppercase text-[#FF1F02] tracking-wider block font-bold">● New Actionable Leads</span>
-          <span className="text-3xl font-mono font-extrabold text-[#FF1F02]">{counts.newCount}</span>
+        <div className="p-5 bg-white border border-red-200/80 rounded-2xl shadow-xs space-y-1">
+          <span className="text-xs font-semibold text-red-600 block">● Actionable Leads</span>
+          <span className="text-3xl font-extrabold text-red-600 block">{counts.newCount}</span>
         </div>
 
-        <div className="p-5 bg-[#1C1C1C] border border-blue-500/40 space-y-1">
-          <span className="text-[10px] font-mono uppercase text-blue-400 tracking-wider block">In Progress</span>
-          <span className="text-3xl font-mono font-extrabold text-blue-400">{counts.inProgress}</span>
+        <div className="p-5 bg-white border border-amber-200/80 rounded-2xl shadow-xs space-y-1">
+          <span className="text-xs font-semibold text-amber-600 block">In Progress</span>
+          <span className="text-3xl font-extrabold text-amber-600 block">{counts.inProgress}</span>
         </div>
 
-        <div className="p-5 bg-[#1C1C1C] border border-emerald-500/40 space-y-1">
-          <span className="text-[10px] font-mono uppercase text-emerald-400 tracking-wider block">Resolved / Closed</span>
-          <span className="text-3xl font-mono font-extrabold text-emerald-400">{counts.resolved}</span>
+        <div className="p-5 bg-white border border-emerald-200/80 rounded-2xl shadow-xs space-y-1">
+          <span className="text-xs font-semibold text-emerald-600 block">Resolved / Closed</span>
+          <span className="text-3xl font-extrabold text-emerald-600 block">{counts.resolved}</span>
         </div>
       </div>
 
-      {/* 3. FILTER TABS */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-[#333333] pb-3">
+      {/* 3. Filter Tabs */}
+      <div className="flex items-center bg-white p-1.5 rounded-2xl border border-[#E5EAE7] shadow-xs gap-1.5 w-fit">
         {[
           { id: 'all', label: `All Leads (${counts.total})` },
-          { id: 'new', label: `New Leads (${counts.newCount})` },
+          { id: 'new', label: `New (${counts.newCount})` },
           { id: 'in-progress', label: `In Progress (${counts.inProgress})` },
           { id: 'resolved', label: `Resolved (${counts.resolved})` },
         ].map((tab) => {
@@ -204,10 +201,10 @@ export default function AdminInquiriesList() {
             <button
               key={tab.id}
               onClick={() => setStatusFilter(tab.id)}
-              className={`px-4 py-2 text-xs font-mono uppercase tracking-wider transition-all cursor-pointer ${
+              className={`px-4 py-2 text-xs font-semibold rounded-xl transition-all cursor-pointer ${
                 isActive
-                  ? 'bg-[#FF1F02] text-white font-bold shadow-md'
-                  : 'bg-[#1C1C1C] border border-[#333333] text-[#D0D0D0] hover:border-[#FF1F02] hover:text-[#FF1F02]'
+                  ? 'bg-[#134E39] text-white shadow-xs font-bold'
+                  : 'text-gray-600 hover:text-[#111827] hover:bg-gray-50'
               }`}
             >
               {tab.label}
@@ -216,7 +213,7 @@ export default function AdminInquiriesList() {
         })}
       </div>
 
-      {/* 4. MAIN LEADS TABLE */}
+      {/* 4. Table */}
       <AdminTable
         columns={columns}
         data={filteredInquiries}
@@ -226,15 +223,15 @@ export default function AdminInquiriesList() {
           <div className="flex items-center gap-1.5">
             <button
               onClick={() => setSelectedInquiry(inq)}
-              className="p-2 border border-[#333333] text-[#D0D0D0] hover:text-white hover:border-white transition-colors cursor-pointer"
+              className="p-2 border border-gray-200 hover:border-[#134E39] hover:bg-[#EBF5EE] text-gray-600 hover:text-[#134E39] transition-colors rounded-lg shadow-2xs cursor-pointer"
               title="Inspect Full Lead Details"
             >
-              <Eye className="w-3.5 h-3.5 text-[#EAB308]" />
+              <Eye className="w-3.5 h-3.5" />
             </button>
 
             <button
               onClick={() => setDeleteTarget(inq)}
-              className="p-2 border border-[#333333] text-[#888888] hover:text-[#FF1F02] hover:border-[#FF1F02] transition-colors cursor-pointer"
+              className="p-2 border border-gray-200 hover:border-red-300 hover:bg-red-50 text-gray-500 hover:text-red-600 transition-colors rounded-lg shadow-2xs cursor-pointer"
               title="Delete inquiry"
             >
               <Trash2 className="w-3.5 h-3.5" />
@@ -243,40 +240,37 @@ export default function AdminInquiriesList() {
         )}
       />
 
-      {/* 5. LEAD DETAIL MODAL / DRAWER */}
+      {/* 5. Lead Detail Modal */}
       {selectedInquiry && (
-        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-          <div className="bg-[#1C1C1C] border border-[#333333] max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative text-white">
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white border border-gray-100 max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl rounded-3xl relative text-[#111827]">
             
-            {/* Close Button */}
             <button
               onClick={() => setSelectedInquiry(null)}
-              className="absolute top-4 right-4 p-2 text-[#888888] hover:text-white transition-colors cursor-pointer"
+              className="absolute top-5 right-5 p-2 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
 
-            {/* Modal Header */}
-            <div className="space-y-1.5 border-b border-[#333333] pb-4">
-              <span className="text-[10px] font-mono uppercase text-[#FF1F02] font-bold tracking-widest">
-                LEAD SPECIFICATIONS & DETAILS
+            <div className="space-y-1 border-b border-gray-100 pb-4">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-[#134E39]">
+                Lead Specifications & Details
               </span>
-              <h2 className="text-2xl font-extrabold uppercase text-white">
+              <h2 className="text-xl font-extrabold text-[#111827]">
                 {selectedInquiry.guestName}
               </h2>
-              <div className="flex flex-wrap gap-2 text-xs font-mono text-[#D0D0D0]">
+              <div className="flex flex-wrap gap-2 text-xs text-gray-500">
                 {selectedInquiry.city && <span>📍 {selectedInquiry.city}</span>}
                 <span>• Submitted: {selectedInquiry.createdAt ? new Date(selectedInquiry.createdAt).toLocaleString() : 'Recent'}</span>
               </div>
             </div>
 
-            {/* Direct Action Contacts */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <a
-                href={getWhatsAppBookingUrl(`Hello ${selectedInquiry.guestName}, thank you for contacting Country Holidays Hotels & Resorts regarding ${selectedInquiry.property}. Our concierge team is happy to assist with your dates and banquet availability.`)}
+                href={getWhatsAppBookingUrl(`Hello ${selectedInquiry.guestName}, thank you for contacting Country Holidays Hotels & Resorts regarding ${selectedInquiry.property}. Our concierge team is happy to assist with your booking dates.`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="py-3 px-4 bg-[#FF1F02] hover:bg-white text-white hover:text-black font-bold text-xs uppercase font-mono tracking-wider transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer"
+                className="py-3 px-4 bg-[#134E39] hover:bg-[#0E3C2B] text-white font-semibold text-xs rounded-full flex items-center justify-center gap-2 shadow-xs"
               >
                 <MessageSquare className="w-4 h-4" />
                 <span>Chat on WhatsApp</span>
@@ -284,47 +278,49 @@ export default function AdminInquiriesList() {
 
               <a
                 href={`tel:${selectedInquiry.phone}`}
-                className="py-3 px-4 bg-[#2A2A2A] hover:bg-[#333333] text-white border border-[#444444] font-bold text-xs uppercase font-mono tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="py-3 px-4 bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 font-semibold text-xs rounded-full flex items-center justify-center gap-2 shadow-2xs"
               >
-                <Phone className="w-4 h-4 text-[#EAB308]" />
+                <Phone className="w-4 h-4 text-[#134E39]" />
                 <span>Call {selectedInquiry.phone}</span>
               </a>
             </div>
 
-            {/* Lead Specifications Breakdown */}
-            <div className="space-y-3 p-4 bg-black border border-[#333333] text-xs font-mono">
-              <div className="text-[10px] font-bold uppercase text-[#FF1F02] tracking-wider pb-1 border-b border-[#222222]">
-                EVENT PROFILE & PARAMETERS:
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-[#D0D0D0]">
-                <div><strong className="text-white">Occasion / Property:</strong> {selectedInquiry.property}</div>
-                <div><strong className="text-white">Estimated Budget:</strong> <span className="text-[#FF1F02] font-bold">{selectedInquiry.budget || 'Custom Quote'}</span></div>
-                <div><strong className="text-white">Expected Guests:</strong> <span className="text-[#EAB308] font-bold">{selectedInquiry.guestCount || 'TBD'}</span></div>
-                <div><strong className="text-white">Rooms / Suites:</strong> <span className="text-[#EAB308] font-bold">{selectedInquiry.roomCount || 'TBD'}</span></div>
-                <div><strong className="text-white">Event Duration:</strong> {selectedInquiry.eventDuration || 'Flexible'}</div>
-                <div><strong className="text-white">Event Date:</strong> {selectedInquiry.eventDate || 'Tentative / Flexible'}</div>
-                <div><strong className="text-white">Host City:</strong> {selectedInquiry.city || 'India'}</div>
-                <div><strong className="text-white">Preferred Callback:</strong> {selectedInquiry.preferredContact || 'WhatsApp Priority'}</div>
-                <div><strong className="text-white">Email Address:</strong> {selectedInquiry.email || 'N/A'}</div>
-                <div><strong className="text-white">Phone / WhatsApp:</strong> {selectedInquiry.phone}</div>
+            <div className="space-y-3 p-4 bg-[#F4F6F5] rounded-2xl text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-gray-700">
+                <div><strong>Source:</strong> <span className="text-[#134E39] font-bold">{selectedInquiry.source || 'Website'}</span></div>
+                <div><strong>Destination:</strong> <span className="font-bold">{selectedInquiry.destination || selectedInquiry.city || 'India'}</span></div>
+                <div><strong>Property:</strong> {selectedInquiry.property}</div>
+                <div><strong>Budget:</strong> <span className="font-bold text-[#134E39]">{selectedInquiry.budget || 'Custom Quote'}</span></div>
+                <div><strong>Guests:</strong> {selectedInquiry.travellers || selectedInquiry.guestCount || 'TBD'}</div>
+                <div><strong>Travel Date:</strong> {selectedInquiry.eventDate || 'Flexible'}</div>
+                <div><strong>Email:</strong> {selectedInquiry.email || 'N/A'}</div>
+                <div><strong>Phone:</strong> {selectedInquiry.phone}</div>
               </div>
 
-              <div className="pt-2 border-t border-[#222222]">
-                <strong className="text-white block mb-1">Full Summary / Special Notes & Concept Vision:</strong>
-                <p className="text-[#A0A0A0] leading-relaxed whitespace-pre-wrap font-sans text-xs">
+              {selectedInquiry.conversationSummary && (
+                <div className="pt-2 border-t border-gray-200">
+                  <strong className="text-[#134E39] block mb-1">Inquiry Conversation / Details:</strong>
+                  <div className="p-2.5 bg-white border border-gray-200 rounded-xl text-[11px] text-gray-600 max-h-36 overflow-y-auto whitespace-pre-wrap leading-relaxed">
+                    {selectedInquiry.conversationSummary}
+                  </div>
+                </div>
+              )}
+
+              <div className="pt-2 border-t border-gray-200">
+                <strong className="block mb-1 text-gray-800">Special Notes:</strong>
+                <p className="text-gray-600 leading-relaxed whitespace-pre-wrap">
                   {selectedInquiry.message || 'No additional notes provided.'}
                 </p>
               </div>
             </div>
 
-            {/* Status Update & Footer */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#333333]">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-mono text-[#D0D0D0]">Change Status:</span>
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-gray-600">Status:</span>
                 <select
                   value={selectedInquiry.status || 'new'}
                   onChange={(e) => handleStatusChange(selectedInquiry.id, e.target.value)}
-                  className="px-3 py-1.5 text-xs font-mono uppercase font-bold bg-black border border-[#444444] text-white cursor-pointer"
+                  className="px-3 py-1.5 text-xs font-semibold rounded-xl bg-[#F4F6F5] border border-gray-200 outline-none"
                 >
                   <option value="new">● New Lead</option>
                   <option value="in-progress">In Progress</option>
@@ -334,9 +330,9 @@ export default function AdminInquiriesList() {
 
               <button
                 onClick={() => setSelectedInquiry(null)}
-                className="px-6 py-2 bg-[#333333] hover:bg-white text-white hover:text-black text-xs font-mono uppercase font-bold transition-colors cursor-pointer"
+                className="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-semibold rounded-full transition-colors cursor-pointer"
               >
-                Done
+                Close
               </button>
             </div>
 
@@ -344,7 +340,6 @@ export default function AdminInquiriesList() {
         </div>
       )}
 
-      {/* 6. DELETE CONFIRMATION DIALOG */}
       <ConfirmDialog
         isOpen={!!deleteTarget}
         onClose={() => setDeleteTarget(null)}
@@ -355,4 +350,3 @@ export default function AdminInquiriesList() {
     </div>
   );
 }
-

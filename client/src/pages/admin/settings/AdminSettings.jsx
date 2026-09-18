@@ -90,44 +90,43 @@ export default function AdminSettings() {
   };
 
   return (
-    <form onSubmit={handleSave} className="space-y-10 max-w-6xl select-none font-manrope">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#333333]">
+    <form onSubmit={handleSave} className="w-full space-y-6 select-none font-manrope text-[#111827]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-widest text-[#FF1F02] mb-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02]" />
-            <span>GLOBAL SYSTEM CONTROLS</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-white">
-            Website CMS Settings
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#111827] tracking-tight">
+            System Settings
           </h1>
+          <p className="text-xs sm:text-sm text-gray-500 font-normal mt-0.5">
+            Configure global website identity, contact channels, and concierge details.
+          </p>
         </div>
 
         <div className="flex items-center space-x-3">
           <button
             type="button"
             onClick={() => setIsResetDialogOpen(true)}
-            className="inline-flex items-center space-x-2 px-4 py-2.5 bg-[#1C1C1C] hover:bg-[#2A2A2A] border border-[#333333] text-white text-xs font-mono uppercase tracking-wider transition-all cursor-pointer"
+            className="inline-flex items-center space-x-2 px-4 py-2.5 bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 text-xs font-semibold rounded-full transition-all cursor-pointer shadow-2xs"
           >
-            <RotateCcw className="w-3.5 h-3.5 text-[#EAB308]" />
+            <RotateCcw className="w-3.5 h-3.5 text-amber-600" />
             <span>Reset Demo Seeds</span>
           </button>
 
           <button
             type="submit"
-            className="inline-flex items-center space-x-2 px-6 py-2.5 bg-[#FF1F02] hover:bg-white text-white hover:text-[#0E0E0E] font-bold text-xs font-mono uppercase tracking-wider transition-all shadow-lg hover:scale-105 cursor-pointer"
+            className="inline-flex items-center space-x-2 px-6 py-2.5 bg-[#134E39] hover:bg-[#0E3C2B] text-white font-semibold text-xs rounded-full transition-all shadow-xs cursor-pointer"
           >
             <Save className="w-4 h-4" />
-            <span>Save All Settings</span>
+            <span>Save Settings</span>
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Brand & Editorial Copy */}
-        <div className="bg-[#0E0E0E] border border-[#333333] p-6 md:p-8 space-y-6 shadow-xl">
-          <div className="flex items-center gap-2 pb-3 border-b border-[#222222]">
-            <Sliders className="w-4 h-4 text-[#FF1F02]" />
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
+        <div className="bg-white border border-[#E5EAE7] p-6 rounded-2xl space-y-5 shadow-xs">
+          <div className="flex items-center gap-2 pb-3 border-b border-gray-100">
+            <Sliders className="w-4 h-4 text-[#134E39]" />
+            <h3 className="text-xs font-bold text-gray-700 uppercase tracking-wider">
               Brand Identity & SEO
             </h3>
           </div>
@@ -159,11 +158,11 @@ export default function AdminSettings() {
         </div>
 
         {/* Contact Numbers & Channels */}
-        <div className="bg-[#0E0E0E] border border-[#333333] p-6 md:p-8 space-y-6 shadow-xl">
-          <div className="flex items-center gap-2 pb-3 border-b border-[#222222]">
-            <Sparkles className="w-4 h-4 text-[#EAB308]" />
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
-              Global Concierge Contact
+        <div className="bg-white border border-[#E5EAE7] p-6 rounded-2xl space-y-5 shadow-xs">
+          <div className="flex items-center gap-2 pb-3 border-b border-gray-100">
+            <Sparkles className="w-4 h-4 text-[#134E39]" />
+            <h3 className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+              Concierge Contact Channels
             </h3>
           </div>
 
@@ -203,7 +202,7 @@ export default function AdminSettings() {
             </FormField>
           </div>
 
-          <FormField label="Physical Pavilion Address" required>
+          <FormField label="Physical Address" required>
             <FormTextarea
               rows={2}
               required

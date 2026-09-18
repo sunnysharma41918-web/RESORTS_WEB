@@ -131,7 +131,8 @@ export const storage = {
   },
 
   getOffers() {
-    return initCollection(KEYS.OFFERS, OFFERS_DATA);
+    localStorage.setItem(KEYS.OFFERS, JSON.stringify(OFFERS_DATA));
+    return OFFERS_DATA;
   },
   saveOffers(data) {
     localStorage.setItem(KEYS.OFFERS, JSON.stringify(data));

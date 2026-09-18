@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowRight, BedDouble, Maximize2, Sparkles, Compass, Eye, ShieldCheck, Phone } from 'lucide-react';
 import ScrollReveal from '../../components/common/ScrollReveal';
 import MagneticButton from '../../components/common/MagneticButton';
 import EditorialHeritageStamp from '../../components/common/EditorialHeritageStamp';
 import EditorialBackgroundElements from '../../components/common/EditorialBackgroundElements';
+import { RoyalOrnamentDivider, IndianJaaliBorder } from '../../components/common/RoyalOrnamentDivider';
+import IndianArtBackground from '../../components/common/IndianArtBackground';
 
 const residencesList = [
   {
     id: '01',
-    name: 'The Forest Pool Villa',
+    name: 'The Royal Pool Villa',
     category: 'VILLAS',
     size: '2,400 SQ FT',
     occupancy: 'Up to 3 Guests',
     view: 'High Valley & Pine Canopy',
-    price: '$1,250',
+    price: '₹24,500',
     tag: 'SIGNATURE RESIDENCE',
     specs: ['Private Heated Plunge Pool', 'Locally Quarried Slate Hearth', '24/7 Dedicated Butler'],
     desc: 'Sculpted into the high mountain slope with cantilevered cedar viewing decks, heated stone floors, and an unhurried horizon vista.',
@@ -27,7 +29,7 @@ const residencesList = [
     size: '1,850 SQ FT',
     occupancy: 'Up to 2 Guests',
     view: '360° Stargazing Mountain Ridge',
-    price: '$980',
+    price: '₹18,500',
     tag: 'ARCHITECTURAL ICON',
     specs: ['Acoustic Glass Sky-Roof', 'Geothermal Mineral Bath', 'Sommelier Cellar Vault'],
     desc: 'A sanctuary of low-iron panoramic acoustic glass offering absolute silence and celestial night sky observation from your bed.',
@@ -40,7 +42,7 @@ const residencesList = [
     size: '3,100 SQ FT',
     occupancy: 'Up to 4 Guests',
     view: '500-Acre Private Forest Ridge',
-    price: '$1,650',
+    price: '₹32,000',
     tag: 'EXCLUSIVE ESTATE',
     specs: ['Dual Master Pavilions', 'Private Organic Tea Terrace', 'Sound Healing Chamber'],
     desc: 'Surrounded by organic estate herb gardens, featuring reclaimed heritage teak finishes, open-air rainwater shower, and dining deck.',
@@ -53,7 +55,7 @@ const residencesList = [
     size: '1,600 SQ FT',
     occupancy: 'Up to 2 Guests',
     view: 'High-Altitude Sunset Vista',
-    price: '$890',
+    price: '₹16,500',
     tag: 'ULTIMATE SECLUSION',
     specs: ['High-Altitude Sunken Hot Tub', 'Artisan Cedar Hearth', 'Private Trail Access'],
     desc: 'Carved into native valley rock with floor-to-ceiling glass doors opening onto an expansive outdoor terrace suspended above cloud valleys.',
@@ -66,17 +68,19 @@ const residencesList = [
     size: '4,200 SQ FT',
     occupancy: 'Up to 6 Guests',
     view: 'Panoramic Himalayan Horizon',
-    price: '$2,400',
+    price: '₹48,000',
     tag: 'FLAGSHIP RESIDENCE',
-    specs: ['Private Helipad Landing Privilege', 'Chef Tasting Kitchen', '3 Cantilevered Decks'],
-    desc: 'The pinnacle of high-altitude luxury. Spanning the entire top tier with multiple living salons, sommelier cellar, and 360° mountain views.',
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=90',
+    specs: ['Wraparound Rooftop Deck', 'Private Dining Pavilion', 'Personal Chauffeur & Range Rover'],
+    desc: 'The crowning jewel of the estate. Spanning the entire top tier with multiple living salons, double infinity spa, and butler pantry.',
+    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=90',
   },
 ];
 
 const categories = ['ALL', 'VILLAS', 'CHALETS', 'ESTATE SUITES', 'SLOWHOUSES'];
 
 export default function Resorts() {
+  const [searchParams] = useSearchParams();
+  const stateQuery = searchParams.get('state');
   const [selectedCategory, setSelectedCategory] = useState('ALL');
 
   const filtered = selectedCategory === 'ALL'
@@ -84,10 +88,14 @@ export default function Resorts() {
     : residencesList.filter((r) => r.category === selectedCategory);
 
   return (
-    <div className="w-full bg-[#1C1C1C] text-white overflow-hidden font-manrope">
+    <div className="w-full bg-[#FAF6F0] dark:bg-[#14110E] text-[#2A1F17] dark:text-[#F3EEE0] overflow-hidden font-manrope transition-colors duration-500">
 
-      {/* 1. HERO BANNER IN PURE BLACK */}
-      <section className="relative min-h-[75vh] sm:min-h-[85vh] flex flex-col justify-center py-20 sm:py-32 px-4 sm:px-12 bg-black border-b border-[#333333] overflow-hidden select-none">
+      {/* 1. HERO BANNER IN ROYAL PALATIAL THEME WITH FULL DARK & LIGHT MODE */}
+      <section className="relative min-h-[55vh] sm:min-h-[65vh] flex flex-col justify-center py-20 sm:py-28 px-4 sm:px-12 bg-[#FAF6F0] dark:bg-[#14110E] border-b border-[#8F6B2E]/20 dark:border-[#8F6B2E]/30 overflow-hidden select-none">
+        
+        {/* Indian Royal Paisley Damask & Arch Background */}
+        <IndianArtBackground variant="paisley" opacity="opacity-[0.055] dark:opacity-[0.08]" />
+
         {/* Background Vista */}
         <div className="absolute inset-0 z-0">
           <img
@@ -95,29 +103,33 @@ export default function Resorts() {
             alt="Mountain Sanctuary Residences"
             loading="eager"
             decoding="async"
-            className="w-full h-full object-cover filter brightness-[0.25]"
+            className="w-full h-full object-cover filter brightness-[0.95] opacity-25 dark:opacity-20"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FAF6F0]/90 via-[#FAF6F0]/80 to-[#FAF6F0] dark:from-[#14110E]/90 dark:via-[#14110E]/80 dark:to-[#14110E]" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto text-center space-y-6 sm:space-y-8 my-auto w-full">
+        <div className="relative z-10 max-w-5xl mx-auto text-center space-y-5 my-auto w-full">
           <ScrollReveal direction="up">
-            <div className="inline-flex items-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#FF1F02] px-3 py-1 bg-black/40 border border-[#FF1F02]/30 rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02] inline-block animate-pulse" />
-              <span>PRIVATE RESIDENCES & PAVILIONS</span>
+            <div className="inline-flex items-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#8F6B2E] dark:text-[#D4AF37] px-4 py-1 bg-[#8F6B2E]/10 dark:bg-[#8F6B2E]/20 border border-[#8F6B2E]/30 dark:border-[#8F6B2E]/40 rounded-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#8F6B2E] dark:bg-[#D4AF37] inline-block animate-pulse" />
+              <span>PRIVATE RESIDENCES & ROYAL PAVILIONS</span>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={100}>
-            <h1 className="text-[clamp(1.95rem,7.5vw,8.5rem)] font-extrabold uppercase tracking-tight sm:tracking-[-0.04em] leading-[0.98] sm:leading-[0.88] text-white break-words">
+            <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal uppercase tracking-tight leading-[1.05] text-[#2A1F17] dark:text-[#F3EEE0] break-words">
               SANCTUARIES <br />
               OF UNBROKEN <br />
-              <span className="text-art-trio">CALM.</span>
+              <span className="text-[#8F6B2E] dark:text-[#D4AF37]">ROYAL CALM.</span>
             </h1>
           </ScrollReveal>
 
+          <ScrollReveal direction="up" delay={150}>
+            <RoyalOrnamentDivider color="#8F6B2E" />
+          </ScrollReveal>
+
           <ScrollReveal direction="up" delay={200}>
-            <p className="text-xs sm:text-lg lg:text-xl font-light text-[#D0D0D0] max-w-2xl mx-auto leading-relaxed px-2">
+            <p className="text-sm sm:text-lg font-serif font-light text-[#6E5D4F] dark:text-[#B8A89A] max-w-2xl mx-auto leading-relaxed px-2">
               Five monolithic residential tiers carved into high-altitude mountain rock, each offering uninterrupted panoramic horizon views.
             </p>
           </ScrollReveal>
@@ -125,43 +137,42 @@ export default function Resorts() {
       </section>
 
 
-      {/* 2. MAIN RESIDENCES SHOWCASE IN IVORY (#FAFDF2) */}
-      <section className="relative bg-[#FAFDF2] text-[#0E0E0E] py-28 sm:py-40 px-6 sm:px-10 lg:px-16 overflow-hidden">
-        <EditorialBackgroundElements variant="light" position="top-right" />
-
-        <div className="max-w-7xl mx-auto space-y-24 sm:space-y-36 relative z-10">
+      {/* 2. MAIN RESIDENCES SHOWCASE (ROYAL HERITAGE THEME) */}
+      <section className="relative dark:bg-[#14110E] bg-[#FAF6F0] dark:text-[#F3EEE0] text-[#2A1F17] py-24 sm:py-36 px-6 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300">
+        <div className="max-w-7xl mx-auto space-y-20 sm:space-y-28 relative z-10">
 
           {/* Section Header with Category Filter Tabs */}
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 pb-10 border-b border-[#E9E9DE]">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 pb-10 border-b dark:border-[#8F6B2E]/30 border-[#8F6B2E]/30">
             <div className="space-y-4">
               <ScrollReveal direction="up">
-                <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-[#0E0E0E]">
-                  <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
+                <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#8F6B2E] dark:text-[#D4AF37]">
+                  <span className="w-2 h-2 rounded-full bg-[#8F6B2E] dark:bg-[#D4AF37] inline-block shrink-0" />
                   <span>01 — ACCOMMODATION PORTFOLIO</span>
                 </div>
               </ScrollReveal>
 
               <ScrollReveal direction="up" delay={100}>
-                <h2 className="text-5xl sm:text-7xl lg:text-8xl font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-art-green">
+                <h2 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-normal uppercase tracking-tight text-[#2A1F17] dark:text-[#F3EEE0]">
                   STAY YOUR <br />
-                  WAY.
+                  <span className="text-[#8F6B2E] dark:text-[#D4AF37]">ROYAL WAY.</span>
                 </h2>
+                <RoyalOrnamentDivider color="#8F6B2E" className="justify-start my-3" />
               </ScrollReveal>
             </div>
 
             {/* Filter Tabs */}
             <ScrollReveal direction="up" delay={200}>
-              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
                 {categories.map((cat) => {
                   const isActive = cat === selectedCategory;
                   return (
                     <button
                       key={cat}
                       onClick={() => setSelectedCategory(cat)}
-                      className={`px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-all duration-300 cursor-pointer ${
+                      className={`px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition-all duration-300 cursor-pointer ${
                         isActive
-                          ? 'bg-[#0E0E0E] text-white'
-                          : 'border border-[#E9E9DE] text-[#0E0E0E]/70 hover:border-[#0E0E0E] hover:text-[#0E0E0E] bg-white/40'
+                          ? 'bg-[#8F6B2E] dark:bg-[#D4AF37] text-white dark:text-[#14110E] shadow-md'
+                          : 'border dark:border-[#8F6B2E]/30 border-[#8F6B2E]/30 dark:text-[#EAE5D9]/75 text-[#2A1F17]/75 hover:border-[#8F6B2E] hover:text-[#8F6B2E] dark:bg-[#1A1613] bg-[#F2ECE1]'
                       }`}
                     >
                       {cat}
@@ -273,8 +284,8 @@ export default function Resorts() {
       </section>
 
 
-      {/* 3. FINAL INVITATION CTA IN PURE BLACK */}
-      <section className="relative bg-[#000000] text-white py-32 sm:py-48 px-6 sm:px-10 lg:px-16 overflow-hidden">
+      {/* 3. FINAL INVITATION CTA (ADAPTIVE DARK/LIGHT) */}
+      <section className="relative bg-[#FAF6F0] dark:bg-[#14110E] text-[#2A1F17] dark:text-[#F3EEE0] py-32 sm:py-48 px-6 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-500 border-t border-[#8F6B2E]/20 dark:border-[#8F6B2E]/30">
         {/* Background Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -282,9 +293,9 @@ export default function Resorts() {
             alt="Mountain Sanctuary Horizon"
             loading="lazy"
             decoding="async"
-            className="w-full h-full object-cover filter brightness-[0.25]"
+            className="w-full h-full object-cover filter brightness-[0.95] opacity-20 dark:opacity-15"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FAF6F0]/90 via-[#FAF6F0]/80 to-[#FAF6F0] dark:from-[#14110E]/90 dark:via-[#14110E]/80 dark:to-[#14110E]" />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-10 sm:space-y-12">
@@ -297,22 +308,23 @@ export default function Resorts() {
           </div>
 
           <ScrollReveal direction="up">
-            <div className="inline-flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-[#FF1F02]">
-              <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
-              <span>02 — BESPOKE BOOKING</span>
+            <div className="inline-flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#8F6B2E] dark:text-[#D4AF37] bg-[#8F6B2E]/10 dark:bg-[#8F6B2E]/20 px-3.5 py-1.5 rounded-full border border-[#8F6B2E]/30">
+              <span className="w-2 h-2 rounded-full bg-[#8F6B2E] dark:bg-[#D4AF37] inline-block shrink-0" />
+              <span>02 — INVITATION</span>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={100}>
-            <h2 className="text-5xl sm:text-7xl lg:text-9xl font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-art-orange-dark">
+            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-normal uppercase tracking-tight leading-[0.95] text-[#2A1F17] dark:text-[#F3EEE0]">
               RESERVE <br />
-              YOUR STAY.
+              <span className="text-[#8F6B2E] dark:text-[#D4AF37]">YOUR ROYAL STAY.</span>
             </h2>
+            <RoyalOrnamentDivider color="#8F6B2E" className="my-4" />
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={200}>
-            <p className="text-base sm:text-xl font-light text-[#D0D0D0] max-w-xl mx-auto leading-relaxed">
-              Every residence includes dedicated 24/7 butler care, private sommelier consultation, and high-altitude transfers.
+            <p className="text-base sm:text-lg font-light dark:text-[#EAE5D9]/80 text-[#2A1F17]/80 max-w-xl mx-auto leading-relaxed">
+              Every royal pavilion includes dedicated 24/7 butler care, private culinary consultation, and bespoke heritage transfers.
             </p>
           </ScrollReveal>
 
@@ -321,10 +333,10 @@ export default function Resorts() {
               <MagneticButton>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-4 px-10 py-5 rounded-none bg-white hover:bg-[#FF1F02] text-[#0E0E0E] hover:text-white font-bold text-xs uppercase tracking-[0.16em] transition-all duration-300 shadow-2xl group cursor-pointer"
+                  className="inline-flex items-center gap-4 px-10 py-5 rounded-none bg-[#8F6B2E] hover:bg-[#A67C38] dark:bg-[#D4AF37] dark:hover:bg-[#C5A880] text-white dark:text-[#14110E] font-bold text-xs uppercase tracking-[0.16em] transition-all duration-300 shadow-xl group cursor-pointer"
                 >
                   <span>CONNECT CONCIERGE</span>
-                  <span className="w-6 h-6 rounded-full bg-[#FF1F02] group-hover:bg-white text-white group-hover:text-[#FF1F02] flex items-center justify-center transition-colors">
+                  <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center transition-colors">
                     <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </Link>
@@ -333,9 +345,9 @@ export default function Resorts() {
               <MagneticButton>
                 <a
                   href="tel:+919876543210"
-                  className="inline-flex items-center gap-3 px-8 py-5 rounded-none border border-white/40 hover:border-white text-white font-semibold text-xs uppercase tracking-[0.16em] backdrop-blur-md transition-all duration-300"
+                  className="inline-flex items-center gap-3 px-8 py-5 rounded-none border border-[#8F6B2E]/40 hover:border-[#8F6B2E] text-[#2A1F17] dark:text-[#F3EEE0] font-semibold text-xs uppercase tracking-[0.16em] backdrop-blur-md transition-all duration-300"
                 >
-                  <Phone className="w-4 h-4 text-[#FF1F02]" />
+                  <Phone className="w-4 h-4 text-[#8F6B2E] dark:text-[#D4AF37]" />
                   <span>DIRECT INQUIRIES</span>
                 </a>
               </MagneticButton>
@@ -343,13 +355,18 @@ export default function Resorts() {
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={400}>
-            <div className="pt-6 flex items-center justify-center gap-6 text-[11px] font-mono text-[#B0B0B0] uppercase tracking-widest">
-              <span>● GUARANTEED SECLUSION</span>
-              <span>● HEATED GEOTHERMAL POOLS</span>
-              <span>● 100% OFF-GRID SOLAR</span>
+            <div className="pt-6 flex items-center justify-center gap-6 text-[11px] font-mono text-[#8F6B2E] dark:text-[#D4AF37] uppercase tracking-widest">
+              <span>✦ GUARANTEED SECLUSION</span>
+              <span>✦ PRIVATE HEATED POOLS</span>
+              <span>✦ 24/7 DEDICATED CARE</span>
             </div>
           </ScrollReveal>
 
+        </div>
+
+        {/* Bottom Jaali Border */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <IndianJaaliBorder />
         </div>
       </section>
 

@@ -26,6 +26,21 @@ const offerSchema = new mongoose.Schema(
       default: '',
       trim: true,
     },
+    propertyType: {
+      type: String,
+      default: 'Resort',
+      trim: true,
+    },
+    region: {
+      type: String,
+      default: 'South India',
+      trim: true,
+    },
+    badge: {
+      type: String,
+      default: 'SPECIAL OFFER',
+      trim: true,
+    },
     tag: {
       type: String,
       default: 'Exclusive Offer',

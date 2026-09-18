@@ -1,119 +1,163 @@
 import React, { useState } from 'react';
-import { Sparkles, Plus, Minus, HelpCircle } from 'lucide-react';
+import { Plus, Minus, HelpCircle, ArrowRight, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ScrollReveal from '../../../components/common/ScrollReveal';
+import { RoyalOrnamentDivider } from '../../../components/common/RoyalOrnamentDivider';
+import IndianArtBackground from '../../../components/common/IndianArtBackground';
+import { getWhatsAppBookingUrl } from '../../../data/contact';
+
+const FAQS = [
+  {
+    q: 'How do I reserve a stay across your destinations?',
+    a: 'Reservations can be made directly through our website, or by connecting with our dedicated 24/7 Royal Concierge Desk via WhatsApp or telephone for bespoke itinerary assistance and tailored rates.',
+  },
+  {
+    q: 'What are the standard check-in and check-out timings?',
+    a: 'Standard check-in begins at 02:00 PM, and check-out is until 11:00 AM. Early check-in and extended late departures can be coordinated in advance based on availability.',
+  },
+  {
+    q: 'Is artisanal dining and breakfast included in reservations?',
+    a: 'Yes, our signature stays feature daily gourmet royal breakfast crafted with fresh regional ingredients. Multi-course meal plans and royal fine dining packages are available across all properties.',
+  },
+  {
+    q: 'Do you arrange airport transfers and private sightseeing tours?',
+    a: 'Absolutely. We provide sanitized luxury chauffeur transfers from nearby airports and railway hubs, along with guided private heritage excursions, safari passes, and riverboat tours.',
+  },
+  {
+    q: 'What is your cancellation and date rescheduling policy?',
+    a: 'We offer flexible cancellation up to 72 hours prior to arrival with full refund eligibility or seamless date rescheduling throughout the operational season.',
+  },
+  {
+    q: 'Can Country Holidays host destination weddings and corporate summits?',
+    a: 'Yes. Our properties feature grand pillarless banquet halls, scenic outdoor lawns, and executive boardrooms accommodating from 20 to 800 guests with complete event decor and catering management.',
+  },
+  {
+    q: 'Are private villas suitable for families and children?',
+    a: 'All our pool villas and royal suites are child-friendly, equipped with dedicated kids play zones, babysitting support on request, and custom culinary menus for young guests.',
+  },
+  {
+    q: 'How can I plan a multi-destination circuit across North or South India?',
+    a: 'Our central estate director curates seamless multi-city circuits (such as Rajasthan Palaces, Himalayan Heights, or Kerala Backwaters) complete with inter-property transfers and dedicated concierge guidance.',
+  },
+];
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState(0);
 
-  const faqs = [
-    {
-      q: 'What are the standard check-in and check-out times?',
-      a: 'Check-in begins at 02:00 PM, and check-out is until 12:00 PM. Flexible early check-in and late departures can be arranged directly with your dedicated butler upon reservation.',
-    },
-    {
-      q: 'Is daily artisanal breakfast and dining included in our stay?',
-      a: 'Yes, all villa reservations include complimentary multi-course champagne breakfast served either in your private pavilion or at The Glass Pavilion restaurant.',
-    },
-    {
-      q: 'Do you provide private airport transfers and helicopter charters?',
-      a: 'We offer complimentary luxury chauffeur sedan transfers from nearby international airports for suites and villas. Direct helicopter charter transfers to our on-site helipad are available upon request.',
-    },
-    {
-      q: 'What is the resort cancellation and rescheduling policy?',
-      a: 'We offer 100% flexible cancellation up to 72 hours prior to arrival with full refund or seamless date modification throughout the 2026 season.',
-    },
-    {
-      q: 'Are children and families accommodated in private pool villas?',
-      a: 'Yes, we warmly welcome families. Dedicated children amenities, child-safe pool fencing, organic infant dining, and certified private childcare can be arranged seamlessly.',
-    },
-    {
-      q: 'Can special dietary, vegan, or kosher preferences be catered to?',
-      a: 'Our executive culinary team accommodates all dietary requirements. A pre-arrival consultation ensures your in-villa pantry and dining menus are tailored to your exact specifications.',
-    },
-  ];
-
   return (
-    <section className="relative py-28 sm:py-36 bg-[#171C28] text-white overflow-hidden select-none border-t border-[#5E6575]/25">
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Rokkitt:wght@700;800;900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
-        .fq-display { font-family: 'Rokkitt', Georgia, serif; }
-        .fq-body { font-family: 'Ubuntu', sans-serif; }
-      `}</style>
+    <section className="relative bg-[#FAF6F0] dark:bg-[#14110E] text-[#2A1F17] dark:text-[#F3EEE0] py-20 sm:py-28 px-4 sm:px-8 lg:px-14 overflow-hidden transition-colors duration-500 font-sans select-none border-t border-[#8F6B2E]/20">
+      
+      {/* Indian Heritage Art: Palace Jaali & Mandala Motifs */}
+      <IndianArtBackground variant="full" opacity="opacity-[0.045] dark:opacity-[0.07]" showMandala={true} />
+      
+      <div className="max-w-4xl mx-auto space-y-12 relative z-10">
 
-      {/* Ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#3FD3C9]/10 rounded-full blur-[200px] pointer-events-none" />
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-3.5">
+          <ScrollReveal direction="up">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8F6B2E]/10 dark:bg-[#8F6B2E]/20 border border-[#8F6B2E]/30 text-[#8F6B2E] dark:text-[#D4AF37] text-[11px] sm:text-xs font-serif font-bold uppercase tracking-[0.18em]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#8F6B2E] dark:bg-[#D4AF37]" />
+              <span>FREQUENTLY ASKED QUESTIONS</span>
+            </div>
+          </ScrollReveal>
 
-      <div className="max-w-4xl mx-auto px-6 sm:px-10 space-y-12 relative z-10">
-        
-        {/* Header */}
-        <div className="text-center space-y-3">
-          <div className="inline-flex items-center space-x-2 text-[#3FD3C9] text-xs uppercase tracking-[0.25em] font-bold">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>FREQUENT INQUIRIES</span>
-          </div>
-          <h2 className="fq-display text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-white">
-            Everything You Need <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3FD3C9] via-white to-[#B72257]">To Know</span>
-          </h2>
-          <p className="fq-body text-xs sm:text-sm text-white/65 font-light max-w-lg mx-auto">
-            Clear, transparent answers to make your arrival and stay completely effortless.
-          </p>
+          <ScrollReveal direction="up" delay={50}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-serif font-normal text-[#2A1F17] dark:text-[#F3EEE0] tracking-wide uppercase">
+              EVERYTHING YOU NEED TO KNOW
+            </h2>
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={100}>
+            <RoyalOrnamentDivider color="#8F6B2E" />
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={150}>
+            <p className="text-xs sm:text-sm md:text-[15px] text-[#6E5D4F] dark:text-[#B8A89A] leading-relaxed font-serif font-light max-w-2xl mx-auto">
+              Clear and transparent guidance to ensure your arrival, dining, and luxury retreat experience across India is completely effortless.
+            </p>
+          </ScrollReveal>
         </div>
 
-        {/* Accordion */}
-        <div className="space-y-4">
-          {faqs.map((faq, idx) => {
+        {/* Accordion List */}
+        <div className="space-y-3.5 pt-2">
+          {FAQS.map((faq, idx) => {
             const isOpen = idx === openIndex;
             return (
-              <div
-                key={faq.q}
-                className={`rounded-3xl border transition-all duration-300 overflow-hidden ${
-                  isOpen
-                    ? 'bg-[#1F2536] border-[#3FD3C9]/60 shadow-2xl'
-                    : 'bg-[#1F2536]/40 border-[#5E6575]/25 hover:border-[#5E6575]/50'
-                }`}
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenIndex(isOpen ? -1 : idx)}
-                  className="w-full p-6 text-left flex items-center justify-between gap-4 cursor-pointer"
+              <ScrollReveal key={faq.q} direction="up" delay={idx * 40}>
+                <div
+                  className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
+                    isOpen
+                      ? 'bg-[#F6F1EB] dark:bg-[#1A1612] border-[#8F6B2E]/50 dark:border-[#D4AF37]/50 shadow-sm'
+                      : 'bg-white dark:bg-[#14110E] border-[#8F6B2E]/20 dark:border-[#8F6B2E]/25 hover:border-[#8F6B2E]/40'
+                  }`}
                 >
-                  <span className="fq-display text-base sm:text-lg font-bold text-white leading-snug">
-                    {faq.q}
-                  </span>
-                  <div
-                    className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-all ${
-                      isOpen
-                        ? 'bg-[#3FD3C9] text-[#171C28] rotate-180'
-                        : 'bg-[#171C28] text-white/60 border border-[#5E6575]/30'
-                    }`}
+                  <button
+                    type="button"
+                    onClick={() => setOpenIndex(isOpen ? -1 : idx)}
+                    className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer"
                   >
-                    {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                  </div>
-                </button>
+                    <span className="font-serif text-base sm:text-lg font-normal text-[#2A1F17] dark:text-[#F3EEE0] leading-snug">
+                      {faq.q}
+                    </span>
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all ${
+                        isOpen
+                          ? 'bg-[#8F6B2E] text-white dark:bg-[#D4AF37] dark:text-[#14110E] rotate-180'
+                          : 'bg-[#EFE8DC] dark:bg-[#251E18] text-[#8F6B2E] dark:text-[#D4AF37]'
+                      }`}
+                    >
+                      {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                    </div>
+                  </button>
 
-                {isOpen && (
-                  <div className="px-6 pb-6 pt-2 text-xs sm:text-sm text-white/70 font-light leading-relaxed border-t border-[#5E6575]/25">
-                    {faq.a}
-                  </div>
-                )}
-              </div>
+                  {isOpen && (
+                    <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-[#6E5D4F] dark:text-[#B8A89A] font-serif leading-relaxed border-t border-[#8F6B2E]/15 dark:border-[#8F6B2E]/20">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              </ScrollReveal>
             );
           })}
         </div>
 
-        {/* Footer Question Help */}
-        <div className="p-6 rounded-3xl bg-[#1F2536]/60 border border-[#5E6575]/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-          <div className="flex items-center space-x-3 text-white/80">
-            <HelpCircle className="w-5 h-5 text-[#3FD3C9] shrink-0" />
-            <span className="fq-body text-xs sm:text-sm">Have a bespoke request or private charter inquiry?</span>
+        {/* Concierge Help Callout */}
+        <ScrollReveal direction="up" delay={150}>
+          <div className="p-6 sm:p-8 rounded-2xl bg-[#F6F1EB] dark:bg-[#1A1612] border border-[#8F6B2E]/25 dark:border-[#8F6B2E]/35 flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left">
+            <div className="flex items-center gap-3.5">
+              <div className="w-11 h-11 rounded-full bg-[#EFE8DC] dark:bg-[#251E18] text-[#8F6B2E] dark:text-[#D4AF37] flex items-center justify-center shrink-0">
+                <HelpCircle className="w-5 h-5" />
+              </div>
+              <div className="space-y-0.5">
+                <h4 className="text-sm sm:text-base font-serif font-bold text-[#2A1F17] dark:text-[#F3EEE0]">
+                  Have a Bespoke Request or Custom Itinerary?
+                </h4>
+                <p className="text-xs text-[#6E5D4F] dark:text-[#B8A89A] font-serif">
+                  Our central concierge desk is available 24/7 to assist with your personalized stay.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 shrink-0">
+              <Link
+                to="/contact"
+                className="px-5 py-2.5 rounded-lg bg-[#8F6B2E] hover:bg-[#725421] text-white font-serif font-bold text-xs uppercase tracking-wider transition-all inline-flex items-center gap-2 shadow-sm"
+              >
+                <span>Inquire Desk</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <a
+                href={getWhatsAppBookingUrl('Hello, I have an inquiry regarding Country Holidays Resorts.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2.5 rounded-lg bg-transparent border border-[#8F6B2E]/40 text-[#2A1F17] dark:text-[#F3EEE0] hover:border-[#8F6B2E] font-serif text-xs uppercase tracking-wider transition-colors inline-flex items-center gap-1.5"
+              >
+                <MessageCircle className="w-3.5 h-3.5 text-[#8F6B2E] dark:text-[#D4AF37]" />
+                <span>WhatsApp</span>
+              </a>
+            </div>
           </div>
-          <Link
-            to="/contact"
-            className="px-6 py-2.5 rounded-full bg-[#3FD3C9] hover:bg-[#2EC4BA] text-[#171C28] font-bold text-xs uppercase tracking-wider transition-all hover:scale-105 shadow-md"
-          >
-            Ask Concierge
-          </Link>
-        </div>
+        </ScrollReveal>
 
       </div>
     </section>

@@ -5,6 +5,8 @@ import ScrollReveal from '../../components/common/ScrollReveal';
 import MagneticButton from '../../components/common/MagneticButton';
 import EditorialHeritageStamp from '../../components/common/EditorialHeritageStamp';
 import EditorialBackgroundElements from '../../components/common/EditorialBackgroundElements';
+import { RoyalOrnamentDivider, IndianJaaliBorder } from '../../components/common/RoyalOrnamentDivider';
+import IndianArtBackground from '../../components/common/IndianArtBackground';
 
 const curatedExperiences = [
   {
@@ -21,24 +23,24 @@ const curatedExperiences = [
   },
   {
     id: '02',
-    title: 'Tibetan Sound Resonance Healing',
+    title: 'Vedic Sound Resonance Healing',
     category: 'WELLNESS',
     duration: '90 Minutes',
     timing: 'Morning & Twilight',
-    specs: 'Geothermal Chamber • Master Sound Healer',
-    desc: 'Deep vibrational acoustic sound bath using handmade bronze bowls to re-align circadian rhythms and alleviate tension.',
+    specs: 'Heritage Chamber • Master Sound Healer',
+    desc: 'Deep vibrational acoustic sound bath using handmade bronze bowls and sacred chants to re-align energy and alleviate tension.',
     image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=85',
     span: 'lg:col-span-4',
     aspect: 'aspect-[3/4]',
   },
   {
     id: '03',
-    title: 'Sommelier Subterranean Vault Tasting',
+    title: 'Royal Subterranean Vault Tasting',
     category: 'CULINARY',
     duration: '2 Hours',
     timing: '06:00 PM Daily',
-    specs: 'Rock-Carved Cellar • 6 Biodynamic Vintages',
-    desc: 'Private tasting of reserve biodynamic wines paired with artisanal mountain cheeses inside our underground limestone cellar.',
+    specs: 'Rock-Carved Cellar • Reserve Vintages',
+    desc: 'Private tasting of reserve fine wines and royal teas paired with artisanal local delicacies inside our cellar vault.',
     image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=85',
     span: 'lg:col-span-4',
     aspect: 'aspect-[3/4]',
@@ -50,38 +52,38 @@ const curatedExperiences = [
     duration: '2 Hours',
     timing: '09:00 PM (Clear Skies)',
     specs: 'High-Power Refractor • Deep Sky Astrophotography',
-    desc: 'Zero light pollution celestial mapping with estate astronomers to view Saturn’s rings and deep Milky Way nebulae.',
+    desc: 'Zero light pollution celestial mapping with estate astronomers to view Saturn’s rings and deep Milky Way constellations.',
     image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=90',
     span: 'lg:col-span-8',
     aspect: 'aspect-[16/10]',
   },
   {
     id: '05',
-    title: 'Botanical Apiary & Dawn Honey Harvest',
+    title: 'Botanical Spice Garden & Dawn Harvest',
     category: 'NATURE',
     duration: '2 Hours',
-    timing: '07:00 AM Daily',
-    specs: '500-Acre Conservation Corridor • Master Beekeeper',
-    desc: 'Hands-on morning honey collection from private mountain hives followed by a fresh honeycomb and herbal tea tasting.',
-    image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=85',
-    span: 'lg:col-span-6',
-    aspect: 'aspect-[16/11]',
+    timing: '06:30 AM Daily',
+    specs: 'Estate Apiary • Hand-Harvested Honey & Herbs',
+    desc: 'Wander through organic herb terraces, participate in raw honey extraction, and blend your bespoke herbal tea infusion.',
+    image: 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&w=800&q=85',
+    span: 'lg:col-span-4',
+    aspect: 'aspect-[3/4]',
   },
   {
     id: '06',
-    title: 'Helicopter Alpine Ridge Tour',
-    category: 'EXPEDITION',
-    duration: '45 Minutes',
-    timing: 'Custom Departure',
-    specs: 'Private Twin-Engine Chopper • On-Site Helipad',
-    desc: 'Soar above inaccessible Himalayan glaciers, sacred high valleys, and towering ridge peaks with direct landing at the resort.',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=85',
-    span: 'lg:col-span-6',
-    aspect: 'aspect-[16/11]',
+    title: 'Royal Sunset Aarti & Sitar Recital',
+    category: 'CULTURAL',
+    duration: '1.5 Hours',
+    timing: '06:30 PM (Daily at Twilight)',
+    specs: 'Open-Air Amphitheatre • Master Musicians',
+    desc: 'An evening of classical sitar, earthen lamps, and royal Indian hospitality by the bonfire under starlit skies.',
+    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=90',
+    span: 'lg:col-span-8',
+    aspect: 'aspect-[16/10]',
   },
 ];
 
-const categories = ['ALL', 'EXPEDITION', 'WELLNESS', 'CULINARY', 'ASTRONOMY', 'NATURE'];
+const categories = ['ALL', 'EXPEDITION', 'WELLNESS', 'CULINARY', 'ASTRONOMY', 'NATURE', 'CULTURAL'];
 
 export default function Experiences() {
   const [selectedCategory, setSelectedCategory] = useState('ALL');
@@ -91,10 +93,14 @@ export default function Experiences() {
     : curatedExperiences.filter((item) => item.category === selectedCategory);
 
   return (
-    <div className="w-full bg-[#1C1C1C] text-white overflow-hidden font-manrope">
+    <div className="w-full bg-[#FAF6F0] dark:bg-[#14110E] text-[#2A1F17] dark:text-[#F3EEE0] overflow-hidden font-manrope transition-colors duration-500">
 
-      {/* 1. HERO SECTION: CINEMATIC MONUMENTAL BANNER IN PURE BLACK */}
-      <section className="relative min-h-[75vh] sm:min-h-[85vh] flex flex-col justify-center py-20 sm:py-32 px-4 sm:px-12 bg-black border-b border-[#333333] overflow-hidden select-none">
+      {/* 1. HERO SECTION: ROYAL PALATIAL THEME WITH FULL DARK & LIGHT MODE */}
+      <section className="relative min-h-[55vh] sm:min-h-[65vh] flex flex-col justify-center py-20 sm:py-28 px-4 sm:px-12 bg-[#FAF6F0] dark:bg-[#14110E] border-b border-[#8F6B2E]/20 dark:border-[#8F6B2E]/30 overflow-hidden select-none">
+        
+        {/* Indian Royal Art & Arch Background */}
+        <IndianArtBackground variant="full" opacity="opacity-[0.05] dark:opacity-[0.07]" />
+
         {/* Background Vista */}
         <div className="absolute inset-0 z-0">
           <img
@@ -102,63 +108,66 @@ export default function Experiences() {
             alt="Mountain Expedition Vista"
             loading="eager"
             decoding="async"
-            className="w-full h-full object-cover filter brightness-[0.25]"
+            className="w-full h-full object-cover filter brightness-[0.95] opacity-25 dark:opacity-20"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FAF6F0]/90 via-[#FAF6F0]/80 to-[#FAF6F0] dark:from-[#14110E]/90 dark:via-[#14110E]/80 dark:to-[#14110E]" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto text-center space-y-6 sm:space-y-8 my-auto w-full">
+        <div className="relative z-10 max-w-5xl mx-auto text-center space-y-5 my-auto w-full">
           <ScrollReveal direction="up">
-            <div className="inline-flex items-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#FF1F02] px-3 py-1 bg-black/40 border border-[#FF1F02]/30 rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF1F02] inline-block animate-pulse" />
-              <span>UNHURRIED EXPEDITIONS & RITUALS</span>
+            <div className="inline-flex items-center gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#8F6B2E] dark:text-[#D4AF37] px-4 py-1 bg-[#8F6B2E]/10 dark:bg-[#8F6B2E]/20 border border-[#8F6B2E]/30 dark:border-[#8F6B2E]/40 rounded-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#8F6B2E] dark:bg-[#D4AF37] inline-block animate-pulse" />
+              <span>ROYAL EXPEDITIONS & HERITAGE RITUALS</span>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={100}>
-            <h1 className="text-[clamp(1.95rem,7.5vw,8.5rem)] font-extrabold uppercase tracking-tight sm:tracking-[-0.04em] leading-[0.98] sm:leading-[0.88] text-white break-words">
+            <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal uppercase tracking-tight leading-[1.05] text-[#2A1F17] dark:text-[#F3EEE0] break-words">
               CURATED <br />
               EXPEDITIONS & <br />
-              <span className="text-art-trio">RITUALS.</span>
+              <span className="text-[#8F6B2E] dark:text-[#D4AF37]">ROYAL RITUALS.</span>
             </h1>
           </ScrollReveal>
 
+          <ScrollReveal direction="up" delay={150}>
+            <RoyalOrnamentDivider color="#8F6B2E" />
+          </ScrollReveal>
+
           <ScrollReveal direction="up" delay={200}>
-            <p className="text-xs sm:text-lg lg:text-xl font-light text-[#D0D0D0] max-w-2xl mx-auto leading-relaxed px-2">
-              From dawn glacier foraging to midnight celestial astronomy under high-altitude starlit skies.
+            <p className="text-sm sm:text-lg font-serif font-light text-[#6E5D4F] dark:text-[#B8A89A] max-w-2xl mx-auto leading-relaxed px-2">
+              From dawn nature expeditions to twilight musical aartis and sacred rituals under high-altitude starlit skies.
             </p>
           </ScrollReveal>
         </div>
       </section>
 
 
-      {/* 2. MAIN EXPERIENCES SHOWCASE IN IVORY (#FAFDF2) */}
-      <section className="relative bg-[#FAFDF2] text-[#0E0E0E] py-28 sm:py-40 px-6 sm:px-10 lg:px-16 overflow-hidden">
-        <EditorialBackgroundElements variant="light" position="top-right" />
-
+      {/* 2. MAIN EXPERIENCES SHOWCASE (ROYAL HERITAGE THEME) */}
+      <section className="relative dark:bg-[#14110E] bg-[#FAF6F0] dark:text-[#F3EEE0] text-[#2A1F17] py-24 sm:py-36 px-6 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-300">
         <div className="max-w-7xl mx-auto space-y-16 lg:space-y-24 relative z-10">
 
           {/* Section Header with Category Filters */}
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 pb-10 border-b border-[#E9E9DE]">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 pb-10 border-b dark:border-[#8F6B2E]/30 border-[#8F6B2E]/30">
             <div className="space-y-4">
               <ScrollReveal direction="up">
-                <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-[#0E0E0E]">
-                  <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
-                  <span>01 — EXPEDITIONS</span>
+                <div className="flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#8F6B2E] dark:text-[#D4AF37]">
+                  <span className="w-2 h-2 rounded-full bg-[#8F6B2E] dark:bg-[#D4AF37] inline-block shrink-0" />
+                  <span>01 — ROYAL EXPERIENCES</span>
                 </div>
               </ScrollReveal>
 
               <ScrollReveal direction="up" delay={100}>
-                <h2 className="text-5xl sm:text-7xl lg:text-8xl font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-art-green">
+                <h2 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-normal uppercase tracking-tight text-[#2A1F17] dark:text-[#F3EEE0]">
                   SANCTUARY <br />
-                  JOURNEYS.
+                  <span className="text-[#8F6B2E] dark:text-[#D4AF37]">JOURNEYS.</span>
                 </h2>
+                <RoyalOrnamentDivider color="#8F6B2E" className="justify-start my-3" />
               </ScrollReveal>
             </div>
 
             {/* Filter Tabs */}
             <ScrollReveal direction="up" delay={200}>
-              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
                 {categories.map((cat) => {
                   const isActive = cat === selectedCategory;
                   return (
@@ -241,8 +250,8 @@ export default function Experiences() {
       </section>
 
 
-      {/* 3. FINAL INVITATION CTA IN PURE BLACK */}
-      <section className="relative bg-[#000000] text-white py-32 sm:py-48 px-6 sm:px-10 lg:px-16 overflow-hidden">
+      {/* 3. FINAL INVITATION CTA (ADAPTIVE DARK/LIGHT) */}
+      <section className="relative bg-[#FAF6F0] dark:bg-[#14110E] text-[#2A1F17] dark:text-[#F3EEE0] py-32 sm:py-48 px-6 sm:px-10 lg:px-16 overflow-hidden transition-colors duration-500 border-t border-[#8F6B2E]/20 dark:border-[#8F6B2E]/30">
         {/* Background Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -250,9 +259,9 @@ export default function Experiences() {
             alt="Mountain Summit Horizon"
             loading="lazy"
             decoding="async"
-            className="w-full h-full object-cover filter brightness-[0.25]"
+            className="w-full h-full object-cover filter brightness-[0.95] opacity-20 dark:opacity-15"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FAF6F0]/90 via-[#FAF6F0]/80 to-[#FAF6F0] dark:from-[#14110E]/90 dark:via-[#14110E]/80 dark:to-[#14110E]" />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-10 sm:space-y-12">
@@ -265,22 +274,23 @@ export default function Experiences() {
           </ScrollReveal>
 
           <ScrollReveal direction="up">
-            <div className="inline-flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] text-[#FF1F02]">
-              <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
-              <span>02 — BESPOKE ITINERARIES</span>
+            <div className="inline-flex items-center gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#8F6B2E] dark:text-[#D4AF37] bg-[#8F6B2E]/10 dark:bg-[#8F6B2E]/20 px-3.5 py-1.5 rounded-full border border-[#8F6B2E]/30">
+              <span className="w-2 h-2 rounded-full bg-[#8F6B2E] dark:bg-[#D4AF37] inline-block shrink-0" />
+              <span>02 — INVITATION</span>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={100}>
-            <h2 className="text-5xl sm:text-7xl lg:text-9xl font-extrabold uppercase tracking-[-0.04em] leading-[0.88] text-art-orange-dark">
+            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-normal uppercase tracking-tight leading-[0.95] text-[#2A1F17] dark:text-[#F3EEE0]">
               DESIGN YOUR <br />
-              STAY.
+              <span className="text-[#8F6B2E] dark:text-[#D4AF37]">ROYAL STAY.</span>
             </h2>
+            <RoyalOrnamentDivider color="#8F6B2E" className="my-4" />
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={200}>
-            <p className="text-base sm:text-xl font-light text-[#D0D0D0] max-w-xl mx-auto leading-relaxed">
-              Our master concierge tailors every expedition to your cadence. Connect with us to curate private sunrise hikes, sommelier cellars, and sound therapy rituals.
+            <p className="text-base sm:text-lg font-light dark:text-[#EAE5D9]/80 text-[#2A1F17]/80 max-w-xl mx-auto leading-relaxed">
+              Our master concierge tailors every expedition to your cadence. Connect with us to curate private sunrise hikes, wine tastings, and sound therapy rituals.
             </p>
           </ScrollReveal>
 
@@ -289,10 +299,10 @@ export default function Experiences() {
               <MagneticButton>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-4 px-10 py-5 rounded-none bg-white hover:bg-[#FF1F02] text-[#0E0E0E] hover:text-white font-bold text-xs uppercase tracking-[0.16em] transition-all duration-300 shadow-2xl group cursor-pointer"
+                  className="inline-flex items-center gap-4 px-10 py-5 rounded-none bg-[#8F6B2E] hover:bg-[#A67C38] dark:bg-[#D4AF37] dark:hover:bg-[#C5A880] text-white dark:text-[#14110E] font-bold text-xs uppercase tracking-[0.16em] transition-all duration-300 shadow-xl group cursor-pointer"
                 >
                   <span>CONNECT CONCIERGE</span>
-                  <span className="w-6 h-6 rounded-full bg-[#FF1F02] group-hover:bg-white text-white group-hover:text-[#FF1F02] flex items-center justify-center transition-colors">
+                  <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center transition-colors">
                     <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </Link>
@@ -301,9 +311,9 @@ export default function Experiences() {
               <MagneticButton>
                 <a
                   href="tel:+919876543210"
-                  className="inline-flex items-center gap-3 px-8 py-5 rounded-none border border-white/40 hover:border-white text-white font-semibold text-xs uppercase tracking-[0.16em] backdrop-blur-md transition-all duration-300"
+                  className="inline-flex items-center gap-3 px-8 py-5 rounded-none border border-[#8F6B2E]/40 hover:border-[#8F6B2E] text-[#2A1F17] dark:text-[#F3EEE0] font-semibold text-xs uppercase tracking-[0.16em] backdrop-blur-md transition-all duration-300"
                 >
-                  <Phone className="w-4 h-4 text-[#FF1F02]" />
+                  <Phone className="w-4 h-4 text-[#8F6B2E] dark:text-[#D4AF37]" />
                   <span>DIRECT INQUIRIES</span>
                 </a>
               </MagneticButton>
@@ -311,13 +321,18 @@ export default function Experiences() {
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={400}>
-            <div className="pt-6 flex items-center justify-center gap-6 text-[11px] font-mono text-[#B0B0B0] uppercase tracking-widest">
-              <span>● PRIVATE NATURALISTS</span>
-              <span>● BESPOKE TIMING</span>
-              <span>● INCLUDED CONCIERGE CARE</span>
+            <div className="pt-6 flex items-center justify-center gap-6 text-[11px] font-mono text-[#8F6B2E] dark:text-[#D4AF37] uppercase tracking-widest">
+              <span>✦ PRIVATE GUIDES</span>
+              <span>✦ BESPOKE TIMING</span>
+              <span>✦ INCLUDED ROYAL CARE</span>
             </div>
           </ScrollReveal>
 
+        </div>
+
+        {/* Bottom Jaali Border */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <IndianJaaliBorder />
         </div>
       </section>
 

@@ -71,6 +71,31 @@ const inquirySchema = new mongoose.Schema(
       type: String,
       default: '',
     },
+    source: {
+      type: String,
+      enum: ['website', 'chatbot', 'direct', 'admin'],
+      default: 'website',
+    },
+    destination: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    travellers: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    language: {
+      type: String,
+      default: 'en',
+      trim: true,
+    },
+    conversationSummary: {
+      type: String,
+      default: '',
+      trim: true,
+    },
   },
   {
     timestamps: true,

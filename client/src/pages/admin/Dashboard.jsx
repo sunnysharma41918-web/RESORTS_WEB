@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import {
-  BedDouble,
-  Image as ImageIcon,
-  MessageSquare,
-  Tag,
   Plus,
-  ArrowRight,
+  ArrowUpRight,
+  BedDouble,
+  Tag,
+  MessageSquare,
+  Image as ImageIcon,
   Sparkles,
-  ExternalLink,
-  CheckCircle2,
-  Calendar,
   Phone,
-  Mail
+  Mail,
+  ExternalLink,
+  ShieldCheck,
+  MapPin,
+  CheckCircle2,
+  Clock,
+  ArrowRight,
+  Flame,
+  Crown,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { accommodationService } from '../../services/accommodationService';
@@ -53,131 +58,138 @@ export default function Dashboard() {
     loadStats();
   }, []);
 
-  const kpiCards = [
+  const kpis = [
     {
-      label: 'Active Guest Inquiries',
-      count: stats.inquiries.length || 0,
-      path: '/admin/inquiries',
-      icon: MessageSquare,
-      actionText: 'Manage Leads →',
-      actionPath: '/admin/inquiries',
-    },
-    {
-      label: 'Signature Suites & Villas',
-      count: stats.accommodations.length || 3,
-      path: '/admin/accommodations',
-      icon: BedDouble,
-      actionText: '+ Add Suite',
-      actionPath: '/admin/accommodations/new',
-    },
-    {
-      label: 'Offers & Packages',
-      count: stats.offers.length || 6,
+      label: 'Active Packages & Offers',
+      count: stats.offers.length,
       path: '/admin/offers',
-      icon: Tag,
       actionText: '+ Add Package',
       actionPath: '/admin/offers/new',
+      isPrimary: true,
+      note: 'Resort & Hotel promotions',
     },
     {
-      label: 'Visual Media Gallery',
+      label: '02 — Accommodations (Resorts, Hotels)',
+      count: stats.accommodations.length || 6,
+      path: '/admin/accommodations',
+      actionText: '+ Add Suite',
+      actionPath: '/admin/accommodations/new',
+      isPrimary: false,
+      note: 'Resort villas & hotel suites',
+    },
+    {
+      label: 'Guest Inquiries & Leads',
+      count: stats.inquiries.length,
+      path: '/admin/inquiries',
+      actionText: 'Manage Leads →',
+      actionPath: '/admin/inquiries',
+      isPrimary: false,
+      note: 'Direct booking requests',
+    },
+    {
+      label: 'Media Gallery Assets',
       count: stats.gallery.length || 18,
       path: '/admin/gallery',
-      icon: ImageIcon,
-      actionText: 'View Media →',
+      actionText: 'Open Media Vault →',
       actionPath: '/admin/gallery',
+      isPrimary: false,
+      note: 'High-res photography',
     },
   ];
 
   return (
-    <div className="space-y-10 select-none text-white font-manrope">
+    <div className="space-y-6 font-manrope text-[#111827]">
       
-      {/* 1. HEADER & ESSENTIAL CMS ACTIONS */}
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-[#333333]">
-        <div className="space-y-2">
-          <div className="flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-[0.14em] text-[#FF1F02]">
-            <span className="w-2 h-2 rounded-full bg-[#FF1F02] inline-block shrink-0" />
-            <span>00 — EXECUTIVE CONTROL CENTER</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-white">
-            ESTATE OVERVIEW
+      {/* 1. Header Section */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#111827] tracking-tight">
+            Dashboard
           </h1>
+          <p className="text-xs sm:text-sm text-gray-500 font-normal mt-0.5">
+            Manage packages, luxury suites, and guest inquiries with ease.
+          </p>
         </div>
 
-        {/* Quick Action Buttons */}
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex items-center gap-3">
           <Link
-            to="/admin/inquiries"
-            className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-none bg-[#FF1F02] hover:bg-white text-white hover:text-black font-bold text-xs uppercase tracking-wider transition-all shadow-lg"
+            to="/admin/ticker"
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-gray-50 text-gray-700 font-semibold text-xs border border-gray-200 rounded-full transition-all shadow-2xs"
           >
-            <MessageSquare className="w-4 h-4" />
-            <span>Guest Inquiries</span>
-          </Link>
-
-          <Link
-            to="/admin/accommodations/new"
-            className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-none bg-[#1C1C1C] hover:bg-white/10 border border-[#333333] text-white font-semibold text-xs uppercase tracking-wider transition-all"
-          >
-            <Plus className="w-4 h-4 text-[#FF1F02]" />
-            <span>Add Suite</span>
+            <Flame className="w-4 h-4 text-[#134E39]" />
+            <span>Top Marquee</span>
           </Link>
 
           <Link
             to="/admin/offers/new"
-            className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-none bg-[#1C1C1C] hover:bg-white/10 border border-[#333333] text-white font-semibold text-xs uppercase tracking-wider transition-all"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#134E39] hover:bg-[#0E3C2B] text-white font-semibold text-xs rounded-full transition-all shadow-xs"
           >
-            <Plus className="w-4 h-4 text-[#FF1F02]" />
-            <span>Create Offer</span>
-          </Link>
-
-          <Link
-            to="/admin/gallery"
-            className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-none bg-[#1C1C1C] hover:bg-white/10 border border-[#333333] text-[#D0D0D0] hover:text-white font-semibold text-xs uppercase tracking-wider transition-all"
-          >
-            <ImageIcon className="w-4 h-4 text-[#FF1F02]" />
-            <span>Media Vault</span>
+            <Plus className="w-4 h-4" />
+            <span>Add Package</span>
           </Link>
         </div>
       </div>
 
-      {/* 2. 4 EDITORIAL KPI METRIC CARDS */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {kpiCards.map((kpi, idx) => {
-          const Icon = kpi.icon;
+      {/* 2. Real KPI 4-Card Metric Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {kpis.map((kpi) => {
+          if (kpi.isPrimary) {
+            return (
+              <div
+                key={kpi.label}
+                className="bg-gradient-to-br from-[#134E39] via-[#0F4332] to-[#0A3324] text-white p-5 rounded-2xl shadow-xs flex flex-col justify-between space-y-4"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-emerald-100">{kpi.label}</span>
+                  <Link
+                    to={kpi.path}
+                    className="w-8 h-8 rounded-full bg-white text-[#134E39] flex items-center justify-center hover:scale-105 transition-transform shadow-sm"
+                  >
+                    <ArrowUpRight className="w-4 h-4" />
+                  </Link>
+                </div>
+
+                <div>
+                  <span className="text-4xl font-extrabold tracking-tight block">
+                    {kpi.count}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between pt-1 text-[11px] text-emerald-200 border-t border-white/10">
+                  <span>{kpi.note}</span>
+                  <Link to={kpi.actionPath} className="font-bold underline hover:text-white">
+                    {kpi.actionText}
+                  </Link>
+                </div>
+              </div>
+            );
+          }
+
           return (
             <div
               key={kpi.label}
-              className="p-6 sm:p-8 bg-[#1C1C1C] border border-[#333333] hover:border-[#FF1F02] transition-all duration-300 flex flex-col justify-between space-y-6 group"
+              className="bg-white p-5 rounded-2xl border border-[#E5EAE7] shadow-xs flex flex-col justify-between space-y-4"
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#FF1F02]">
-                  ● 0{idx + 1}
-                </span>
-                <div className="w-10 h-10 rounded-none bg-black border border-[#333333] flex items-center justify-center text-[#FF1F02] group-hover:bg-[#FF1F02] group-hover:text-white transition-colors">
-                  <Icon className="w-4 h-4" />
-                </div>
+                <span className="text-xs font-semibold text-gray-600">{kpi.label}</span>
+                <Link
+                  to={kpi.path}
+                  className="w-8 h-8 rounded-full border border-gray-200 text-gray-600 hover:text-[#134E39] hover:border-[#134E39] flex items-center justify-center transition-colors shadow-2xs"
+                >
+                  <ArrowUpRight className="w-4 h-4" />
+                </Link>
               </div>
 
               <div>
-                <span className="text-4xl sm:text-5xl font-extrabold font-mono text-white block">
+                <span className="text-4xl font-extrabold text-[#111827] tracking-tight block">
                   {kpi.count}
                 </span>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[#D0D0D0] mt-1">
-                  {kpi.label}
-                </h3>
               </div>
 
-              <div className="pt-4 border-t border-[#333333]/80 flex items-center justify-between">
-                <Link
-                  to={kpi.actionPath}
-                  className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#FF1F02] hover:text-white transition-colors"
-                >
+              <div className="flex items-center justify-between pt-1 text-[11px] text-gray-500 border-t border-gray-100">
+                <span>{kpi.note}</span>
+                <Link to={kpi.actionPath} className="font-semibold text-[#134E39] hover:underline">
                   {kpi.actionText}
-                </Link>
-                <Link
-                  to={kpi.path}
-                  className="text-white/40 hover:text-white transition-colors"
-                >
-                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>
@@ -185,103 +197,170 @@ export default function Dashboard() {
         })}
       </div>
 
-      {/* 3. RECENT INQUIRIES & QUICK TELEMETRY GRID */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      {/* 3. Main Operational Sections: Recent Inquiries (Left) & Active Packages CMS (Right) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
         
-        {/* Left Column: Recent Concierge Inquiries (8 Cols) */}
-        <div className="lg:col-span-8 p-6 sm:p-8 bg-[#1C1C1C] border border-[#333333] space-y-6">
-          <div className="flex items-center justify-between border-b border-[#333333] pb-4">
-            <div className="space-y-1">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#FF1F02] font-bold block">
-                LEADS STREAM
-              </span>
-              <h2 className="text-xl font-extrabold uppercase tracking-tight text-white">
-                Recent Guest Inquiries
-              </h2>
+        {/* Left: Recent Guest Inquiries Stream (7 Cols) */}
+        <div className="lg:col-span-7 bg-white p-5 sm:p-6 rounded-2xl border border-[#E5EAE7] shadow-xs space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+            <div>
+              <h3 className="text-sm font-bold text-[#111827]">Recent Guest Inquiries</h3>
+              <p className="text-[11px] text-gray-400">Incoming direct reservations and booking requests</p>
             </div>
             <Link
               to="/admin/inquiries"
-              className="text-xs font-mono uppercase tracking-widest text-[#FF1F02] hover:underline"
+              className="text-xs font-semibold text-[#134E39] hover:underline flex items-center gap-1"
             >
-              View All Inquiries →
+              <span>View All</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
           <div className="space-y-3">
             {stats.inquiries && stats.inquiries.length > 0 ? (
-              stats.inquiries.slice(0, 4).map((inq, idx) => (
+              stats.inquiries.slice(0, 5).map((inq, idx) => (
                 <div
                   key={inq.id || idx}
-                  className="p-4 bg-black border border-[#333333] hover:border-[#FF1F02]/50 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                  className="p-3.5 bg-[#F8FAF9] hover:bg-[#EBF5EE] border border-transparent hover:border-[#134E39]/20 rounded-xl transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3"
                 >
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-3">
-                      <span className="text-sm font-bold text-white uppercase">{inq.guestName || inq.name || 'Guest'}</span>
-                      <span className="text-[10px] font-mono px-2 py-0.5 bg-[#1C1C1C] text-[#FF1F02] border border-[#333333] uppercase">
-                        {inq.property || inq.residence || 'Sanctuary Stay'}
+                  <div className="space-y-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold text-[#111827] truncate">
+                        {inq.guestName || inq.name || 'Guest'}
+                      </span>
+                      <span className="px-1.5 py-0.5 bg-gray-100 text-gray-700 text-[9px] font-bold rounded-full">
+                        {inq.source || 'Web Lead'}
                       </span>
                     </div>
-                    <p className="text-xs text-[#D0D0D0] font-light font-mono">
-                      {inq.email} • {inq.phone}
-                    </p>
+                    <div className="flex items-center gap-3 text-[11px] text-gray-500">
+                      <span className="truncate">📍 {inq.property || 'Resort Stay'}</span>
+                      <span>•</span>
+                      <span>{inq.phone}</span>
+                    </div>
                   </div>
-                  <span className={`text-[10px] font-mono uppercase tracking-widest shrink-0 px-2.5 py-1 border ${
-                    inq.status === 'resolved'
-                      ? 'border-emerald-500/40 text-emerald-400 bg-emerald-950/20'
-                      : inq.status === 'in-progress'
-                      ? 'border-blue-500/40 text-blue-300 bg-blue-950/20'
-                      : 'border-[#FF1F02]/40 text-[#FF1F02] bg-red-950/20'
-                  }`}>
-                    {inq.status ? inq.status.toUpperCase() : 'NEW LEAD'}
-                  </span>
+
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className={`px-2.5 py-0.5 text-[10px] font-semibold rounded-full border ${
+                      inq.status === 'resolved'
+                        ? 'bg-emerald-50 border-emerald-200 text-emerald-700'
+                        : inq.status === 'in-progress'
+                        ? 'bg-amber-50 border-amber-200 text-amber-700'
+                        : 'bg-red-50 border-red-200 text-red-700'
+                    }`}>
+                      {inq.status ? inq.status.toUpperCase() : 'NEW LEAD'}
+                    </span>
+                    <Link
+                      to="/admin/inquiries"
+                      className="p-1.5 bg-white hover:bg-gray-100 border border-gray-200 text-gray-600 rounded-lg shadow-2xs"
+                      title="View Lead"
+                    >
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
                 </div>
               ))
             ) : (
-              <div className="p-8 text-center text-xs font-mono text-white/50 border border-dashed border-[#333333]">
+              <div className="p-8 text-center text-xs text-gray-400 border border-dashed border-gray-200 rounded-xl">
                 No pending inquiries. All guest requests have been addressed.
               </div>
             )}
           </div>
         </div>
 
-        {/* Right Column: Estate System Status & Live Actions (4 Cols) */}
-        <div className="lg:col-span-4 p-6 sm:p-8 bg-[#1C1C1C] border border-[#333333] space-y-6">
-          <div className="space-y-1 border-b border-[#333333] pb-4">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-[#FF1F02] font-bold block">
-              STATUS
-            </span>
-            <h2 className="text-xl font-extrabold uppercase tracking-tight text-white">
-              System Telemetry
-            </h2>
+        {/* Right: Active Flagship Packages & Quick Status (5 Cols) */}
+        <div className="lg:col-span-5 space-y-5">
+          
+          {/* Active Packages Mini-List */}
+          <div className="bg-white p-5 sm:p-6 rounded-2xl border border-[#E5EAE7] shadow-xs space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+              <div>
+                <h3 className="text-sm font-bold text-[#111827]">Active Packages</h3>
+                <p className="text-[11px] text-gray-400">South & North India destinations</p>
+              </div>
+              <Link
+                to="/admin/offers"
+                className="text-xs font-semibold text-[#134E39] hover:underline flex items-center gap-1"
+              >
+                <span>View All</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            <div className="space-y-2.5">
+              {stats.offers.slice(0, 4).map((pkg) => (
+                <div
+                  key={pkg.id}
+                  className="flex items-center justify-between p-2.5 bg-[#F8FAF9] hover:bg-gray-100 rounded-xl transition-colors gap-3"
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    <img
+                      src={pkg.image}
+                      alt={pkg.title}
+                      className="w-10 h-10 rounded-lg object-cover shrink-0 border border-gray-200"
+                    />
+                    <div className="min-w-0">
+                      <h4 className="text-xs font-bold text-[#111827] truncate">
+                        {pkg.title}
+                      </h4>
+                      <div className="flex items-center gap-1.5 text-[10px] text-gray-500 mt-0.5">
+                        <span className="text-[#134E39] font-semibold">
+                          {pkg.propertyType === 'Resort' ? '🏰 Resort' : '🏢 Hotel'}
+                        </span>
+                        <span>•</span>
+                        <span className="truncate">{pkg.region || pkg.location}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Link
+                    to={`/admin/offers/edit/${pkg.id}`}
+                    className="p-1.5 bg-white border border-gray-200 hover:border-[#134E39] hover:text-[#134E39] text-gray-600 rounded-lg shadow-2xs shrink-0"
+                    title="Edit Package"
+                  >
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="space-y-4 text-xs font-mono">
-            <div className="flex items-center justify-between py-2 border-b border-[#333333]">
-              <span className="text-[#D0D0D0]">DATABASE ENGINE</span>
-              <span className="text-emerald-400 font-bold">● CONNECTED</span>
+          {/* Estate System & Telemetry Card */}
+          <div className="bg-white p-5 rounded-2xl border border-[#E5EAE7] shadow-xs space-y-3">
+            <div className="flex items-center justify-between pb-2 border-b border-gray-100">
+              <span className="text-xs font-bold uppercase tracking-wider text-gray-700">
+                Estate Telemetry
+              </span>
+              <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Live Sync
+              </span>
             </div>
-            <div className="flex items-center justify-between py-2 border-b border-[#333333]">
-              <span className="text-[#D0D0D0]">CDN MEDIA CACHE</span>
-              <span className="text-white font-bold">OPTIMIZED</span>
+
+            <div className="space-y-2 text-xs text-gray-600">
+              <div className="flex items-center justify-between py-1 border-b border-gray-50">
+                <span>Database Engine</span>
+                <span className="font-semibold text-emerald-700">Connected</span>
+              </div>
+              <div className="flex items-center justify-between py-1 border-b border-gray-50">
+                <span>Media Asset Vault</span>
+                <span className="font-semibold text-[#111827]">Synchronized</span>
+              </div>
+              <div className="flex items-center justify-between py-1 border-b border-gray-50">
+                <span>Marquee Announcements</span>
+                <span className="font-semibold text-[#134E39]">Displaying</span>
+              </div>
             </div>
-            <div className="flex items-center justify-between py-2 border-b border-[#333333]">
-              <span className="text-[#D0D0D0]">OFF-GRID TELEMETRY</span>
-              <span className="text-[#FF1F02] font-bold">100% SOLAR</span>
-            </div>
-            <div className="flex items-center justify-between py-2 border-b border-[#333333]">
-              <span className="text-[#D0D0D0]">SECURITY LEVEL</span>
-              <span className="text-white font-bold">LEVEL 4 HIGH</span>
-            </div>
+
+            <Link
+              to="/"
+              target="_blank"
+              className="w-full py-2.5 bg-[#F4F6F5] hover:bg-[#EBF5EE] text-[#134E39] font-semibold text-xs rounded-xl flex items-center justify-center gap-2 transition-all mt-2"
+            >
+              <span>Preview Live Website</span>
+              <ExternalLink className="w-3.5 h-3.5 text-gray-400" />
+            </Link>
           </div>
 
-          <Link
-            to="/"
-            target="_blank"
-            className="w-full py-3.5 bg-black hover:bg-[#FF1F02] text-white font-bold text-xs font-mono uppercase tracking-widest transition-all border border-[#333333] flex items-center justify-center gap-2 group"
-          >
-            <span>Preview Live Resort</span>
-            <ExternalLink className="w-3.5 h-3.5 text-[#FF1F02] group-hover:text-white" />
-          </Link>
         </div>
 
       </div>
