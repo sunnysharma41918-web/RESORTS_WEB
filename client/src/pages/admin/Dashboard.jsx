@@ -98,26 +98,39 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="space-y-6 font-manrope text-[#111827]">
+    <div className="w-full space-y-6 font-manrope text-[#111827]">
       
       {/* 1. Header Section */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#111827] tracking-tight">
-            Dashboard
-          </h1>
+          <div className="flex items-center gap-2.5">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#111827] tracking-tight">
+              Dashboard
+            </h1>
+            <span className="px-2.5 py-0.5 bg-[#EBF5EE] text-[#134E39] text-[10px] font-bold uppercase rounded-full tracking-wider border border-[#134E39]/15">
+              Live Estate CMS
+            </span>
+          </div>
           <p className="text-xs sm:text-sm text-gray-500 font-normal mt-0.5">
-            Manage packages, luxury suites, and guest inquiries with ease.
+            Manage packages, luxury suites, and guest inquiries across Country Holidays Hotels & Resorts.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <Link
             to="/admin/ticker"
             className="inline-flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-gray-50 text-gray-700 font-semibold text-xs border border-gray-200 rounded-full transition-all shadow-2xs"
           >
             <Flame className="w-4 h-4 text-[#134E39]" />
             <span>Top Marquee</span>
+          </Link>
+
+          <Link
+            to="/admin/accommodations/new"
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-gray-50 text-gray-700 font-semibold text-xs border border-gray-200 rounded-full transition-all shadow-2xs"
+          >
+            <BedDouble className="w-4 h-4 text-[#134E39]" />
+            <span>Add Suite</span>
           </Link>
 
           <Link
@@ -130,14 +143,14 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* 2. Real KPI 4-Card Metric Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* 2. Real KPI 4-Card Metric Grid (Full 100% Width) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 w-full">
         {kpis.map((kpi) => {
           if (kpi.isPrimary) {
             return (
               <div
                 key={kpi.label}
-                className="bg-gradient-to-br from-[#134E39] via-[#0F4332] to-[#0A3324] text-white p-5 rounded-2xl shadow-xs flex flex-col justify-between space-y-4"
+                className="bg-gradient-to-br from-[#134E39] via-[#0F4332] to-[#0A3324] text-white p-5 sm:p-6 rounded-2xl shadow-xs flex flex-col justify-between space-y-4 transition-transform hover:-translate-y-0.5"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-semibold text-emerald-100">{kpi.label}</span>
@@ -150,12 +163,12 @@ export default function Dashboard() {
                 </div>
 
                 <div>
-                  <span className="text-4xl font-extrabold tracking-tight block">
+                  <span className="text-4xl sm:text-5xl font-extrabold tracking-tight block">
                     {kpi.count}
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between pt-1 text-[11px] text-emerald-200 border-t border-white/10">
+                <div className="flex items-center justify-between pt-2 text-[11px] text-emerald-200 border-t border-white/10">
                   <span>{kpi.note}</span>
                   <Link to={kpi.actionPath} className="font-bold underline hover:text-white">
                     {kpi.actionText}
@@ -168,7 +181,7 @@ export default function Dashboard() {
           return (
             <div
               key={kpi.label}
-              className="bg-white p-5 rounded-2xl border border-[#E5EAE7] shadow-xs flex flex-col justify-between space-y-4"
+              className="bg-white p-5 sm:p-6 rounded-2xl border border-[#E5EAE7] shadow-xs flex flex-col justify-between space-y-4 transition-transform hover:-translate-y-0.5"
             >
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-gray-600">{kpi.label}</span>
@@ -181,12 +194,12 @@ export default function Dashboard() {
               </div>
 
               <div>
-                <span className="text-4xl font-extrabold text-[#111827] tracking-tight block">
+                <span className="text-4xl sm:text-5xl font-extrabold text-[#111827] tracking-tight block">
                   {kpi.count}
                 </span>
               </div>
 
-              <div className="flex items-center justify-between pt-1 text-[11px] text-gray-500 border-t border-gray-100">
+              <div className="flex items-center justify-between pt-2 text-[11px] text-gray-500 border-t border-gray-100">
                 <span>{kpi.note}</span>
                 <Link to={kpi.actionPath} className="font-semibold text-[#134E39] hover:underline">
                   {kpi.actionText}
@@ -198,7 +211,7 @@ export default function Dashboard() {
       </div>
 
       {/* 3. Main Operational Sections: Recent Inquiries (Left) & Active Packages CMS (Right) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 w-full items-start">
         
         {/* Left: Recent Guest Inquiries Stream (7 Cols) */}
         <div className="lg:col-span-7 bg-white p-5 sm:p-6 rounded-2xl border border-[#E5EAE7] shadow-xs space-y-4">
@@ -325,7 +338,7 @@ export default function Dashboard() {
           </div>
 
           {/* Estate System & Telemetry Card */}
-          <div className="bg-white p-5 rounded-2xl border border-[#E5EAE7] shadow-xs space-y-3">
+          <div className="bg-white p-5 sm:p-6 rounded-2xl border border-[#E5EAE7] shadow-xs space-y-3">
             <div className="flex items-center justify-between pb-2 border-b border-gray-100">
               <span className="text-xs font-bold uppercase tracking-wider text-gray-700">
                 Estate Telemetry
@@ -363,6 +376,84 @@ export default function Dashboard() {
 
         </div>
 
+      </div>
+
+      {/* 4. Quick Estate Navigation Bar (Full 100% Width) */}
+      <div className="w-full bg-white p-5 sm:p-6 rounded-2xl border border-[#E5EAE7] shadow-xs">
+        <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+          <div>
+            <h3 className="text-sm font-bold text-[#111827]">Estate Quick Access Modules</h3>
+            <p className="text-[11px] text-gray-400">Direct shortcuts to manage properties, promotions, and media assets</p>
+          </div>
+          <span className="text-xs font-semibold text-[#134E39]">5 Modules Online</span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-4">
+          <Link
+            to="/admin/accommodations"
+            className="p-3.5 bg-[#F8FAF9] hover:bg-[#EBF5EE] border border-transparent hover:border-[#134E39]/30 rounded-xl transition-all flex items-center gap-3 group"
+          >
+            <div className="w-9 h-9 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-[#134E39] group-hover:bg-[#134E39] group-hover:text-white transition-colors shadow-2xs">
+              <BedDouble className="w-4 h-4" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-[#111827]">Accommodations</p>
+              <p className="text-[10px] text-gray-400">Suites & Villas</p>
+            </div>
+          </Link>
+
+          <Link
+            to="/admin/offers"
+            className="p-3.5 bg-[#F8FAF9] hover:bg-[#EBF5EE] border border-transparent hover:border-[#134E39]/30 rounded-xl transition-all flex items-center gap-3 group"
+          >
+            <div className="w-9 h-9 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-[#134E39] group-hover:bg-[#134E39] group-hover:text-white transition-colors shadow-2xs">
+              <Tag className="w-4 h-4" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-[#111827]">Offers & Packages</p>
+              <p className="text-[10px] text-gray-400">Promotions CMS</p>
+            </div>
+          </Link>
+
+          <Link
+            to="/admin/ticker"
+            className="p-3.5 bg-[#F8FAF9] hover:bg-[#EBF5EE] border border-transparent hover:border-[#134E39]/30 rounded-xl transition-all flex items-center gap-3 group"
+          >
+            <div className="w-9 h-9 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-[#134E39] group-hover:bg-[#134E39] group-hover:text-white transition-colors shadow-2xs">
+              <Flame className="w-4 h-4" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-[#111827]">Marquee Ticker</p>
+              <p className="text-[10px] text-gray-400">Header Alerts</p>
+            </div>
+          </Link>
+
+          <Link
+            to="/admin/gallery"
+            className="p-3.5 bg-[#F8FAF9] hover:bg-[#EBF5EE] border border-transparent hover:border-[#134E39]/30 rounded-xl transition-all flex items-center gap-3 group"
+          >
+            <div className="w-9 h-9 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-[#134E39] group-hover:bg-[#134E39] group-hover:text-white transition-colors shadow-2xs">
+              <ImageIcon className="w-4 h-4" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-[#111827]">Media Gallery</p>
+              <p className="text-[10px] text-gray-400">Asset Vault</p>
+            </div>
+          </Link>
+
+          <Link
+            to="/admin/inquiries"
+            className="p-3.5 bg-[#F8FAF9] hover:bg-[#EBF5EE] border border-transparent hover:border-[#134E39]/30 rounded-xl transition-all flex items-center gap-3 group"
+          >
+            <div className="w-9 h-9 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-[#134E39] group-hover:bg-[#134E39] group-hover:text-white transition-colors shadow-2xs">
+              <MessageSquare className="w-4 h-4" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-[#111827]">Guest Leads</p>
+              <p className="text-[10px] text-gray-400">Inquiry Stream</p>
+            </div>
+          </Link>
+        </div>
       </div>
 
     </div>
