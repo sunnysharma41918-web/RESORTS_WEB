@@ -10,10 +10,13 @@ const STATIC_RESORT_KNOWLEDGE = {
   overview:
     'Country Holidays Hotels & Resorts is an international luxury hospitality brand offering curated sanctuaries across breathtaking cliffside, alpine, spice garden, and palace locations.',
   contact: {
-    phone: '+91 98765 43210',
-    whatsapp: '+919876543210',
-    email: 'info@countryholidaysresorts.com',
-    address: '111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041',
+    legalEntityName: 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED',
+    phone: '+91 98991 08543',
+    whatsapp: '+919899108543',
+    email: 'dharmendra@countryholidaysresorts.com',
+    registeredAddress: 'F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019',
+    operationalAddress: 'F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019',
+    address: 'F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019',
     hours: '24/7 Global Luxury Concierge',
     bookingUrl: '/accommodations',
     contactUrl: '/contact',
@@ -162,10 +165,11 @@ async function retrieveWebsiteContent(userQuery = '') {
 
   // Contact & Links
   sections.push(`### CONTACT & OFFICIAL WEBSITE LINKS
-- Phone: ${contact.phone || contact.phoneRaw || '+91 98765 43210'}
-- WhatsApp: ${contact.whatsapp || '+919876543210'}
-- Email: ${contact.email || 'info@countryholidaysresorts.com'}
-- Address: ${contact.address || '111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041'}
+- Legal Entity: ${contact.legalEntityName || 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED'}
+- Phone: ${contact.phone || contact.phoneRaw || '+91 98991 08543'}
+- WhatsApp: ${contact.whatsapp || '+919899108543'}
+- Email: ${contact.email || 'dharmendra@countryholidaysresorts.com'}
+- Registered & Operational Address: ${contact.address || 'F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019'}
 - Hours: ${contact.hours || '24/7 Global Luxury Concierge'}
 - Booking Page: /accommodations
 - Offers Page: /offers

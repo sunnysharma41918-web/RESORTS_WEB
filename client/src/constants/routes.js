@@ -18,6 +18,8 @@ export const ROUTES = {
   EVENTS: '/events',
   PRIVACY: '/privacy-policy',
   TERMS: '/terms',
+  CANCELLATION: '/cancellation-policy',
+  REFUND: '/refund-policy',
   LOGIN: '/login',
   ADMIN_LOGIN: '/admin/login',
   ADMIN: '/admin',

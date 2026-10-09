@@ -20,10 +20,11 @@ async function retrieveStructuredWebsiteData() {
 
     const resortName = setting?.resortName || 'Country Holidays Hotels & Resorts';
     const contact = {
-      phone: setting?.phone || '+91 98765 43210',
-      whatsapp: setting?.whatsapp || '+919876543210',
-      email: setting?.email || 'info@countryholidaysresorts.com',
-      address: setting?.address || '111, Rajiv Gandhi Salai, OMR, Chennai, Tamil Nadu 600041',
+      legalEntityName: setting?.legalEntityName || 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED',
+      phone: setting?.phone || '+91 98991 08543',
+      whatsapp: setting?.whatsapp || '+919899108543',
+      email: setting?.email || 'dharmendra@countryholidaysresorts.com',
+      address: setting?.address || 'F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019',
       hours: setting?.hours || '24/7 Global Luxury Concierge',
     };
 
@@ -38,10 +39,11 @@ async function retrieveStructuredWebsiteData() {
     return {
       resortName: 'Country Holidays Hotels & Resorts',
       contact: {
-        phone: '+91 98765 43210',
-        whatsapp: '+919876543210',
-        email: 'info@countryholidaysresorts.com',
-        address: '111, Rajiv Gandhi Salai, OMR, Chennai, Tamil Nadu 600041',
+        legalEntityName: 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED',
+        phone: '+91 98991 08543',
+        whatsapp: '+919899108543',
+        email: 'dharmendra@countryholidaysresorts.com',
+        address: 'F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019',
         hours: '24/7 Global Luxury Concierge',
       },
       accommodations: [],

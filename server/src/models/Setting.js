@@ -26,17 +26,25 @@ const settingSchema = new mongoose.Schema(
       },
     },
     contactInfo: {
+      legalEntityName: {
+        type: String,
+        default: 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED',
+      },
+      companyName: {
+        type: String,
+        default: 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED',
+      },
       phone: {
         type: String,
-        default: '+91 98765 43210',
+        default: '+91 98991 08543',
       },
       phoneRaw: {
         type: String,
-        default: '+919876543210',
+        default: '+919899108543',
       },
       whatsapp: {
         type: String,
-        default: '+919876543210',
+        default: '+919899108543',
       },
       whatsappMessage: {
         type: String,
@@ -44,15 +52,23 @@ const settingSchema = new mongoose.Schema(
       },
       email: {
         type: String,
-        default: 'info@countryholidaysresorts.com',
+        default: 'dharmendra@countryholidaysresorts.com',
       },
       enquiriesEmail: {
         type: String,
-        default: 'info@countryholidaysresorts.com',
+        default: 'dharmendra@countryholidaysresorts.com',
+      },
+      registeredAddress: {
+        type: String,
+        default: 'F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019',
+      },
+      operationalAddress: {
+        type: String,
+        default: 'F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019',
       },
       address: {
         type: String,
-        default: 'Country Holidays Corporate Pavilion, Ocean Avenue, Goa, India',
+        default: 'F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019',
       },
       hours: {
         type: String,

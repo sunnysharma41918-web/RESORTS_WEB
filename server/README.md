@@ -114,6 +114,7 @@ npm start
 ---
 
 ## 🏢 Organization
-**Country Holidays Hotel & Resorts Pvt. Ltd.**  
-*Corporate Office:* 111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041  
-*Official Concierge Desk:* info@countryholidaysresorts.com
+**COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED**  
+*Registered & Operational Address:* F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019  
+*Telephone:* +91 98991 08543  
+*Official Email:* dharmendra@countryholidaysresorts.com

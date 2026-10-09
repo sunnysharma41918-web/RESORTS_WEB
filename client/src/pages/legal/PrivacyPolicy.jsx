@@ -64,13 +64,26 @@ export default function PrivacyPolicy() {
               Your information is exclusively utilized to curate bespoke stays, provide airport transfers, and deliver personalized concierge services. We do not sell or monetize guest data to third parties.
             </p>
           </div>
+          <div className="space-y-3">
+            <h3 className="text-lg font-bold uppercase tracking-tight dark:text-white text-[#0E0E0E] flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#FF1F02]" />
+              <span>3. Contact & Grievance Officer</span>
+            </h3>
+            <div className="pl-4 border-l-2 dark:border-[#333333] border-[#E9E9DE] space-y-1 text-xs sm:text-sm">
+              <p><strong>Merchant Legal Entity:</strong> COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED</p>
+              <p><strong>Registered & Operational Address:</strong> F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019</p>
+              <p><strong>Telephone:</strong> +91 98991 08543</p>
+              <p><strong>Email:</strong> dharmendra@countryholidaysresorts.com</p>
+            </div>
+          </div>
         </div>
 
         {/* Heritage Stamp Signoff */}
         <div className="pt-10 flex items-center justify-between border-t dark:border-[#333333] border-[#E9E9DE]">
           <div className="text-xs font-mono dark:text-white/60 text-[#0E0E0E]/60 space-y-1">
-            <p className="font-bold dark:text-white text-[#0E0E0E]">CHHR Privacy Desk</p>
-            <p>111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041</p>
+            <p className="font-bold dark:text-white text-[#0E0E0E]">COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED</p>
+            <p>F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019</p>
+            <p>Tel: +91 98991 08543 | Email: dharmendra@countryholidaysresorts.com</p>
           </div>
           <EditorialHeritageStamp size={90} centerText="CHHR" text="COUNTRY HOLIDAYS • PRIVACY SEAL • " />
         </div>

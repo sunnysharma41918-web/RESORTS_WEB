@@ -254,12 +254,12 @@ function handleDeterministicConcierge(userMessage, conversationHistory, websiteC
     query.includes('kamra milega')
   ) {
     if (langMode === 'hi_devanagari') {
-      return `मैं यहाँ से लाइव उपलब्धता की पुष्टि नहीं कर सकता। कृपया रीयल-टाइम उपलब्धता और बुकिंग के लिए हमारे बुकिंग पेज पर जाएँ या हमारी रिज़ॉर्ट टीम से WhatsApp (+91 98765 43210) पर संपर्क करें।`;
+      return `मैं यहाँ से लाइव उपलब्धता की पुष्टि नहीं कर सकता। कृपया रीयल-टाइम उपलब्धता और बुकिंग के लिए हमारे बुकिंग पेज पर जाएँ या हमारी रिज़ॉर्ट टीम से WhatsApp (+91 98991 08543) पर संपर्क करें।`;
     }
     if (langMode === 'hi_roman') {
-      return `Main live availability confirm nahi kar sakta bhai. Booking page ya resort team se direct WhatsApp (+91 98765 43210) par check karna best rahega.`;
+      return `Main live availability confirm nahi kar sakta bhai. Booking page ya resort team se direct WhatsApp (+91 98991 08543) par check karna best rahega.`;
     }
-    return `I can't confirm live room availability from here. Please use our booking page or contact our resort team directly on WhatsApp (+91 98765 43210) to check real-time availability.`;
+    return `I can't confirm live room availability from here. Please use our booking page or contact our resort team directly on WhatsApp (+91 98991 08543) to check real-time availability.`;
   }
 
   // 2. Booking & Reservations (Rule 6)
@@ -271,12 +271,12 @@ function handleDeterministicConcierge(userMessage, conversationHistory, websiteC
     query.includes('बुक')
   ) {
     if (langMode === 'hi_devanagari') {
-      return `**${resortName}** में बुकिंग करने के लिए, आप हमारे **Accommodations** पेज पर जाकर विला चुन सकते हैं या हमारी 24/7 कॉन्सिएर्ज टीम से सीधे WhatsApp (**+91 98765 43210**) या ईमेल (**info@countryholidaysresorts.com**) पर संपर्क कर सकते हैं।`;
+      return `**${resortName}** में बुकिंग करने के लिए, आप हमारे **Accommodations** पेज पर जाकर विला चुन सकते हैं या हमारी 24/7 कॉन्सिएर्ज टीम से सीधे WhatsApp (**+91 98991 08543**) या ईमेल (**dharmendra@countryholidaysresorts.com**) पर संपर्क कर सकते हैं।`;
     }
     if (langMode === 'hi_roman') {
-      return `Stay book karne ke liye aap hamare **Accommodations** page par ja sakte hain ya direct 24/7 WhatsApp (**+91 98765 43210**) par message kar sakte hain bhai. Upar diye gaye **Inquiry** button se bhi direct request bhej sakte ho.`;
+      return `Stay book karne ke liye aap hamare **Accommodations** page par ja sakte hain ya direct 24/7 WhatsApp (**+91 98991 08543**) par message kar sakte hain bhai. Upar diye gaye **Inquiry** button se bhi direct request bhej sakte ho.`;
     }
-    return `To book your stay at **${resortName}**, please visit our **Accommodations** page or connect directly with our 24/7 Concierge team via WhatsApp at **+91 98765 43210** or email at **info@countryholidaysresorts.com**.`;
+    return `To book your stay at **${resortName}**, please visit our **Accommodations** page or connect directly with our 24/7 Concierge team via WhatsApp at **+91 98991 08543** or email at **dharmendra@countryholidaysresorts.com**.`;
   }
 
   // 3. Room comparison & Recommendations (Rule 9 & 10)
@@ -491,14 +491,14 @@ function handleDeterministicConcierge(userMessage, conversationHistory, websiteC
     return `Resort Timings:\n• **Check-in**: 14:00 (2:00 PM)\n• **Check-out**: 11:00 (11:00 AM)\n\nEarly check-in and late check-out are subject to availability upon arrival.`;
   }
 
-  if (query.includes('रद्द') || query.includes('cancel') || query.includes('refund')) {
+  if (query.includes('रद्द') || query.includes('cancel') || query.includes('refund') || query.includes('वापसी')) {
     if (langMode === 'hi_devanagari') {
-      return `**रद्दीकरण नीति (Cancellation Policy)**:\nआगमन तिथि से 72 घंटे पहले तक निःशुल्क रद्दीकरण उपलब्ध है। 72 घंटे के भीतर रद्दीकरण पर 1 रात का टैरिफ शुल्क लागू होता है।`;
+      return `**रद्दीकरण व धनवापसी नीति (COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED)**:\n• ऑर्डर/बुकिंग तुरंत बाद रद्दीकरण के लिए अनुरोध किया जा सकता है, बशर्ते वेंडर द्वारा शिपिंग/प्रसंस्करण प्रक्रिया शुरू न हुई हो।\n• खराब होने वाली वस्तुओं (फूल, खाद्य पदार्थ आदि) के लिए रद्दीकरण मान्य नहीं है, सिवाय गुणवत्ता खराबी स्थापित होने पर।\n• क्षतिग्रस्त या उम्मीद अनुसार न होने वाली वस्तुओं की सूचना प्राप्ति के **7 दिनों** के भीतर देनी होगी।\n• स्वीकृत रिफंड **16–30 दिनों** में मूल भुगतान माध्यम में प्रोसेस किया जाता है।`;
     }
     if (langMode === 'hi_roman') {
-      return `**Cancellation Policy**:\nArrival date se 72 hours pehle tak complimentary cancellation available hai. 72 hours ke andar cancel karne par 1 night ka tariff charge lagta hai.`;
+      return `**Cancellation & Refund Policy (COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED)**:\n• Order/booking request turant karne par cancellation consider hoti hai, agar vendor ne shipping/processing shuru na ki ho.\n• Perishable items (flowers, eatables) cancel nahi hote jab tak quality issue prove na ho.\n• Damaged ya mismatch products 7 days ke andar customer service ko report karein.\n• Approved refunds 16–30 days mein process ho jate hain bhai.`;
     }
-    return `**Cancellation Policy**:\nComplimentary cancellation is available up to 72 hours prior to scheduled arrival date. Cancellations within 72 hours are subject to a one-night tariff fee.`;
+    return `**Cancellation & Refund Policy (COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED)**:\n• Cancellations are considered if requested immediately after placing the order, provided shipping/vendor processing has not been initiated.\n• Perishable items (e.g. flowers, eatables) are non-cancellable unless quality defects are established.\n• Damaged or mismatched items must be reported within **7 Days** of delivery to our Customer Service.\n• Approved refunds are credited within **16–30 Days** to the customer.`;
   }
 
   if (query.includes('बच्चे') || query.includes('child') || query.includes('kid') || query.includes('baby') || query.includes('family')) {
@@ -539,12 +539,12 @@ function handleDeterministicConcierge(userMessage, conversationHistory, websiteC
     query.includes('संपर्क')
   ) {
     if (langMode === 'hi_devanagari') {
-      return `**${resortName} संपर्क व स्थान विवरण**:\n\n• **फ़ोन**: +91 98765 43210\n• **WhatsApp**: +91 98765 43210\n• **ईमेल**: info@countryholidaysresorts.com\n• **पता**: 111, राजीव गांधी सलाई, ओएमआर, कोट्टीवक्कम, चेन्नई, तमिलनाडु 600041\n• **हेल्पडेस्क सेवा**: 24/7 उपलब्ध।`;
+      return `**${resortName} संपर्क व स्थान विवरण**:\n\n• **कंपनी**: COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED\n• **फ़ोन**: +91 98991 08543\n• **WhatsApp**: +91 98991 08543\n• **ईमेल**: dharmendra@countryholidaysresorts.com\n• **पंजीकृत व परिचालन पता**: F-10, Second Floor Kalkaji, Near Union Bank, Delhi, PIN: 110019\n• **हेल्पडेस्क सेवा**: 24/7 उपलब्ध।`;
     }
     if (langMode === 'hi_roman') {
-      return `**${resortName} Contact Details**:\n\n• **Phone / WhatsApp**: +91 98765 43210\n• **Email**: info@countryholidaysresorts.com\n• **Address**: 111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041\n• **Executive Desk**: 24/7 Available.`;
+      return `**${resortName} Contact Details**:\n\n• **Company**: COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED\n• **Phone / WhatsApp**: +91 98991 08543\n• **Email**: dharmendra@countryholidaysresorts.com\n• **Registered & Operational Address**: F-10, Second Floor Kalkaji, Near Union Bank, Delhi, PIN: 110019\n• **Executive Desk**: 24/7 Available.`;
     }
-    return `**Contact & Location Details**:\n\n• **Phone**: +91 98765 43210\n• **WhatsApp**: +91 98765 43210\n• **Email**: info@countryholidaysresorts.com\n• **Address**: 111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041\n• **Executive Desk**: 24/7 Global Luxury Support.`;
+    return `**Contact & Location Details**:\n\n• **Merchant Legal Entity**: COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED\n• **Phone**: +91 98991 08543\n• **WhatsApp**: +91 98991 08543\n• **Email**: dharmendra@countryholidaysresorts.com\n• **Registered & Operational Address**: F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019\n• **Executive Desk**: 24/7 Global Luxury Support.`;
   }
 
   // 11. Conversational Local Hindi Greetings & Slang ("Aur Bhai", "Kya Scene Hai", "Ram Ram", "Kay Haal Hai", etc.)
@@ -639,10 +639,10 @@ function handleDeterministicConcierge(userMessage, conversationHistory, websiteC
 
   // 14. Strict RAG fallback rule (Rule 20)
   if (langMode === 'hi_devanagari') {
-    return `मुझे हमारी वेबसाइट पर यह जानकारी नहीं मिली। कृपया अधिक जानकारी और सहायता के लिए हमारी रिज़ॉर्ट टीम (+91 98765 43210) से संपर्क करें।`;
+    return `मुझे हमारी वेबसाइट पर यह जानकारी नहीं मिली। कृपया अधिक जानकारी और सहायता के लिए हमारी रिज़ॉर्ट टीम (+91 98991 08543) से संपर्क करें।`;
   }
   if (langMode === 'hi_roman') {
-    return `Ye information mujhe website par nahi mili bhai. Latest details ke liye resort team se contact karna best rahega (+91 98765 43210).`;
+    return `Ye information mujhe website par nahi mili bhai. Latest details ke liye resort team se contact karna best rahega (+91 98991 08543).`;
   }
   return `I couldn't find that information on our website. Please contact our resort team for further assistance.`;
 }

@@ -162,13 +162,13 @@ export default function CustomerCareSection() {
                   </div>
                   <div className="space-y-0.5 min-w-0">
                     <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-[#635142] dark:text-[#BFB0A2] block font-semibold">
-                      DIRECT CONCIERGE
+                      DIRECT TELEPHONE / CONCIERGE
                     </span>
                     <a
-                      href={`tel:${CONTACT_INFO.phoneRaw || '+919876543210'}`}
+                      href={`tel:${CONTACT_INFO.phoneRaw || '+919899108543'}`}
                       className="text-lg sm:text-xl font-serif font-bold text-[#241A12] dark:text-[#F5EFE6] hover:text-[#B38738] dark:hover:text-[#E8C97E] transition-colors block font-mono"
                     >
-                      {CONTACT_INFO.phone || '+91 98765 43210'}
+                      {CONTACT_INFO.phone || '9899108543'}
                     </a>
                   </div>
                 </div>
@@ -180,7 +180,7 @@ export default function CustomerCareSection() {
                   </div>
                   <div className="space-y-0.5 min-w-0">
                     <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-[#635142] dark:text-[#BFB0A2] block font-semibold">
-                      OFFICIAL EMAIL
+                      OFFICIAL EMAIL ID
                     </span>
                     <a
                       href={`mailto:${CONTACT_INFO.email}`}
@@ -196,12 +196,15 @@ export default function CustomerCareSection() {
                   <div className="w-12 h-12 rounded-full bg-[#EFE8DC] dark:bg-[#1C160E] text-[#B38738] dark:text-[#E8C97E] border border-[#B38738]/20 flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 shadow-sm">
                     <MapPin className="w-5 h-5" />
                   </div>
-                  <div className="space-y-0.5 min-w-0">
+                  <div className="space-y-1 min-w-0">
                     <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-[#635142] dark:text-[#BFB0A2] block font-semibold">
-                      CORPORATE HEADQUARTERS
+                      REGISTERED & OPERATIONAL ADDRESS
                     </span>
+                    <p className="text-xs font-serif font-semibold text-[#241A12] dark:text-[#F5EFE6]">
+                      {CONTACT_INFO.legalEntityName}
+                    </p>
                     <p className="text-xs sm:text-sm font-serif text-[#635142] dark:text-[#BFB0A2] leading-relaxed">
-                      111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041, India.
+                      {CONTACT_INFO.address}
                     </p>
                   </div>
                 </div>
@@ -453,7 +456,7 @@ export default function CustomerCareSection() {
                             name="phone"
                             value={formData.phone}
                             onChange={handleInputChange}
-                            placeholder="+91 98765 43210"
+                            placeholder="+91 98991 08543"
                             className="w-full pl-10 pr-4 py-3 rounded-lg bg-white dark:bg-[#1A130D] border border-[#DDD4C4] dark:border-[#3A2C17] text-sm text-[#241A12] dark:text-[#F5EFE6] placeholder:text-[#635142]/40 dark:placeholder:text-[#BFB0A2]/40 focus:outline-none focus:border-[#B38738] dark:focus:border-[#E8C97E] focus:ring-1 focus:ring-[#B38738]/20 transition-all font-mono shadow-none"
                           />
                         </div>

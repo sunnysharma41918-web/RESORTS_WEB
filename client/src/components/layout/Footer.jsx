@@ -93,7 +93,7 @@ export default function Footer() {
 
                 {/* WhatsApp 3D */}
                 <a
-                  href="https://wa.me/919876543210"
+                  href={`https://wa.me/${(CONTACT_INFO.phoneRaw || '919899108543').replace(/[^0-9]/g, '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp"
@@ -149,20 +149,23 @@ export default function Footer() {
 
             <div className="space-y-3 text-xs sm:text-sm dark:text-[#EAE5D9] text-[#2D2823] font-light leading-relaxed">
               <div>
-                <span className="text-[10px] font-mono dark:text-[#C5A880]/80 text-[#8C7355] uppercase tracking-widest block">Direct Concierge</span>
+                <span className="text-[10px] font-mono dark:text-[#C5A880]/80 text-[#8C7355] uppercase tracking-widest block">Telephone / Concierge</span>
                 <a href={`tel:${CONTACT_INFO.phoneRaw}`} className="hover:text-[#C5A880] transition-colors font-medium dark:text-white text-[#0E0E0E]">
                   {CONTACT_INFO.phone}
                 </a>
               </div>
               <div>
-                <span className="text-[10px] font-mono dark:text-[#C5A880]/80 text-[#8C7355] uppercase tracking-widest block">Reservations Email</span>
+                <span className="text-[10px] font-mono dark:text-[#C5A880]/80 text-[#8C7355] uppercase tracking-widest block">Official Email</span>
                 <a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-[#C5A880] transition-colors font-medium dark:text-white text-[#0E0E0E]">
                   {CONTACT_INFO.email}
                 </a>
               </div>
               <div>
-                <span className="text-[10px] font-mono dark:text-[#C5A880]/80 text-[#8C7355] uppercase tracking-widest block">Sanctuary Location</span>
-                <p className="dark:text-[#EAE5D9]/80 text-[#2D2823]/80 text-xs leading-normal">
+                <span className="text-[10px] font-mono dark:text-[#C5A880]/80 text-[#8C7355] uppercase tracking-widest block">Registered & Operational Office</span>
+                <p className="font-medium text-[11px] dark:text-[#E8C97E] text-[#8F6B2E]">
+                  {CONTACT_INFO.legalEntityName}
+                </p>
+                <p className="dark:text-[#EAE5D9]/80 text-[#2D2823]/80 text-xs leading-normal mt-0.5">
                   {CONTACT_INFO.address}
                 </p>
               </div>
@@ -248,12 +251,14 @@ export default function Footer() {
         {/* Bottom Copyright & Legal Notice Line */}
         <div className="pt-6 border-t dark:border-[#C5A880]/20 border-[#C5A880]/25 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono dark:text-[#EAE5D9]/60 text-[#2D2823]/60 tracking-wider">
           <div>
-            Country Holidays Hotels & Resorts Group © {new Date().getFullYear()} • All Rights Reserved.
+            {CONTACT_INFO.legalEntityName} © {new Date().getFullYear()} • All Rights Reserved.
           </div>
-          <div className="flex items-center space-x-5">
-            <Link to="/privacy" className="hover:text-[#C5A880] transition-colors">Privacy Policy</Link>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <Link to="/privacy-policy" className="hover:text-[#C5A880] transition-colors">Privacy Policy</Link>
             <span className="text-[#C5A880]/40">•</span>
             <Link to="/terms" className="hover:text-[#C5A880] transition-colors">Terms of Stay</Link>
+            <span className="text-[#C5A880]/40">•</span>
+            <Link to="/cancellation-policy" className="hover:text-[#C5A880] transition-colors">Cancellation Policy</Link>
             <span className="text-[#C5A880]/40">•</span>
             <Link to="/admin" className="hover:text-[#C5A880] transition-colors">Admin Portal</Link>
           </div>

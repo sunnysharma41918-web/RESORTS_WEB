@@ -235,7 +235,7 @@ export default function AIConciergeWidget() {
         id: `err-${Date.now()}`,
         role: 'assistant',
         content:
-          "I'm experiencing a brief network delay. Please feel free to reach our 24/7 VIP Concierge directly at **+91 98765 43210** or WhatsApp.",
+          "I'm experiencing a brief network delay. Please feel free to reach our 24/7 VIP Concierge directly at **+91 98991 08543** or WhatsApp.",
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       setMessages((prev) => [...prev, errorMsg]);

@@ -26,6 +26,7 @@ import EditorialBackgroundElements from '../../components/common/EditorialBackgr
 import { RoyalOrnamentDivider, IndianJaaliBorder } from '../../components/common/RoyalOrnamentDivider';
 import IndianArtBackground from '../../components/common/IndianArtBackground';
 import { inquiryService } from '../../services/inquiryService';
+import { CONTACT_INFO } from '../../data/contact';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -177,13 +178,13 @@ export default function Contact() {
                     </div>
                     <div className="space-y-0.5 min-w-0">
                       <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-[#6E5D4F] dark:text-[#B8A89A] block font-semibold">
-                        DIRECT CONCIERGE
+                        DIRECT TELEPHONE / CONCIERGE
                       </span>
                       <a
-                        href="tel:+919876543210"
+                        href={`tel:${CONTACT_INFO.phoneRaw || '+919899108543'}`}
                         className="text-lg sm:text-xl font-serif font-bold text-[#2A1F17] dark:text-[#F3EEE0] hover:text-[#8F6B2E] dark:hover:text-[#D4AF37] transition-colors block font-mono"
                       >
-                        +91 98765 43210
+                        {CONTACT_INFO.phone || '9899108543'}
                       </a>
                     </div>
                   </div>
@@ -195,28 +196,31 @@ export default function Contact() {
                     </div>
                     <div className="space-y-0.5 min-w-0">
                       <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-[#6E5D4F] dark:text-[#B8A89A] block font-semibold">
-                        OFFICIAL EMAIL
+                        OFFICIAL EMAIL ID
                       </span>
                       <a
-                        href="mailto:info@countryholidaysresorts.com"
+                        href={`mailto:${CONTACT_INFO.email}`}
                         className="text-sm sm:text-base font-serif font-bold text-[#2A1F17] dark:text-[#F3EEE0] hover:text-[#8F6B2E] dark:hover:text-[#D4AF37] transition-colors truncate block"
                       >
-                        info@countryholidaysresorts.com
+                        {CONTACT_INFO.email}
                       </a>
                     </div>
                   </div>
 
-                  {/* Corporate Headquarters */}
+                  {/* Registered & Operational Address */}
                   <div className="flex items-start gap-4 group">
                     <div className="w-12 h-12 rounded-full bg-[#EFE8DC] dark:bg-[#251E18] text-[#8F6B2E] dark:text-[#D4AF37] flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 shadow-none">
                       <MapPin className="w-5 h-5" />
                     </div>
-                    <div className="space-y-0.5 min-w-0">
+                    <div className="space-y-1 min-w-0">
                       <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-[#6E5D4F] dark:text-[#B8A89A] block font-semibold">
-                        CORPORATE HEADQUARTERS
+                        REGISTERED & OPERATIONAL ADDRESS
                       </span>
+                      <p className="text-xs font-serif font-semibold text-[#2A1F17] dark:text-[#F3EEE0]">
+                        {CONTACT_INFO.legalEntityName}
+                      </p>
                       <p className="text-xs sm:text-sm font-serif text-[#6E5D4F] dark:text-[#B8A89A] leading-relaxed">
-                        111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041, India.
+                        {CONTACT_INFO.address}
                       </p>
                     </div>
                   </div>
@@ -384,7 +388,7 @@ export default function Contact() {
                               name="phone"
                               value={formData.phone}
                               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                              placeholder="+91 98765 43210"
+                              placeholder="+91 98991 08543"
                               className="w-full pl-10 pr-4 py-3 rounded-lg bg-white dark:bg-[#110E0B] border border-[#DDD4C4] dark:border-[#382E24] text-sm text-[#2A1F17] dark:text-[#F3EEE0] placeholder:text-[#6E5D4F]/40 dark:placeholder:text-[#B8A89A]/40 focus:outline-none focus:border-[#8F6B2E] dark:focus:border-[#D4AF37] focus:ring-1 focus:ring-[#8F6B2E]/20 transition-all font-mono shadow-none"
                             />
                           </div>

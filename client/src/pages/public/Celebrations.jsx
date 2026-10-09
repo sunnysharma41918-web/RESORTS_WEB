@@ -511,7 +511,7 @@ export default function Celebrations() {
                     required
                     value={formData.phone}
                     onChange={handleInputChange}
-                    placeholder="+91 98765 43210"
+                    placeholder="+91 98991 08543"
                     className="w-full px-4 py-3 bg-[#FAF6F0] dark:bg-[#0E0C0A] border border-[#B38738]/25 focus:border-[#B38738] rounded-xl text-sm text-[#2A1F17] dark:text-[#FAF6ED] focus:outline-none"
                   />
                 </div>

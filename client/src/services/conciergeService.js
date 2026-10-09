@@ -97,7 +97,7 @@ const FALLBACK_STATIC_ANSWERS = [
   {
     keywords: ['available', 'availability', 'tomorrow', 'tonight', 'vacant', 'उपलब्ध', 'khali hai'],
     reply:
-      "I can't confirm live room availability from here. Please use our booking page or contact our resort team directly on WhatsApp (+91 98765 43210) to check real-time availability."
+      "I can't confirm live room availability from here. Please use our booking page or contact our resort team directly on WhatsApp (+91 98991 08543) to check real-time availability."
   },
   {
     keywords: ['check in', 'check out', 'checkin', 'checkout', 'timing', 'time', 'समय'],
@@ -110,9 +110,9 @@ const FALLBACK_STATIC_ANSWERS = [
       'Our dining venues include:\n• **The Cliffside Pavilion & Hearth** — Coastal & Pan-Asian gastronomy (Breakfast: 07:00–10:30, Lunch: 12:30–15:30, Dinner: 19:30–23:00)\n• **Subterranean Sommelier Wine Vault** — Biodynamic vintages & tastings\n• **In-Villa Dining** — 24-hour à la carte service.'
   },
   {
-    keywords: ['cancel', 'refund', 'रद्द'],
+    keywords: ['cancel', 'cancellation', 'refund', 'रद्द', 'वापसी'],
     reply:
-      '**Cancellation Policy**:\nComplimentary cancellation is available up to 72 hours prior to scheduled arrival date. Cancellations within 72 hours are subject to a one-night tariff fee.'
+      '**Cancellation & Refund Policy (COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED)**:\n• Cancellations are considered if requested immediately after placing the order / booking before shipping/processing.\n• Non-cancellable for perishable items (e.g., flowers, eatables) unless quality defect is established.\n• Damaged or mismatched items must be reported within **7 Days** of receipt to our Customer Service Team.\n• Approved refunds are processed within **16–30 Days** to the customer.'
   },
   {
     keywords: ['child', 'kid', 'family', 'बच्चे'],
@@ -211,8 +211,8 @@ export const conciergeService = {
     return {
       success: true,
       conversationId: conversationId || `local_${Date.now()}`,
-      message: "I couldn't find confirmed information on that right now. Please connect directly with our 24/7 VIP concierge desk at +91 98765 43210 or email info@countryholidaysresorts.com.",
-      reply: "I couldn't find confirmed information on that right now. Please connect directly with our 24/7 VIP concierge desk at +91 98765 43210 or email info@countryholidaysresorts.com.",
+      message: "I couldn't find confirmed information on that right now. Please connect directly with our 24/7 VIP concierge desk at +91 98991 08543 or email dharmendra@countryholidaysresorts.com.",
+      reply: "I couldn't find confirmed information on that right now. Please connect directly with our 24/7 VIP concierge desk at +91 98991 08543 or email dharmendra@countryholidaysresorts.com.",
       intent: 'UNKNOWN',
       source: 'local-fallback',
     };

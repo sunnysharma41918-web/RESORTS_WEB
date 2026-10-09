@@ -9,8 +9,8 @@ export default function ContactInformation() {
         <span className="text-xs uppercase tracking-luxury text-luxury-accent block mb-2">
           Concierge Relations
         </span>
-        <h3 className="text-2xl font-serif text-luxury-light">
-          AURA GLOBAL HEADQUARTERS
+        <h3 className="text-xl sm:text-2xl font-serif text-luxury-light">
+          {CONTACT_INFO.legalEntityName || 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED'}
         </h3>
       </div>
 

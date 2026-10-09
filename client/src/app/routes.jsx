@@ -18,6 +18,7 @@ export const About = lazy(() => import('../pages/public/About'));
 export const Contact = lazy(() => import('../pages/public/Contact'));
 export const PrivacyPolicy = lazy(() => import('../pages/legal/PrivacyPolicy'));
 export const Terms = lazy(() => import('../pages/legal/Terms'));
+export const CancellationPolicy = lazy(() => import('../pages/legal/CancellationPolicy'));
 export const NotFound = lazy(() => import('../pages/public/NotFound'));
 
 // Admin routes lazy loading
@@ -56,7 +57,11 @@ export const PUBLIC_ROUTES = [
   { path: ROUTES.SANCTUARY_ETHOS, component: SanctuaryEthos },
   { path: ROUTES.ETHOS, component: SanctuaryEthos },
   { path: ROUTES.PRIVACY, component: PrivacyPolicy },
+  { path: '/privacy', component: PrivacyPolicy },
   { path: ROUTES.TERMS, component: Terms },
+  { path: ROUTES.CANCELLATION, component: CancellationPolicy },
+  { path: ROUTES.REFUND, component: CancellationPolicy },
+  { path: '/cancellation', component: CancellationPolicy },
   { path: '*', component: NotFound },
 ];
 

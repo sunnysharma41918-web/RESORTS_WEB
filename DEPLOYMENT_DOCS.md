@@ -1,4 +1,4 @@
-﻿# 🏛️ Country Holidays Hotels & Resorts (CHHR)
+# 🏛️ Country Holidays Hotels & Resorts (CHHR)
 ## 📚 Complete Production Deployment & Architecture Documentation
 
 ---
@@ -149,4 +149,4 @@ Because Render free-tier instances sleep after 15 minutes of idle traffic:
 
 - **Project Leadership**: *Prityoush Raj (HOD - IT, Country Holidays Hotel & Resorts Pvt. Ltd.)*
 - **Architecture & Full-Stack Development**: *Sunny Sharma (IT Executive & Full-Stack Developer)*
-- **Organization**: *Country Holidays Hotel & Resorts Pvt. Ltd., Chennai, Tamil Nadu, India*
+- **Organization**: *COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED, F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019*

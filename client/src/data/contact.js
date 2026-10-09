@@ -1,11 +1,15 @@
 export const CONTACT_INFO = {
-  companyName: 'Country Holidays Hotels & Resorts Group',
-  phone: '+91 98765 43210',
-  phoneRaw: '+919876543210',
-  whatsapp: '+919876543210', // Easy to update or configure later
+  legalEntityName: 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED',
+  companyName: 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED',
+  brandName: 'Country Holidays Hotels & Resorts',
+  phone: '+91 98991 08543',
+  phoneRaw: '+919899108543',
+  whatsapp: '+919899108543',
   whatsappMessage: 'Hello Country Holidays Hotels & Resorts, I would like to book our stay.',
-  email: 'info@countryholidaysresorts.com',
-  address: '111, Rajiv Gandhi Salai, OMR, Kottivakkam, Chennai, Tamil Nadu 600041',
+  email: 'dharmendra@countryholidaysresorts.com',
+  registeredAddress: 'F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019',
+  operationalAddress: 'F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019',
+  address: 'F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019',
   hours: '24/7 Global Luxury Concierge',
   socials: {
     instagram: 'https://instagram.com',
@@ -37,7 +41,7 @@ export function getWhatsAppBookingUrl(customMessage) {
     // fallback
   }
 
-  const cleanNumber = (whatsappNumber || '+919876543210').replace(/[^0-9]/g, '');
+  const cleanNumber = (whatsappNumber || CONTACT_INFO.phoneRaw || '+919899108543').replace(/[^0-9]/g, '');
   const message = encodeURIComponent(customMessage || defaultMsg || 'Hello Country Holidays Hotels & Resorts, I would like to book our stay.');
   return `https://wa.me/${cleanNumber}?text=${message}`;
 }
