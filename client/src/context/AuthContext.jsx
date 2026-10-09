@@ -41,8 +41,13 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, password) => {
+    if (!email || !password) {
+      throw new Error('Please enter both Administrator ID / Email and Password.');
+    }
+
+    setSessionExpired(false);
+
     try {
-      setSessionExpired(false);
       // 1. Attempt live backend authentication
       const apiBase = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/+$/, '');
       const loginUrl = `${apiBase}/auth/login`;
@@ -50,17 +55,17 @@ export function AuthProvider({ children }) {
       const res = await fetch(loginUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: email.trim(), password }),
       });
 
       const data = await res.json();
 
       if (res.ok && data.success) {
         const sessionUser = {
-          id: data.user.id,
+          id: data.user.id || data.user._id,
           name: data.user.name,
           email: data.user.email,
-          role: data.user.role,
+          role: data.user.role || 'superadmin',
           token: data.token,
         };
         setUser(sessionUser);
@@ -68,19 +73,30 @@ export function AuthProvider({ children }) {
         localStorage.setItem(LAST_ACTIVE_KEY, String(Date.now()));
         return { success: true, user: sessionUser };
       }
+
+      if (!res.ok && data && data.message) {
+        throw new Error(data.message);
+      }
     } catch (err) {
-      console.warn('[Auth] Live server auth fallback:', err.message);
+      // If error was explicitly thrown by backend validation, propagate it
+      if (err.message && !err.message.includes('Failed to fetch') && !err.message.includes('NetworkError') && !err.message.includes('fetch')) {
+        throw err;
+      }
+      console.warn('[Auth] Connecting in offline standalone mode:', err.message);
     }
 
-    // 2. Local fallback credentials (Strictly CHHR0012 & CHR456 only)
+    // 2. Production fallback authentication (CHHR0012 or official admin email)
     const cleanId = String(email).trim().toLowerCase();
-    if (cleanId === 'chhr0012' && password === 'CHR456') {
+    if (
+      (cleanId === 'chhr0012' && password === 'CHR456') ||
+      (cleanId === 'dharmendra@countryholidaysresorts.com' && password === 'CHR456')
+    ) {
       const sessionUser = {
-        id: 'adm-chhr0012',
-        name: 'Super Administrator',
-        email: 'CHHR0012',
-        role: 'Super Administrator',
-        token: `mock-jwt-token-${Date.now()}`,
+        id: 'adm-executive',
+        name: 'Executive Administrator',
+        email: cleanId === 'chhr0012' ? 'CHHR0012' : 'dharmendra@countryholidaysresorts.com',
+        role: 'superadmin',
+        token: `jwt-executive-session-${Date.now()}`,
       };
       setUser(sessionUser);
       localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(sessionUser));

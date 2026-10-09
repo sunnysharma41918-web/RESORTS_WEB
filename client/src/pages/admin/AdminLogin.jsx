@@ -9,18 +9,24 @@ import {
   ShieldCheck,
   Lock,
   Mail,
-  CheckCircle2,
+  KeyRound,
+  ShieldAlert,
+  Clock,
+  Loader2,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import BrandLogo from '../../components/common/BrandLogo';
 
 export default function AdminLogin() {
-  const [email, setEmail] = useState('admin@countryholidaysresorts.com');
-  const [password, setPassword] = useState('admin123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
+  const [capsLockActive, setCapsLockActive] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [failedAttempts, setFailedAttempts] = useState(0);
+  const [lockoutTimer, setLockoutTimer] = useState(0);
 
   const { login, isAuthenticated, sessionExpired } = useAuth();
   const navigate = useNavigate();
@@ -29,38 +35,73 @@ export default function AdminLogin() {
   const isExpiredRedirect = sessionExpired || location.state?.sessionExpired;
   const from = location.state?.from?.pathname || '/admin';
 
+  // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated) {
       navigate('/admin', { replace: true });
     }
   }, [isAuthenticated, navigate]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
+  // Lockout countdown timer
+  useEffect(() => {
+    if (lockoutTimer > 0) {
+      const interval = setInterval(() => {
+        setLockoutTimer((prev) => {
+          if (prev <= 1) {
+            clearInterval(interval);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [lockoutTimer]);
 
-    try {
-      await login(email, password);
-      navigate(from, { replace: true });
-    } catch (err) {
-      setError(err.message || 'Authentication failed. Please verify credentials.');
-    } finally {
-      setLoading(false);
+  // Detect Caps Lock
+  const handleKeyDown = (e) => {
+    if (e.getModifierState) {
+      setCapsLockActive(e.getModifierState('CapsLock'));
     }
   };
 
-  const handleQuickFill = () => {
-    setEmail('admin@countryholidaysresorts.com');
-    setPassword('admin123');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (lockoutTimer > 0) return;
+
     setError('');
+
+    if (!email.trim() || !password) {
+      setError('Please provide both your Administrator ID / Email and Password.');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await login(email.trim(), password);
+      setFailedAttempts(0);
+      navigate(from, { replace: true });
+    } catch (err) {
+      const newAttempts = failedAttempts + 1;
+      setFailedAttempts(newAttempts);
+
+      if (newAttempts >= 5) {
+        setLockoutTimer(30);
+        setError('Too many failed authentication attempts. Access locked for 30 seconds.');
+      } else {
+        setError(err.message || 'Authentication failed. Please verify your Administrator credentials.');
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-[#F4F6F5] text-[#111827] grid grid-cols-1 lg:grid-cols-12 select-none font-manrope">
       
       {/* ========================================================================= */}
-      {/* LEFT COLUMN: LUXURY EDITORIAL PHOTOGRAPHIC PLATE (5/12 COLS - 100% FIXED) */}
+      {/* LEFT COLUMN: LUXURY EDITORIAL PHOTOGRAPHIC PLATE (5/12 COLS - FIXED FIT)   */}
       {/* ========================================================================= */}
       <div className="hidden lg:flex lg:col-span-5 h-full relative p-6 xl:p-8 flex-col justify-between overflow-hidden bg-[#134E39] text-white shrink-0">
         
@@ -94,7 +135,7 @@ export default function AdminLogin() {
             to="/"
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/20 text-[11px] font-semibold text-white transition-all shadow-sm"
           >
-            <span>Live Site</span>
+            <span>Live Sanctuary</span>
             <ArrowRight className="w-3 h-3 text-[#34D399]" />
           </Link>
         </div>
@@ -104,32 +145,32 @@ export default function AdminLogin() {
           <div className="p-5 bg-white/10 backdrop-blur-xl border border-white/15 rounded-2xl space-y-2.5 max-w-sm">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#34D399]/20 text-[#34D399] rounded-full text-[10px] font-bold uppercase tracking-wider">
               <Sparkles className="w-3 h-3" />
-              <span>CMS Control Center</span>
+              <span>Executive CMS Control Center</span>
             </div>
             <h3 className="text-lg font-extrabold text-white leading-snug">
               Sanctuaries of Distinction & Wonder
             </h3>
             <p className="text-[11px] text-emerald-100 font-light leading-relaxed">
-              Curate bespoke resort packages, manage dynamic suites, update live marquee tickers, and respond to VIP guest leads in real time.
+              Secure enterprise console to curate bespoke resort packages, manage dynamic suites, monitor guest inquiries, and update live portal settings.
             </p>
           </div>
         </div>
 
-        {/* Bottom Slogan */}
+        {/* Bottom Security Footer */}
         <div className="relative z-10 space-y-1">
           <div className="flex items-center gap-1.5 text-[10px] text-emerald-200 font-semibold tracking-wider uppercase">
             <ShieldCheck className="w-3.5 h-3.5 text-[#34D399]" />
-            <span>Secure 256-Bit Executive Session</span>
+            <span>256-Bit Encrypted Executive Authentication</span>
           </div>
           <p className="text-[10px] text-white/70">
-            © {new Date().getFullYear()} Country Holidays Hotels & Resorts Group.
+            © {new Date().getFullYear()} COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED.
           </p>
         </div>
 
       </div>
 
       {/* ========================================================================= */}
-      {/* RIGHT COLUMN: 100% FIXED FIT LOGIN CARD (7/12 COLS - ZERO SCROLL)         */}
+      {/* RIGHT COLUMN: PRODUCTION AUTHENTICATION CARD (7/12 COLS - ZERO SCROLL)     */}
       {/* ========================================================================= */}
       <div className="col-span-12 lg:col-span-7 h-full p-4 sm:p-6 lg:p-8 flex flex-col justify-between items-center bg-[#F4F6F5] overflow-hidden">
         
@@ -139,7 +180,7 @@ export default function AdminLogin() {
             <BrandLogo size="sm" animated={false} />
             <div className="flex flex-col">
               <span className="text-xs font-black uppercase text-[#111827]">Country Holidays</span>
-              <span className="text-[9px] text-[#134E39] font-bold uppercase">Hotels & Resorts CMS</span>
+              <span className="text-[9px] text-[#134E39] font-bold uppercase">Executive CMS</span>
             </div>
           </Link>
 
@@ -152,61 +193,77 @@ export default function AdminLogin() {
           </Link>
         </div>
 
-        {/* Center Card Container - Perfectly Compact */}
-        <div className="w-full max-w-[390px] my-auto space-y-3.5">
+        {/* Center Card Container */}
+        <div className="w-full max-w-[400px] my-auto space-y-3.5">
           
           {/* Card Box */}
-          <div className="bg-white border border-[#E5EAE7] rounded-3xl p-6 sm:p-7 shadow-sm space-y-4">
+          <div className="bg-white border border-[#E5EAE7] rounded-3xl p-6 sm:p-8 shadow-sm space-y-4">
             
             {/* Header */}
-            <div className="space-y-1 text-center sm:text-left">
-              <div className="w-10 h-10 rounded-xl bg-[#EBF5EE] text-[#134E39] flex items-center justify-center mb-2 mx-auto sm:mx-0">
+            <div className="space-y-1.5 text-center sm:text-left">
+              <div className="w-11 h-11 rounded-2xl bg-[#EBF5EE] text-[#134E39] flex items-center justify-center mb-2 mx-auto sm:mx-0 shadow-2xs">
                 <Lock className="w-5 h-5 text-[#134E39]" />
               </div>
               <h1 className="text-xl sm:text-2xl font-extrabold text-[#111827] tracking-tight">
-                Welcome Back
+                Executive Portal Sign-In
               </h1>
               <p className="text-xs text-gray-500 font-normal">
-                Sign in to manage your luxury properties & inquiries.
+                Enter your authorized administrator credentials to access the console.
               </p>
             </div>
 
             {/* Session Expired Alert */}
             {isExpiredRedirect && (
-              <div className="p-2.5 bg-amber-50 border border-amber-200 text-amber-800 text-[11px] rounded-xl flex items-start gap-2">
-                <AlertCircle className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
+              <div className="p-3 bg-amber-50 border border-amber-200 text-amber-800 text-xs rounded-xl flex items-start gap-2.5">
+                <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                 <div>
-                  <strong className="block font-bold">Session Timed Out</strong>
-                  <span>Please sign in again to continue.</span>
+                  <strong className="block font-bold">Session Expired</strong>
+                  <span>Your executive session has timed out due to inactivity. Please sign in again.</span>
                 </div>
               </div>
             )}
 
+            {/* Lockout Timer Alert */}
+            {lockoutTimer > 0 && (
+              <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2.5">
+                <Clock className="w-4 h-4 text-red-600 shrink-0 animate-pulse" />
+                <span>Security cooldown active. Please wait <strong>{lockoutTimer}s</strong> before retrying.</span>
+              </div>
+            )}
+
             {/* Error Alert */}
-            {error && (
-              <div className="p-2.5 bg-red-50 border border-red-200 text-red-700 text-[11px] rounded-xl flex items-center gap-2">
-                <AlertCircle className="w-3.5 h-3.5 text-red-600 shrink-0" />
-                <span>{error}</span>
+            {error && lockoutTimer === 0 && (
+              <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-start gap-2.5">
+                <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+                <span className="leading-tight">{error}</span>
               </div>
             )}
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-3">
+            <form onSubmit={handleSubmit} className="space-y-3.5" noValidate>
               
               {/* Email / Admin ID */}
               <div className="space-y-1">
-                <label className="text-[11px] font-bold text-gray-700 block">
-                  Email Address / Admin ID
+                <label className="text-[11px] font-bold text-gray-700 block uppercase tracking-wider">
+                  Administrator ID or Email *
                 </label>
                 <div className="relative">
-                  <Mail className="w-3.5 h-3.5 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <Mail className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                   <input
-                    type="email"
+                    type="text"
                     required
+                    autoFocus
+                    autoCapitalize="none"
+                    autoCorrect="off"
+                    spellCheck="false"
+                    autoComplete="username"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="admin@countryholidaysresorts.com"
-                    className="w-full pl-9 pr-3.5 py-2.5 bg-[#F4F6F5] focus:bg-white text-xs text-[#111827] placeholder:text-gray-400 border border-transparent focus:border-[#134E39] rounded-xl outline-none transition-all"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (error) setError('');
+                    }}
+                    placeholder="e.g. CHHR0012 or admin@domain.com"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-[#F4F6F5] focus:bg-white text-xs sm:text-sm text-[#111827] placeholder:text-gray-400 border border-transparent focus:border-[#134E39] rounded-xl outline-none transition-all font-mono"
                   />
                 </div>
               </div>
@@ -214,67 +271,79 @@ export default function AdminLogin() {
               {/* Password */}
               <div className="space-y-1">
                 <div className="flex items-center justify-between">
-                  <label className="text-[11px] font-bold text-gray-700 block">
-                    Password
+                  <label className="text-[11px] font-bold text-gray-700 block uppercase tracking-wider">
+                    Secret Password *
                   </label>
-                  <button
-                    type="button"
-                    onClick={handleQuickFill}
-                    className="text-[10px] text-[#134E39] font-bold hover:underline cursor-pointer"
-                  >
-                    Quick Auto-Fill
-                  </button>
+                  {capsLockActive && (
+                    <span className="text-[10px] text-amber-600 font-bold flex items-center gap-1">
+                      <ShieldAlert className="w-3 h-3" />
+                      Caps Lock ON
+                    </span>
+                  )}
                 </div>
 
                 <div className="relative">
-                  <Lock className="w-3.5 h-3.5 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <KeyRound className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     required
+                    autoComplete="current-password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••"
-                    className="w-full pl-9 pr-10 py-2.5 bg-[#F4F6F5] focus:bg-white text-xs text-[#111827] placeholder:text-gray-400 border border-transparent focus:border-[#134E39] rounded-xl outline-none transition-all"
+                    onKeyDown={handleKeyDown}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      if (error) setError('');
+                    }}
+                    placeholder="Enter executive password"
+                    className="w-full pl-10 pr-10 py-2.5 bg-[#F4F6F5] focus:bg-white text-xs sm:text-sm text-[#111827] placeholder:text-gray-400 border border-transparent focus:border-[#134E39] rounded-xl outline-none transition-all"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="p-1 text-gray-400 hover:text-gray-700 absolute right-2.5 top-1/2 -translate-y-1/2 cursor-pointer transition-colors"
+                    className="p-1.5 text-gray-400 hover:text-gray-700 absolute right-2.5 top-1/2 -translate-y-1/2 cursor-pointer transition-colors"
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                   >
-                    {showPassword ? <EyeOff className="w-3.5 h-3.5 text-[#134E39]" /> : <Eye className="w-3.5 h-3.5" />}
+                    {showPassword ? <EyeOff className="w-4 h-4 text-[#134E39]" /> : <Eye className="w-4 h-4" />}
                   </button>
                 </div>
               </div>
 
-              {/* Remember Me */}
-              <div className="flex items-center justify-between pt-0.5">
-                <label className="flex items-center gap-1.5 text-[11px] text-gray-600 cursor-pointer">
+              {/* Remember Me & SSL Info */}
+              <div className="flex items-center justify-between pt-1">
+                <label className="flex items-center gap-2 text-xs text-gray-600 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
-                    className="w-3.5 h-3.5 accent-[#134E39] rounded cursor-pointer"
+                    className="w-4 h-4 accent-[#134E39] rounded cursor-pointer"
                   />
-                  <span>Keep me signed in</span>
+                  <span>Stay logged in</span>
                 </label>
 
-                <span className="text-[10px] text-gray-400">256-Bit SSL</span>
+                <div className="flex items-center gap-1 text-[10px] text-gray-400 font-mono">
+                  <ShieldCheck className="w-3 h-3 text-[#134E39]" />
+                  <span>TLS 1.3 Secure</span>
+                </div>
               </div>
 
               {/* Submit Button */}
-              <div className="pt-1">
+              <div className="pt-2">
                 <button
                   type="submit"
-                  disabled={loading}
-                  className="w-full py-3 bg-[#134E39] hover:bg-[#0E3C2B] active:scale-[0.99] text-white font-bold text-xs rounded-full transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 tracking-wider uppercase"
+                  disabled={loading || lockoutTimer > 0}
+                  className="w-full py-3.5 bg-[#134E39] hover:bg-[#0E3C2B] active:scale-[0.99] text-white font-bold text-xs sm:text-sm rounded-full transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 tracking-wider uppercase"
                 >
                   {loading ? (
-                    <span>Authenticating...</span>
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-[#34D399]" />
+                      <span>Authenticating Secure Session...</span>
+                    </>
+                  ) : lockoutTimer > 0 ? (
+                    <span>Locked ({lockoutTimer}s)</span>
                   ) : (
                     <>
-                      <span>Sign In to CMS Portal</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <span>Sign In to Executive Portal</span>
+                      <ArrowRight className="w-4 h-4" />
                     </>
                   )}
                 </button>
@@ -284,25 +353,20 @@ export default function AdminLogin() {
 
           </div>
 
-          {/* Quick Demo Credentials Footer Helper */}
-          <div className="p-3 bg-[#EBF5EE] border border-[#134E39]/10 rounded-xl flex items-center justify-between text-[11px] text-[#134E39]">
-            <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 shrink-0 text-[#134E39]" />
-              <span className="font-semibold">Demo: admin@countryholidaysresorts.com / admin123</span>
-            </div>
-            <button
-              onClick={handleQuickFill}
-              className="font-bold underline hover:text-[#0E3C2B] text-[10px] shrink-0 cursor-pointer"
-            >
-              Fill
-            </button>
+          {/* Security Notice Footer */}
+          <div className="text-center space-y-1 text-[11px] text-gray-400">
+            <p>Authorized personnel only. All access attempts are securely logged & audited.</p>
           </div>
 
         </div>
 
         {/* Footer */}
-        <div className="w-full text-center text-[10px] text-gray-400 pt-1">
-          <span>Country Holidays Hotels & Resorts CMS • All Rights Reserved</span>
+        <div className="w-full text-center text-[10px] text-gray-400 pt-1 flex items-center justify-center gap-4">
+          <span>COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED</span>
+          <span>•</span>
+          <Link to="/privacy-policy" className="hover:underline">Privacy Policy</Link>
+          <span>•</span>
+          <Link to="/cancellation-policy" className="hover:underline">Cancellation Policy</Link>
         </div>
 
       </div>
@@ -310,3 +374,4 @@ export default function AdminLogin() {
     </div>
   );
 }
+

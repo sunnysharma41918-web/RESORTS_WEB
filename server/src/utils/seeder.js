@@ -6,21 +6,31 @@ const Setting = require('../models/Setting');
 
 const seedDefaultData = async () => {
   try {
-    // 1. Ensure ONLY Super Admin ID CHHR0012 exists and delete old demo users
-    await User.deleteMany({ email: { $ne: 'chhr0012' } });
-
-    let chhrAdmin = await User.findOne({ email: 'chhr0012' });
-    if (!chhrAdmin) {
-      await User.create({
+    // 1. Ensure Official Administrator accounts exist
+    const adminsToSeed = [
+      {
         name: 'Super Administrator',
         email: 'chhr0012',
         password: 'CHR456',
         role: 'superadmin',
-      });
-      console.log('\x1b[36m✔ Seeded Super Admin ID: CHHR0012 (Password: CHR456)\x1b[0m');
-    } else {
-      chhrAdmin.password = 'CHR456';
-      await chhrAdmin.save();
+      },
+      {
+        name: 'Executive Administrator',
+        email: 'dharmendra@countryholidaysresorts.com',
+        password: 'CHR456',
+        role: 'superadmin',
+      },
+    ];
+
+    for (const adm of adminsToSeed) {
+      let existingAdmin = await User.findOne({ email: adm.email });
+      if (!existingAdmin) {
+        await User.create(adm);
+        console.log(`\x1b[36m✔ Seeded Administrator: ${adm.email}\x1b[0m`);
+      } else {
+        existingAdmin.password = adm.password;
+        await existingAdmin.save();
+      }
     }
 
     // 2. Seed Accommodations
