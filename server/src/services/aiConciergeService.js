@@ -493,12 +493,12 @@ function handleDeterministicConcierge(userMessage, conversationHistory, websiteC
 
   if (query.includes('रद्द') || query.includes('cancel') || query.includes('refund') || query.includes('वापसी')) {
     if (langMode === 'hi_devanagari') {
-      return `**रद्दीकरण व धनवापसी नीति (COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED)**:\n• ऑर्डर/बुकिंग तुरंत बाद रद्दीकरण के लिए अनुरोध किया जा सकता है, बशर्ते वेंडर द्वारा शिपिंग/प्रसंस्करण प्रक्रिया शुरू न हुई हो।\n• खराब होने वाली वस्तुओं (फूल, खाद्य पदार्थ आदि) के लिए रद्दीकरण मान्य नहीं है, सिवाय गुणवत्ता खराबी स्थापित होने पर।\n• क्षतिग्रस्त या उम्मीद अनुसार न होने वाली वस्तुओं की सूचना प्राप्ति के **7 दिनों** के भीतर देनी होगी।\n• स्वीकृत रिफंड **16–30 दिनों** में मूल भुगतान माध्यम में प्रोसेस किया जाता है।`;
+      return `**रद्दीकरण व धनवापसी नीति (COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED)**:\n• ऑर्डर/बुकिंग तुरंत बाद रद्दीकरण के लिए अनुरोध किया जा सकता है, बशर्ते वेंडर द्वारा शिपिंग/प्रसंस्करण प्रक्रिया शुरू न हुई हो।\n• खराब होने वाली वस्तुओं (फूल, खाद्य पदार्थ आदि) के लिए रद्दीकरण मान्य नहीं है, सिवाय गुणवत्ता खराबी स्थापित होने पर।\n• क्षतिग्रस्त या उम्मीद अनुसार न होने वाली वस्तुओं की सूचना प्राप्ति के **7 दिनों** के भीतर देनी होगी।\n• स्वीकृत रिफंड **16–30 दिनों** में मूल भुगतान माध्यम में प्रोसेस किया जाता है।`;
     }
     if (langMode === 'hi_roman') {
-      return `**Cancellation & Refund Policy (COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED)**:\n• Order/booking request turant karne par cancellation consider hoti hai, agar vendor ne shipping/processing shuru na ki ho.\n• Perishable items (flowers, eatables) cancel nahi hote jab tak quality issue prove na ho.\n• Damaged ya mismatch products 7 days ke andar customer service ko report karein.\n• Approved refunds 16–30 days mein process ho jate hain bhai.`;
+      return `**Cancellation & Refund Policy (COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED)**:\n• Order/booking request turant karne par cancellation consider hoti hai, agar vendor ne shipping/processing shuru na ki ho.\n• Perishable items (flowers, eatables) cancel nahi hote jab tak quality issue prove na ho.\n• Damaged ya mismatch products 7 days ke andar customer service ko report karein.\n• Approved refunds 16–30 days mein process ho jate hain bhai.`;
     }
-    return `**Cancellation & Refund Policy (COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED)**:\n• Cancellations are considered if requested immediately after placing the order, provided shipping/vendor processing has not been initiated.\n• Perishable items (e.g. flowers, eatables) are non-cancellable unless quality defects are established.\n• Damaged or mismatched items must be reported within **7 Days** of delivery to our Customer Service.\n• Approved refunds are credited within **16–30 Days** to the customer.`;
+    return `**Cancellation & Refund Policy (COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED)**:\n• Cancellations are considered if requested immediately after placing the order, provided shipping/vendor processing has not been initiated.\n• Perishable items (e.g. flowers, eatables) are non-cancellable unless quality defects are established.\n• Damaged or mismatched items must be reported within **7 Days** of delivery to our Customer Service.\n• Approved refunds are credited within **16–30 Days** to the customer.`;
   }
 
   if (query.includes('बच्चे') || query.includes('child') || query.includes('kid') || query.includes('baby') || query.includes('family')) {
@@ -539,12 +539,12 @@ function handleDeterministicConcierge(userMessage, conversationHistory, websiteC
     query.includes('संपर्क')
   ) {
     if (langMode === 'hi_devanagari') {
-      return `**${resortName} संपर्क व स्थान विवरण**:\n\n• **कंपनी**: COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED\n• **फ़ोन**: +91 98991 08543\n• **WhatsApp**: +91 98991 08543\n• **ईमेल**: dharmendra@countryholidaysresorts.com\n• **पंजीकृत व परिचालन पता**: F-10, Second Floor Kalkaji, Near Union Bank, Delhi, PIN: 110019\n• **हेल्पडेस्क सेवा**: 24/7 उपलब्ध।`;
+      return `**${resortName} संपर्क व स्थान विवरण**:\n\n• **कंपनी**: COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED\n• **फ़ोन**: +91 98991 08543\n• **WhatsApp**: +91 98991 08543\n• **ईमेल**: dharmendra@countryholidaysresorts.com\n• **पंजीकृत व परिचालन पता**: F-10, Second Floor Kalkaji, Near Union Bank, Delhi, PIN: 110019\n• **हेल्पडेस्क सेवा**: 24/7 उपलब्ध।`;
     }
     if (langMode === 'hi_roman') {
-      return `**${resortName} Contact Details**:\n\n• **Company**: COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED\n• **Phone / WhatsApp**: +91 98991 08543\n• **Email**: dharmendra@countryholidaysresorts.com\n• **Registered & Operational Address**: F-10, Second Floor Kalkaji, Near Union Bank, Delhi, PIN: 110019\n• **Executive Desk**: 24/7 Available.`;
+      return `**${resortName} Contact Details**:\n\n• **Company**: COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED\n• **Phone / WhatsApp**: +91 98991 08543\n• **Email**: dharmendra@countryholidaysresorts.com\n• **Registered & Operational Address**: F-10, Second Floor Kalkaji, Near Union Bank, Delhi, PIN: 110019\n• **Executive Desk**: 24/7 Available.`;
     }
-    return `**Contact & Location Details**:\n\n• **Merchant Legal Entity**: COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED\n• **Phone**: +91 98991 08543\n• **WhatsApp**: +91 98991 08543\n• **Email**: dharmendra@countryholidaysresorts.com\n• **Registered & Operational Address**: F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019\n• **Executive Desk**: 24/7 Global Luxury Support.`;
+    return `**Contact & Location Details**:\n\n• **Merchant Legal Entity**: COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED\n• **Phone**: +91 98991 08543\n• **WhatsApp**: +91 98991 08543\n• **Email**: dharmendra@countryholidaysresorts.com\n• **Registered & Operational Address**: F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019\n• **Executive Desk**: 24/7 Global Luxury Support.`;
   }
 
   // 11. Conversational Local Hindi Greetings & Slang ("Aur Bhai", "Kya Scene Hai", "Ram Ram", "Kay Haal Hai", etc.)

@@ -10,7 +10,7 @@ const STATIC_RESORT_KNOWLEDGE = {
   overview:
     'Country Holidays Hotels & Resorts is an international luxury hospitality brand offering curated sanctuaries across breathtaking cliffside, alpine, spice garden, and palace locations.',
   contact: {
-    legalEntityName: 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED',
+    legalEntityName: 'COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED',
     phone: '+91 98991 08543',
     whatsapp: '+919899108543',
     email: 'dharmendra@countryholidaysresorts.com',
@@ -165,7 +165,7 @@ async function retrieveWebsiteContent(userQuery = '') {
 
   // Contact & Links
   sections.push(`### CONTACT & OFFICIAL WEBSITE LINKS
-- Legal Entity: ${contact.legalEntityName || 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED'}
+- Legal Entity: ${contact.legalEntityName || 'COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED'}
 - Phone: ${contact.phone || contact.phoneRaw || '+91 98991 08543'}
 - WhatsApp: ${contact.whatsapp || '+919899108543'}
 - Email: ${contact.email || 'dharmendra@countryholidaysresorts.com'}

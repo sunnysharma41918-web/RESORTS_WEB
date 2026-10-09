@@ -20,7 +20,7 @@ async function retrieveStructuredWebsiteData() {
 
     const resortName = setting?.resortName || 'Country Holidays Hotels & Resorts';
     const contact = {
-      legalEntityName: setting?.legalEntityName || 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED',
+      legalEntityName: setting?.legalEntityName || 'COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED',
       phone: setting?.phone || '+91 98991 08543',
       whatsapp: setting?.whatsapp || '+919899108543',
       email: setting?.email || 'dharmendra@countryholidaysresorts.com',
@@ -39,7 +39,7 @@ async function retrieveStructuredWebsiteData() {
     return {
       resortName: 'Country Holidays Hotels & Resorts',
       contact: {
-        legalEntityName: 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED',
+        legalEntityName: 'COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED',
         phone: '+91 98991 08543',
         whatsapp: '+919899108543',
         email: 'dharmendra@countryholidaysresorts.com',

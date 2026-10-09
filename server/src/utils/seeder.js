@@ -162,8 +162,8 @@ const seedDefaultData = async () => {
             'An international collection of world-class architectural resorts, tranquil nature escapes, and boutique hotels.',
         },
         contactInfo: {
-          legalEntityName: 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED',
-          companyName: 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED',
+          legalEntityName: 'COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED',
+          companyName: 'COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED',
           phone: '+91 98991 08543',
           phoneRaw: '+919899108543',
           whatsapp: '+919899108543',

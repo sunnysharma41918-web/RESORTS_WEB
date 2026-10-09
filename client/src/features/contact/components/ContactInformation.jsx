@@ -10,7 +10,7 @@ export default function ContactInformation() {
           Concierge Relations
         </span>
         <h3 className="text-xl sm:text-2xl font-serif text-luxury-light">
-          {CONTACT_INFO.legalEntityName || 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED'}
+          {CONTACT_INFO.legalEntityName || 'COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED'}
         </h3>
       </div>
 

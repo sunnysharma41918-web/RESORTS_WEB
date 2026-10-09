@@ -34,7 +34,7 @@ export default function CancellationPolicy() {
             CANCELLATION & REFUND POLICY
           </h1>
           <p className="text-xs font-mono dark:text-white/40 text-[#0E0E0E]/40 uppercase tracking-widest">
-            COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED • Customer Protection Protocol
+            COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED • Customer Protection Protocol
           </p>
         </div>
 
@@ -48,7 +48,7 @@ export default function CancellationPolicy() {
               <span>Liberal Customer Care Commitment</span>
             </div>
             <p className="font-normal dark:text-white text-[#0E0E0E] leading-relaxed">
-              <strong className="text-[#FF1F02] font-bold">COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED</strong> believes in helping its customers as far as possible, and has therefore established a liberal and transparent cancellation policy for all patrons, bookings, and curated orders.
+              <strong className="text-[#FF1F02] font-bold">COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED</strong> believes in helping its customers as far as possible, and has therefore established a liberal and transparent cancellation policy for all patrons, bookings, and curated orders.
             </p>
           </div>
 
@@ -70,7 +70,7 @@ export default function CancellationPolicy() {
               <span>2. Perishable Items & Bespoke Curations</span>
             </h3>
             <p className="pl-4 border-l-2 dark:border-[#333333] border-[#E9E9DE]">
-              <strong>COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED</strong> does not accept cancellation requests for perishable items like flowers, eatables, culinary platters, etc. However, a refund or replacement can be made if the customer establishes that the quality of the product delivered is not good or unsatisfactory.
+              <strong>COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED</strong> does not accept cancellation requests for perishable items like flowers, eatables, culinary platters, etc. However, a refund or replacement can be made if the customer establishes that the quality of the product delivered is not good or unsatisfactory.
             </p>
           </div>
 
@@ -106,7 +106,7 @@ export default function CancellationPolicy() {
                   <span>Refund Processing Window</span>
                 </div>
                 <p>
-                  In case of any Refunds approved by <strong>COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED</strong>, it will take <strong>16-30 Days</strong> for the refund to be processed to the end customer via original payment mode or bank transfer.
+                  In case of any Refunds approved by <strong>COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED</strong>, it will take <strong>16-30 Days</strong> for the refund to be processed to the end customer via original payment mode or bank transfer.
                 </p>
               </div>
             </div>

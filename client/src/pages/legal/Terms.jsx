@@ -70,7 +70,7 @@ export default function Terms() {
               <span>3. Legal Entity & Jurisdiction</span>
             </h3>
             <div className="pl-4 border-l-2 dark:border-[#333333] border-[#E9E9DE] space-y-1 text-xs sm:text-sm">
-              <p><strong>Merchant Legal Entity:</strong> COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED</p>
+              <p><strong>Merchant Legal Entity:</strong> COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED</p>
               <p><strong>Registered & Operational Address:</strong> F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019</p>
               <p><strong>Telephone:</strong> +91 98991 08543</p>
               <p><strong>Email:</strong> dharmendra@countryholidaysresorts.com</p>
@@ -81,7 +81,7 @@ export default function Terms() {
         {/* Heritage Stamp Signoff */}
         <div className="pt-10 flex items-center justify-between border-t dark:border-[#333333] border-[#E9E9DE]">
           <div className="text-xs font-mono dark:text-white/60 text-[#0E0E0E]/60 space-y-1">
-            <p className="font-bold dark:text-white text-[#0E0E0E]">COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED</p>
+            <p className="font-bold dark:text-white text-[#0E0E0E]">COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED</p>
             <p>F-10, SECOND FLOOR KALKAJI, NEAR UNION BANK, Delhi, Delhi, PIN: 110019</p>
             <p>Tel: +91 98991 08543 | Email: dharmendra@countryholidaysresorts.com</p>
           </div>

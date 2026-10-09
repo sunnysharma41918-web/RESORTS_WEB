@@ -28,11 +28,11 @@ const settingSchema = new mongoose.Schema(
     contactInfo: {
       legalEntityName: {
         type: String,
-        default: 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED',
+        default: 'COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED',
       },
       companyName: {
         type: String,
-        default: 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED',
+        default: 'COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED',
       },
       phone: {
         type: String,

@@ -112,7 +112,7 @@ const FALLBACK_STATIC_ANSWERS = [
   {
     keywords: ['cancel', 'cancellation', 'refund', 'रद्द', 'वापसी'],
     reply:
-      '**Cancellation & Refund Policy (COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED)**:\n• Cancellations are considered if requested immediately after placing the order / booking before shipping/processing.\n• Non-cancellable for perishable items (e.g., flowers, eatables) unless quality defect is established.\n• Damaged or mismatched items must be reported within **7 Days** of receipt to our Customer Service Team.\n• Approved refunds are processed within **16–30 Days** to the customer.'
+      '**Cancellation & Refund Policy (COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED)**:\n• Cancellations are considered if requested immediately after placing the order / booking before shipping/processing.\n• Non-cancellable for perishable items (e.g., flowers, eatables) unless quality defect is established.\n• Damaged or mismatched items must be reported within **7 Days** of receipt to our Customer Service Team.\n• Approved refunds are processed within **16–30 Days** to the customer.'
   },
   {
     keywords: ['child', 'kid', 'family', 'बच्चे'],

@@ -8,7 +8,7 @@ export const CONTACT_PAGE_DATA = {
   },
   contacts: CONTACT_INFO,
   headquarters: {
-    title: 'COUNTRY HOLIDAYS HOTELS and RESORTS PRIVATE LIMITED',
+    title: 'COUNTRY HOLIDAYS HOTELS & RESORTS PRIVATE LIMITED',
     legalEntityName: CONTACT_INFO.legalEntityName,
     registeredAddress: CONTACT_INFO.registeredAddress,
     operationalAddress: CONTACT_INFO.operationalAddress,
