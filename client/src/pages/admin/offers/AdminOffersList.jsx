@@ -14,10 +14,8 @@ import {
   Building2,
   Compass,
   ArrowUpRight,
-  SlidersHorizontal,
 } from 'lucide-react';
 import { offerService } from '../../../services/offerService';
-import Loader from '../../../components/common/Loader';
 
 const PROPERTY_TYPES = [
   { label: 'All Types', value: 'All' },
@@ -44,7 +42,6 @@ export default function AdminOffersList() {
   }, []);
 
   async function loadOffers() {
-    setLoading(true);
     try {
       const data = await offerService.getOffers();
       setOffers(data || []);
@@ -84,8 +81,6 @@ export default function AdminOffersList() {
 
     return matchType && matchRegion && matchSearch;
   });
-
-  if (loading) return <Loader text="LOADING PACKAGES CMS..." />;
 
   return (
     <div className="space-y-6 font-manrope text-[#111827]">
@@ -172,7 +167,20 @@ export default function AdminOffersList() {
       </div>
 
       {/* Grid of Offers Cards */}
-      {filteredOffers.length === 0 ? (
+      {loading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          {[1, 2, 3, 4].map((n) => (
+            <div key={n} className="bg-white border border-[#E5EAE7] rounded-2xl overflow-hidden shadow-xs animate-pulse">
+              <div className="aspect-[16/10] bg-gray-200" />
+              <div className="p-4 space-y-3">
+                <div className="h-3 bg-gray-200 rounded w-1/3" />
+                <div className="h-4 bg-gray-200 rounded w-3/4" />
+                <div className="h-3 bg-gray-100 rounded w-full" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : filteredOffers.length === 0 ? (
         <div className="p-12 text-center bg-white border border-[#E5EAE7] space-y-3 rounded-2xl shadow-xs">
           <p className="text-[#111827] font-bold text-base">No packages found</p>
           <p className="text-xs text-gray-500">Create a new package promotion or adjust your filters.</p>

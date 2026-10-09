@@ -20,13 +20,7 @@ export default function App() {
 
   if (isAdminRoute) {
     return (
-      <Suspense
-        fallback={
-          <div className="min-h-screen flex items-center justify-center bg-[#1C1C1C] text-white">
-            <Loader text="Loading CMS Control Center..." />
-          </div>
-        }
-      >
+      <Suspense fallback={null}>
         <Routes>
           <Route path="/login" element={<AdminLogin />} />
           <Route path="/admin/login" element={<AdminLogin />} />
@@ -61,7 +55,7 @@ export default function App() {
           <Suspense
             fallback={
               <div className="min-h-screen flex items-center justify-center bg-luxury-black">
-                <Loader text="WELCOME TO THE COUNTRY HOLIDAYS HOTELS AND RESORTS" />
+                <Loader text="WELCOME TO COUNTRY HOLIDAYS HOTELS & RESORTS" />
               </div>
             }
           >

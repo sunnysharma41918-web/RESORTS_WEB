@@ -19,7 +19,6 @@ import {
   Eye,
 } from 'lucide-react';
 import { offerService } from '../../../services/offerService';
-import Loader from '../../../components/common/Loader';
 
 const CATEGORIES = [
   'Resort Package',
@@ -151,7 +150,19 @@ export default function AdminOfferForm() {
     }
   }
 
-  if (loading) return <Loader text="LOADING PACKAGE DETAILS..." />;
+  if (loading) {
+    return (
+      <div className="w-full space-y-6 font-manrope text-[#111827] animate-pulse">
+        <div className="h-8 bg-gray-200 rounded w-1/4" />
+        <div className="bg-white p-8 border border-[#E5EAE7] rounded-2xl space-y-4">
+          <div className="h-5 bg-gray-200 rounded w-1/3" />
+          <div className="h-10 bg-gray-100 rounded w-full" />
+          <div className="h-10 bg-gray-100 rounded w-full" />
+          <div className="h-20 bg-gray-100 rounded w-full" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full space-y-6 font-manrope text-[#111827]">
